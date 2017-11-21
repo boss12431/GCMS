@@ -1,0 +1,67 @@
+<?php
+/**
+ * @filesource modules/index/models/other.php
+ * @link http://www.kotchasan.com/
+ * @copyright 2016 Goragod.com
+ * @license http://www.kotchasan.com/license/
+ */
+
+namespace Index\Other;
+
+use \Kotchasan\Http\Request;
+use \Gcms\Login;
+use \Kotchasan\Language;
+use \Gcms\Config;
+
+/**
+ * บันทึกการตั้งค่าอื่นๆ
+ *
+ * @author Goragod Wiriya <admin@goragod.com>
+ *
+ * @since 1.0
+ */
+class Model extends \Kotchasan\KBase
+{
+
+  /**
+   * บันทึกการตั้งค่าเว็บไซต์ (system.php)
+   *
+   * @param Request $request
+   */
+  public function submit(Request $request)
+  {
+    $ret = array();
+    // session, token, member, can_config, ไม่ใช่สมาชิกตัวอย่าง
+    if ($request->initSession() && $request->isSafe() && $login = Login::adminAccess()) {
+      if (Login::checkPermission($login, 'can_config') && Login::notDemoMode($login)) {
+        // โหลด config
+        $config = Config::load(CONFIG);
+        $config->member_reserv = array();
+        foreach (explode("\n", $request->post('member_reserv')->text()) as $item) {
+          $config->member_reserv[] = trim($item);
+        }
+        $config->wordrude = array();
+        foreach (explode("\n", $request->post('wordrude')->text()) as $item) {
+          $config->wordrude[] = trim($item);
+        }
+        $config->wordrude_replace = $request->post('wordrude_replace', 'xxx')->toString();
+        $config->counter_digit = max(4, $request->post('counter_digit')->toInt());
+        // save config
+        if (Config::save($config, CONFIG)) {
+          $ret['alert'] = Language::get('Saved successfully');
+          $ret['location'] = 'reload';
+          // เคลียร์
+          $request->removeToken();
+        } else {
+          // ไม่สามารถบันทึก config ได้
+          $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), 'settings/config.php');
+        }
+      }
+    }
+    if (empty($ret)) {
+      $ret['alert'] = Language::get('Unable to complete the transaction');
+    }
+    // คืนค่าเป็น JSON
+    echo json_encode($ret);
+  }
+}
