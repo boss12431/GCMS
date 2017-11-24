@@ -157,8 +157,6 @@ class Controller extends \Kotchasan\Controller
           '/{LNG}/' => $lng
         ));
       }
-      // เมนูหลัก
-      Gcms::$view->setContents(Gcms::$menu->render(isset($page->menu) ? $page->menu : $page->module));
       // เนื้อหา
       Gcms::$view->setContents(array(
         // content
@@ -171,6 +169,8 @@ class Controller extends \Kotchasan\Controller
         '/{LOGO}/' => isset($image_logo) ? $image_logo : ''
       ));
     }
+    // เมนูหลัก
+    Gcms::$view->setContents(Gcms::$menu->render(isset($page->menu) ? $page->menu : $page->module));
     // ส่งออก เป็น HTML
     $response = new Response;
     if (isset($page->status) && $page->status == 404) {

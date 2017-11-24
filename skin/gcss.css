@@ -2410,6 +2410,10 @@ input[type="text"].gddcolor {
 .input-groups-table > .row label {
   padding-right: 5px;
 }
+.input-groups .button,
+.input-groups-table .button {
+  line-height: 1;
+}
 .width5 {
   width: 5% !important;
 }
@@ -2599,7 +2603,7 @@ table.fullwidth,
   margin: 0 0 1% 1%;
   border-width: 2px;
   border-bottom-style: dotted;
-  padding-bottom: 5px;
+  padding: 0 5px 5px;
 }
 .document-list .col,
 .document-list .col1 {

@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource Widgets/News/Controllers/Index.php
+ * @filesource Widgets/Like/Controllers/Index.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/

@@ -181,13 +181,13 @@ span.icon-sex-m:before {
   color: #FFF;
 }
 /* header */
-#logo {
+.header {
   background-position: 0 50%;
 }
-#logo h1 {
+.header h1 {
   padding: 10px 10px 0;
 }
-#logo .description {
+.header .description {
   padding: 0 30px 10px;
 }
 body.toTop .fixed_top {

@@ -41,10 +41,10 @@ class Settings extends \Kotchasan\KBase
         $config->map_height = max(100, $request->post('map_height')->toInt());
         $config->map_zoom = max(1, $request->post('map_zoom')->toInt());
         $config->map_latitude = $request->post('map_latitude')->topic();
-        $config->map_lantigude = $request->post('map_lantigude')->topic();
+        $config->map_lantitude = $request->post('map_lantitude')->topic();
         $config->map_info = $request->post('map_info')->textarea();
-        $config->map_info_latigude = $request->post('map_info_latigude')->topic();
-        $config->map_info_lantigude = $request->post('map_info_lantigude')->topic();
+        $config->map_info_latitude = $request->post('map_info_latitude')->topic();
+        $config->map_info_lantitude = $request->post('map_info_lantitude')->topic();
         // save config
         if (Config::save($config, CONFIG)) {
           $ret['alert'] = Language::get('Saved successfully');

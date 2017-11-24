@@ -55,5 +55,6 @@ class Index extends \Kotchasan\Controller
       }
       return \Widgets\Video\Views\Index::render($cols, $count, $videos);
     }
+    return '';
   }
 }

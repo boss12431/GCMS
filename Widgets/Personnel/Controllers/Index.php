@@ -35,10 +35,11 @@ class Index extends \Kotchasan\Controller
         $query_string['menu'] = isset($match[3]);
         $query_string['module'] = 'personnel';
       }
+      $query_string['cat'] = empty($query_string['cat']) ? 0 : $query_string['cat'];
       // ตรวจสอบโมดูล
       $index = Gcms::$module->findByModule($query_string['module']);
       if ($index) {
-        $id = \Kotchasan\Text::rndname(10);
+        $id = uniqid();
         $widget = array();
         $widget[] = '<div id="'.$id.'" class=widget_personnel>';
         foreach (\Personnel\Lists\Model::getItems($index->module_id, $query_string['cat']) as $i => $item) {

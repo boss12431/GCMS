@@ -30,15 +30,12 @@ class Lists extends \Gcms\View
    */
   public static function render($index, $query_string)
   {
-    $id = Text::rndname(10);
+    $id = uniqid();
     // รายการ
     $listitem = Grid::create('download', $index->module, 'widgetitem');
     // query ข้อมูล
-    $bg = 'bg2';
     foreach (\Widgets\Download\Models\Lists::get($index->module_id, $query_string['cat'], $query_string['count']) as $item) {
-      $bg = $bg == 'bg1' ? 'bg2' : 'bg1';
       $listitem->add(array(
-        '/{BG}/' => $bg,
         '/{ID}/' => $item->id,
         '/{NAME}/' => $item->name,
         '/{EXT}/' => $item->ext,

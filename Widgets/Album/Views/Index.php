@@ -38,7 +38,7 @@ class Index extends \Kotchasan\View
       $widget[] = '<a class=figcaption href="'.$url.'" title="'.$item->topic.'"><span class=cuttext>'.$item->topic.'</span></a>';
       $widget[] = '</div></div>';
     }
-    if (sizeof($widget) > 0) {
+    if (!empty($widget)) {
       return '<div class="widget-album document-list thumbview">'.implode('', $widget).'</div>';
     }
   }

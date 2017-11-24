@@ -215,9 +215,13 @@ nav.breadcrumbs li:before {
   background-color: #691F74;
   color: #FFF;
 }
-.homepage .icon-next {
-  margin: 5px;
-  display: inline-block;
+.homepage .next {
+  margin: 0;
+  text-align: right;
+  padding: 5px 10px;
+}
+.homepage .widget_bg_color {
+  background-color: #FFF;
 }
 .menu_wrapper .topmenu {
   background-color: #333;

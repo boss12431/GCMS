@@ -10,7 +10,6 @@ namespace Widgets\Map\Views;
 
 use \Kotchasan\Language;
 use \Kotchasan\Html;
-use \Gcms\Gcms;
 
 /**
  * โมดูลสำหรับจัดการการตั้งค่าเริ่มต้น
@@ -34,11 +33,9 @@ class Settings extends \Gcms\Adminview
     self::$cfg->map_height = isset(self::$cfg->map_height) ? self::$cfg->map_height : 400;
     self::$cfg->map_zoom = isset(self::$cfg->map_zoom) ? self::$cfg->map_zoom : 14;
     self::$cfg->map_latitude = isset(self::$cfg->map_latitude) ? self::$cfg->map_latitude : '14.132081110519639';
-    self::$cfg->map_lantigude = isset(self::$cfg->map_lantigude) ? self::$cfg->map_lantigude : '99.69822406768799';
-    self::$cfg->map_info_latigude = isset(self::$cfg->map_info_latigude) ? self::$cfg->map_info_latigude : '14.132081110519639';
-    self::$cfg->map_info_lantigude = isset(self::$cfg->map_info_lantigude) ? self::$cfg->map_info_lantigude : '99.69822406768799';
-    // google map
-    Gcms::$view->addJavascript('//maps.google.com/maps/api/js?key='.self::$cfg->map_api_key.'&amp;language='.Language::name());
+    self::$cfg->map_lantitude = isset(self::$cfg->map_lantitude) ? self::$cfg->map_lantitude : '99.69822406768799';
+    self::$cfg->map_info_latitude = isset(self::$cfg->map_info_latitude) ? self::$cfg->map_info_latitude : '14.132081110519639';
+    self::$cfg->map_info_lantitude = isset(self::$cfg->map_info_lantitude) ? self::$cfg->map_info_lantitude : '99.69822406768799';
     // form
     $form = Html::create('form', array(
         'id' => 'setup_frm',
@@ -85,23 +82,23 @@ class Settings extends \Gcms\Adminview
       'comment' => '{LNG_Location of the info}',
       'comment' => '{LNG_Click Find me button to configure the map to the current location of the computer, or click the Search button to find the approximate location you need.}'
     ));
-    // map_info_latigude
+    // map_info_latitude
     $groups->add('text', array(
-      'id' => 'map_info_latigude',
+      'id' => 'map_info_latitude',
       'labelClass' => 'g-input icon-location',
       'label' => '{LNG_Latitude}',
       'itemClass' => 'width',
       'pattern' => '[0-9\.]+',
-      'value' => self::$cfg->map_info_latigude
+      'value' => self::$cfg->map_info_latitude
     ));
-    // map_info_lantigude
+    // map_info_lantitude
     $groups->add('text', array(
-      'id' => 'map_info_lantigude',
+      'id' => 'map_info_lantitude',
       'labelClass' => 'g-input icon-location',
       'label' => '{LNG_Longitude}',
       'itemClass' => 'width',
       'pattern' => '[0-9\.]+',
-      'value' => self::$cfg->map_info_lantigude
+      'value' => self::$cfg->map_info_lantitude
     ));
     $groups->add('button', array(
       'id' => 'find_me',
@@ -131,14 +128,14 @@ class Settings extends \Gcms\Adminview
       'pattern' => '[0-9\.]+',
       'value' => self::$cfg->map_latitude
     ));
-    // map_lantigude
+    // map_lantitude
     $groups->add('text', array(
-      'id' => 'map_lantigude',
+      'id' => 'map_lantitude',
       'labelClass' => 'g-input icon-location',
       'label' => '{LNG_Longitude}',
       'itemClass' => 'width',
       'pattern' => '[0-9\.]+',
-      'value' => self::$cfg->map_lantigude
+      'value' => self::$cfg->map_lantitude
     ));
     // map_info
     $fieldset->add('textarea', array(
@@ -158,7 +155,7 @@ class Settings extends \Gcms\Adminview
       'class' => 'button ok large',
       'value' => '{LNG_Save}'
     ));
-    $form->script('initMapDemo();');
+    $form->script('initMapDemo("'.self::$cfg->map_api_key.'", "'.Language::name().'");');
     return $form->render();
   }
 }

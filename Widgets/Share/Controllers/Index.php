@@ -8,7 +8,6 @@
 
 namespace Widgets\Share\Controllers;
 
-use \Kotchasan\Text;
 
 /**
  * Controller หลัก สำหรับแสดงผล Widget
@@ -28,7 +27,7 @@ class Index extends \Kotchasan\Controller
    */
   public function get($query_string)
   {
-    $id = Text::rndname(10);
+    $id = uniqid();
     // share on tweeter & facebook
     $widget = '<div id="'.$id.'" class="widget_share'.(empty($query_string['module']) ? '' : '_'.$query_string['module']).'">';
     if (!empty($query_string['module'])) {

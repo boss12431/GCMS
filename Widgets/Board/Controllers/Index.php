@@ -38,7 +38,7 @@ class Index extends \Kotchasan\Controller
       $interval = isset($query_string['interval']) ? (int)$query_string['interval'] : 0;
       $count = isset($query_string['count']) ? (int)$query_string['count'] : $index->news_count;
       if ($count > 0) {
-        // template
+        // widget.html
         $template = Template::create('board', $index->module, 'widget');
         $template->add(array(
           '/{DETAIL}/' => '<script>getWidgetNews("{ID}", "Board", '.$interval.')</script>',
@@ -62,7 +62,7 @@ class Index extends \Kotchasan\Controller
       // ตรวจสอบโมดูล
       $index = \Index\Module\Model::getModuleWithConfig('board', '', $match[1]);
       if ($index) {
-        // /board/widgetitem.html
+        // widgetitem.html
         $listitem = Grid::create('board', $index->module, 'widgetitem');
         // เครื่องหมาย new
         $valid_date = time() - (int)$index->new_date;
