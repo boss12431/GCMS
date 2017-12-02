@@ -248,7 +248,7 @@ return array(
   'Gallery' => 'ギャラリー',
   'General' => '全般',
   'General site settings' => '基本的なサイトの設定',
-  'Generate Access token (For developers)' => 'アクセストークンの発行(開発者向け)',
+  'Generate access token (For developers)' => 'アクセストークンの発行(開発者向け)',
   'Get new password' => 'パスワードを変更する',
   'Go to Homepage' => 'ホームページへ',
   'go to page' => 'ページに移動',

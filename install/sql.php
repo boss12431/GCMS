@@ -279,7 +279,7 @@ INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`)
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Gallery','text','index','0','แกลอรี่','','ギャラリー');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('General','text','index','0','ทั่วไป','','全般');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('General site settings','text','index','0','ตั้งค่าพื้นฐานของเว็บไซต์','','基本的なサイトの設定');
-INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Generate Access token (For developers)','text','index','0','ออก Access token (สำหรับผู้พัฒนา)','','アクセストークンの発行(開発者向け)');
+INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Generate access token (For developers)','text','index','0','ออก Access token (สำหรับผู้พัฒนา)','','アクセストークンの発行(開発者向け)');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Get new password','text','index','0','ขอรหัสผ่าน','','パスワードを変更する');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Go to Homepage','text','index','0','ไปหน้าหลักเว็บไซต์','','ホームページへ');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('go to page','text','index','0','ไปหน้าที่','','ページに移動');
@@ -413,7 +413,7 @@ INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`)
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Number','text','index','0','จำนวน','','番号');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Other','text','index','0','อื่นๆ','','その他');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Other details','text','index','0','รายละเอียดอื่นๆ','','その他の詳細');
-INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Other preferences about SEO and Social Network','text','index','0','การตั้งค่าเกี่ยวกับ SEO และโซเชี่ยลเน็ตเวอร์ค','','ソーシャルネットワークとSEOの設定');
+INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Other preferences about SEO and Social Network','text','index','0','การตั้งค่าเกี่ยวกับ SEO และโซเชียลเน็ตเวิร์ค','','ソーシャルネットワークとSEOの設定');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Other settings','text','index','0','การตั้งค่าอื่นๆ','','その他の設定');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Other templates','text','index','0','แม่แบบอื่นๆ','','その他のテンプレート');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Overview and summary of this site','text','index','0','รายละเอียดและข้อมูลสรุปของเว็บไซต์นี้','','サイトの要約と概要');
