@@ -365,16 +365,12 @@ section > header {
   -webkit-box-shadow: none;
 }
 legend > span[class^="icon-"]:before,
+legend > span[class*=" icon-"]:before,
 .breadcrumbs [class^="icon-"]:before,
-.breadcrumbs [class*="icon-"]:before,
-h1[class^="icon-"]:before,
-h1[class*="icon-"]:before,
-h2[class^="icon-"]:before,
-h2[class*="icon-"]:before,
-h3[class^="icon-"]:before,
-h3[class*="icon-"]:before,
+.breadcrumbs [class*=" icon-"]:before,
 h1[class]:before,
-h2[class]:before {
+h2[class]:before,
+h3[class]:before {
   color: inherit;
 }
 .ggraphs {
@@ -465,7 +461,7 @@ h2[class]:before {
   -moz-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
   -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 }
-.qmenu [class*="icon"]:before {
+.qmenu [class^="icon"]:before {
   color: inherit;
 }
 .qmenu a:hover {
@@ -627,7 +623,8 @@ table.can_list {
 #language_tbl label {
   margin-right: 10px;
 }
-td a[class*="icon"] {
+td a[class^="icon-"],
+td a[class*=" icon-"] {
   display: block;
 }
 /* form */
@@ -735,7 +732,6 @@ header .inline {
 .button.icon-gps:before,
 .button.icon-search:before,
 .icon-customer:before,
-.icon-upload:before,
 .icon-subcategory:before,
 .icon-ban:before,
 .icon-valid:before,

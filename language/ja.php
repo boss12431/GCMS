@@ -167,7 +167,7 @@ return array(
   'Detail' => '詳細',
   'Details of' => '詳細',
   'Determine how to log in successfully' => 'ログイン時の動作を選択して下さい',
-  'Determine how to sort the items displayed in the list' => '並び順を指定して下さい',
+  'Determine how to sort the items displayed' => '並び順を指定して下さい',
   'Determine how to turn the page when a link is clicked' => 'リンクがクリックされた時の動作を選択して下さい',
   'Determine how to view the content for the page is reserved for members only' => 'メンバー限定ページで表示する内容を選択して下さい',
   'Determine the maximum number of messages to be displayed (set to 0 to display the Scrollbar)' => '表示するメッセージの数（0にするとスクロールバーが表示されます）',

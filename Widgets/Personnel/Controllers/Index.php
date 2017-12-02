@@ -35,7 +35,7 @@ class Index extends \Kotchasan\Controller
         $query_string['menu'] = isset($match[3]);
         $query_string['module'] = 'personnel';
       }
-      $query_string['cat'] = empty($query_string['cat']) ? 0 : $query_string['cat'];
+      $query_string['cat'] = isset($query_string['cat']) ? $query_string['cat']: 0;
       // ตรวจสอบโมดูล
       $index = Gcms::$module->findByModule($query_string['module']);
       if ($index) {

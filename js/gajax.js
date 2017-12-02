@@ -1994,9 +1994,6 @@ window.$K = (function () {
       });
       this.container.rel = 'play';
       this.playing = false;
-      var size = this.container.getDimensions();
-      this.containerHeight = size.height;
-      this.containerWidth = size.width;
     },
     play: function (options) {
       for (var property in options) {
@@ -2009,17 +2006,18 @@ window.$K = (function () {
     },
     step: function () {
       if (this.container.rel == 'play' || this.options.pauseit != 1) {
+        var size = this.container.getDimensions();
         if (this.options.scrollto == 'bottom') {
-          this.scrollerTop = this.scrollerTop > this.containerHeight ? 0 - this.scroller.getHeight() : this.scrollerTop + this.options.duration;
+          this.scrollerTop = this.scrollerTop > size.height ? 0 - this.scroller.getHeight() : this.scrollerTop + this.options.duration;
           this.scroller.style.top = this.scrollerTop + 'px';
         } else if (this.options.scrollto == 'left') {
-          this.scrollerLeft = this.scrollerLeft + this.scroller.getWidth() < 0 ? this.containerWidth : this.scrollerLeft - this.options.duration;
+          this.scrollerLeft = this.scrollerLeft + this.scroller.getWidth() < 0 ? size.width : this.scrollerLeft - this.options.duration;
           this.scroller.style.left = this.scrollerLeft + 'px';
         } else if (this.options.scrollto == 'right') {
-          this.scrollerLeft = this.scrollerLeft > this.containerWidth ? 0 - this.scrollerWidth : this.scrollerLeft + this.options.duration;
+          this.scrollerLeft = this.scrollerLeft > size.width ? 0 - this.scroller.getWidth() : this.scrollerLeft + this.options.duration;
           this.scroller.style.left = this.scrollerLeft + 'px';
         } else {
-          this.scrollerTop = this.scrollerTop + this.scroller.getHeight() < 0 ? this.containerHeight : this.scrollerTop - this.options.duration;
+          this.scrollerTop = this.scrollerTop + this.scroller.getHeight() < 0 ? size.height : this.scrollerTop - this.options.duration;
           this.scroller.style.top = this.scrollerTop + 'px';
         }
       }

@@ -106,7 +106,7 @@ class View extends \Gcms\Adminview
     // cols
     $groups->add('select', array(
       'id' => 'cols',
-      'labelClass' => 'g-input icon-width',
+      'labelClass' => 'g-input icon-cols',
       'itemClass' => 'width50',
       'label' => '{LNG_Cols}',
       'options' => array(1 => 1, 2 => 2, 4 => 4, 6 => 6, 8 => 8),
@@ -115,7 +115,7 @@ class View extends \Gcms\Adminview
     // rows
     $groups->add('number', array(
       'id' => 'rows',
-      'labelClass' => 'g-input icon-height',
+      'labelClass' => 'g-input icon-rows',
       'itemClass' => 'width50',
       'label' => '{LNG_Rows}',
       'value' => $index->rows
@@ -127,7 +127,7 @@ class View extends \Gcms\Adminview
       'labelClass' => 'g-input icon-sort',
       'itemClass' => 'item',
       'label' => '{LNG_Sort}',
-      'comment' => '{LNG_Determine how to sort the items displayed in the list}',
+      'comment' => '{LNG_Determine how to sort the items displayed}',
       'options' => $sorts,
       'value' => $index->sort
     ));
@@ -183,7 +183,7 @@ class View extends \Gcms\Adminview
       'labelClass' => 'g-input icon-sort',
       'itemClass' => 'item',
       'label' => '{LNG_Sort}',
-      'comment' => '{LNG_Determine how to sort the items displayed in the list}',
+      'comment' => '{LNG_Determine how to sort the items displayed}',
       'options' => $sorts,
       'value' => $index->news_sort
     ));
@@ -196,7 +196,7 @@ class View extends \Gcms\Adminview
     // document_cols
     $groups->add('select', array(
       'id' => 'document_cols',
-      'labelClass' => 'g-input icon-width',
+      'labelClass' => 'g-input icon-cols',
       'itemClass' => 'width50',
       'label' => '{LNG_Cols}',
       'options' => array(1 => 1, 2 => 2, 4 => 4, 6 => 6, 8 => 8),
@@ -205,7 +205,7 @@ class View extends \Gcms\Adminview
     // document_rows
     $groups->add('number', array(
       'id' => 'document_rows',
-      'labelClass' => 'g-input icon-height',
+      'labelClass' => 'g-input icon-rows',
       'itemClass' => 'width50',
       'label' => '{LNG_Rows}',
       'value' => self::$cfg->document_rows
@@ -292,7 +292,7 @@ class View extends \Gcms\Adminview
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button ok large',
+      'class' => 'button save large icon-save',
       'value' => '{LNG_Save}'
     ));
     // id

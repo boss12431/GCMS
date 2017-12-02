@@ -102,7 +102,7 @@ class Write extends \Gcms\Adminview
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button ok large',
+      'class' => 'button save large icon-save',
       'value' => '{LNG_Save}'
     ));
     // id

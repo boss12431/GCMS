@@ -94,7 +94,7 @@ class View extends \Gcms\Adminview
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button ok large',
+      'class' => 'button save large icon-save',
       'value' => '{LNG_Send message}'
     ));
     return $form->render();

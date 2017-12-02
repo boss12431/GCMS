@@ -152,7 +152,7 @@ class Settings extends \Gcms\Adminview
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button ok large',
+      'class' => 'button save large icon-save',
       'value' => '{LNG_Save}'
     ));
     $form->script('initMapDemo("'.self::$cfg->map_api_key.'", "'.Language::name().'");');

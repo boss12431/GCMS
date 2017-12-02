@@ -90,7 +90,7 @@ class View extends \Gcms\Adminview
       'labelClass' => 'g-input icon-sort',
       'itemClass' => 'item',
       'label' => '{LNG_Sort}',
-      'comment' => '{LNG_Determine how to sort the items displayed in the list}',
+      'comment' => '{LNG_Determine how to sort the items displayed}',
       'options' => $sorts,
       'value' => isset($index->sort) ? $index->sort : 1
     ));
@@ -147,7 +147,7 @@ class View extends \Gcms\Adminview
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button ok large',
+      'class' => 'button save large icon-save',
       'value' => '{LNG_Save}'
     ));
     // id

@@ -90,7 +90,7 @@ class View extends \Gcms\Adminview
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button ok large',
+      'class' => 'button save large icon-download',
       'value' => '{LNG_Export}'
     ));
     Gcms::$view->setContentsAfter(array(
@@ -132,7 +132,7 @@ class View extends \Gcms\Adminview
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button ok large',
+      'class' => 'button save large icon-upload',
       'value' => '{LNG_Import}'
     ));
     $form->add('aside', array(

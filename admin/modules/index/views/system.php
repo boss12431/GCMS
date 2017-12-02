@@ -262,7 +262,7 @@ class View extends \Gcms\Adminview
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button save large',
+      'class' => 'button save large icon-save',
       'value' => '{LNG_Save}'
     ));
     $form->script('initSystem();');

@@ -49,13 +49,10 @@ class Controller extends \Kotchasan\Controller
             createClass($class)->init($modules);
           }
         }
-        if ($new_day && is_file($dir.$owner.'/controllers/cron.php')) {
-          include $dir.$owner.'/controllers/cron.php';
-          $class = ucfirst($owner).'\Cron\Controller';
-          if (method_exists($class, 'init')) {
-            createClass($class)->init($modules);
-          }
-        }
+      }
+      if ($new_day) {
+        // cron
+        \Index\Cron\Controller::index(self::$request);
       }
       // โหลด init ของส่วนเสริม
       $dir = ROOT_PATH.'Widgets/';

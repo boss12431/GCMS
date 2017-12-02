@@ -166,7 +166,7 @@ return array(
   'Detail' => 'รายละเอียด',
   'Details of' => 'รายละเอียดของ',
   'Determine how to log in successfully' => 'กำหนดวิธีการหลังจากเข้าระบบเรียบร้อยแล้ว',
-  'Determine how to sort the items displayed in the list' => 'กำหนดวิธีการเรียงลำดับการแสดงผลในหน้าแสดงรายการ',
+  'Determine how to sort the items displayed' => 'กำหนดวิธีการเรียงลำดับการแสดงผล',
   'Determine how to turn the page when a link is clicked' => 'กำหนดวิธีการเปิดหน้าเว็บเมื่อมีการคลิกลิงค์',
   'Determine how to view the content for the page is reserved for members only' => 'กำหนดวิธีการดูเนื้อหาของหน้าที่สงวนไว้สำหรับสมาชิกเท่านั้น',
   'Determine the maximum number of messages to be displayed (set to 0 to display the Scrollbar)' => 'กำหนดจำนวนข้อความสูงสุดที่ต้องการแสดงผล (กำหนดเป็น 0 จะแสดงผลแบบมี Scrollbar)',

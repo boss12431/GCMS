@@ -11,7 +11,6 @@ namespace Document\Admin\Write;
 use \Kotchasan\Http\Request;
 use \Kotchasan\Html;
 use \Kotchasan\Language;
-use \Gcms\Gcms;
 use \Kotchasan\ArrayTool;
 
 /**
@@ -214,13 +213,13 @@ class View extends \Gcms\Adminview
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button ok large',
+      'class' => 'button save large icon-save',
       'value' => '{LNG_Save}'
     ));
     // preview
     $fieldset->add('button', array(
       'id' => 'preview',
-      'class' => 'button preview large',
+      'class' => 'button preview large icon-index',
       'value' => '{LNG_Preview}'
     ));
     // id

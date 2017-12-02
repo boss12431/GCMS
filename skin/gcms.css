@@ -111,13 +111,6 @@ time {
 .icon-pin:before {
   color: #E91E63;
 }
-.icon-published0:before,
-.reply0:before,
-.icon-sex:before,
-.icon-thumbnail:before,
-.disabled {
-  color: #CCC;
-}
 .sql,
 .tags,
 .icon-subcategory:before {
@@ -129,6 +122,7 @@ time {
   color: rgb(71, 87, 173);
 }
 .icon-delete:before,
+.icon-valid:before,
 .access:before {
   font-style: normal;
   color: #FF5722;
@@ -144,6 +138,14 @@ span.icon-sex-m:before {
 }
 .icon-print:before {
   color: #4488BB;
+}
+.icon-published0:before,
+.reply0:before,
+.icon-sex:before,
+.icon-thumbnail:before,
+.value0:before,
+.disabled:before {
+  color: #CCC;
 }
 .new:after,
 .update:after,

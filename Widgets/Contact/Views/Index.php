@@ -79,7 +79,7 @@ class Index extends \Gcms\View
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button ok large',
+      'class' => 'button save large',
       'value' => '{LNG_Send message}'
     ));
     return $form->render();

@@ -39,7 +39,7 @@ class Model extends \Kotchasan\KBase
         $config = Config::load(CONFIG);
         // อัปโหลดไฟล์
         foreach ($request->getUploadedFiles() as $item => $file) {
-          if (in_array($item, array('logo', 'bg_image', 'header_bg'))) {
+          if (in_array($item, array('logo', 'bg_image'))) {
             /* @var $file \Kotchasan\Http\UploadedFile */
             if ($request->post('delete_'.$item)->toBoolean() == 1) {
               // ลบรูปภาพ

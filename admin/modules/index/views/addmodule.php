@@ -50,7 +50,7 @@ class View extends \Gcms\Adminview
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button ok large',
+      'class' => 'button ok large icon-next',
       'value' => '{LNG_Create}'
     ));
     // module

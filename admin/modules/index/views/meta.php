@@ -122,7 +122,7 @@ class View extends \Gcms\Adminview
       'labelClass' => 'g-input icon-password',
       'itemClass' => 'item',
       'label' => '{LNG_Access token}',
-      'comment' => '{LNG_Generate Access token (For developers)} <a href="https://gcms.in.th/index.php?module=howto&id=367" class=icon-help></a>',
+      'comment' => '{LNG_Generate access token (For developers)} <a href="https://gcms.in.th/index.php?module=howto&id=367" class=icon-help></a>',
       'value' => isset($config->line_api_key) ? $config->line_api_key : ''
     ));
     $fieldset = $form->add('fieldset', array(
@@ -130,7 +130,7 @@ class View extends \Gcms\Adminview
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button ok large',
+      'class' => 'button save large icon-save',
       'value' => '{LNG_Save}'
     ));
     return $form->render();

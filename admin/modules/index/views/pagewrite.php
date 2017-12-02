@@ -134,14 +134,14 @@ class View extends \Gcms\Adminview
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button ok large',
+      'class' => 'button save large icon-save',
       'value' => '{LNG_Save}'
     ));
     // preview button
     if ($index->owner == 'index') {
       $fieldset->add('button', array(
         'id' => 'btn_preview',
-        'class' => 'button preview large',
+        'class' => 'button preview large icon-index',
         'value' => '{LNG_Preview}'
       ));
     }

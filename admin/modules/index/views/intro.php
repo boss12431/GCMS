@@ -85,7 +85,7 @@ class View extends \Gcms\Adminview
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button ok large',
+      'class' => 'button save large icon-save',
       'value' => '{LNG_Save}'
     ));
     $form->script('doChangeLanguage("btn_go", "index.php?module=intro");');

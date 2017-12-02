@@ -12,7 +12,6 @@ use \Kotchasan\Http\Request;
 use \Kotchasan\Template;
 use \Kotchasan\Language;
 use \Gcms\Gcms;
-use \Kotchasan\Date;
 use \Gcms\Login;
 
 /**
