@@ -158,7 +158,6 @@ class Html extends \Kotchasan\KBase
         'innerHTML' => $attributes['label'],
         'for' => $attributes['id']
       ));
-      $c[] = 'border';
     }
     $div = $obj->add('div', array(
       'class' => implode(' ', $c)

@@ -1268,7 +1268,7 @@ form .comment {
   display: block;
   overflow: hidden;
 }
-.radiogroups > label, .checkboxgroups > label {
+.radiogroups.g-input > label, .checkboxgroups.g-input > label {
   padding: 0.25em 1em 0.25em 0.25em;
   cursor: pointer;
   float: left;
@@ -1276,11 +1276,12 @@ form .comment {
 .radiogroups.multiline > label, .checkboxgroups.multiline > label {
   float: none;
   display: block;
+  padding: 0 1em;
 }
-.radiogroups > label > input, .checkboxgroups > label > input {
+.radiogroups.g-input > label > input, .checkboxgroups.g-input > label > input {
   height: 1.65em;
 }
-.radiogroups > label:hover, .checkboxgroups > label:hover {
+.radiogroups.g-input > label:hover, .checkboxgroups.g-input > label:hover {
   background-color: #3297FD;
   color: #FFF;
 }

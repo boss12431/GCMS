@@ -168,9 +168,9 @@ class Controller extends \Kotchasan\Controller
         // โลโก
         '/{LOGO}/' => isset($image_logo) ? $image_logo : ''
       ));
+      // เมนูหลัก
+      Gcms::$view->setContents(Gcms::$menu->render(isset($page->menu) ? $page->menu : $page->module));
     }
-    // เมนูหลัก
-    Gcms::$view->setContents(Gcms::$menu->render(isset($page->menu) ? $page->menu : $page->module));
     // ส่งออก เป็น HTML
     $response = new Response;
     if (isset($page->status) && $page->status == 404) {
