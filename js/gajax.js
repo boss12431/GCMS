@@ -1527,10 +1527,6 @@ window.$K = (function () {
             if (obj.title != '') {
               text.title = obj.title;
             }
-            if (obj.disabled) {
-              text.disabled = true;
-              hidden.disabled = true;
-            }
             text.className = elem.className;
             var src = new GCalendar(text, function () {
               hidden.value = this.getDateFormat('y-m-d');
@@ -1554,6 +1550,9 @@ window.$K = (function () {
               }
               if (hidden.disabled != text.disabled) {
                 text.disabled = hidden.disabled ? true : false;
+              }
+              if (hidden.readOnly != text.readOnly) {
+                text.readOnly = hidden.readOnly ? true : false;
               }
             }, 500);
             hidden.display = text;
@@ -1582,6 +1581,9 @@ window.$K = (function () {
             }
             if (elem.maxlength > 0) {
               text.maxlength = elem.maxlength;
+            }
+            if (elem.readOnly) {
+              text.readOnly = true;
             }
             text.className = elem.className;
             elem.replace(text);

@@ -189,6 +189,9 @@ class Html extends \Kotchasan\KBase
         if (isset($attributes['comment'])) {
           $item['title'] = strip_tags($attributes['comment']);
         }
+        if (isset($attributes['disabled'])) {
+          $item['disabled'] = true;
+        }
         $div->add($tag == 'radiogroups' ? 'radio' : 'checkbox', $item);
       }
     }

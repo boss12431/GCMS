@@ -75,15 +75,16 @@ class View extends \Gcms\Adminview
       'id' => 'begin_date',
       'labelClass' => 'g-input icon-calendar',
       'itemClass' => 'width',
+      'label' => '{LNG_from time}',
       'value' => date('Y-m-d', $begin_date)
     ));
     $row->add('time', array(
       'id' => 'begin_time',
       'labelClass' => 'g-input icon-clock',
       'itemClass' => 'width',
-      'label' => '{LNG_from time}',
       'value' => date('H:i:s', $begin_date)
     ));
+    $row = $group->add('row');
     $end_date = isset($index->end_date) ? Date::sqlDateTimeToMktime($index->end_date) : time();
     $row->add('time', array(
       'id' => 'to_time',
@@ -94,7 +95,7 @@ class View extends \Gcms\Adminview
     ));
     $row->add('checkbox', array(
       'id' => 'forever',
-      'label' => '{LNG_forever}',
+      'label' => '{LNG_all day}',
       'itemClass' => 'width',
       'checked' => !isset($index->end_date) || $index->end_date == '0000-00-00 00:00:00',
       'value' => 1

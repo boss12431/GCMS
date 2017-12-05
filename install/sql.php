@@ -270,7 +270,7 @@ INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`)
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('First Install','text','index','0','ติดตั้งครั้งแรก','','初回インストール');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('FIT_SCREEN','text','index','1','แสดงรูปภาพพอดีกับจอ','Fit screen','フィット画面');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('For display by Date or Tag','text','index','0','สำหรับการแสดงผลตามวันที่หรือตามป้ายกำกับ','','タグまたは日付による表示');
-INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('forever','text','index','0','ตลอดไป','','無期限');
+INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('all day','text','index','0','ทั้งวัน','','一日中');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Forgot','text','index','0','ลืมรหัสผ่าน','','パスワード再発行');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Friend&#039;s faces','text','index','0','รายชื่อเพื่อน','','フレンドリスト');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('from time','text','index','0','ตั้งแต่เวลา','','から');

@@ -41,7 +41,7 @@ class Controller extends \Gcms\Controller
     // เลือกเมนู
     $this->menu = 'modules';
     // ตรวจสอบรายการที่เลือก
-    $index = \Download\Admin\Write\Model::get($module_id, $id);
+    $index = \Event\Admin\Write\Model::get($module_id, $id);
     // admin
     $login = Login::adminAccess();
     // can_write หรือ สมาชิกตัวอย่าง

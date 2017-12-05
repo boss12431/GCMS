@@ -440,7 +440,6 @@ input[type="color"] {
   -o-transition: border-color linear .2s, width linear .2s;
   transition: border-color linear .2s, width linear .2s;
 }
-input.ginput[readonly],
 fieldset.search,
 .g-file ~ input[type="text"],
 select,
@@ -1268,6 +1267,9 @@ form .comment {
   display: block;
   overflow: hidden;
 }
+.radiogroups > label, .checkboxgroups > label {
+  padding: 0 1em;
+}
 .radiogroups.g-input > label, .checkboxgroups.g-input > label {
   padding: 0.25em 1em 0.25em 0.25em;
   cursor: pointer;
@@ -1276,7 +1278,6 @@ form .comment {
 .radiogroups.multiline > label, .checkboxgroups.multiline > label {
   float: none;
   display: block;
-  padding: 0 1em;
 }
 .radiogroups.g-input > label > input, .checkboxgroups.g-input > label > input {
   height: 1.65em;
