@@ -52,7 +52,7 @@ class Controller extends \Kotchasan\Controller
       }
       if ($new_day) {
         // cron
-        \Index\Cron\Controller::index(self::$request);
+        createClass('Index\Cron\Controller')->index(self::$request);
       }
       // โหลด init ของส่วนเสริม
       $dir = ROOT_PATH.'Widgets/';
