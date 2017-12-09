@@ -215,7 +215,7 @@
     },
   };
 }());
-function initAutoComplete(id, model, displayFields, icon, options) {
+function initAutoComplete(id, link, displayFields, icon, options) {
   var obj,
     df = displayFields.split(',');
   function doGetQuery() {
@@ -250,7 +250,7 @@ function initAutoComplete(id, model, displayFields, icon, options) {
     get: doGetQuery,
     populate: doPopulate,
     callBack: doCallBack,
-    url: 'index.php/' + model
+    url: link
   };
   for (var prop in options) {
     o[prop] = options[prop];
