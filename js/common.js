@@ -372,7 +372,7 @@ function selectChanged(src, action, callback) {
       if (xhr.responseText !== '') {
         callback.call(temp, xhr);
       }
-    });
+    }, this);
   });
 }
 var doCustomConfirm = function (value) {

@@ -134,6 +134,7 @@ class Date
    * @return string วันที่และเวลาตามรูปแบบที่กำหนดโดย $format
    * @assert (0) [!=]  ''
    * @assert (null) [==]  ''
+   * @assert (1454259600, 'Y-m-d H:i:s') [==] '2559-02-01 00:00:00'
    */
   public static function format($time = 0, $format = '')
   {
@@ -145,7 +146,7 @@ class Date
       } elseif (preg_match('/([0-9]+){1,2}:([0-9]+){1,2}:([0-9]+){1,2}/', $time, $match)) {
         $time = mktime((int)$match[1], (int)$match[2], (int)$match[3]);
       }
-    } else {
+    } elseif (!is_int($time)) {
       return '';
     }
     // create class

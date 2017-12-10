@@ -977,6 +977,28 @@ window.$K = (function () {
       }
       return this.elem.value;
     },
+    setOptions: function (json, value) {
+      if (this.tagName.toLowerCase() == 'select') {
+        for (var i = this.options.length; i > 0; i--) {
+          this.removeChild(this.options[i - 1]);
+        }
+        var selectedIndex = 0;
+        if (json) {
+          var i = 0;
+          for (var key in json) {
+            if (key == value) {
+              selectedIndex = i;
+            }
+            var option = document.createElement('option');
+            option.innerHTML = json[key];
+            option.value = key;
+            this.appendChild(option);
+            i++;
+          }
+        }
+        this.selectedIndex = selectedIndex;
+      }
+    },
     element: function () {
       return Object.isString(this.elem) ? document.getElementById(this.elem) : this.elem;
     },
