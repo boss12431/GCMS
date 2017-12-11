@@ -60,7 +60,7 @@ class View extends \Gcms\View
             // รูปภาพของความคิดเห็น
             $picture = $item->picture != '' && is_file($imagedir.$item->picture) ? '<figure><img src="'.$imageurl.$item->picture.'" alt="'.$index->topic.'"></figure>' : '';
             $listitem->add(array(
-              '/{DETAIL}/' => $picture.Gcms::showDetail(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), nl2br($item->detail)), $canView, true, true),
+              '/{DETAIL}/' => $picture.Gcms::showDetail(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), nl2br($item->detail)), $canView, true),
               '/{DISPLAYNAME}/' => $item->displayname,
               '/{DATE}/' => Date::format($item->last_update),
               '/{IP}/' => Gcms::showip($item->ip, $login),
@@ -71,7 +71,7 @@ class View extends \Gcms\View
         // รูปภาพในกระทู้
         $picture = empty($index->image_src) ? '' : '<figure><img src="'.$index->image_src.'" alt="'.$index->topic.'"></figure>';
         // เนื้อหา
-        $detail = Gcms::showDetail(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), nl2br($index->detail)), $canView, true, true);
+        $detail = Gcms::showDetail(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), nl2br($index->detail)), $canView, true);
         $replace = array(
           '/{COMMENTLIST}/' => isset($listitem) ? $listitem->render() : '',
           '/{TOPIC}/' => $index->topic,

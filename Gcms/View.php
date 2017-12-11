@@ -94,7 +94,7 @@ class View extends \Gcms\Baseview
       /* ภาษา ที่ใช้งานอยู่ */
       '/{LANGUAGE}/' => Language::name(),
       /* Javascript ท้ายเพจ */
-      '/(<body.*)(<\/body>)/isu' => '$1<script>'.implode("\n", $this->script).'</script>$2',
+      '/(<body.*)(<\/body>)/isu' => '$1<script>'.implode("\n", $this->script).'</script>$2'
     ));
     // JSON-LD
     if (!empty($this->jsonld)) {

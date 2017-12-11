@@ -39,7 +39,7 @@ class View extends \Gcms\View
       // URL ของหน้า
       $index->canonical = \Documentation\Index\Controller::url($index->module, $index->alias, $index->id);
       // เนื้อหา
-      $index->detail = Gcms::showDetail(str_replace(array('&#x007B;', '&#x007D;'), array('{', '}'), $index->detail), true, true, true);
+      $index->detail = Gcms::showDetail(str_replace(array('&#x007B;', '&#x007D;'), array('{', '}'), $index->detail), true, true);
       // JSON-LD
       Gcms::$view->setJsonLd(\Documentation\Jsonld\View::generate($index));
       // คืนค่า

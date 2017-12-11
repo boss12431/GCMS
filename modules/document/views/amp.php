@@ -71,7 +71,7 @@ class View extends \Gcms\View
           $listitem = Grid::create('document', $index->module, 'printcommentitem');
           // รายการแสดงความคิดเห็น
           foreach ($index->comment_items as $no => $item) {
-            $item->detail = Gcms::showDetail(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), nl2br($item->detail)), $canView, true, true);
+            $item->detail = Gcms::showDetail(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), nl2br($item->detail)), $canView, true);
             $listitem->add(array(
               '/{DETAIL}/' => $item->detail,
               '/{DISPLAYNAME}/' => $item->displayname,
@@ -82,7 +82,7 @@ class View extends \Gcms\View
           }
         }
         // เนื้อหา
-        $index->detail = Gcms::showDetail(str_replace(array('&#x007B;', '&#x007D;'), array('{', '}'), $index->detail), $canView, true, true);
+        $index->detail = Gcms::showDetail(str_replace(array('&#x007B;', '&#x007D;'), array('{', '}'), $index->detail), $canView, true);
         // JSON-LD
         Gcms::$view->setJsonLd(\Document\Jsonld\View::generate($index));
         // คืนค่า

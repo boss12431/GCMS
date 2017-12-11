@@ -551,7 +551,7 @@ return array(
   'Sender' => '送信者',
   'Separate them with a comma' => 'コンマで区切ります',
   'Server time' => 'サーバー時間',
-  'Set as cover image' => 'Set as cover image',
+  'Set as cover image' => '表紙画像に設定',
   'Set the application for send an email' => 'メール送信スクリプトを選択して下さい',
   'Set the Display category list. If you choose to disable. System will jump to display the list of articles.' => 'カテゴリの有無を選択して下さい。無を選択した場合、分類せずに一覧表示となります',
   'Set the number of entries displayed (0 means not shown)' => '表示数を入力して下さい（0は非表示）',

@@ -32,7 +32,7 @@ class Controller extends \Gcms\Controller
   public function render(Request $request)
   {
     // ข้อความ title bar
-    $this->title = Language::get('Enable/Disable Maintenance mode');
+    $this->title = Language::get('Enable/Disable maintenance mode');
     // เลือกเมนู
     $this->menu = 'settings';
     // สามารถตั้งค่าระบบได้

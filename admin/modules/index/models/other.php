@@ -42,7 +42,10 @@ class Model extends \Kotchasan\KBase
         }
         $config->wordrude = array();
         foreach (explode("\n", $request->post('wordrude')->text()) as $item) {
-          $config->wordrude[] = trim($item);
+          $item = trim($item);
+          if ($item != '') {
+            $config->wordrude[] = $item;
+          }
         }
         $config->wordrude_replace = $request->post('wordrude_replace', 'xxx')->toString();
         $config->counter_digit = max(4, $request->post('counter_digit')->toInt());

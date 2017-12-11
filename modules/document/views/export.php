@@ -69,7 +69,7 @@ class View extends \Gcms\View
           $listitem = Grid::create('document', $index->module, 'printcommentitem');
           // รายการแสดงความคิดเห็น
           foreach ($index->comment_items as $no => $item) {
-            $item->detail = Gcms::showDetail(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), nl2br($item->detail)), $canView, true, true);
+            $item->detail = Gcms::showDetail(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), nl2br($item->detail)), $canView, true);
             $listitem->add(array(
               '/{DETAIL}/' => $item->detail,
               '/{DISPLAYNAME}/' => $item->displayname,
@@ -80,7 +80,7 @@ class View extends \Gcms\View
           }
         }
         // เนื้อหา
-        $index->detail = Gcms::showDetail(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), $index->detail), $canView, true, true);
+        $index->detail = Gcms::showDetail(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), $index->detail), $canView, true);
         $replace = array(
           '/{COMMENTLIST}/' => isset($listitem) ? $listitem->render() : '',
           '/{TOPIC}/' => $index->topic,
@@ -129,7 +129,7 @@ class View extends \Gcms\View
           $listitem = Grid::create($index->owner, $index->module, 'printcommentitem');
           foreach (\Document\Comment\Model::get($index) as $no => $item) {
             $listitem->add(array(
-              '/{DETAIL}/' => Gcms::showDetail(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), nl2br($item->detail)), $canView, true, true),
+              '/{DETAIL}/' => Gcms::showDetail(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), nl2br($item->detail)), $canView, true),
               '/{DISPLAYNAME}/' => $item->name,
               '/{DATE}/' => Date::format($item->last_update),
               '/{IP}/' => Gcms::showip($item->ip, $login),
@@ -138,7 +138,7 @@ class View extends \Gcms\View
           }
         }
         // เนื้อหา
-        $detail = Gcms::showDetail(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), $index->detail), $canView, true, true);
+        $detail = Gcms::showDetail(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), $index->detail), $canView, true);
         $replace = array(
           '/{COMMENTLIST}/' => isset($listitem) ? $listitem->render() : '',
           '/{TOPIC}/' => $index->topic,

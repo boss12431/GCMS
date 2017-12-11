@@ -258,14 +258,10 @@ class Gcms extends \Kotchasan\KBase
    * @param string $detail ข้อความ
    * @param boolean $canview true จะแสดงข้อความเตือน 'ยังไม่ได้เข้าระบบ' หากไม่ได้เข้าระบบ สำหรับส่วนที่อยู่ในกรอบ code
    * @param boolean $rude (optional) true=ตรวจสอบคำหยาบด้วย (default true)
-   * @param boolean $txt (optional) true=เปลี่ยน tab เป็นช่องว่าง 4 ตัวอักษร (default false)
    * @return string
    */
-  public static function showDetail($detail, $canview, $rude = true, $txt = false)
+  public static function showDetail($detail, $canview, $rude = true)
   {
-    if ($txt) {
-      $detail = preg_replace('/[\t]/', '&nbsp;&nbsp;&nbsp;&nbsp;', $detail);
-    }
     if ($rude) {
       return self::highlighter(self::checkRude($detail), $canview);
     } else {

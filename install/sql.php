@@ -86,6 +86,7 @@ INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`)
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('all','text','index','0','ทุก','','全て');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('All :count entries, displayed :start to :end, page :page of :total pages','text','index','0','ทั้งหมด :count รายการ, แสดง :start ถึง :end, หน้าที่ :page จากทั้งหมด :total หน้า','','全:count件　:startから:end件を表示　:page／:totalページ');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('All Categories Must have at least one item','text','index','0','หมวดหมู่ทั้งหมด ต้องมีอย่างน้อย 1 รายการ','','カテゴリは少なくとも1つ以上作成して下さい');
+INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('all day','text','index','0','ทั้งวัน','','一日中');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('all items','text','index','0','ทั้งหมด','','全ての項目');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('all languages','text','index','0','ทุกภาษา','','選択して下さい');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('All template files are stored in <span>%s</span>','text','index','0','ไฟล์แม่แบบนี้เก็บอยู่ใน <span>%s</span>','','<span>%s</span>に保存されています');
@@ -239,7 +240,7 @@ INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`)
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('EMPTY_SEARCH_MESSAGE','text','index','0','<ul><li>ตรวจสอบให้แน่ใจว่าการสะกดคำถูกต้อง</li><li>ลองเปลี่ยนวลีใหม่หรือใช้คำเหมือน</li><li>ลองระบุคำที่ไม่เฉพาะเจาะจงเกินไป</li><li>ระบุคำที่ต้องการค้นหาให้รัดกุมมากที่สุด</li></ul>','<ul><li>make sure that the spelling correct</li><li>try changing or new phrases. synonyms</li><li>try to identify a non-specific too</li><li>specific keywords to search the most concise</li></ul>','<ul><li>綴りに間違いはありませんか？</li><li>フレーズの変更もしくは同義語も試してみて下さい</li><li>あまり具体的過ぎないようにしましょう</li><li>簡潔なキーワードを使ってみて下さい</li></ul>');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Enable SSL encryption for sending email','text','index','0','เปิดใช้งานการเข้ารหัส SSL สำหรับการส่งอีเมล์','','メール送信時のSSL暗号化');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Enable/Disable intro page','text','index','0','เปิด/ปิด การแสดงหน้าต้อนรับ','','イントロページの有無');
-INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Enable/Disable Maintenance mode','text','index','0','เปิด/ปิด โหมดบำรุงรักษา','','メンテナンスモードの有無');
+INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Enable/Disable maintenance mode','text','index','0','เปิด/ปิด โหมดบำรุงรักษา','','メンテナンスモードの有無');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Enabled and required','text','index','0','เปิดใช้งานและบังคับต้องกรอกเสมอ','','有　必須にする');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Enabled but not required','text','index','0','เปิดใช้งานแต่ไม่ต้องกรอกก็ได้','','有　必須にしない');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('English lowercase and number only','text','index','0','ภาษาอังกฤษตัวพิมพ์เล็กและตัวเลขเท่านั้น','','小文字の半角英数字のみ');
@@ -270,7 +271,7 @@ INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`)
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('First Install','text','index','0','ติดตั้งครั้งแรก','','初回インストール');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('FIT_SCREEN','text','index','1','แสดงรูปภาพพอดีกับจอ','Fit screen','フィット画面');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('For display by Date or Tag','text','index','0','สำหรับการแสดงผลตามวันที่หรือตามป้ายกำกับ','','タグまたは日付による表示');
-INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('all day','text','index','0','ทั้งวัน','','一日中');
+INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('forever','text','index','0','ตลอดไป','','無期限');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Forgot','text','index','0','ลืมรหัสผ่าน','','パスワード再発行');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Friend&#039;s faces','text','index','0','รายชื่อเพื่อน','','フレンドリスト');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('from time','text','index','0','ตั้งแต่เวลา','','から');

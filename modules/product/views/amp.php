@@ -49,7 +49,7 @@ class View extends \Gcms\View
       // URL ของหน้า
       $index->canonical = \Product\Index\Controller::url($index->module, $index->alias, $index->id, false);
       // เนื้อหา
-      $index->detail = Gcms::showDetail(str_replace(array('&#x007B;', '&#x007D;'), array('{', '}'), $index->detail), false, true, true);
+      $index->detail = Gcms::showDetail(str_replace(array('&#x007B;', '&#x007D;'), array('{', '}'), $index->detail), false, true);
       // JSON-LD
       Gcms::$view->setJsonLd(\Product\Jsonld\View::generate($index));
       // สกุลเงิน

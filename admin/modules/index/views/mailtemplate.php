@@ -47,7 +47,7 @@ class View extends \Gcms\Adminview
       'action' => 'index.php/index/model/mailtemplate/action',
       'actionCallback' => 'indexActionCallback',
       'actionConfirm' => 'confirmAction',
-      /* ฟังก์ชั่นตรวจสอบการแสดงผลปุ่มในแถว */
+      /* ฟังก์ชั่นตรวจสอบว่าสามารถสร้างปุ่มได้หรือไม่ */
       'onCreateButton' => array($this, 'onCreateButton'),
       /* ส่วนหัวของตาราง และการเรียงลำดับ (thead) */
       'headers' => array(
@@ -105,10 +105,11 @@ class View extends \Gcms\Adminview
   }
 
   /**
-   * ฟังกชั่นตรวจสอบว่าสามารถสร้างปุ่มได้หรือไม่
+   * ฟังก์ชั่นตรวจสอบว่าสามารถสร้างปุ่มได้หรือไม่
    *
-   * @param array $item
-   * @return array
+   * @param $btn string id ของ button
+   * @param $attributes array property ของปุ่ม
+   * @param $items array ข้อมูลในแถว
    */
   public function onCreateButton($btn, $attributes, $items)
   {

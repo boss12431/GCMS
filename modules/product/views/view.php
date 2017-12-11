@@ -73,7 +73,7 @@ class View extends \Gcms\View
         Gcms::$view->metas['amphtml'] = '<link rel="amphtml" href="'.WEB_URL.'amp.php?module='.$index->module.'&amp;id='.$index->id.'">';
       }
       // เนื้อหา
-      $index->detail = Gcms::showDetail(str_replace(array('&#x007B;', '&#x007D;'), array('{', '}'), $index->detail), false, true, true);
+      $index->detail = Gcms::showDetail(str_replace(array('&#x007B;', '&#x007D;'), array('{', '}'), $index->detail), false, true);
       // สกุลเงิน
       $currency_units = Language::get('CURRENCY_UNITS');
       $replace = array(

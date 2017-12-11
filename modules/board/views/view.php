@@ -93,7 +93,7 @@ class View extends \Gcms\View
             $listitem->add(array(
               '/(edit-{QID}-{RID}-{NO}-{MODULE})/' => $canEdit ? '\\1' : 'hidden',
               '/(delete-{QID}-{RID}-{NO}-{MODULE})/' => $moderator ? '\\1' : 'hidden',
-              '/{DETAIL}/' => $picture.Gcms::highlightSearch(Gcms::showDetail(nl2br($item->detail), $canView, true, true), $index->q),
+              '/{DETAIL}/' => $picture.Gcms::highlightSearch(Gcms::showDetail(nl2br($item->detail), $canView, true), $index->q),
               '/{UID}/' => $item->member_id,
               '/{DISPLAYNAME}/' => $item->displayname,
               '/{STATUS}/' => $item->status,
@@ -113,7 +113,7 @@ class View extends \Gcms\View
         // รูปภาพในกระทู้
         $picture = is_array($index->picture) ? '<div><figure><img src="'.$index->picture['url'].'" alt="'.$index->topic.'"></figure></div>' : '';
         // เนื้อหา
-        $index->detail = Gcms::showDetail(nl2br($index->detail), $canView, true, true);
+        $index->detail = Gcms::showDetail(nl2br($index->detail), $canView, true);
         // description
         $index->description = Gcms::html2txt($index->detail);
         $replace = array(

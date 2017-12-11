@@ -999,6 +999,33 @@ window.$K = (function () {
         this.selectedIndex = selectedIndex;
       }
     },
+    getSelectedText: function () {
+      var text = '';
+      if (this.selectionStart) {
+        if (this.selectionStart != this.selectionEnd) {
+          text = this.value.substring(this.selectionStart, this.selectionEnd);
+        }
+      } else {
+        var range = document.selection.createRange();
+        if (range.parentElement() === this) {
+          text = range.text;
+        }
+      }
+      return text;
+    },
+    setSelectedText: function (value) {
+      if (this.selectionStart) {
+        if (this.selectionStart != this.selectionEnd) {
+          this.value = this.value.substring(0, this.selectionStart) + value + this.value.substring(this.selectionEnd);
+        }
+      } else {
+        var range = document.selection.createRange();
+        if (range.parentElement() === this) {
+          range.text = value;
+        }
+      }
+      return this;
+    },
     element: function () {
       return Object.isString(this.elem) ? document.getElementById(this.elem) : this.elem;
     },
@@ -1424,7 +1451,7 @@ window.$K = (function () {
         var val = this.value;
         var key = GEvent.keyCode(e);
         if (!((key > 36 && key < 41) || key == 8 || key == 9 || key == 13 || GEvent.isCtrlKey(e))) {
-          if (data.maxlength > 0 && val.length >= data.maxlength) {
+          if (data.maxlength > 0 && val.length >= data.maxlength && this.getSelectedText() == '') {
             GEvent.stop(e);
           } else if (data.pattern && data.type == 'text') {
             val = String.fromCharCode(key);
@@ -1438,7 +1465,7 @@ window.$K = (function () {
         var val = this.value;
         var data = this.data;
         if (e && val !== '' && data.type == 'number' && e.type == 'change') {
-          val = val.replace(/[^0-9]+/, '');
+          val = val.replace(/[^0-9\.\-]+/, '');
           if (data.min) {
             val = Math.max(data.min, floatval(val));
           }
