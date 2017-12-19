@@ -61,7 +61,7 @@ class Model extends \Kotchasan\Model
       $query->select($select)
         ->join('user U1', 'LEFT', array('U1.id', 'Q.member_id'))
         ->join('user U2', 'LEFT', array('U2.id', 'Q.commentator_id'))
-        ->order('Q.id DESC')
+        ->order('Q.last_update DESC')
         ->where(array_merge(array(array('Q.pin', 1)), $where));
       $index->items = $query->cacheOn()->execute();
       $query->where(array_merge(array(array('Q.pin', 0)), $where))
