@@ -8,6 +8,8 @@
 
 namespace Widgets\Download\Models;
 
+use \Kotchasan\Database\Sql;
+
 /**
  * รายการไฟล์ดาวน์โหลด
  *
@@ -34,7 +36,7 @@ class Lists extends \Kotchasan\Model
       array('module_id', (int)$module_id),
     );
     if (!empty($categories)) {
-      $where[] = "`category_id` IN ($categories)";
+      $where[] = Sql::create("`category_id` IN ($categories)");
     }
     return $model->db()->createQuery()
         ->select()

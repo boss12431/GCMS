@@ -8,8 +8,6 @@
 
 namespace Widgets\Search\Controllers;
 
-use \Kotchasan\Template;
-
 /**
  * Controller หลัก สำหรับแสดงผล Widget
  *
@@ -29,7 +27,7 @@ class Index extends \Kotchasan\Controller
   public function get($query_string)
   {
     // ฟอร์มค้นหา
-    $template = Template::createFromFile(ROOT_PATH.'Widgets/Search/Views/search.html');
+    $template = \Kotchasan\Template::createFromFile(ROOT_PATH.'Widgets/Search/Views/search.html');
     $template->add(array(
       '/{ID}/' => uniqid(),
       '/{SEARCH}/' => self::$request->get('q')->topic(),

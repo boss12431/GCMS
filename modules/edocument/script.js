@@ -17,7 +17,12 @@ function initEDocumentMain(id) {
             req.send(WEB_URL + 'index.php/edocument/model/download/action', 'action=downloading&id=' + this.className);
             ds = req.responseText.toJSON();
             if (ds.id) {
-              this.href = ds.href;
+              if (ds.target && ds.target == 1) {
+                this.set('target', 'download');
+              }
+              if (ds.href) {
+                this.href = ds.href;
+              }
               return true;
             }
           }

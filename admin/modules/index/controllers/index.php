@@ -39,7 +39,7 @@ class Controller extends \Gcms\Controller
     // ตรวจสอบการ login
     Login::create();
     // template ที่กำลังใช้งานอยู่
-    Template::init('skin/'.self::$cfg->skin);
+    Template::init('skin/admin');
     // View
     Gcms::$view = new \Gcms\Adminview;
     if ($login = Login::adminAccess()) {
@@ -78,7 +78,7 @@ class Controller extends \Gcms\Controller
       // language menu
       '/{LANGUAGES}/' => implode('', $languages),
       // title
-      '/{TITLE}/' => $main->title().' (Admin)',
+      '/{TITLE}/' => $main->title(),
       // class สำหรับ body
       '/{BODYCLASS}/' => $bodyclass
     ));

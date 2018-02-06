@@ -33,7 +33,7 @@ class Controller extends \Kotchasan\Controller
       $mv = \Video\View\Model::get($match[1]);
       if ($mv) {
         // get video info
-        $url = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id='.$mv->youtube.'&key='.$mv->google_api_key;
+        $url = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id='.$mv->youtube.(empty($mv->google_api_key) ? '' : '&key='.$mv->google_api_key);
         if (function_exists('curl_init') && $ch = @curl_init()) {
           curl_setopt($ch, CURLOPT_URL, $url);
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

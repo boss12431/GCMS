@@ -14,11 +14,13 @@ if (is_file($file['file'])) {
   $f = @fopen($file['file'], 'rb');
   if ($f) {
     // ดาวน์โหลดไฟล์
-    header("Pragma: public");
-    header("Expires: -1");
-    header("Cache-Control: public, must-revalidate, post-check=0, pre-check=0");
-    header("Content-Disposition: attachment; filename=$file[name]");
-    header('Content-Type: application/octet-stream');
+    header('Pragma: public');
+    header('Expires: -1');
+    header('Cache-Control: public, must-revalidate, post-check=0, pre-check=0');
+    if ($file['name'] != '') {
+      header('Content-Disposition: attachment; filename='.$file['name']);
+    }
+    header('Content-Type: '.$file['mime']);
     header('Content-Length: '.filesize($file['file']));
     header('Accept-Ranges: bytes');
     while (!feof($f)) {
@@ -34,5 +36,5 @@ if (is_file($file['file'])) {
     exit;
   }
 } else {
-  header("HTTP/1.0 404 Not Found");
+  header('HTTP/1.0 404 Not Found');
 }

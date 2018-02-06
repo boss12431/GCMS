@@ -1,11 +1,11 @@
-<div class=bdr_content>
-  <header>
-    <h2>{TOPIC}</h2>
-    <nav class="breadcrumbs cuttext">
-      <ul>{BREADCRUMBS}</ul>
-    </nav>
-  </header>
-  <div id=board-view>
+<div id=board-view>
+  <div class=bdr_content>
+    <header>
+      <h2>{TOPIC}</h2>
+      <nav class="breadcrumbs cuttext">
+        <ul>{BREADCRUMBS}</ul>
+      </nav>
+    </header>
     <div class="q imgicon">
       <div class=clear>
         <div class=post-author>
@@ -21,7 +21,7 @@
             <a class="icon-delete delete-{QID}-0-0-{MODULE}" title="{DELETE}"></a>
             <a class="icon-print print-{QID}-0-0-{MODULE}" title="{LNG_Print page}"></a>
           </p>
-          {DETAIL}
+          <div>{DETAIL}</div>
         </div>
       </div>
       <footer class="reaction">
@@ -30,10 +30,10 @@
         <span class="icon-visited visited" title="{LNG_Views}">{VISITED}</span>
       </footer>
     </div>
-    <div id=comment-list>{COMMENTLIST}</div>
-    {REPLYFORM}
   </div>
-  <script>
-    initDocumentView('board-view', 'board');
-  </script>
+  <div id=comment-list>{COMMENTLIST}</div>
+  {REPLYFORM}
 </div>
+<script>
+  initDocumentView('board-view', 'board');
+</script>

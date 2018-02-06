@@ -36,7 +36,7 @@ class Index extends \Kotchasan\Controller
     }
     if (!empty(self::$cfg->rss_tabs)) {
       $tab = \Kotchasan\Text::rndname(10);
-      $widget[] = '<div class="rss_widget widget widget_bg_color">';
+      $widget[] = '<div class="rss_widget">';
       $widget[] = '<div id=rss_tab_'.$tab.' class=rss_tab></div>';
       $widget[] = '<div id=rss_div_'.$tab.' class=rss_div></div>';
       $widget[] = '</div>';

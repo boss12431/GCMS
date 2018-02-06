@@ -28,7 +28,7 @@ class View extends \Kotchasan\KBase
     $data .= file_get_contents(ROOT_PATH.'skin/gcss.css');
     $data .= file_get_contents(ROOT_PATH.'skin/gcms.css');
     // css ของ template
-    $data2 = file_get_contents(APP_PATH.'skin/'.self::$cfg->skin.'/style.css');
+    $data2 = file_get_contents(APP_PATH.'skin/admin/style.css');
     $data2 = preg_replace('/url\(([\'"])?(img|fonts)\//isu', "url(\\1".WEB_URL.'skin/\\2/', $data2);
     // โหลด css ของ module
     $dir = ROOT_PATH.'modules/';

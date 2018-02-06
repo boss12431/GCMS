@@ -53,7 +53,7 @@ class Controller extends \Gcms\Controller
       $ul->appendChild('<li><a href="{BACKURL?module=personnel-settings&mid='.$index->module_id.'}">'.ucfirst($index->module).'</a></li>');
       $ul->appendChild('<li><span>{LNG_Personnel groups}</span></li>');
       $section->add('header', array(
-        'innerHTML' => '<h2 class="icon-category">'.$this->title.'</h2>'
+        'innerHTML' => '<h2 class="icon-group">'.$this->title.'</h2>'
       ));
       // แสดงตาราง
       $section->appendChild(createClass('Personnel\Admin\Category\View')->render($request, $index));

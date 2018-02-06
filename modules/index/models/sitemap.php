@@ -31,7 +31,7 @@ class Model extends \Kotchasan\Model
           ->select('M.id', 'M.module', 'M.owner', 'I.language')
           ->from('modules M')
           ->join('index I', 'LEFT', array(array('I.module_id', 'M.id'), array('I.index', 1)))
-          ->where(array('I.published', 1))
+          ->where(array('I.published', '1'))
           ->cacheOn()
           ->execute();
     } else {

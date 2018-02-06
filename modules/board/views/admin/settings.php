@@ -8,6 +8,7 @@
 
 namespace Board\Admin\Settings;
 
+use \Kotchasan\Http\Request;
 use \Kotchasan\Html;
 use \Kotchasan\Language;
 use \Kotchasan\HtmlTable;
@@ -24,12 +25,13 @@ class View extends \Gcms\Adminview
 {
 
   /**
-   * จัดการการตั้งค่า
+   * จัดการการตั้งค่าโมดูล
    *
+   * @param Request $request
    * @param object $index
    * @return string
    */
-  public function render($index)
+  public function render(Request $request, $index)
   {
     // form
     $form = Html::create('form', array(
@@ -49,7 +51,7 @@ class View extends \Gcms\Adminview
       'comment' => '{LNG_Size of the image at pixels (Images should be at least 696 pixels wide)}'
     ));
     // icon_width
-    $groups->add('text', array(
+    $groups->add('number', array(
       'id' => 'icon_width',
       'labelClass' => 'g-input icon-width',
       'itemClass' => 'width',
@@ -57,7 +59,7 @@ class View extends \Gcms\Adminview
       'value' => $index->icon_width
     ));
     // icon_height
-    $groups->add('text', array(
+    $groups->add('number', array(
       'id' => 'icon_height',
       'labelClass' => 'g-input icon-height',
       'itemClass' => 'width',
@@ -105,7 +107,7 @@ class View extends \Gcms\Adminview
       'labelClass' => 'g-input icon-clock',
       'itemClass' => 'item',
       'label' => '{LNG_New mark}',
-      'comment' => '{LNG_Setting the number of days an item will show up as New (0 means not shown)}',
+      'comment' => '{LNG_Setting the number of days an item will show up as New} ({LNG_0 to disable})',
       'options' => $options,
       'value' => $index->new_date / 86400
     ));

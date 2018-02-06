@@ -37,7 +37,11 @@ class Index extends \Kotchasan\Model
       // อ่านโมดูล จาก id ของ บทความ
       $index = $model->db()->createQuery()
         ->from('index Q')
-        ->join('index_detail D', 'INNER', array(array('D.id', 'Q.id'), array('D.module_id', 'Q.module_id')))
+        ->join('index_detail D', 'INNER', array(
+          array('D.id', 'Q.id'),
+          array('D.module_id', 'Q.module_id'),
+          array('D.language', array(Language::name(), ''))
+        ))
         ->where(array(
           array('Q.id', $id),
           array('Q.index', '0')

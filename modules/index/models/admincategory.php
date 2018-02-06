@@ -60,6 +60,36 @@ class Model extends \Kotchasan\Model
    *
    * @param Request $request
    */
+  public function toSelect(Request $request)
+  {
+    if ($request->post('module_id')->exists()) {
+      $where = array(array('module_id', $request->post('module_id')->toInt()));
+    } elseif ($request->post('module')->exists()) {
+      $where = array(array('module', $request->post('module')->filter('a-z0-9')));
+    }
+    if (isset($where)) {
+      $where[] = array('published', '1');
+      $query = $this->db()->createQuery()
+        ->select('category_id', 'topic')
+        ->from('category C')
+        ->join('modules M', 'INNER', array('M.id', 'C.module_id'))
+        ->where($where)
+        ->order('category_id')
+        ->cacheOn()
+        ->toArray();
+      $result = array();
+      foreach ($query->execute() as $item) {
+        $result[$item['category_id']] = Gcms::ser2Str($item, 'topic');
+      }
+      echo json_encode($result);
+    }
+  }
+
+  /**
+   * action ของตารางหมวดหมู่
+   *
+   * @param Request $request
+   */
   public function action(Request $request)
   {
     $ret = array();

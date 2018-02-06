@@ -126,7 +126,7 @@ class View extends \Gcms\Adminview
    * @param array $item ข้อมูลแถว
    * @param int $o ID ของข้อมูล
    * @param object $prop กำหนด properties ของ TR
-   * @return array คืนค่า $item กลับไปy
+   * @return array คืนค่า $item กลับไป
    */
   public function onRow($item, $o, $prop)
   {

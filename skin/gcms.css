@@ -4,6 +4,9 @@ body, li {
 .thumbview .description {
   height: 5.4em;
 }
+.menu_bg_color {
+  border-color: rgba(0,0,0,0.1);
+}
 /* font button, language button */
 .font_size, a[id^='lang_'] {
   color: inherit;
@@ -36,6 +39,17 @@ a[id^='lang_']:hover, a[id^='lang_']:focus, .font_size:hover, .font_size:focus {
   border-color: #DDD;
   border-color: rgba(0,0,0,0.1);
 }
+.member_section,
+.bdr_content {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.bdr_content header {
+  margin-bottom: 10px;
+}
+.modaldiv .bdr_content {
+  margin: 0;
+}
 .header h1 {
   font-size: 4em;
 }
@@ -49,12 +63,6 @@ header p, footer p {
 .header h1 > a,
 .header h1 > a:hover {
   color: inherit;
-}
-.content header {
-  margin-bottom: 10px;
-}
-.subcontent header {
-  margin-bottom: 0;
 }
 .keywords > a {
   background-color: rgba(0, 0, 0, 0.03);
@@ -192,19 +200,35 @@ span.icon-sex-m:before {
 .header .description {
   padding: 0 30px 10px;
 }
-body.toTop .fixed_top {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 8;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
 /* Widget */
 .widget {
-  margin-bottom: 10px;
+  margin-top: 10px;
+  color: inherit;
+}
+.homepage .widget {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.widget:first-child {
+  margin-top: 0;
+}
+.widget .widget_body {
+  padding: 5px;
+}
+.widget header h2 {
+  padding: 0 10px;
+}
+.sidebar .sidebar_bg {
+  padding: 10px;
+}
+.sidebar .widget_like,
+.sidebar .widget_share {
+  margin-top: 10px;
+  text-align: center;
+}
+.widget .next {
+  margin: 0 10px;
+  text-align: right;
 }
 #counter-box {
   display: table;
@@ -236,11 +260,8 @@ body.toTop .fixed_top {
 .login .subtitle {
   font-size: 0.9em;
 }
-#login-box {
-  padding-bottom: 3px;
-}
 /* member form */
-.member_section {
+.member_section .main_frm {
   border-width: 1px;
   border-style: solid;
   border-color: inherit;
@@ -260,6 +281,7 @@ img.uicon {
   margin-left: 10px;
 }
 /* comment */
+.q.detail,
 .post-detail {
   position: relative;
 }
@@ -272,8 +294,11 @@ img.uicon {
   text-align: center;
   display: block;
 }
-.reaction {
+#document-view .reaction,
+.q {
   margin-top: 10px;
+}
+.reaction {
   padding: 5px;
 }
 #comment-list .reaction {
@@ -323,11 +348,6 @@ header.list .newtopic {
 header.list h2 select {
   font-size: 0.8em;
 }
-#comment-list .r,
-#document-view .q,
-#board-view .q {
-  margin-bottom: 10px;
-}
 /* webbaord */
 #board-list .col1 {
   width: 42px;
@@ -364,6 +384,9 @@ header.list h2 select {
   color: #FFF;
   text-shadow: 1px 1px 0 rgba(0,0,0,0.7);
 }
+.gbanner .btnnav {
+  font-size: 1.3em;
+}
 .gbanner .button_container_gbanner {
   position: absolute;
   bottom: 0;
@@ -399,12 +422,26 @@ header.list h2 select {
   margin-right: -100%;
   list-style-type: none;
 }
-.gbanner figcaption > a {
+.gbanner figcaption {
+  padding: 0.5em;
   position: absolute;
-  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  color: #FFF;
   left: 0;
+  bottom: -3em;
+  line-height: 2em;
   width: 100%;
-  height: 100%;
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  -ms-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+}
+.gbanner:hover figcaption {
+  bottom: 0;
+}
+.gbanner figcaption a {
+  color: #FFF;
 }
 .gbanner a.current {
   background-color: rgba(255,0,0,0.8);
@@ -554,14 +591,31 @@ header.list h2 select {
   -ms-transition: all 1s ease-out;
   transition: all 1s ease-out;
 }
+.modaldiv form {
+  padding: 10px;
+}
+.modaldiv .bdr_content,
+.modaldiv form {
+  background-color: #FFF;
+  margin: 0 !important;
+}
+.info {
+  border: 1px dashed rgba(0,0,0,0.1);
+  margin: 5px 0;
+  padding: 10px;
+}
 /* phone, tablet */
 @media only screen and (max-width: 768px) {
-  body.responsive #board-list .col2 {
+  body.responsie #board-list .col2 {
     max-width: 10em;
   }
 }
-@media only screen and (max-width: 560px) {
-  body.responsive .header h1 {
+/* tablet only */
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+}
+/* iphone and small device */
+@media only screen and (max-width: 480px) {
+  body.responsie .header h1 {
     font-size: 2.5em;
   }
 }

@@ -130,9 +130,7 @@ class Model extends \Kotchasan\Model
           'category_id' => $request->post('category_id')->toInt(),
           'can_reply' => $request->post('can_reply')->toBoolean(),
           'show_news' => $request->post('show_news', array())->text(),
-          'published' => $request->post('published')->toBoolean(),
-          'create_date' => Date::sqlDateTimeToMktime($request->post('create_date')->date().' '.$request->post('create_time')->date()),
-          'published_date' => $request->post('published_date')->date(),
+          'published' => $request->post('published')->toBoolean()
         );
         // id ที่แก้ไข
         $id = $request->post('id')->toInt();
@@ -223,8 +221,9 @@ class Model extends \Kotchasan\Model
               }
             }
             if (empty($ret)) {
+              $save['create_date'] = Date::sqlDateTimeToMktime($request->post('create_date')->date().' '.$request->post('create_time')->date().':00');
+              $save['published_date'] = $request->post('published_date')->date();
               $save['last_update'] = time();
-              $save['index'] = 0;
               $save['ip'] = $request->getClientIp();
               $show_news = array();
               foreach ($save['show_news'] as $item) {
@@ -233,6 +232,7 @@ class Model extends \Kotchasan\Model
               $save['show_news'] = implode("\n", $show_news);
               if (empty($id)) {
                 // ใหม่
+                $save['index'] = 0;
                 $save['module_id'] = $index->module_id;
                 $save['member_id'] = $login['id'];
                 $index->id = $this->db()->insert($table, $save);

@@ -155,23 +155,25 @@ class Model
    */
   public static function getDetails($index)
   {
-    // Model
-    $model = new \Kotchasan\Model;
-    $search = $model->db()->createQuery()
-      ->from('index I')
-      ->join('index_detail D', 'INNER', array(array('D.id', 'I.id'), array('D.module_id', 'I.module_id'), array('D.language', 'I.language')))
-      ->where(array(
-        array('I.id', (int)$index->index_id),
-        array('I.module_id', (int)$index->module_id),
-      ))
-      ->cacheOn()
-      ->toArray()
-      ->first('D.detail', 'D.keywords', 'D.description');
-    if ($search) {
-      $index->detail = $search['detail'];
-      $index->keywords = $search['keywords'];
-      $index->description = $search['description'];
-      return $index;
+    if (!empty($index->index_id) && !empty($index->module_id)) {
+      // Model
+      $model = new \Kotchasan\Model;
+      $search = $model->db()->createQuery()
+        ->from('index I')
+        ->join('index_detail D', 'INNER', array(array('D.id', 'I.id'), array('D.module_id', 'I.module_id'), array('D.language', 'I.language')))
+        ->where(array(
+          array('I.id', (int)$index->index_id),
+          array('I.module_id', (int)$index->module_id),
+        ))
+        ->cacheOn()
+        ->toArray()
+        ->first('D.detail', 'D.keywords', 'D.description');
+      if ($search) {
+        $index->detail = $search['detail'];
+        $index->keywords = $search['keywords'];
+        $index->description = $search['description'];
+        return $index;
+      }
     }
     return null;
   }

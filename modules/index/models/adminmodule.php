@@ -60,4 +60,26 @@ class Model extends \Kotchasan\Model
     }
     return null;
   }
+
+  /**
+   * อ่านชื่อโมดูลจาก $module_id
+   *
+   * @param int $module_id
+   * @param string $owner
+   * @return string
+   */
+  public static function getModule($module_id, $owner)
+  {
+    $model = new static;
+    $index = $model->db()->createQuery()
+      ->from('modules')
+      ->where(array(
+        array('id', $module_id),
+        array('owner', $owner)
+      ))
+      ->toArray()
+      ->cacheOn()
+      ->first('module');
+    return $index ? $index['module'] : null;
+  }
 }

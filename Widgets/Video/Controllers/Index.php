@@ -53,7 +53,7 @@ class Index extends \Kotchasan\Controller
       if ($cols == 1 && $count == 1 && MAIN_INIT == 'amphtml') {
         return \Widgets\Video\Views\Amp::render($videos);
       }
-      return \Widgets\Video\Views\Index::render($cols, $count, $videos);
+      return \Widgets\Video\Views\Index::render($cols, $count, $videos, $query_string);
     }
     return '';
   }

@@ -39,7 +39,7 @@ class Controller extends \Kotchasan\Controller
     // ตรวจสอบการ login
     Login::create();
     // template ที่กำลังใช้งานอยู่
-    self::$cfg->skin = $request->get('skin', $request->session('skin', self::$cfg->skin)->toString())->toString();
+    self::$cfg->skin = $request->get('skin', $request->session('skin', self::$cfg->skin)->toString())->filter('a-z0-9');
     self::$cfg->skin = is_file(APP_PATH.'skin/'.self::$cfg->skin.'/style.css') ? self::$cfg->skin : 'rooster';
     $_SESSION['skin'] = self::$cfg->skin;
     Template::init('skin/'.self::$cfg->skin);
@@ -65,22 +65,17 @@ class Controller extends \Kotchasan\Controller
         'url' => WEB_URL.'index.php',
       );
       // logo
+      $img_logo = '';
       if (!empty(self::$cfg->logo) && is_file(ROOT_PATH.DATA_FOLDER.'image/'.self::$cfg->logo)) {
         $info = @getImageSize(ROOT_PATH.DATA_FOLDER.'image/'.self::$cfg->logo);
         if ($info && $info[0] > 0 && $info[1] > 0) {
-          $exts = explode('.', self::$cfg->logo);
-          $ext = strtolower(end($exts));
           $logo = WEB_URL.DATA_FOLDER.'image/'.self::$cfg->logo;
-          Gcms::$view->addScript('if ($E("logo")) {new GMedia("logo_'.$ext.'", "'.$logo.'", '.$info[0].', '.$info[1].').write("logo");}');
-          if ($ext !== 'swf') {
-            $image_logo = '<img src="'.$logo.'" alt="{WEBTITLE}">';
-            // site logo
-            Gcms::$site['logo'] = array(
-              '@type' => 'ImageObject',
-              'url' => $logo,
-              'width' => $info[0],
-            );
-          }
+          $img_logo = '<img src="'.$logo.'" alt="{WEBTITLE}">';
+          Gcms::$site['logo'] = array(
+            '@type' => 'ImageObject',
+            'url' => $logo,
+            'width' => $info[0],
+          );
         }
       }
       if (!isset(Gcms::$site['logo']) && is_file(ROOT_PATH.DATA_FOLDER.'image/site_logo.jpg')) {
@@ -161,12 +156,12 @@ class Controller extends \Kotchasan\Controller
       Gcms::$view->setContents(array(
         // content
         '/{CONTENT}/' => $page->detail,
+        // โลโก
+        '/{LOGO}/' => $img_logo,
         // title
         '/{TITLE}/' => $page->topic,
         // ภาษาที่ติดตั้ง
         '/{LANGUAGES}/' => $languages->render(),
-        // โลโก
-        '/{LOGO}/' => isset($image_logo) ? $image_logo : ''
       ));
       // เมนูหลัก
       Gcms::$view->setContents(Gcms::$menu->render(isset($page->menu) ? $page->menu : $page->module));

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang={LANGUAGE} dir=ltr>
+<html lang="{LANGUAGE}" dir=ltr>
   <head>
     <title>{TITLE}</title>
     <meta charset=utf-8>
@@ -11,71 +11,86 @@
     <script src={WEBURL}js/html5.js></script>
     <![endif]-->
   </head>
-  <body class="responsive wide">
+  <body class="wide responsive">
     <a class=skip_content accesskey=s href=#content title="{LNG_skip to content}"></a>
     <div id=slidemenu_content>
-      <header id=scroll-to class="header header_bg header_bg_color">
-        <div class="top_header">
-          <div class="table gcss-wrapper">
+      <div id=top_header>
+        <div class="gcss-wrapper">
+          <div class="table fullwidth">
             <div class="td">{FONTSIZE}{LANGUAGES}</div>
             <div class="td">{WIDGET_SEARCH}</div>
             <div class="td right">{WIDGET_SHARE}</div>
           </div>
         </div>
-        <div id=logo class=center>
-          <h1><a href="{WEBURL}">{WEBTITLE}</a></h1>
-          <p class="description">{WEBDESCRIPTION}</p>
-        </div>
-        <div class="menu_wrapper menu_bg menu_bg_color gcss-wrapper">
-          <nav id=topmenu class="slidemenu topmenu center">
-            <ul>{MAINMENU}</ul>
-          </nav>
+      </div>
+      <header class="header header_bg_color">
+        <div class="header_bg">
+          <div class="gcss-wrapper">
+            <a id=logo href="{WEBURL}index.php">{LOGO}</a>
+            <h1><a href="{WEBURL}index.php">{WEBTITLE}</a></h1>
+            <p class=description>{WEBDESCRIPTION}</p>
+          </div>
         </div>
       </header>
-      <main class="content wrapper_top_bg wrapper_bg_color clear">
-        <div id=content class="article clear content_bg content_bg_color margin-top-bottom">
-          {CONTENT}
-        </div>
-      </main>
-      <div class=text-links>
-        <div id=text-links class="center gcss-wrapper">
-          <a href="https://www.goragod.com" title="Goragod.com"><img src="https://www.goragod.com/smalllogo.gif" alt="Goragod.com"></a>
-          <iframe src="https://www.webshopready.com/ad_small.html" style="width:88px;height:31px;"></iframe>
-        </div>
-      </div>
-      <div class=footer_grid>
-        <div class="gcss-wrapper">
-          <div class="ggrid">
-            <section class="float-left block3">
-              <header><h3>Counter</h3></header>
-              {WIDGET_COUNTER}
-            </section>
-            <section class="float-left block3">
-              <header><h3>Member</h3></header>
-              <ul id=login-box>{LOGIN}</ul>
-            </section>
-            <section class="float-left block3">
-              <header><h3>News</h3></header>
-              {WIDGET_DOCUMENT module=knowledge;rows=4}
-            </section>
-            <section class="float-left block3">
-              <header><h3>About Us</h3></header>
-              <ul>
-                <li class=icon-customer>xxxx xxxx</li>
-                <li class=icon-home>xxx ม.1 ต.xxxx อ.xxxx จ.xxxx xxxx</li>
-                <li><a  class=icon-phone href="tel:0123456789">012 345 6789</a></li>
-                <li><a  class=icon-email href="mailto:admin@xxx.com">admin@xxx.com</a></li>
-              </ul>
-            </section>
+      <div id="toTop" class="menu menu_bg_color">
+        <div class="menu_bg">
+          <div class="gcss-wrapper">
+            <nav id=topmenu class="slidemenu topmenu fullwidth">
+              <ul>{MAINMENU}</ul>
+            </nav>
           </div>
         </div>
       </div>
-      <footer class="footer footer_bg_color footer_bg">
-        <p class="gcss-wrapper">
-          Copyright &copy; 2017 <a href="{WEBURL}">{WEBTITLE}</a>
-          designed by <a href="https://www.kotchasan.com">Kotchasan.com</a> GCMS Version {VERSION}
-          {LNG_page process} <span id=db_elapsed>{ELAPSED}</span> {LNG_second} (<span id=db_quries>{QURIES}</span> quries.)
-        </p>
+      <main class="content content_bg_color">
+        <div class="content_bg padding-top-bottom">
+          <div class="gcss-wrapper">
+            <div id=content class="article clear">
+              {CONTENT}
+            </div>
+          </div>
+        </div>
+      </main>
+      <div class="center margin-top-bottom">
+        <a href="https://www.goragod.com" title="Goragod.com"><img src="https://www.goragod.com/smalllogo.gif" alt="Goragod.com"></a>
+        <iframe src="https://www.webshopready.com/ad_small.html" style="width:88px;height:31px;"></iframe>
+      </div>
+      <footer class="footer footer_bg_color">
+        <div class="footer_grid footer_bg">
+          <div class="gcss-wrapper">
+            <div class="ggrid clear">
+              <section class="float-left block3">
+                <header><h3>Counter</h3></header>
+                {WIDGET_COUNTER}
+              </section>
+              <section class="float-left block3">
+                <header><h3>Member</h3></header>
+                <ul id=login-box>{LOGIN}</ul>
+              </section>
+              <section class="float-left block3">
+                <header><h3>News</h3></header>
+                {WIDGET_DOCUMENT module=knowledge;rows=4}
+              </section>
+              <section class="float-left block3">
+                <header><h3>About Us</h3></header>
+                <ul>
+                  <li class=icon-customer>xxxx xxxx</li>
+                  <li class=icon-home>xxx ม.1 ต.xxxx อ.xxxx จ.xxxx xxxx</li>
+                  <li><a  class=icon-phone href="tel:0123456789">012 345 6789</a></li>
+                  <li><a  class=icon-email href="mailto:admin@xxx.com">admin@xxx.com</a></li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <div class="gcss-wrapper">
+            <p>
+              Copyright &copy; 2017 <a href="{WEBURL}">{WEBTITLE}</a>
+              designed by <a href="https://www.kotchasan.com">Kotchasan.com</a> GCMS Version {VERSION}
+              {LNG_page process} <span id=db_elapsed>{ELAPSED}</span> {LNG_second} (<span id=db_quries>{QURIES}</span> quries.)
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
     <a href=#scroll-to class="scroller">^</a>

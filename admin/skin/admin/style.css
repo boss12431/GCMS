@@ -177,7 +177,7 @@ header.header li {
   margin-right: 10px;
   overflow: visible;
 }
-.menu_wrapper {
+.menu_bg_color {
   background-color: #1276B9;
 }
 .topmenu ul > li:hover {
@@ -732,6 +732,7 @@ header .inline {
 .button.icon-gps:before,
 .button.icon-search:before,
 .icon-customer:before,
+.icon-upload:before,
 .icon-subcategory:before,
 .icon-ban:before,
 .icon-valid:before,

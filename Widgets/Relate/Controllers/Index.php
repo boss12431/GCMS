@@ -57,7 +57,7 @@ class Index extends \Kotchasan\Controller
   public function getWidgetNews(Request $request)
   {
     // id_cols_rows_sort_style
-    if ($request->isReferer() && preg_match('/^([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_(list|icon|thumb)$/', $request->get('id')->toString(), $match)) {
+    if ($request->isReferer() && preg_match('/^([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_([a-z]{0,})$/', $request->get('id')->toString(), $match)) {
       // query
       $index = \Widgets\Relate\Models\Index::get((int)$match[1], (int)$match[3], (int)$match[2]);
       if ($index) {

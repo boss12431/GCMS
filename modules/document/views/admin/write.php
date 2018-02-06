@@ -131,7 +131,7 @@ class View extends \Gcms\Adminview
       'labelClass' => 'g-input icon-clock',
       'itemClass' => 'width',
       'label' => '{LNG_Time}',
-      'value' => date('H:i:s', $index->create_date)
+      'value' => date('H:i', $index->create_date)
     ));
     // picture
     if (!empty($index->picture) && is_file(ROOT_PATH.DATA_FOLDER.'document/'.$index->picture)) {

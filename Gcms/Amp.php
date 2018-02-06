@@ -31,7 +31,7 @@ class Amp extends \Gcms\Baseview
       /* AMP CSS */
       '/{CSS}/' => \Css\Index\View::compress(file_get_contents(ROOT_PATH.'skin/'.self::$cfg->skin.'/amp.css')),
       // widgets
-      '/{WIDGET_([A-Z]+)(([_\s]+)([^}]+))?}/e' => '\Gcms\View::getWidgets(array(1=>"$1",3=>"$3",4=>"$4"))',
+      '/{WIDGET_([A-Z]+)([_\s]+([^}]+))?}/e' => '\Gcms\View::getWidgets(array(1=>"$1",3=>"$3"))',
       /* ภาษา */
       '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
       /* ภาษาที่ใช้งานอยู่ */
@@ -60,7 +60,7 @@ class Amp extends \Gcms\Baseview
           }
         }
         if ($tag == 'img' && isset($attributes['src'])) {
-          if (!isset($attributes['width']) && is_file($attributes['src'])) {
+          if (!isset($attributes['width'])) {
             $size = @getimagesize($attributes['src']);
             if ($size) {
               $attributes['width'] = $size[0];

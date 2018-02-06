@@ -43,7 +43,7 @@ class View extends \Kotchasan\KBase
     $content .= '<table class="data fullwidth border">';
     $content .= '<thead><tr><th>{LNG_monthly}</th>'.implode('', $thead).'</tr></thead>';
     $content .= '<tbody>';
-    $content .= '<tr><th scope=row>{LNG_Visitors total}</th>'.implode('', $visited).'</tr>';
+    $content .= '<tr><th scope=row>{LNG_Total visitors}</th>'.implode('', $visited).'</tr>';
     $content .= '<tr class=bg2><th scope=row>{LNG_Pages view}</th>'.implode('', $pageview).'</tr>';
     $content .= '</tbody>';
     $content .= '</table>';

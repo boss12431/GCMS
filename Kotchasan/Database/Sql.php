@@ -505,6 +505,22 @@ class Sql
   }
 
   /**
+   * หาความแตกต่างระหว่างเวลา (คืนค่าเป็น H:m:i ที่แตกต่างกัน)
+   *
+   * @param string $column_name1
+   * @param string $column_name2
+   * @param string $alias
+   * @return \static
+   *
+   * @assert ('create_date', Sql::NOW())->text() [==] "TIMEDIFF(`create_date`, NOW())"
+   * @assert ('2017-04-04', 'create_date')->text() [==] "TIMEDIFF('2017-04-04', `create_date`)"
+   */
+  public static function TIMEDIFF($column_name1, $column_name2, $alias = null)
+  {
+    return self::create("TIMEDIFF(".self::fieldName($column_name1).", ".self::fieldName($column_name2).")".($alias ? " AS `$alias`" : ''));
+  }
+
+  /**
    * จัดรูปแบบของคอลัมน์ตอนแสดงผล
    *
    * @param string $column_name

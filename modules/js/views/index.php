@@ -33,10 +33,11 @@ class View extends \Kotchasan\KBase
     $js[] = file_get_contents(ROOT_PATH.'js/loader.js');
     $js[] = file_get_contents(ROOT_PATH.'js/ddmenu.js');
     $js[] = file_get_contents(ROOT_PATH.'js/table.js');
+    $js[] = file_get_contents(ROOT_PATH.'js/range.js');
     $js[] = file_get_contents(ROOT_PATH.'js/common.js');
     $js[] = file_get_contents(ROOT_PATH.'js/tooltip.js');
-    $js[] = file_get_contents(ROOT_PATH.'js/media.js');
     $js[] = file_get_contents(ROOT_PATH.'js/gcms.js');
+    $js[] = file_get_contents(ROOT_PATH.'js/facebook.js');
     $lng = Language::name();
     $data_folder = Language::languageFolder();
     if (is_file($data_folder.$lng.'.js')) {
@@ -88,7 +89,6 @@ class View extends \Kotchasan\KBase
       $js[] = 'var use_ajax = 1;';
     }
     if (!empty(self::$cfg->facebook_appId)) {
-      $js[] = file_get_contents(ROOT_PATH.'js/facebook.js');
       $js[] = 'initFacebook("'.self::$cfg->facebook_appId.'", "'.Language::name().'");';
     }
     // compress javascript

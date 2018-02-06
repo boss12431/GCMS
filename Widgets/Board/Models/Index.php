@@ -36,7 +36,7 @@ class Index extends \Kotchasan\Model
       array('Q.module_id', (int)$module_id),
     );
     if (!empty($categories)) {
-      $where[] = "Q.`category_id` IN ($categories)";
+      $where[] = Sql::create("Q.`category_id` IN ($categories)");
     }
     $sql = Sql::create("(CASE WHEN ISNULL(U.`id`) THEN (CASE WHEN Q.`comment_date` > 0 THEN Q.`commentator` ELSE Q.`email` END) ELSE (CASE WHEN U.`displayname` = '' THEN U.`email` ELSE U.`displayname` END) END) AS `displayname`");
     return $model->db()->createQuery()

@@ -205,7 +205,7 @@ class Model extends \Kotchasan\Model
         ->where(array(array('R.id', $id), array('R.index_id', $index_id), array('R.module_id', $module_id)))
         ->toArray()
         ->cacheOn()
-        ->first('R.member_id', 'Q.id', 'Q.comments', 'Q.module_id', 'Q.can_reply canReply', 'Q.alias', 'M.module', 'M.config mconfig', 'C.config', 'C.category_id');
+        ->first('R.member_id', 'Q.id', 'Q.comments', 'Q.module_id', 'Q.can_reply canReply', 'Q.alias', 'M.module', 'M.config', 'C.category_id');
     } else {
       // ใหม่
       $index = $this->db()->createQuery()
@@ -215,28 +215,11 @@ class Model extends \Kotchasan\Model
         ->where(array(array('Q.id', $index_id), array('Q.module_id', $module_id)))
         ->toArray()
         ->cacheOn()
-        ->first('Q.id', 'Q.comments', 'Q.module_id', 'Q.can_reply canReply', 'Q.alias', 'M.module', 'M.config mconfig', 'C.config', 'C.category_id');
+        ->first('Q.id', 'Q.comments', 'Q.module_id', 'Q.can_reply canReply', 'Q.alias', 'M.module', 'M.config', 'C.category_id');
     }
     if ($index) {
       // config จากโมดูล
-      $index = ArrayTool::unserialize($index['mconfig'], $index);
-      // config จากหมวด แทนที่ config จากโมดูล
-      if (!empty($index['config'])) {
-        $datas = @unserialize($index['config']);
-        if (is_array($datas)) {
-          foreach ($datas as $key => $value) {
-            if ($key == 'can_reply') {
-              // ไม่แสดงความคิดเห็นถ้าหมวดไม่สมารถแสดงได้
-              if ($value == 0) {
-                $index['can_reply'] = array();
-              }
-            } else {
-              $index[$key] = $value;
-            }
-          }
-        }
-      }
-      unset($index['mconfig']);
+      $index = ArrayTool::unserialize($index['config'], $index);
       unset($index['config']);
       return (object)$index;
     }

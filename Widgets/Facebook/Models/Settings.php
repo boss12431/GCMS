@@ -14,7 +14,7 @@ use \Kotchasan\Language;
 use \Gcms\Config;
 
 /**
- * บันทึกการตั้งค่าเว็บไซต์
+ * บันทึกการตั้งค่า
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *

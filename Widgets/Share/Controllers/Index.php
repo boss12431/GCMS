@@ -8,7 +8,6 @@
 
 namespace Widgets\Share\Controllers;
 
-
 /**
  * Controller หลัก สำหรับแสดงผล Widget
  *

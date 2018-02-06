@@ -95,14 +95,14 @@ CKEDITOR.editorConfig = function (config) {
   /* toolbar */
   config.toolbar_Blog = [
     ['Undo', 'Redo'],
-    ['RemoveFormat', 'Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
+    ['RemoveFormat', 'Bold', 'Italic', 'Underline', 'Strike'],
     ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
     ['Link', 'Unlink', 'Image'],
-    ['Table', 'Smiley', 'SpecialChar'],
     ['NumberedList', 'BulletedList'],
     '/',
+    ['Styles'],
     ['TextColor', 'BGColor'],
-    ['FontSize', 'Styles', 'Format']
+    ['Table', 'Smiley', 'SpecialChar']
   ];
   config.toolbar_Document = [
     ['Source', 'Maximize'],

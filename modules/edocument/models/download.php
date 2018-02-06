@@ -65,12 +65,15 @@ class Model extends \Kotchasan\Model
                 $this->db()->update($this->getTableName('edocument_download'), (int)$download->download_id, $save);
               }
               // URL สำหรับดาวน์โหลด
-              $fid = Text::rndname(32);
-              $_SESSION[$fid]['file'] = ROOT_PATH.DATA_FOLDER.'edocument/'.$download->file;
-              $_SESSION[$fid]['size'] = $download->size;
-              $_SESSION[$fid]['name'] = $download->topic.'.'.$download->ext;
+              $id = Text::rndname(32);
+              $_SESSION[$id] = array(
+                'file' => ROOT_PATH.DATA_FOLDER.'edocument/'.$download->file,
+                'name' => $download->download_action == 1 ? '' : $download->topic.'.'.$download->ext,
+                'mime' => $download->download_action == 1 ? \Kotchasan\Mime::get($download->ext) : 'application/octet-stream'
+              );
               // คืนค่า URL สำหรับดาวน์โหลด
-              $ret['href'] = WEB_URL.'modules/edocument/filedownload.php?id='.$fid;
+              $ret['target'] = $download->download_action;
+              $ret['href'] = WEB_URL.'modules/edocument/filedownload.php?id='.$id;
             }
           } elseif ($action === 'delete') {
             // ลบ

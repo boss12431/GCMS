@@ -135,10 +135,7 @@ class Controller extends \Kotchasan\Controller
         );
       } elseif ($modules['module'] == 'index' && isset($modules['id'])) {
         // เรียกโมดูล index จาก id
-        $module = (object)array(
-            'owner' => 'index',
-            'id' => $modules['id']
-        );
+        $module = self::findByIndexId($modules['id']);
       } elseif (in_array($modules['module'], $module_list)) {
         // โมดูลที่เลือก
         $module = $this->module->by_module[$modules['module']];
@@ -233,6 +230,24 @@ class Controller extends \Kotchasan\Controller
     if (!empty($this->module->by_module)) {
       foreach ($this->module->by_module as $item) {
         if ($item->module_id == $id) {
+          return $item;
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * อ่านข้อมูลโมดูลจาก index_id ของโมดูล
+   *
+   * @param int $id ID ของโมดูล
+   * @return object|null ข้อมูลโมดูล (Object) ไม่พบคืนค่า null
+   */
+  public function findByIndexId($id)
+  {
+    if (!empty($this->module->by_module)) {
+      foreach ($this->module->by_module as $item) {
+        if ($item->index_id == $id) {
           return $item;
         }
       }

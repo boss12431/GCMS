@@ -81,7 +81,7 @@ class Model extends \Kotchasan\Model
           }
           // moderator สามารถ แก้ไขวันที่ได้
           if ($id > 0 && $moderator) {
-            $post['create_date'] = Date::sqlDateTimeToMktime($request->post('board_create_date')->toString().' '.$request->post('board_create_time')->toString());
+            $post['create_date'] = Date::sqlDateTimeToMktime($request->post('board_create_date')->toString().' '.$request->post('board_create_time')->toString().':00');
           }
         }
         if (!$index || empty($index->can_post)) {
@@ -259,7 +259,12 @@ class Model extends \Kotchasan\Model
    */
   private function get($id, $module_id, $category_id)
   {
-    $query = $this->db()->createQuery()->selectCount()->from('category G')->where(array('G.module_id', 'M.id'));
+    $query = $this->db()->createQuery()
+      ->selectCount()->from('category G')
+      ->where(array(
+      array('G.module_id', 'M.id'),
+      array('G.published', '1')
+    ));
     if ($id > 0) {
       // แก้ไข
       $index = $this->db()->createQuery()

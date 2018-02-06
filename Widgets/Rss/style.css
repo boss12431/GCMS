@@ -1,8 +1,4 @@
 /* rss */
-.rss_widget {
-  border-width: 1px;
-  border-style: solid;
-}
 .rss_widget .rss_tab {
   position: relative;
 }

@@ -47,7 +47,7 @@ class View extends \Gcms\Adminview
       'action' => 'index.php/index/model/mailtemplate/action',
       'actionCallback' => 'indexActionCallback',
       'actionConfirm' => 'confirmAction',
-      /* ฟังก์ชั่นตรวจสอบว่าสามารถสร้างปุ่มได้หรือไม่ */
+      /* ฟังก์ชั่นตรวจสอบการแสดงผลปุ่มในแถว */
       'onCreateButton' => array($this, 'onCreateButton'),
       /* ส่วนหัวของตาราง และการเรียงลำดับ (thead) */
       'headers' => array(

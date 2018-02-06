@@ -122,7 +122,7 @@ class View extends \Gcms\View
           '/(quote-{QID}-([0-9]+)-([0-9]+)-{MODULE})/' => !$canReply || $index->locked == 1 ? 'hidden' : '\\1',
           '/(pin-{QID}-0-0-{MODULE})/' => $moderator ? '\\1' : 'hidden',
           '/(lock-{QID}-0-0-{MODULE})/' => $moderator ? '\\1' : 'hidden',
-          '/{COMMENTLIST}/' => isset($listitem) ? $listitem->render() : '',
+          '/{COMMENTLIST}/' => isset($listitem) ? ($listitem->hasItem() ? $listitem->render() : '<div class="center message">{LNG_No comments yet}</div>') : '',
           '/{REPLYFORM}/' => $canReply && $index->locked == 0 ? Template::load($index->owner, $index->module, 'reply') : '',
           '/<MEMBER>(.*)<\/MEMBER>/s' => $isMember ? '' : '$1',
           '/<UPLOAD>(.*)<\/UPLOAD>/s' => empty($index->img_upload_type) ? '' : '$1',

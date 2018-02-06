@@ -153,10 +153,8 @@ class Model extends \Kotchasan\Model
     // referer, token, admin, ไม่ใช่ตัวอย่าง
     if ($request->initSession() && $request->isSafe() && $login = Login::isAdmin()) {
       if (Login::notDemoMode($login)) {
-        // database
-        $model = new static;
         // prefix
-        $prefix = $model->getSetting('prefix');
+        $prefix = $this->getSetting('prefix');
         // อัปโหลดไฟล์
         foreach ($request->getUploadedFiles() as $item => $file) {
           /* @var $file \Kotchasan\Http\UploadedFile */

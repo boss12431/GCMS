@@ -48,7 +48,13 @@ class Model extends \Kotchasan\Model
       // Model
       $model = new static;
       // จำนวนหมวดในโมดูล
-      $query = $model->db()->createQuery()->selectCount()->from('category')->where(array('module_id', 'D.module_id'));
+      $query = $model->db()->createQuery()
+        ->selectCount()
+        ->from('category')
+        ->where(array(
+        array('module_id', 'D.module_id'),
+        array('published', '1')
+      ));
       $select = array(
         'D.detail',
         'D.keywords',
@@ -72,7 +78,8 @@ class Model extends \Kotchasan\Model
         $select[] = 'C.config';
         $query->join('category C', 'LEFT', array(
           array('C.category_id', (int)reset($categories)),
-          array('C.module_id', 'D.module_id')
+          array('C.module_id', 'D.module_id'),
+          array('C.published', '1')
         ));
       }
       $result = $query->first($select);

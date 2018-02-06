@@ -35,7 +35,7 @@ class Model extends \Kotchasan\Model
     $model = new static;
     // select
     $fields = array(
-      'M.config mconfig',
+      'M.config',
       'M.module',
       'M.owner',
       'I.id',
@@ -59,7 +59,6 @@ class Model extends \Kotchasan\Model
       '0 vote_count',
       'C.topic category',
       'C.detail cat_tooltip',
-      'C.config',
       'U.status',
       'U.id member_id',
       Sql::create('(CASE WHEN U.`displayname`="" THEN U.`email` ELSE U.`displayname` END) AS `displayname`'),
@@ -96,7 +95,6 @@ class Model extends \Kotchasan\Model
       // อัปเดทตัวแปร
       foreach ($result as $key => $value) {
         switch ($key) {
-          case 'mconfig':
           case 'config':
             $config = @unserialize($value);
             if (is_array($config)) {

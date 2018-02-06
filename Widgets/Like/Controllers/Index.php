@@ -30,9 +30,10 @@ class Index extends \Kotchasan\Controller
   {
     $module = empty($query_string['module']) ? '' : $query_string['module'];
     $likes = array('g-plusone', 'fb-likebox');
-    $widget = '';
+    $id = uniqid();
+    $widget = '<div class="widget_like">';
     foreach ($likes AS $item) {
-      $widget .= '<div id='.$item.'></div>';
+      $widget .= '<div id="'.$id.$item.'"></div>';
     }
     $widget .= '<script>';
     $widget .= 'function setLikeURL(src, url){';
@@ -49,28 +50,26 @@ class Index extends \Kotchasan\Controller
     $widget .= 'url = encodeURIComponent(hs ? hs[1] : url);';
     $lng = Language::name();
     $a = 'https://www.facebook.com/plugins/like.php?layout='.($module == 'tall' ? 'box_count' : 'button_count').'&node_type=link&show_faces=false&href=';
-    $widget .= 'setLikeURL("fb-likebox-iframe", "'.$a.'" + url);';
+    $widget .= 'setLikeURL("'.$id.'fb-likebox-iframe", "'.$a.'" + url);';
     $a = 'https://plusone.google.com/_/+1/fastbutton?bsv&size='.($module == 'tall' ? 'tall' : 'medium').'&count=true&hl='.$lng.'&url=';
-    $widget .= 'setLikeURL("g-plusone-iframe", "'.$a.'" + url);';
+    $widget .= 'setLikeURL("'.$id.'g-plusone-iframe", "'.$a.'" + url);';
     $a = 'https://platform.twitter.com/widgets/tweet_button.1404859412.html#count='.($module == 'tall' ? 'vertical' : 'horizontal').'&lang='.$lng.'&url=';
-    $widget .= 'setLikeURL("twitter-share-iframe", "'.$a.'" + url);';
+    $widget .= 'setLikeURL("'.$id.'twitter-share-iframe", "'.$a.'" + url);';
     $widget .= '};';
     $widget .= '$G(window).Ready(function(){';
     foreach ($likes AS $item) {
-      $widget .= '$E("'.$item.'").style.display = "inline";';
-      $widget .= "var iframe = document.createElement('iframe');";
-      $widget .= "iframe.id = '$item-iframe';";
-      $widget .= "iframe.frameBorder = 0;";
-      $widget .= "iframe.scrolling = 'no';";
+      $widget .= '$E("'.$id.$item.'").style.display="inline-block";';
+      $widget .= '$E("'.$id.$item.'").style.vertalAlign="middle";';
+      $widget .= "var iframe=document.createElement('iframe');";
+      $widget .= 'iframe.id="'.$id.$item.'-iframe";';
       if ($module == 'tall') {
-        $widget .= "iframe.width = '60';";
-        $widget .= "iframe.height = '68';";
+        $widget .= "iframe.width=60;";
+        $widget .= "iframe.height=68;";
       } else {
-        $widget .= "iframe.width = '90';";
-        $widget .= "iframe.height = '28';";
+        $widget .= "iframe.width=90;";
+        $widget .= "iframe.height=28;";
       }
-      $widget .= "iframe.style.overflow = 'hidden';";
-      $widget .= '$E("'.$item.'").appendChild(iframe);';
+      $widget .= '$E("'.$id.$item.'").appendChild(iframe);';
       if ($item == 'g-plusone') {
         $widget .= '$G(iframe).setStyle("float","left");';
       }
@@ -78,6 +77,7 @@ class Index extends \Kotchasan\Controller
     $widget .= 'createLikeButton();';
     $widget .= '});';
     $widget .= '</script>';
+    $widget .= '</div>';
     return $widget;
   }
 }

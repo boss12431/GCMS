@@ -94,6 +94,18 @@ class View extends \Gcms\Adminview
       'value' => isset($index->upload_size) ? $index->upload_size : ':upload_max_filesize'
     ));
     $fieldset = $form->add('fieldset', array(
+      'title' => '{LNG_Download}'
+    ));
+    // download_action
+    $fieldset->add('select', array(
+      'id' => 'download_action',
+      'labelClass' => 'g-input icon-download',
+      'itemClass' => 'item',
+      'label' => '{LNG_When download}',
+      'options' => Language::get('DOWNLOAD_ACTIONS'),
+      'value' => $index->download_action
+    ));
+    $fieldset = $form->add('fieldset', array(
       'title' => '{LNG_Display}'
     ));
     // list_per_page

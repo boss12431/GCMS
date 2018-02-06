@@ -29,7 +29,7 @@ class Controller extends \Kotchasan\Controller
   public function index(Request $request)
   {
     // ตรวจสอบ Referer
-    if ($request->initSession() && $request->isReferer()) {
+    if ($request->initSession() && $request->isReferer() && $request->isAjax()) {
       // ตัวแปรป้องกันการเรียกหน้าเพจโดยตรง
       define('MAIN_INIT', __FILE__);
       // template ที่กำลังใช้งานอยู่

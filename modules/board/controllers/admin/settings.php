@@ -56,7 +56,7 @@ class Controller extends \Gcms\Controller
         'innerHTML' => '<h2 class="icon-config">'.$this->title.'</h2>'
       ));
       // แสดงฟอร์ม
-      $section->appendChild(createClass('Board\Admin\Settings\View')->render($index));
+      $section->appendChild(createClass('Board\Admin\Settings\View')->render($request, $index));
       return $section->render();
     }
     // 404.html

@@ -150,7 +150,7 @@ class Gcms extends \Kotchasan\KBase
     $replace[] = '<span class=\\2>\\1</span>';
     $patt[] = '/(&lt;[\/]?([a-z]+)(.*?)&gt;)/isu';
     $replace[] = '<span class=html>\\1</span>';
-    $patt[] = '/([^:])(\/\/[^\r\n]+)/';
+    $patt[] = '/([^:])(\/\/\s[^\r\n]+)/';
     $replace[] = '\\1<span class=comment>\\2</span>';
     $patt[] = '/(\/\*(.*?)\*\/)/s';
     $replace[] = '<span class=comment>\\1</span>';
@@ -160,6 +160,8 @@ class Gcms extends \Kotchasan\KBase
     $replace[] = '<a href="'.WEB_URL.'index.php?module=search&amp;q=\\1" rel="nofollow">\\1</a>';
     $patt[] = '/\[google\](.*?)\[\/google\]/iU';
     $replace[] = '<a class="googlesearch" href="http://www.google.co.th/search?q=\\1&amp;&meta=lr%3Dlang_th" target="_blank" rel="nofollow">\\1</a>';
+    $patt[] = '/([^["]]|\r|\n|\s|\t|^)((ftp|https?):\/\/([a-z0-9\.\-_]+)\/([^\s<>\"\']{1,})([^\s<>\"\']{20,20}))/i';
+    $replace[] = '\\1<a href="\\2" target="_blank" rel="nofollow">\\3://\\4/...\\6</a>';
     $patt[] = '/([^["]]|\r|\n|\s|\t|^)((ftp|https?):\/\/([^\s<>\"\']+))/i';
     $replace[] = '\\1<a href="\\2" target="_blank" rel="nofollow">\\2</a>';
     $patt[] = '/(<a[^>]+>)(https?:\/\/[^\%<]+)([\%][^\.\&<]+)([^<]{5,})(<\/a>)/i';

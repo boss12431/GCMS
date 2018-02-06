@@ -58,7 +58,7 @@ class View extends \Gcms\View
       '/<MODERATOR>(.*)<\/MODERATOR>/s' => Gcms::canConfig($login, $index, 'moderator') ? '$1' : '',
       '/<UPLOAD>(.*)<\/UPLOAD>/s' => empty($index->module->img_upload_type) ? '' : '$1',
       '/{DATE}/' => date('Y-m-d', $index->create_date),
-      '/{TIME}/' => date('H:i:s', $index->create_date),
+      '/{TIME}/' => date('H:i', $index->create_date),
       '/{MODULEID}/' => $index->module_id,
       '/{TOKEN}/' => $request->createToken(),
       '/{QID}/' => $index->id

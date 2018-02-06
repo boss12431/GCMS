@@ -136,7 +136,7 @@ class Model extends \Kotchasan\Model
         } elseif (!preg_match('/^[a-z0-9]{2,}$/', $module_save['module'])) {
           // module ไม่ถูกต้อง
           $ret['ret_module'] = 'this';
-        } elseif ($module_save['owner'] === 'index' && (is_dir(ROOT_PATH.'modules/'.$module_save['module']) || is_dir(ROOT_PATH.'widgets/'.$module_save['module']))) {
+        } elseif ($module_save['owner'] === 'index' && $module_save['module'] != 'home' && is_dir(ROOT_PATH.'modules/'.$module_save['module'])) {
           // index ไม่สามารถใช้ชื่อโมดูลหรือวิดเจ็ตได้
           $ret['ret_module'] = Language::get('Invalid name');
         } else {

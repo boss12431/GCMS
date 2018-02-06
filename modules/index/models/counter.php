@@ -33,6 +33,7 @@ class Model extends \Kotchasan\Model
     if (defined('MAIN_INIT')) {
       // Model
       $model = new static;
+      // Database
       $db = $model->db();
       // ตาราง useronline
       $useronline = $model->getTableName('useronline');
@@ -51,7 +52,7 @@ class Model extends \Kotchasan\Model
       if ($d != $c) {
         $f = @fopen($counter_dir.'/index.php', 'wb');
         if ($f) {
-          fwrite($f, $d);
+          fwrite($f, date('d-m-Y H:i:s'));
           fclose($f);
         }
         if ($d < $c) {

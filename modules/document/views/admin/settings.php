@@ -72,7 +72,7 @@ class View extends \Gcms\Adminview
       'comment' => '{LNG_Types of files that can be uploaded} ({LNG_must choose at least one item})',
       'labelClass' => 'g-input icon-thumbnail',
       'options' => array('jpg' => 'jpg', 'jpeg' => 'jpeg', 'gif' => 'gif', 'png' => 'png'),
-      'value' => empty($index->img_typies) ? array('jpg', 'jpeg') : $index->img_typies
+      'value' => $index->img_typies
     ));
     // default_icon
     $fieldset->add('file', array(
@@ -141,7 +141,7 @@ class View extends \Gcms\Adminview
       'labelClass' => 'g-input icon-clock',
       'itemClass' => 'item',
       'label' => '{LNG_New mark}',
-      'comment' => '{LNG_Setting the number of days an item will show up as New (0 means not shown)}',
+      'comment' => '{LNG_Setting the number of days an item will show up as New} ({LNG_0 to disable})',
       'options' => $options,
       'value' => $index->new_date / 86400
     ));

@@ -21,6 +21,7 @@ use \Kotchasan\Language;
  */
 class Model extends \Kotchasan\Orm\Field
 {
+
   /**
    * ชื่อตาราง
    *

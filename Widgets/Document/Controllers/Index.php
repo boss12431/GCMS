@@ -48,7 +48,7 @@ class Index extends \Kotchasan\Controller
         $interval = isset($query_string['interval']) ? (int)$query_string['interval'] : 0;
         $sort = isset($query_string['sort']) ? (int)$query_string['sort'] : $index->news_sort;
         $show = isset($query_string['show']) && preg_match('/^[a-z0-9]+$/', $query_string['show']) ? $query_string['show'] : '';
-        $style = isset($query_string['style']) && in_array($query_string['style'], array('list', 'icon', 'thumb')) ? $query_string['style'] : 'list';
+        $style = isset($query_string['style']) && in_array($query_string['style'], array('listview', 'iconview', 'thumbview')) ? $query_string['style'] : 'listview';
         // widget.html
         $template = Template::create('document', $index->module, 'widget');
         $template->add(array(
@@ -56,7 +56,7 @@ class Index extends \Kotchasan\Controller
           // module_id_cat_rows_cols_sort_show
           '/{ID}/' => Text::rndname(10).'_'.$index->module_id.'_'.$cat.'_'.$rows.'_'.$cols.'_'.$sort.'_'.$show,
           '/{MODULE}/' => $index->module,
-          '/{STYLE}/' => $style.'view'
+          '/{STYLE}/' => $style
         ));
         return $template->render();
       }

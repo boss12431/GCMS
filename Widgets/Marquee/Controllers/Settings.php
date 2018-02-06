@@ -14,7 +14,7 @@ use \Kotchasan\Html;
 use \Kotchasan\Language;
 
 /**
- * Controller สำหรับจัดการการตั้งค่าเริ่มต้น
+ * module=rss-settings
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -24,7 +24,7 @@ class Settings extends \Gcms\Controller
 {
 
   /**
-   * แสดงผล
+   * ฟอร์มตั้งค่า Widget
    *
    * @param Request $request
    * @return string

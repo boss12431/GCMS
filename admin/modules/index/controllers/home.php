@@ -54,8 +54,8 @@ class Controller extends \Gcms\Controller
       $counter = \Index\Home\Model::counter();
       self::renderCard($card, 'icon-visited', '{LNG_People online}', number_format($counter['useronline']));
       self::renderCard($card, 'icon-clock', '{LNG_Visitors today}', number_format($counter['visited']), 'index.php?module=report');
-      self::renderCard($card, 'icon-sex', '{LNG_Visitors total}', number_format($counter['counter']));
-      self::renderCard($card, 'icon-users', '{LNG_Total Members}', number_format($counter['members']), 'index.php?module=member&amp;sort=id%20desc');
+      self::renderCard($card, 'icon-sex', '{LNG_Total visitors}', number_format($counter['counter']));
+      self::renderCard($card, 'icon-users', '{LNG_Total members}', number_format($counter['members']), 'index.php?module=member&amp;sort=id%20desc');
       // grid
       $grid = new Collection;
       if (!self::$cfg->production) {

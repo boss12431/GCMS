@@ -119,7 +119,7 @@ class View extends \Gcms\View
         $canReply = $canReply && $index->canReply == 1;
         $replace = array(
           '/(quote-{QID}-0-0-{MODULE})/' => $canReply ? '\\1' : 'hidden',
-          '/{COMMENTLIST}/' => isset($listitem) ? $listitem->render() : '',
+          '/{COMMENTLIST}/' => isset($listitem) ? ($listitem->hasItem() ? $listitem->render() : '<div class="center message">{LNG_No comments yet}</div>') : '',
           '/{REPLYFORM}/' => $canReply ? Template::load('document', $index->module, 'reply') : '',
           '/<MEMBER>(.*)<\/MEMBER>/s' => $isMember ? '' : '$1',
           '/{TOPIC}/' => $index->topic,

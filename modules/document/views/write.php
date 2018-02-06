@@ -9,7 +9,6 @@
 namespace Document\Write;
 
 use \Kotchasan\Http\Request;
-use \Gcms\Gcms;
 use \Gcms\Login;
 use \Kotchasan\Language;
 use \Kotchasan\Date;
@@ -51,7 +50,7 @@ class View extends \Gcms\View
       // form
       $form = Html::create('form', array(
           'id' => 'documentwrite_frm',
-          'class' => 'main_frm member_section',
+          'class' => 'main_frm',
           'autocomplete' => 'off',
           'action' => 'index.php/document/model/write/submit',
           'onsubmit' => 'doFormSubmit',

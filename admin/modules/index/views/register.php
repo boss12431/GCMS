@@ -11,7 +11,7 @@ namespace Index\Register;
 use \Kotchasan\Html;
 
 /**
- * ลงทะเบียนสมาชิกใหม่
+ * module=register
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -21,7 +21,7 @@ class View extends \Gcms\Adminview
 {
 
   /**
-   * module=register
+   * ลงทะเบียนสมาชิกใหม่
    *
    * @return string
    */

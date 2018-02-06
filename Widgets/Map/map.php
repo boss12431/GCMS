@@ -26,9 +26,9 @@ $map[] = 'center:myLatlng,';
 $map[] = 'mapTypeId:google.maps.MapTypeId.ROADMAP';
 $map[] = '};';
 $map[] = 'var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);';
-$info = $_GET['info'];
+$info = isset($_GET['info']) ? $_GET['info'] : '';
 if (!empty($info)) {
-  $map[] = "var infowindow = new google.maps.InfoWindow({content:'".nl2br(str_replace(array('&lt;', '&gt;', '&#92;'), array('<', '>', '\\'), $info))."'});";
+  $map[] = "var infowindow = new google.maps.InfoWindow({content:'".str_replace(array('&lt;', '&gt;', '&#92;', "\r", "\n"), array('<', '>', '\\', '', '<br>'), $info)."'});";
   $map[] = 'var info = new google.maps.LatLng("'.$_GET['info_latitude'].'","'.$_GET['info_lantitude'].'");';
   $map[] = 'var marker = new google.maps.Marker({position:info,map:map});';
   $map[] = 'infowindow.open(map,marker);';

@@ -98,7 +98,7 @@ class View extends \Gcms\Adminview
         'published' => array(
           'class' => 'center'
         ),
-        'img_upload_size' => array(
+        'config' => array(
           'class' => 'center'
         ),
         'c1' => array(

@@ -27,9 +27,10 @@ class Index extends \Kotchasan\Controller
    * @param int $cols
    * @param int $count
    * @param array $videos
+   * @param array $query_string
    * @return string
    */
-  public static function render($cols, $count, $videos)
+  public static function render($cols, $count, $videos, $query_string)
   {
     if ($cols == 1 && $cols == 1) {
       return '<div class="youtube"><iframe src="//www.youtube.com/embed/'.$videos[0]['youtube'].'?wmode=transparent"></iframe></div>';

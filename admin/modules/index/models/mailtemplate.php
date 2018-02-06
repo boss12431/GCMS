@@ -22,6 +22,7 @@ use \Kotchasan\Orm\Field;
  */
 class Model extends Field
 {
+
   /**
    * ชื่อตาราง
    *

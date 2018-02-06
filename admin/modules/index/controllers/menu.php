@@ -23,13 +23,12 @@ class Controller
   /**
    * รายการเมนู (Backend)
    *
-   * @param array $login
    * @var array
    */
   public $menus;
 
   /**
-   * โหลดเมนู
+   * Controller สำหรับการโหลดเมนู
    *
    * @param array $login
    * @return \static

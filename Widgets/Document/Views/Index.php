@@ -40,22 +40,18 @@ class Index extends \Gcms\View
     }
     if ($item->create_date > $valid_date && $item->comment_date == 0) {
       $icon = 'new';
-      $date = $item->create_date;
     } elseif ($item->last_update > $valid_date) {
       $icon = 'update';
-      $date = $item->last_update;
     } elseif ($item->comment_date > $valid_date) {
       $icon = 'update';
-      $date = $item->comment_date;
     } else {
       $icon = '';
-      $date = $item->create_date;
     }
     return array(
       '/{URL}/' => Controller::url($index->module, $item->alias, $item->id),
       '/{TOPIC}/' => $item->topic,
       '/{DETAIL}/' => $item->description,
-      '/{DATE}/' => $date,
+      '/{DATE}/' => $item->create_date,
       '/{UID}/' => $item->member_id,
       '/{SENDER}/' => $item->sender,
       '/{STATUS}/' => $item->status,
