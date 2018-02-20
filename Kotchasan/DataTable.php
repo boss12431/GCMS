@@ -667,10 +667,12 @@ class DataTable extends \Kotchasan\KBase
       }
       $content[] = '</table></div>';
       $table_nav = array();
-      foreach ($this->actions as $item) {
-        $table_nav[] = $this->addAction($item);
+      if (!empty($this->actions) && is_array($this->actions)) {
+        foreach ($this->actions as $item) {
+          $table_nav[] = $this->addAction($item);
+        }
       }
-      if (!empty($this->addNew)) {
+      if (!empty($this->addNew) && is_array($this->addNew)) {
         $prop = array();
         foreach ($this->addNew as $k => $v) {
           if ($k != 'text') {
@@ -896,7 +898,7 @@ class DataTable extends \Kotchasan\KBase
    */
   private function addAction($item)
   {
-    if (preg_match('/^((.*)\s+)?(icon-[a-z0-9\-_]+)(\s+(.*))?$/', $item['class'], $match)) {
+    if (isset($item['class']) && preg_match('/^((.*)\s+)?(icon-[a-z0-9\-_]+)(\s+(.*))?$/', $item['class'], $match)) {
       $match[2] = trim($match[2].' '.(isset($match[5]) ? $match[5] : ''));
     }
     if (isset($item['options'])) {

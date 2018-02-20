@@ -461,8 +461,9 @@ input[type="color"] {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #74B9F0;
-  border-color: rgba(82,168,236,0.8);
+  box-shadow: 0 0 3px rgba(82,168,236,0.8) inset;
+  -moz-box-shadow: 0 0 3px rgba(82,168,236,0.8) inset;
+  -webkit-box-shadow: 0 0 3px rgba(82,168,236,0.8) inset;
   outline: none;
 }
 input[type="file"]:focus,
@@ -1250,12 +1251,6 @@ form .comment {
 .checkboxgroups {
   display: block;
   overflow: hidden;
-}
-.radiogroups.multiline,
-.checkboxgroups.multiline {
-  overflow-x: hidden;
-  overflow-y: visible;
-  max-height: 10.4em;
 }
 .radiogroups > label,
 .checkboxgroups > label {
@@ -3130,6 +3125,9 @@ fieldset.search input[type="text"] {
 }
 fieldset.search input[type="text"]:focus {
   width: 150px;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
 }
 fieldset.search button {
   width: 2.3em;

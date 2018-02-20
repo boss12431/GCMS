@@ -199,22 +199,22 @@ class Model extends \Kotchasan\Model
           'parent' => strtoupper($request->post('parent')->topic()),
           'published' => $request->post('published')->toInt(),
           'menu_url' => str_replace(array('&#x007B;', '&#x007D;'), array('{', '}'), $request->post('menu_url')->url()),
-          'menu_target' => $request->post('menu_target')->topic()
+          'menu_target' => $request->post('menu_target')->topic(),
+          'action' => $request->post('action')->toInt()
         );
         $id = $request->post('id')->toInt();
         $type = $request->post('type')->toInt();
         $toplvl = $request->post('menu_order')->toInt();
-        $action = $request->post('action')->toInt();
         // owner_action_module_moduleid
-        if ($action == 1 && preg_match('/^([a-z]+)_([a-z0-9]+)(_([0-9]+))?(_([a-z0-9]+))?$/', $request->post('index_id')->toString(), $match)) {
+        if ($save['action'] == 1 && preg_match('/^([a-z]+)_([a-z0-9]+)(_([0-9]+))?(_([a-z0-9]+))?$/', $request->post('index_id')->toString(), $match)) {
           // module Initial
           $class = ucfirst($match[1]).'\Admin\Init\Model';
           if (class_exists($class) && method_exists($class, 'parseMenuwrite')) {
-            $class::parseMenuwrite($match);
+            $save = $class::parseMenuwrite($match, $save);
           }
           if (empty($match[4])) {
             if (isset(Gcms::$module_menus[$match[1]])) {
-              $action = 2;
+              $save['action'] = 2;
               $save['menu_url'] = Gcms::$module_menus[$match[1]][$match[2]][1];
               $save['alias'] = $save['alias'] == '' ? Gcms::$module_menus[$match[1]][$match[2]][2] : $save['alias'];
             }
@@ -241,20 +241,21 @@ class Model extends \Kotchasan\Model
           // menu order (top level)
           if ($type != 0 && $toplvl == 0) {
             $ret['ret_menu_order'] = 'this';
-          } elseif ($action == 1 && $save['index_id'] == 0) {
+          } elseif ($save['action'] == 1 && $save['index_id'] == 0) {
             $ret['ret_menu_order'] = 'this';
           }
           // menu_url
-          if ($action == 2 && $save['menu_url'] == '') {
+          if ($save['action'] == 2 && $save['menu_url'] == '') {
             $ret['ret_menu_url'] = 'this';
           }
-          if ($action != 2) {
+          if ($save['action'] != 2) {
             unset($ret['ret_menu_url']);
           }
-          if ($action != 1) {
+          if ($save['action'] != 1) {
             $save['index_id'] = 0;
           }
         }
+        unset($save['action']);
         if (empty($ret)) {
           if ($type == 0) {
             // เป็นเมนูลำดับแรกสุด

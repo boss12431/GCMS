@@ -1636,6 +1636,7 @@ window.$K = (function () {
               }
             }, 100);
             hidden.display = text;
+            text.calendar = src;
             elem.replace(text);
           } else if (obj.type == 'range') {
             new GRange(elem);
@@ -2134,7 +2135,7 @@ window.$K = (function () {
   window.GEvent = {
     isButton: function (e, code) {
       var button;
-      e = !e ? window.event : e;
+      e = window.event || e;
       if (e.which == null) {
         button = (e.button < 2) ? 0 : ((e.button == 4) ? 1 : 2);
       } else {
@@ -2152,25 +2153,25 @@ window.$K = (function () {
       return GEvent.isButton(e, 2);
     },
     isCtrlKey: function (e) {
-      return !e ? window.event.ctrlKey : e.ctrlKey;
+      return window.event ? window.event.ctrlKey : e.ctrlKey;
     },
     isShiftKey: function (e) {
-      return !e ? window.event.shiftKey : e.shiftKey;
+      return window.event ? window.event.shiftKey : e.shiftKey;
     },
     isAltKey: function (e) {
-      return !e ? window.event.altKey : e.altKey;
+      return window.event ? window.event.altKey : e.altKey;
     },
     element: function (e) {
-      e = !e ? window.event : e;
+      e = window.event || e;
       var node = e.target ? e.target : e.srcElement;
       return e.nodeType == 3 ? node.parentNode : node;
     },
     keyCode: function (e) {
-      e = !e ? window.event : e;
+      e = window.event || e;
       return e.which || e.keyCode;
     },
     stop: function (e) {
-      e = !e ? window.event : e;
+      e = window.event || e;
       if (e.stopPropagation) {
         e.stopPropagation();
       }

@@ -399,7 +399,7 @@ class Sql
   }
 
   /**
-   * หาค่าต่ำสุด
+   * หาค่าสูงสุด
    *
    * @param string $column_name
    * @param string|null $alias ชื่อรองที่ต้องการ ถ้าไม่ระบุไม่มีชื่อรอง

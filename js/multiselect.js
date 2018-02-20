@@ -48,8 +48,9 @@
             var items = xhr.responseText.toJSON();
             if (items) {
               for (var prop in items) {
-                var select = self.selects[prop];
-                self.populate(select, items[prop], select.options[0].value);
+                if ($E(prop)) {
+                  $G(prop).setOptions(items[prop], $E(prop).value);
+                }
               }
             }
           });
@@ -71,25 +72,6 @@
         self.selects[item] = select;
       });
       _dochanged.call($E(selects[0]));
-    },
-    populate: function (obj, items, select) {
-      for (var i = obj.options.length - 1; i > 0; i--) {
-        obj.removeChild(obj.options[i]);
-      }
-      var selectedIndex = 0;
-      if (items) {
-        var i = 1;
-        for (var key in items) {
-          selectedIndex = key == select ? i : selectedIndex;
-          var option = document.createElement('option');
-          option.innerHTML = items[key];
-          option.value = key;
-          obj.appendChild(option);
-          i++;
-        }
-      }
-      obj.selectedIndex = selectedIndex;
-      obj.options[0].value = '';
     }
   };
 }());

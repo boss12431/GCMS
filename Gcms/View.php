@@ -25,12 +25,6 @@ class View extends \Gcms\Baseview
    * @var array
    */
   private $breadcrumbs = array();
-  /**
-   * ลิสต์คำสั่ง Javascript ที่จะใส่ไว้ท้ายเพจ
-   *
-   * @var array
-   */
-  private $script = array();
 
   /**
    * เพิ่ม breadcrumb.
@@ -51,16 +45,6 @@ class View extends \Gcms\Baseview
       $this->breadcrumbs_jsonld[] = array('name' => $menu);
       $this->breadcrumbs[] = '<li><span class="'.$class.'" title="'.$tooltip.'">'.$menu.'</span></li>';
     }
-  }
-
-  /**
-   * เพิ่มคำสั่ง Javascript ที่จะใส่ตรงท้ายเพจ
-   *
-   * @param string $script
-   */
-  public function addScript($script)
-  {
-    $this->script[] = $script;
   }
 
   /**
@@ -92,9 +76,7 @@ class View extends \Gcms\Baseview
       /* วันที่ */
       '/{DATE\s([0-9\-]+(\s[0-9:]+)?)?(\s([^}]+))?}/e' => '\Gcms\View::formatDate(array(1=>"$1",4=>"$4"))',
       /* ภาษา ที่ใช้งานอยู่ */
-      '/{LANGUAGE}/' => Language::name(),
-      /* Javascript ท้ายเพจ */
-      '/(<body.*)(<\/body>)/isu' => '$1<script>'.implode("\n", $this->script).'</script>$2'
+      '/{LANGUAGE}/' => Language::name()
     ));
     // JSON-LD
     if (!empty($this->jsonld)) {

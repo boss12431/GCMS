@@ -53,7 +53,7 @@ class View extends \Gcms\Adminview
       'itemClass' => 'item',
       'label' => '{LNG_Type of file uploads}',
       'comment' => '{LNG_Specify the file extension that allows uploading. English lowercase letters and numbers 2-4 characters to separate each type with a comma (,) and without spaces. eg zip,rar,doc,docx}',
-      'value' => isset($index->file_typies) ? implode(',', $index->file_typies) : 'doc,ppt,pptx,docx,rar,zip,jpg,pdf'
+      'value' => implode(',', $index->file_typies)
     ));
     // upload_size
     $sizes = array();
@@ -68,7 +68,7 @@ class View extends \Gcms\Adminview
       'label' => '{LNG_Size of the file upload}',
       'comment' => '{LNG_The size of the files can be uploaded. (Should not exceed the value of the Server :upload_max_filesize.)}',
       'options' => $sizes,
-      'value' => isset($index->upload_size) ? $index->upload_size : ':upload_max_filesize'
+      'value' => $index->upload_size
     ));
     $fieldset = $form->add('fieldset', array(
       'title' => '{LNG_Display}'
@@ -76,12 +76,12 @@ class View extends \Gcms\Adminview
     // list_per_page
     $fieldset->add('select', array(
       'id' => 'list_per_page',
-      'labelClass' => 'g-input icon-published1',
+      'labelClass' => 'g-input icon-rows',
       'itemClass' => 'item',
       'label' => '{LNG_Number}',
       'comment' => '{LNG_The number of items displayed per page}',
       'options' => array(10 => 10, 20 => 20, 30 => 30, 40 => 40, 50 => 50),
-      'value' => isset($index->list_per_page) ? $index->list_per_page : 10
+      'value' => $index->list_per_page
     ));
     // sort
     $sorts = array('ID', '{LNG_Last updated}', '{LNG_Random}');
@@ -92,7 +92,7 @@ class View extends \Gcms\Adminview
       'label' => '{LNG_Sort}',
       'comment' => '{LNG_Determine how to sort the items displayed}',
       'options' => $sorts,
-      'value' => isset($index->sort) ? $index->sort : 1
+      'value' => $index->sort
     ));
     $fieldset = $form->add('fieldset', array(
       'title' => '{LNG_Role of Members}'

@@ -127,7 +127,7 @@ function defaultSubmit(ds) {
             }
           }
         } else if (val == 'this') {
-          if (el.placeholder) {
+          if (typeof el.placeholder != 'undefined') {
             t = el.placeholder.strip_tags();
           }
           if (t == '') {

@@ -135,7 +135,7 @@ class View extends \Gcms\Adminview
    */
   public function onRow($item, $o, $prop)
   {
-    $item['topic'] = '<a href="../index.php?module='.$this->module.'&amp;id='.$item['id'].'">'.$item['topic'].'</a>';
+    $item['topic'] = '<a href="../index.php?module='.$this->module.'&amp;id='.$item['id'].'" target=preview>'.$item['topic'].'</a>';
     $item['last_update'] = Date::format($item['last_update'], 'd M Y H:i');
     $item['published'] = '<a id=published_'.$item['id'].' class="icon-published'.$item['published'].'" title="'.$this->publisheds[$item['published']].'"></a>';
     return $item;
