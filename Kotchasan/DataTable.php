@@ -628,6 +628,10 @@ class DataTable extends \Kotchasan\KBase
         }
         $colCount++;
       }
+      if (!$this->hideCheckbox && $colCount == $this->checkCol) {
+        $row[] = '<th class="check-column"><a class="checkall icon-uncheck"></a></th>';
+        $colCount++;
+      }
       if ($colspan === 0) {
         if (!empty($this->buttons)) {
           $row[] = $this->th($i, '', array('text' => ''));
@@ -763,6 +767,10 @@ class DataTable extends \Kotchasan\KBase
             $row[] = $this->td($id, $i, $properties, $text, $th);
             $i++;
           }
+        }
+        if (!$this->hideCheckbox && $i == $this->checkCol) {
+          $row[] = '<td headers="r'.$id.'" class="check-column"><a id="check_'.$id.'" class="icon-uncheck"></a></td>';
+          $i++;
         }
         if (!empty($this->buttons)) {
           $buttons = array();

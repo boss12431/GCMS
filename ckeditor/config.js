@@ -117,14 +117,6 @@ CKEDITOR.editorConfig = function (config) {
     ['ShowBlocks', 'Templates'],
     ['Table', 'Smiley', 'SpecialChar', 'Iframe']
   ];
-  config.toolbar_Comment = [
-    ['RemoveFormat', 'Bold', 'Italic', 'Underline', 'Strike'],
-    ['NumberedList', 'BulletedList'],
-    ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-    ['Link', 'Unlink', 'Image', 'Flash'],
-    ['Smiley', 'SpecialChar'],
-    ['TextColor', 'BGColor']
-  ];
   config.toolbar_Email = [
     ['Undo', 'Redo'],
     ['RemoveFormat', 'Bold', 'Italic', 'Underline', 'Strike'],

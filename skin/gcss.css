@@ -392,6 +392,9 @@ button {
   font-size: inherit;
   line-height: inherit;
   vertical-align: middle;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
 }
 input[type="text"],
 input[type="password"],
@@ -2173,7 +2176,6 @@ input.gcalendar {
   background-image: url();
   max-width: none;
   background-color: #FFF;
-  color: inherit;
 }
 /* widget calendar */
 div.calendar div {
