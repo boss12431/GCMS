@@ -117,7 +117,7 @@ function defaultSubmit(ds) {
       if (val == '') {
         el.valid();
       } else {
-        if (val == 'Please fill in' || val == 'Please browse file') {
+        if (val == 'Please fill in' || val == 'Please select' || val == 'Please browse file') {
           val = trans(val);
           var label = el.findLabel();
           if (label) {

@@ -41,6 +41,6 @@ class Controller extends \Kotchasan\Controller
       }
     }
     // 404
-    return createClass('Index\PageNotFound\Controller')->init('portfolio');
+    return createClass('Index\Error\Controller')->init('portfolio');
   }
 }

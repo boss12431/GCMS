@@ -47,6 +47,6 @@ class Controller extends \Kotchasan\Controller
       return $page;
     }
     // 404
-    return createClass('Index\PageNotFound\Controller')->init('event');
+    return createClass('Index\Error\Controller')->init('event');
   }
 }

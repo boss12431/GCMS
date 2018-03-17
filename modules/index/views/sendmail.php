@@ -75,6 +75,6 @@ class View extends \Gcms\View
     }
     // ไม่สามารถส่งอีเมล์ได้
     $message = Language::get('Unable to send e-mail, Because you can not send e-mail to yourself or can not find the email address of the recipient.');
-    return createClass('Index\PageNotFound\Controller')->init('member', $message);
+    return createClass('Index\Error\Controller')->init('member', $message);
   }
 }

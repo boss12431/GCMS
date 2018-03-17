@@ -36,6 +36,6 @@ class Controller extends \Kotchasan\Controller
       return createClass('Edocument\Index\View')->index($request, $index);
     }
     // 404
-    return createClass('Index\PageNotFound\Controller')->init('edocument');
+    return createClass('Index\Error\Controller')->init('edocument');
   }
 }

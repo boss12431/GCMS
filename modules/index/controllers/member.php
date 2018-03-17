@@ -34,7 +34,7 @@ class Controller extends \Kotchasan\Controller
       $page = createClass('Index\Forgot\View')->render($request, true);
     } else {
       // 404
-      $page = createClass('Index\PageNotFound\Controller')->init('index');
+      $page = createClass('Index\Error\Controller')->init('index');
     }
     echo json_encode($page);
   }

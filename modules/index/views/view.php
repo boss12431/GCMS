@@ -68,10 +68,10 @@ class View extends \Gcms\View
         );
       }
       // ไม่พบสมาชิก
-      return createClass('Index\PageNotFound\Controller')->init('index');
+      return createClass('Index\Error\Controller')->init('index');
     } else {
       // ไม่ได้ login
-      return createClass('Index\PageNotFound\Controller')->init('index', 'Members Only');
+      return createClass('Index\Error\Controller')->init('index', 'Members Only');
     }
   }
 }

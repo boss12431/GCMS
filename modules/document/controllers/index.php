@@ -55,7 +55,7 @@ class Controller extends \Kotchasan\Controller
     }
     if (empty($page)) {
       // ไม่พบหน้าที่เรียก (document)
-      $page = createClass('Index\PageNotFound\Controller')->init('document');
+      $page = createClass('Index\Error\Controller')->init('document');
     }
     return $page;
   }

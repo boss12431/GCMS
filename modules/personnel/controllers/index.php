@@ -43,7 +43,7 @@ class Controller extends \Kotchasan\Controller
     }
     if (!$page) {
       // 404
-      $page = createClass('Index\PageNotFound\Controller')->init('personnel');
+      $page = createClass('Index\Error\Controller')->init('personnel');
     }
     return $page;
   }

@@ -71,6 +71,6 @@ class View extends \Gcms\View
       );
     }
     // 404
-    return createClass('Index\PageNotFound\Controller')->init('product');
+    return createClass('Index\Error\Controller')->init('product');
   }
 }

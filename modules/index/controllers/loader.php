@@ -65,7 +65,7 @@ class Controller extends \Kotchasan\Controller
       }
       if (empty($page)) {
         // ไม่พบหน้าที่เรียก (index)
-        $page = createClass('Index\PageNotFound\Controller')->init('index');
+        $page = createClass('Index\Error\Controller')->init('index');
       }
       // output เป็น HTML
       $ret = array(

@@ -71,6 +71,6 @@ class View extends \Gcms\View
       }
     }
     // ไม่ได้ login
-    return createClass('Index\PageNotFound\Controller')->init('index');
+    return createClass('Index\Error\Controller')->init('index');
   }
 }

@@ -36,7 +36,7 @@ class View extends \Gcms\View
     // query หมวด ถ้าไม่มีใช้หมวดแรกสุด
     $category = \Documentation\Index\Model::category((int)$index->module_id, $request->request('cat')->toInt());
     if ($category === null) {
-      return createClass('Index\PageNotFound\Controller')->init($request, 'documentation');
+      return createClass('Index\Error\Controller')->init('documentation');
     } else {
       // template
       $template = Template::create($index->owner, $index->module, 'list');

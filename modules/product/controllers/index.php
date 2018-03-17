@@ -50,7 +50,7 @@ class Controller extends \Kotchasan\Controller
     }
     if (empty($page)) {
       // ไม่พบหน้าที่เรียก (product)
-      $page = createClass('Index\PageNotFound\Controller')->init('product');
+      $page = createClass('Index\Error\Controller')->init('product');
     }
     return $page;
   }

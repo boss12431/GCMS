@@ -46,7 +46,7 @@ class Controller extends \Kotchasan\Controller
     }
     if (empty($page)) {
       // ไม่พบหน้าที่เรียก (board)
-      $page = createClass('Index\PageNotFound\Controller')->init('board');
+      $page = createClass('Index\Error\Controller')->init('board');
     }
     return $page;
   }

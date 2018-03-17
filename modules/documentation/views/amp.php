@@ -52,6 +52,6 @@ class View extends \Gcms\View
       );
     }
     // 404
-    return createClass('Index\PageNotFound\Controller')->init('document');
+    return createClass('Index\Error\Controller')->init('document');
   }
 }

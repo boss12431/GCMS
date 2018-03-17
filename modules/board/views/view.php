@@ -177,6 +177,6 @@ class View extends \Gcms\View
       return (object)$result;
     }
     // 404
-    return createClass('Index\PageNotFound\Controller')->init('board');
+    return createClass('Index\Error\Controller')->init('board');
   }
 }

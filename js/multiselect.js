@@ -64,7 +64,7 @@
       var l = selects.length - 1;
       forEach(selects, function (item, index) {
         var select = $G(item);
-        if (index < l) {
+        if (index < l || l == 0) {
           select.addEvent('change', _dochanged);
         } else if (Object.isFunction(self.onchanged)) {
           select.addEvent('change', self.onchanged);

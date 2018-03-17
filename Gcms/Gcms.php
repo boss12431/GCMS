@@ -199,8 +199,10 @@ class Gcms extends \Kotchasan\KBase
    */
   public static function checkRude($detail)
   {
-    if (!empty(self::$cfg->wordrude)) {
-      $detail = preg_replace("/(".implode('|', self::$cfg->wordrude).")/usi", '<em>'.self::$cfg->wordrude_replace.'</em>', $detail);
+    if (!empty(self::$cfg->wordrude) && is_array(self::$cfg->wordrude)) {
+      foreach (self::$cfg->wordrude as $item) {
+        $detail = str_replace($item, '<em>'.self::$cfg->wordrude_replace.'</em>', $detail);
+      }
     }
     return $detail;
   }
