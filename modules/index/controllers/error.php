@@ -1,18 +1,18 @@
 <?php
 /**
- * @filesource modules/index/controllers/pagenotfound.php
+ * @filesource modules/index/controllers/error.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
  */
 
-namespace Index\PageNotFound;
+namespace Index\Error;
 
 use \Kotchasan\Language;
 use \Kotchasan\Template;
 
 /**
- * หน้าเพจ 404 (Page Not Found)
+ * หน้า Error
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -28,7 +28,7 @@ class Controller extends \Kotchasan\Controller
    * @param string $message ข้อความที่จะแสดง ถ้าไม่กำหนดจะใช้ข้อความของระบบ
    * @return object
    */
-  public function init($module, $message = '')
+  public function init($module, $status = 404, $message = '')
   {
     $template = Template::create($module, '', '404');
     $message = Language::get($message == '' ? 'Sorry, cannot find a page called Please check the URL or try the call again.' : $message);
@@ -36,12 +36,13 @@ class Controller extends \Kotchasan\Controller
       '/{TOPIC}/' => $message,
       '/{DETAIL}/' => $message
     ));
+    $topic = strip_tags($message);
     return (object)array(
-        'status' => 404,
-        'topic' => $message,
+        'status' => $status,
+        'topic' => $topic,
         'detail' => $template->render(),
-        'description' => $message,
-        'keywords' => $message,
+        'description' => $topic,
+        'keywords' => $topic,
         'module' => $module
     );
   }

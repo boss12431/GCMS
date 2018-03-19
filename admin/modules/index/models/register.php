@@ -52,8 +52,8 @@ class Model extends \Kotchasan\Model
           }
         }
         // password
-        $password = $request->post('register_password')->topic();
-        $repassword = $request->post('register_repassword')->topic();
+        $password = $request->post('register_password')->password();
+        $repassword = $request->post('register_repassword')->password();
         if (mb_strlen($password) < 4) {
           // รหัสผ่านต้องไม่น้อยกว่า 4 ตัวอักษร
           $ret['ret_register_password'] = 'this';

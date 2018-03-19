@@ -41,7 +41,7 @@ class Model extends \Kotchasan\Model
         ->first();
       if ($user) {
         // permission
-        $user['permission'] = empty($user['permission']) ? array() : explode(',', $user['permission']);
+        $user['permission'] = empty($user['permission']) ? array() : trim(explode(',', $user['permission']), " \t\n\r\0\x0B,");
         return $user;
       }
     }
@@ -137,8 +137,8 @@ class Model extends \Kotchasan\Model
             }
           }
           // แก้ไขรหัสผ่าน
-          $password = $request->post('register_password')->topic();
-          $repassword = $request->post('register_repassword')->topic();
+          $password = $request->post('register_password')->password();
+          $repassword = $request->post('register_repassword')->password();
           if (!empty($password) || !empty($repassword)) {
             if (mb_strlen($password) < 4) {
               // รหัสผ่านต้องไม่น้อยกว่า 4 ตัวอักษร
@@ -188,7 +188,7 @@ class Model extends \Kotchasan\Model
             }
             if ($login['status'] == 1 && $user->id != 1 && $login['id'] != $user->id) {
               // แอดมินแต่ไม่ใช่ตัวเองและแก้ไขสมาชิกสถานะอื่น
-              $save['permission'] = empty($permission) ? '' : implode(',', $permission);
+              $save['permission'] = empty($permission) ? '' : ','.implode(',', $permission).',';
             } else {
               // ตัวเอง ห้ามแก้ไข
               unset($save['status']);

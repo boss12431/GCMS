@@ -105,7 +105,7 @@ class Model extends \Kotchasan\Model
           // เคลียร์
           $request->removeToken();
           // login
-          $save['permission'] = empty($save['permission']) ? array() : explode(',', $save['permission']);
+          $save['permission'] = empty($save['permission']) ? array() : trim(explode(',', $save['permission']), " \t\n\r\0\x0B,");
           $save['password'] = $password;
           $_SESSION['login'] = $save;
           // คืนค่า
