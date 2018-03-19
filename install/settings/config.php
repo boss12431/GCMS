@@ -1,5 +1,5 @@
 <?php
 /* config.php */
 return array(
-  'new_version' => '13.0.1'
+  'new_version' => '13.1.0'
 );
