@@ -45,7 +45,7 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
     $login_result = null;
     foreach ($query->execute() as $item) {
       if ($item['password'] == md5($params['password'].$item['salt'])) {
-        $item['permission'] = empty($item['permission']) ? array() : trim(explode(',', $item['permission']), " \t\n\r\0\x0B,");
+        $item['permission'] = empty($item['permission']) ? array() : explode(',', trim($item['permission'], " \t\n\r\0\x0B,"));
         $login_result = $item;
         break;
       }
