@@ -612,8 +612,8 @@ function initWeb(module) {
     });
     loader.initLoading('wait', false);
     loader.init(document);
-    $K.init(document.body);
   }
+  $K.init(document.body);
 }
 if (navigator.userAgent.match(/(iPhone|iPod|iPad)/i)) {
   document.addEventListener("touchstart", function () {}, false);
