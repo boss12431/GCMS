@@ -642,7 +642,7 @@ td > .wlabel {
 }
 .g-input[class*=" icon-"] > select,
 .g-input[class^="icon-"] > select {
-  padding-left: 2.5em;
+  padding-left: 2.8em;
   min-width: 6em;
   -webkit-appearance: none;
   -moz-appearance: none;

@@ -13,6 +13,7 @@
   GMultiSelect.prototype = {
     initialize: function (selects, o) {
       var loading = true;
+      this.prefix = '';
       this.selects = new Object();
       this.req = new GAjax();
       var self = this;
@@ -32,7 +33,7 @@
           });
         } else {
           var qs = new Array();
-          qs.push('srcItem=' + this.id);
+          qs.push('srcItem=' + this.id.replace(self.prefix, ''));
           for (var prop in o) {
             if (prop != 'action' && prop != 'onchanged') {
               qs.push(prop + '=' + o[prop]);
@@ -40,7 +41,7 @@
           }
           for (var sel in self.selects) {
             var select = self.selects[sel];
-            qs.push(select.id + '=' + encodeURIComponent(select.value));
+            qs.push(select.id.replace(self.prefix, '') + '=' + encodeURIComponent(select.value));
           }
           temp.addClass('wait');
           self.req.send(o.action, qs.join('&'), function (xhr) {
@@ -48,8 +49,9 @@
             var items = xhr.responseText.toJSON();
             if (items) {
               for (var prop in items) {
-                if ($E(prop)) {
-                  $G(prop).setOptions(items[prop], $E(prop).value);
+                var sel = $E(self.prefix + prop);
+                if (sel) {
+                  $G(sel).setOptions(items[prop], sel.value);
                 }
               }
             }
@@ -57,9 +59,7 @@
         }
       };
       for (var prop in o) {
-        if (prop == 'onchanged') {
-          this.onchanged = o[prop];
-        }
+        this[prop] = o[prop];
       }
       var l = selects.length - 1;
       forEach(selects, function (item, index) {

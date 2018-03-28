@@ -49,7 +49,7 @@ class Settings extends \Gcms\Adminview
     // cols
     $groups->add('number', array(
       'id' => 'cols',
-      'labelClass' => 'g-input icon-width',
+      'labelClass' => 'g-input icon-cols',
       'itemClass' => 'width50',
       'label' => '{LNG_Cols}',
       'value' => self::$cfg->rss_gallery['cols']
@@ -57,7 +57,7 @@ class Settings extends \Gcms\Adminview
     // rows
     $groups->add('number', array(
       'id' => 'rows',
-      'labelClass' => 'g-input icon-height',
+      'labelClass' => 'g-input icon-rows',
       'itemClass' => 'width50',
       'label' => '{LNG_Rows}',
       'value' => self::$cfg->rss_gallery['rows']

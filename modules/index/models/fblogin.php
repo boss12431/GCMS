@@ -28,8 +28,8 @@ class Model extends \Kotchasan\Model
    */
   public function chklogin(Request $request)
   {
-    // session, token
-    if ($request->initSession() && $request->isSafe()) {
+    // session, referer
+    if ($request->initSession() && $request->isReferer()) {
       // สุ่มรหัสผ่านใหม่
       $password = uniqid();
       // ข้อมูลที่ส่งมา
@@ -102,8 +102,6 @@ class Model extends \Kotchasan\Model
               fclose($f);
             }
           }
-          // เคลียร์
-          $request->removeToken();
           // login
           $save['permission'] = empty($save['permission']) ? array() : explode(',', trim($save['permission'], " \t\n\r\0\x0B,"));
           $save['password'] = $password;

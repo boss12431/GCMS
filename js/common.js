@@ -584,6 +584,7 @@ function initWeb(module) {
             loader.init(content);
             content.replaceClass('loading', 'animation');
             content.Ready(function () {
+              $K.init(content);
               value.evalScript();
             });
           } else if (prop == 'topic') {
@@ -611,6 +612,7 @@ function initWeb(module) {
     });
     loader.initLoading('wait', false);
     loader.init(document);
+    $K.init(document.body);
   }
 }
 if (navigator.userAgent.match(/(iPhone|iPod|iPad)/i)) {
