@@ -31,8 +31,16 @@ class View extends \Gcms\Adminview
    */
   public function render(Request $request, $ip, $date)
   {
+    // URL สำหรับส่งให้ตาราง
+    $uri = $request->createUriWithGlobals(WEB_URL.'admin/index.php');
+    // ตาราง
     $table = new DataTable(array(
+      /* Uri */
+      'uri' => $uri,
+      /* ข้อมูล Array */
       'datas' => \Index\Report\Model::get($ip, $date),
+      /* รายการต่อหน้า */
+      'perPage' => $request->cookie('counter_perPage', 30)->toInt(),
       /* ส่วนหัวของตาราง และการเรียงลำดับ (thead) */
       'headers' => array(
         'time' => array(
@@ -68,6 +76,8 @@ class View extends \Gcms\Adminview
         ),
       )
     ));
+    // save cookie
+    setcookie('counter_perPage', $table->perPage, time() + 3600 * 24 * 365, '/');
     // คืนค่า HTML
     return $table->render();
   }

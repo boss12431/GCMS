@@ -38,28 +38,12 @@ class Model extends \Kotchasan\KBase
       if (is_file($counter_dat)) {
         foreach (file($counter_dat) AS $a => $item) {
           list($sid, $sip, $sref, $sagent, $time) = explode(chr(1), Text::removeNonCharacters($item));
+          $sref = str_replace(array('<', '>', '"', "'"), array('&lt;', '&gt;', '&quot;', '&#039;'), $sref);
           if (empty($ip) || $sip == $ip) {
             if (preg_match_all('%(?P<browser>Firefox|Safari|MSIE|AppleWebKit|bingbot|MJ12bot|Baiduspider|Googlebot|DotBot|Twitterbot|LivelapBot|facebookexternalhit|StatusNet|PaperLiBot|SurdotlyBot|Trident|archive\.org_bot|Yahoo\!\sSlurp|Go[a-z\-]+)([\/\s](?P<version>[^;\s]+))?%ix', $sagent, $result, PREG_PATTERN_ORDER)) {
               $sagent = '<span title="'.$sagent.'">'.$result['browser'][0].(empty($result['version'][0]) ? '' : '/'.$result['version'][0]).'</span>';
             } elseif ($sagent != '') {
               $sagent = '<span title="'.$sagent.'">unknown</span>';
-            }
-            if (empty($ip)) {
-              $datas[$sip.$sref] = array(
-                'time' => isset($datas[$sip.$sref]) ? $datas[$sip.$sref]['time'] : $time,
-                'count' => isset($datas[$sip.$sref]) ? $datas[$sip.$sref]['count'] + 1 : 1,
-                'ip' => '<a href="index.php?module=report&amp;ip='.$sip.'&amp;date='.$date.'" target=_blank>'.$sip.'</a>',
-                'agent' => $sagent,
-                'referer' => '',
-              );
-            } else {
-              $datas[$time] = array(
-                'time' => $time,
-                'count' => 1,
-                'ip' => '<a href="http://'.$sip.'" target=_blank>'.$sip.'</a>',
-                'agent' => $sagent,
-                'referer' => '',
-              );
             }
             if (preg_match('/^(https?.*(www\.)?google(usercontent)?.*)\/.*[\&\?]q=(.*)($|\&.*)/iU', $sref, $match)) {
               // จาก google search
@@ -73,10 +57,29 @@ class Model extends \Kotchasan\KBase
             }
             if ($sref != '') {
               if (empty($ip)) {
-                $datas[$sip.$sref]['referer'] = '<a href="'.$sref.'" title="'.$title.'" target=_blank>'.Text::cut($title, 149).'</a>';
+                $referer = '<a href="'.$sref.'" title="'.$title.'" target=_blank>'.Text::cut($title, 149).'</a>';
               } else {
-                $datas[$time]['referer'] = '<a href="'.$sref.'" title="'.$title.'" target=_blank>'.Text::cut($title, 149).'</a>';
+                $referer = '<a href="'.$sref.'" title="'.$title.'" target=_blank>'.Text::cut($title, 149).'</a>';
               }
+            } else {
+              $referer = '';
+            }
+            if (empty($ip)) {
+              $datas[$sip.$sref] = array(
+                'time' => isset($datas[$sip.$sref]) ? $datas[$sip.$sref]['time'] : $time,
+                'count' => isset($datas[$sip.$sref]) ? $datas[$sip.$sref]['count'] + 1 : 1,
+                'ip' => '<a href="index.php?module=report&amp;ip='.$sip.'&amp;date='.$date.'" target=_blank>'.$sip.'</a>',
+                'agent' => $sagent,
+                'referer' => $referer,
+              );
+            } else {
+              $datas[$time] = array(
+                'time' => $time,
+                'count' => 1,
+                'ip' => '<a href="http://'.$sip.'" target=_blank>'.$sip.'</a>',
+                'agent' => $sagent,
+                'referer' => $referer,
+              );
             }
           }
         }
