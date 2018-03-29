@@ -67,7 +67,7 @@ class View extends \Gcms\Adminview
       'dragColumn' => 1,
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/documentation/model/admin/setup/action?mid='.$index->module_id,
-      'actionCallback' => 'indexActionCallback',
+      'actionCallback' => 'dataTableActionCallback',
       'actionConfirm' => 'confirmAction',
       'actions' => array(
         array(

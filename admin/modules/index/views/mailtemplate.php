@@ -45,7 +45,7 @@ class View extends \Gcms\Adminview
       'hideColumns' => array('id', 'email_id', 'subject'),
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/index/model/mailtemplate/action',
-      'actionCallback' => 'indexActionCallback',
+      'actionCallback' => 'dataTableActionCallback',
       'actionConfirm' => 'confirmAction',
       /* ฟังก์ชั่นตรวจสอบการแสดงผลปุ่มในแถว */
       'onCreateButton' => array($this, 'onCreateButton'),

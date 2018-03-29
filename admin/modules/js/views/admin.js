@@ -239,7 +239,7 @@ function initMenuwrite() {
   getMenus.call(this);
   menuAction();
 }
-var indexActionCallback = function (xhr) {
+var dataTableActionCallback = function (xhr) {
   var el,
     val,
     toplv = -1,

@@ -73,7 +73,7 @@ class Settings extends \Gcms\Adminview
       'dragColumn' => 1,
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/Widgets/Textlink/Models/Action/get',
-      'actionCallback' => 'indexActionCallback',
+      'actionCallback' => 'dataTableActionCallback',
       'actionConfirm' => 'confirmAction',
       'actions' => array(
         array(

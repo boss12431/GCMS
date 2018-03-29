@@ -58,7 +58,7 @@ class View extends \Gcms\Adminview
       'hideColumns' => array('module_id', 'id', 'owner'),
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/index/model/pages/action',
-      'actionCallback' => 'indexActionCallback',
+      'actionCallback' => 'dataTableActionCallback',
       'actionConfirm' => 'confirmAction',
       'actions' => array(
         array(

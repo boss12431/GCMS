@@ -60,7 +60,7 @@ class View extends \Gcms\Adminview
       'searchColumns' => array('name', 'displayname', 'email', 'phone1'),
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/index/model/member/action',
-      'actionCallback' => 'indexActionCallback',
+      'actionCallback' => 'dataTableActionCallback',
       'actions' => array(
         array(
           'id' => 'action',

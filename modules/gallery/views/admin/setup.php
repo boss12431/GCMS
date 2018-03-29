@@ -61,7 +61,7 @@ class View extends \Gcms\Adminview
       'hideColumns' => array('member_id', 'status', 'module_id'),
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/gallery/model/admin/setup/action?mid='.$index->module_id,
-      'actionCallback' => 'indexActionCallback',
+      'actionCallback' => 'dataTableActionCallback',
       'actionConfirm' => 'confirmAction',
       'actions' => array(
         array(

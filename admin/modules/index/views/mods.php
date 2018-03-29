@@ -56,7 +56,7 @@ class View extends \Gcms\Adminview
       'hideColumns' => array('module_id', 'id', 'index'),
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/index/model/mods/action',
-      'actionCallback' => 'indexActionCallback',
+      'actionCallback' => 'dataTableActionCallback',
       'actions' => array(
         array(
           'class' => 'button green icon-plus',
