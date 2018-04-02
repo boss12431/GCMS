@@ -43,18 +43,16 @@ class Controller extends \Kotchasan\Controller
       $className = ucfirst($index->owner).'\Export\Controller';
       if (class_exists($className) && method_exists($className, 'init')) {
         $detail = createClass($className)->init($request, $index);
-      } else {
-        $detail = false;
-      }
-      if ($detail !== false) {
-        if ($detail !== '') {
+        if (is_string($detail) && $detail != '') {
           $view = new \Gcms\View;
           $view->setContents(array(
             '/{CONTENT}/' => $detail
           ));
           echo $view->renderHTML(Template::load('', '', 'print'));
+          // สำเร็จ
+          $detail = true;
         }
-        exit;
+        return $detail;
       }
     }
     // ไม่พบโมดูลหรือไม่มีสิทธิ

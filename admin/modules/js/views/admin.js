@@ -88,21 +88,6 @@ function initEditInplace(id, className) {
   callClick(id + '_add', _doAction);
   _doInitEditInplaceMethod(id);
 }
-function initListCategory(module) {
-  if (!module) {
-    module = 'index';
-  }
-  var patt = /^categoryid_([0-9]+)_([0-9]+)$/;
-  forEach($G('datatable').elems('input'), function () {
-    if (patt.test(this.id)) {
-      $G(this).addEvent('keypress', numberOnly);
-      this.addEvent('change', function () {
-        var hs = patt.exec(this.id);
-        send('index.php/' + module + '/model/admincategory/action', 'action=categoryid&mid=' + hs[1] + '&id=' + hs[2] + '&value=' + this.value, doFormSubmit, this);
-      });
-    }
-  });
-}
 function initLanguages(id) {
   var patt = /^(edit|delete|check|import)_([a-z]{2,2})$/;
   var doClick = function () {
@@ -272,11 +257,17 @@ var dataTableActionCallback = function (xhr) {
             el.title = ds.title;
           }
         } else if ($E(prop)) {
-          as = val.split('|');
-          $E(prop).innerHTML = as[0];
-          $E('move_left_' + as[2]).className = (as[1] == 0 ? 'hidden' : 'icon-move_left');
-          $E('move_right_' + as[2]).className = (as[1] > toplv ? 'hidden' : 'icon-move_right');
-          toplv = as[1];
+          var el = $E(prop),
+            tag = el.tagName.toLowerCase();
+          if (tag == 'th' && /r[0-9]+/.test(prop)) {
+            var as = val.split('|');
+            el.innerHTML = as[0];
+            $E('move_left_' + as[2]).className = (as[1] == 0 ? 'hidden' : 'icon-move_left');
+            $E('move_right_' + as[2]).className = (as[1] > toplv ? 'hidden' : 'icon-move_right');
+            toplv = as[1];
+          } else {
+            $G(prop).setValue(decodeURIComponent(val).replace(/\%/g, '&#37;'));
+          }
         }
       }
     }

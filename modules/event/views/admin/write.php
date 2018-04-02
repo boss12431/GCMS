@@ -79,17 +79,15 @@ class View extends \Gcms\Adminview
     ));
     $row->add('time', array(
       'id' => 'begin_time',
-      'labelClass' => 'g-input icon-clock',
       'itemClass' => 'width',
-      'label' => '{LNG_from time}',
+      'label' => '{LNG_from time}&nbsp;',
       'value' => date('H:i', $begin_date)
     ));
     $end_date = isset($index->end_date) ? Date::sqlDateTimeToMktime($index->end_date) : time();
     $row->add('time', array(
       'id' => 'to_time',
-      'labelClass' => 'g-input icon-clock',
       'itemClass' => 'width',
-      'label' => '{LNG_to time}',
+      'label' => '{LNG_to time}&nbsp;',
       'value' => date('H:i', $end_date)
     ));
     $row->add('checkbox', array(

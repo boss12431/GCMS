@@ -12,7 +12,7 @@ use \Kotchasan\Http\Request;
 use \Gcms\Login;
 use \Kotchasan\Html;
 use \Kotchasan\Language;
-use \Kotchasan\Config;
+use \Gcms\Config;
 
 /**
  * module=meta

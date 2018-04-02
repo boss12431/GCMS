@@ -1,6 +1,6 @@
 <?php
 /**
- * print.php
+ * export.php
  *
  * @author Goragod Wiriya <admin@goragod.com>
  * @link http://www.kotchasan.com/

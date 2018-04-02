@@ -63,10 +63,13 @@ class Model extends \Kotchasan\Orm\Field
             $ret['location'] = 'reload';
           } else if ($action === 'order') {
             // update order
+            $value = $request->post('value')->toInt();
             $model->db()->update($model->getTableName('personnel'), array(
               array('id', (int)$id),
               array('module_id', $module_id)
-              ), array('order' => $request->post('value')->toInt()));
+              ), array('order' => $value));
+            // คืนค่า
+            $ret['order_'.$id] = $value;
           }
         }
       }

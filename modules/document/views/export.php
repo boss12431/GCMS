@@ -154,7 +154,8 @@ class View extends \Gcms\View
         $pdf->AddPage();
         $pdf->WriteHTML(Template::create($index->owner, $index->module, 'print')->add($replace)->render());
         $pdf->Output();
-        exit;
+        // คืนค่าสำเร็จ
+        return true;
       }
     }
   }

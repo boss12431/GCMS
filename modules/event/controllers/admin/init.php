@@ -34,7 +34,6 @@ class Controller extends \Kotchasan\Controller
       foreach ($modules as $item) {
         if (Gcms::canConfig($login, $item, 'can_config') || !Login::notDemoMode($login)) {
           Gcms::$menu->menus['modules'][$item->module]['config'] = '<a href="index.php?module=event-settings&amp;mid='.$item->id.'"><span>{LNG_Config}</span></a>';
-          Gcms::$menu->menus['modules'][$item->module]['category'] = '<a href="index.php?module=event-category&amp;mid='.$item->id.'"><span>{LNG_Category}</span></a>';
         }
         if (Gcms::canConfig($login, $item, 'can_write') || !Login::notDemoMode($login)) {
           Gcms::$menu->menus['modules'][$item->module]['setup'] = '<a href="index.php?module=event-setup&amp;mid='.$item->id.'"><span>{LNG_List of} {LNG_Event}</span></a>';

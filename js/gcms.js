@@ -269,7 +269,7 @@ function initDocumentView(id, module) {
     };
     var viewExport = function (action) {
       var hs = patt.exec(action);
-      window.open(WEB_URL + 'print.php?action=' + hs[1] + '&id=' + hs[2] + '&module=' + hs[5], 'print');
+      window.open(WEB_URL + 'export.php?action=' + hs[1] + '&id=' + hs[2] + '&module=' + hs[5], 'print');
     };
     forEach($G(id).elems('a'), function (item, index) {
       if (patt.exec(item.className)) {

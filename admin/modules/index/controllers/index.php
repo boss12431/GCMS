@@ -80,7 +80,7 @@ class Controller extends \Gcms\Controller
       // title
       '/{TITLE}/' => $main->title(),
       // class สำหรับ body
-      '/{BODYCLASS}/' => $bodyclass
+      '/{BODYCLASS}/' => $bodyclass,
     ));
     if ($login) {
       Gcms::$view->setContents(array(

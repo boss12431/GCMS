@@ -42,6 +42,7 @@ class Model extends \Kotchasan\Model
    * บันทึกข้อมูล config ของโมดูล
    *
    * @param Request $request
+   * @return JSON
    */
   public function submit(Request $request)
   {

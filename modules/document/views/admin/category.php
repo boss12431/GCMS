@@ -53,7 +53,6 @@ class View extends \Gcms\Adminview
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/index/model/admincategory/action?mid='.$index->module_id,
       'actionCallback' => 'dataTableActionCallback',
-      'actionConfirm' => 'confirmAction',
       'actions' => array(
         array(
           'id' => 'action',
@@ -114,7 +113,6 @@ class View extends \Gcms\Adminview
         )
       ),
     ));
-    $table->script('initListCategory("index");');
     return $table->render();
   }
 
@@ -130,7 +128,7 @@ class View extends \Gcms\Adminview
   {
     $item['topic'] = $this->unserialize($item['topic']);
     $item['detail'] = $this->unserialize($item['detail']);
-    $item['category_id'] = '<label><input type=text class=number size=5 id=categoryid_'.$item['module_id'].'_'.$item['id'].' value="'.$item['category_id'].'" title="{LNG_Edit}"></label>';
+    $item['category_id'] = '<label><input type=text class=number size=5 id=categoryid_'.$item['id'].' value="'.$item['category_id'].'" title="{LNG_Edit}"></label>';
     $item['published'] = '<a id=published_'.$item['id'].' class="icon-published'.$item['published'].'" title="'.$this->publisheds[$item['published']].'"></a>';
     $config = @unserialize($item['config']);
     if (is_array($config)) {

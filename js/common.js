@@ -489,16 +489,6 @@ var doLoginSubmit = function (xhr) {
     alert(xhr.responseText);
   }
 };
-function initCalendarRange(minDate, maxDate) {
-  if ($E(minDate) && $E(maxDate)) {
-    $G(minDate).addEvent('change', function () {
-      $E(maxDate).calendar.minDate(this.value);
-    });
-    $G(maxDate).addEvent('change', function () {
-      $E(minDate).calendar.maxDate(this.value);
-    });
-  }
-}
 var createLikeButton;
 function initWeb(module) {
   module = module ? module + '/' : '';

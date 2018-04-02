@@ -71,7 +71,6 @@ class View extends \Gcms\Adminview
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/personnel/model/admin/setup/action?mid='.$index->module_id,
       'actionCallback' => 'dataTableActionCallback',
-      'actionConfirm' => 'confirmAction',
       'actions' => array(
         array(
           'id' => 'action',
@@ -149,7 +148,6 @@ class View extends \Gcms\Adminview
     ));
     // save cookie
     setcookie('personnel_perPage', $table->perPage, time() + 3600 * 24 * 365, '/');
-    $table->script('initPersonnel();');
     return $table->render();
   }
 
@@ -168,7 +166,7 @@ class View extends \Gcms\Adminview
     $thumb = is_file(ROOT_PATH.DATA_FOLDER.'personnel/'.$item['picture']) ? WEB_URL.DATA_FOLDER.'personnel/'.$item['picture'] : '../modules/personnel/img/noimage.jpg';
     $item['picture'] = '<img src="'.$thumb.'" style="max-height:50px" alt=thumbnail>';
     $item['category_id'] = empty($item['category_id']) || empty($this->categories[$item['category_id']]) ? '{LNG_Uncategorized}' : $this->categories[$item['category_id']];
-    $item['order'] = '<label><input type=text size=5 id=order_'.$item['module_id'].'_'.$item['id'].' value="'.$item['order'].'"></label>';
+    $item['order'] = '<label><input type=text size=5 id=order_'.$item['id'].' value="'.$item['order'].'"></label>';
     return $item;
   }
 }
