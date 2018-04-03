@@ -46,7 +46,7 @@ class Model extends \Kotchasan\KBase
             $config->languages = explode(',', str_replace('check_', '', $post['data']));
           } else {
             // จัดลำดับภาษา
-            $languages = $config->languages;
+            $languages = empty($config->languages) ? Language::installedLanguage() : $config->languages;
             $config->languages = array();
             foreach (explode(',', str_replace('L_', '', $post['data'])) as $lng) {
               if (in_array($lng, $languages)) {
@@ -82,7 +82,7 @@ class Model extends \Kotchasan\KBase
               $ret['location'] = 'reload';
             }
           } else {
-            $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), 'settings/config.php');
+            $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), 'config');
           }
         }
       }

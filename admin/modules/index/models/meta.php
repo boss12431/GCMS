@@ -84,7 +84,7 @@ class Model extends \Kotchasan\KBase
             $request->removeToken();
           } else {
             // ไม่สามารถบันทึก config ได้
-            $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), 'settings/config.php');
+            $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), 'config');
           }
         }
       }

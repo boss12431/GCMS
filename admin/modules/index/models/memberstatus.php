@@ -110,7 +110,7 @@ class Model extends \Kotchasan\KBase
         }
         // save config
         if ($save && !Config::save($config, CONFIG)) {
-          $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), 'settings/config.php');
+          $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), 'config');
         }
       }
     }

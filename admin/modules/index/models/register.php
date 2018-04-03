@@ -65,7 +65,11 @@ class Model extends \Kotchasan\Model
         }
         if (empty($ret)) {
           // ใช้ชื่อจาก email
-          list($displayname, $domain) = explode('@', $save['email']);
+          if (preg_match('/^(.*)(\@(.*))?$/', $save['email'], $match)) {
+            $displayname = $match[1];
+          } else {
+            $displayname = $save['email'];
+          }
           $save['name'] = ucwords($displayname);
           $save['displayname'] = $displayname;
           $a = 1;
@@ -120,7 +124,7 @@ class Model extends \Kotchasan\Model
     if (!isset($save['country'])) {
       $save['country'] = 'TH';
     }
-    $save['permission'] = empty($permission) ? '' : implode(',', $permission);
+    $save['permission'] = empty($permission) ? '' : ','.implode(',', $permission).',';
     $save['active'] = 1;
     $save['ban'] = 0;
     $save['create_date'] = time();
