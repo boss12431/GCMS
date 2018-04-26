@@ -15,7 +15,7 @@ use \Kotchasan\Validator;
 use \Kotchasan\Email;
 
 /**
- * ส่งอีเมล์ (admin)
+ * ส่งอีเมล (admin)
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,7 +25,7 @@ class Model extends \Kotchasan\Model
 {
 
   /**
-   * ลิสต์รายชื่ออีเมล์ของแอดมิน
+   * ลิสต์รายชื่ออีเมลของแอดมิน
    */
   public static function findAdmin()
   {
@@ -102,13 +102,13 @@ class Model extends \Kotchasan\Model
         if (empty($ret)) {
           $err = Email::send($save['reciever'], $save['from'], $save['subject'], $save['detail']);
           if (!$err->error()) {
-            // ส่งอีเมล์สำเร็จ
+            // ส่งอีเมลสำเร็จ
             $ret['alert'] = Language::get('Your message was sent successfully');
             $ret['location'] = 'reload';
             // เคลียร์
             $request->removeToken();
           } else {
-            // ข้อผิดพลาดการส่งอีเมล์
+            // ข้อผิดพลาดการส่งอีเมล
             $ret['alert'] = $err->getErrorMessage();
           }
         }

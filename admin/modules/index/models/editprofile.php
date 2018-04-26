@@ -90,17 +90,17 @@ class Model extends \Kotchasan\Model
         if ($user && ($user->id == $login['id'] || ($user->id > 1 && $login['status'] == 1))) {
           // แอดมิน สามารถแก้ไขได้ทุกอย่าง
           $isAdmin = $login['status'] == 1;
-          // ไม่ใช่แอดมิน ใช้อีเมล์เดิมจากฐานข้อมูล
+          // ไม่ใช่แอดมิน ใช้อีเมลเดิมจากฐานข้อมูล
           if (!$isAdmin && $user->id > 0) {
             $save['email'] = $user->email;
           }
           // ตรวจสอบค่าที่ส่งมา
           $requirePassword = false;
-          // อีเมล์
+          // อีเมล
           if (empty($save['email'])) {
             $ret['ret_register_email'] = 'this';
           } else {
-            // ตรวจสอบอีเมล์ซ้ำ
+            // ตรวจสอบอีเมลซ้ำ
             $search = $db->first($user_table, array('email', $save['email']));
             if ($search !== false && $user->id != $search->id) {
               $ret['ret_register_email'] = Language::replace('This :name already exist', array(':name' => Language::get('Email')));

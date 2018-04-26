@@ -35,9 +35,9 @@ class View extends \Gcms\View
         $_SESSION['email'] = $request->post('email')->url();
       }
       if (empty($_SESSION['email']) || empty($_SESSION['password'])) {
-        return createClass('Index\Install2\View')->render($request, 'กรุณากรอก '.(empty($_SESSION['email']) ? 'ที่อยู่อีเมล์' : 'รหัสผ่าน'));
+        return createClass('Index\Install2\View')->render($request, 'กรุณากรอก '.(empty($_SESSION['email']) ? 'ที่อยู่อีเมล' : 'รหัสผ่าน'));
       } elseif (!Validator::email($_SESSION['email'])) {
-        return createClass('Index\Install2\View')->render($request, 'ที่อยู่อีเมล์ ไม่ถูกต้อง');
+        return createClass('Index\Install2\View')->render($request, 'ที่อยู่อีเมล ไม่ถูกต้อง');
       } elseif (!preg_match('/^[A-Za-z0-9]{4,}$/u', $_SESSION['password'])) {
         return createClass('Index\Install2\View')->render($request, 'รหัสผ่าน ภาษาอังกฤษและตัวเลข ไม่น้อยกว่า 4 หลัก');
       } else {

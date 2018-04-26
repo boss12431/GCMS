@@ -25,8 +25,8 @@ class Model extends \Kotchasan\Model
 {
 
   /**
-   * อ่านอีเมล์ที่แก้ไข
-   * id = 0 สร้างอีเมล์ใหม่
+   * อ่านอีเมลที่แก้ไข
+   * id = 0 สร้างอีเมลใหม่
    *
    * @param int $id
    * @return object|bool คืนค่าข้อมูล object ไม่พบคืนค่า false
@@ -93,7 +93,7 @@ class Model extends \Kotchasan\Model
             // บันทึกเป็นรายการใหม่
             $id = 0;
           } else {
-            // มีอีเมล์ในภาษาที่เลือกอยู่แล้ว
+            // มีอีเมลในภาษาที่เลือกอยู่แล้ว
             $ret['ret_language'] = Language::get('This entry is in selected language');
           }
         }

@@ -188,7 +188,7 @@ class Model extends \Kotchasan\Model
               if ($request->post('send_mail')->toInt() == 1) {
                 $query = $this->db()->createQuery()->select('name', 'email')->from('user')->where(array('status', $reciever));
                 foreach ($query->toArray()->execute() as $item) {
-                  // ส่งอีเมล์
+                  // ส่งอีเมล
                   $replace = array(
                     '/%NAME%/' => $item['name'],
                     '/%URL%/' => WEB_URL.'index.php?module='.$index->module

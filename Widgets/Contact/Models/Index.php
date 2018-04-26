@@ -24,7 +24,7 @@ class Index extends \Kotchasan\Model
 {
 
   /**
-   * ส่งอีเมล์ ตาม ID
+   * ส่งอีเมล ตาม ID
    *
    * @param Request $request
    */
@@ -76,16 +76,16 @@ class Index extends \Kotchasan\Model
       } elseif ($detail == '') {
         $ret['ret_mail_detail'] = 'Please fill in';
       } else {
-        // ส่งอีเมล์
+        // ส่งอีเมล
         $err = Email::send($reciever, $sender, $subject, $detail);
         if (!$err->error()) {
-          // ส่งอีเมล์สำเร็จ
+          // ส่งอีเมลสำเร็จ
           $ret['alert'] = Language::get('Your message was sent successfully');
           $ret['location'] = WEB_URL.'index.php';
           // เคลียร์
           $request->removeToken();
         } else {
-          // ข้อผิดพลาดการส่งอีเมล์
+          // ข้อผิดพลาดการส่งอีเมล
           echo $err->getErrorMessage();
         }
       }

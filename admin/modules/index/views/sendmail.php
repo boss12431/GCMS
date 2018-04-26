@@ -15,7 +15,7 @@ use \Gcms\Login;
 use \Kotchasan\Template;
 
 /**
- * ฟอร์มส่งอีเมล์จากแอดมิน
+ * ฟอร์มส่งอีเมลจากแอดมิน
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,7 +25,7 @@ class View extends \Gcms\Adminview
 {
 
   /**
-   * ฟอร์มส่งอีเมล์ sendmail.php
+   * ฟอร์มส่งอีเมล sendmail.php
    *
    * @param Request $request
    * @param array $login

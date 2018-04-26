@@ -12,7 +12,7 @@ use \Kotchasan\Html;
 use \Gcms\Login;
 
 /**
- * ฟอร์มส่งอีเมล์ถึงแอดมิน
+ * ฟอร์มส่งอีเมลถึงแอดมิน
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *

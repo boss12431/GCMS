@@ -25,7 +25,7 @@ class View extends \Gcms\View
 {
 
   /**
-   * หน้าส่งอีเมล์
+   * หน้าส่งอีเมล
    * สมาชิกส่งจดหมายถึงสมาชิก และ แอดมิน
    *
    * @param Request $request
@@ -73,7 +73,7 @@ class View extends \Gcms\View
         return $index;
       }
     }
-    // ไม่สามารถส่งอีเมล์ได้
+    // ไม่สามารถส่งอีเมลได้
     $message = Language::get('Unable to send e-mail, Because you can not send e-mail to yourself or can not find the email address of the recipient.');
     return createClass('Index\Error\Controller')->init('member', $message);
   }

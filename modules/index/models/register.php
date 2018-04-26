@@ -57,13 +57,13 @@ class Model extends \Kotchasan\Model
         $user_table = $this->getTableName('user');
         // database connection
         $db = $this->db();
-        // อีเมล์
+        // อีเมล
         if (empty($save['email'])) {
           $ret['ret_register_email'] = 'Please fill in';
         } elseif (!Validator::email($save['email'])) {
           $ret['ret_register_email'] = Language::replace('Invalid :name', array(':name' => Language::get('Email')));
         } else {
-          // ตรวจสอบอีเมล์ซ้ำ
+          // ตรวจสอบอีเมลซ้ำ
           $search = $db->first($user_table, array('email', $save['email']));
           if ($search !== false) {
             $ret['ret_register_email'] = Language::replace('This :name already exist', array(':name' => Language::get('Email')));
@@ -128,7 +128,7 @@ class Model extends \Kotchasan\Model
           $save['activatecode'] = empty(self::$cfg->user_activate) ? '' : Text::rndname(32);
           // บันทึกลงฐานข้อมูล
           $save['id'] = $db->insert($user_table, $save);
-          // ส่งอีเมล์
+          // ส่งอีเมล
           $replace = array(
             '/%EMAIL%/' => $save['email'],
             '/%PASSWORD%/' => $password,

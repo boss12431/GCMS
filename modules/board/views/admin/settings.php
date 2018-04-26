@@ -94,7 +94,7 @@ class View extends \Gcms\Adminview
       'labelClass' => 'g-input icon-published1',
       'itemClass' => 'item',
       'label' => '{LNG_Number}',
-      'comment' => '{LNG_Set the number of entries displayed per page}',
+      'comment' => '{LNG_Set the number of entries displayed}',
       'value' => $index->list_per_page
     ));
     // new_date

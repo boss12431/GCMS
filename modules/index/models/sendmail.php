@@ -24,7 +24,7 @@ class Model extends \Kotchasan\Model
 {
 
   /**
-   * ส่งอีเมล์ ตาม ID
+   * ส่งอีเมล ตาม ID
    *
    * @param Request $request
    */
@@ -51,16 +51,16 @@ class Model extends \Kotchasan\Model
       } elseif ($detail == '') {
         $ret['ret_mail_detail'] = 'Please fill in';
       } else {
-        // ส่งอีเมล์
+        // ส่งอีเมล
         $err = Email::send($reciever, $login['email'].(empty($login['displayname']) ? '' : '<'.$login['displayname'].'>'), $subject, $detail);
         if (!$err->error()) {
           // เคลียร์
           $request->removeToken();
-          // ส่งอีเมล์สำเร็จ
+          // ส่งอีเมลสำเร็จ
           $ret['alert'] = Language::get('Your message was sent successfully');
           $ret['location'] = WEB_URL.'index.php';
         } else {
-          // ข้อผิดพลาดการส่งอีเมล์
+          // ข้อผิดพลาดการส่งอีเมล
           echo $err->getErrorMessage();
         }
       }
@@ -73,7 +73,7 @@ class Model extends \Kotchasan\Model
 
   /**
    * อ่านข้อมูลสมาชิก สำหรับผู้รับจดหมาย
-   * ไม่สามารถอ่านอีเมล์ตัวเองได้
+   * ไม่สามารถอ่านอีเมลตัวเองได้
    *
    * @param Request $request
    * @param string|int $id ข้อความ "admin" หรือ ID สมาชิกผู้รับ

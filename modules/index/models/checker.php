@@ -24,7 +24,7 @@ class Model extends \Kotchasan\Model
 {
 
   /**
-   * ฟังก์ชั่นตรวจสอบความถูกต้องของอีเมล์ และตรวจสอบอีเมล์ซ้ำ
+   * ฟังก์ชั่นตรวจสอบความถูกต้องของอีเมล และตรวจสอบอีเมลซ้ำ
    */
   public function email()
   {
@@ -35,7 +35,7 @@ class Model extends \Kotchasan\Model
       if (!Validator::email($value)) {
         echo Language::replace('Invalid :name', array(':name' => Language::get('Email')));
       } else {
-        // ตรวจสอบอีเมล์ซ้ำ
+        // ตรวจสอบอีเมลซ้ำ
         $search = $this->db()->first($this->getTableName('user'), array('email', $value));
         if ($search && ($id == 0 || $id != $search->id)) {
           echo Language::replace('This :name already exist', array(':name' => Language::get('Email')));

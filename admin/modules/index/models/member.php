@@ -144,7 +144,7 @@ class Model extends \Kotchasan\Model
             // คืนค่า
             $ret['location'] = 'reload';
           } elseif ($action === 'activate' || $action === 'sendpassword') {
-            // ขอรหัสผ่านใหม่ ส่งอีเมล์ยืนยันสมาชิก
+            // ขอรหัสผ่านใหม่ ส่งอีเมลยืนยันสมาชิก
             $query = $this->db()->createQuery()
               ->select('id', 'email', 'activatecode')
               ->from('user')
@@ -158,7 +158,7 @@ class Model extends \Kotchasan\Model
             foreach ($query->execute() as $item) {
               // รหัสผ่านใหม่
               $password = \Kotchasan\Text::rndname(6);
-              // ข้อมูลอีเมล์
+              // ข้อมูลอีเมล
               $replace = array(
                 '/%PASSWORD%/' => $password,
                 '/%EMAIL%/' => $item['email']
@@ -186,7 +186,7 @@ class Model extends \Kotchasan\Model
                 $msgs[] = $err->getErrorMessage();
               }
               if (empty($msgs)) {
-                // ส่งอีเมล์ สำเร็จ
+                // ส่งอีเมล สำเร็จ
                 $ret['alert'] = Language::get('Your message was sent successfully');
               } else {
                 // มีข้อผิดพลาด

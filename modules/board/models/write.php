@@ -72,6 +72,7 @@ class Model extends \Kotchasan\Model
             // ต้องมีรายละเอียด ถ้าเป็นโพสต์ใหม่ หรือ แก้ไขและไม่มีรูป
             $requireDetail = ($id == 0 || ($id > 0 && empty($index->picture)));
             foreach ($request->getUploadedFiles() as $item => $file) {
+              /* @var $file \Kotchasan\Http\UploadedFile */
               if ($file->hasUploadFile()) {
                 $fileUpload[$item] = $file;
                 // ไม่ต้องมีรายละเอียด ถ้ามีการอัปโหลดรูปภาพมาด้วย
@@ -102,7 +103,7 @@ class Model extends \Kotchasan\Model
         } elseif ($id == 0) {
           // ใหม่
           if ($email == '') {
-            // ไม่ได้กรอกอีเมล์
+            // ไม่ได้กรอกอีเมล
             $ret['ret_board_email'] = Language::get('Please fill in').' '.Language::get('Email');
           } elseif ($password == '' && !$guest) {
             // สมาชิกเท่านั้น และ ไม่ได้กรอกรหัสผ่าน
@@ -127,16 +128,16 @@ class Model extends \Kotchasan\Model
               $post['sender'] = empty($user['displayname']) ? $user['email'] : $user['displayname'];
             }
           } elseif ($guest) {
-            // ตรวจสอบอีเมล์ซ้ำกับสมาชิก สำหรับบุคคลทั่วไป
+            // ตรวจสอบอีเมลซ้ำกับสมาชิก สำหรับบุคคลทั่วไป
             $search = $this->db()->createQuery()
               ->from('user')
               ->where(array('email', $email))
               ->first('id');
             if ($search) {
-              // พบอีเมล์ ต้องการ password
+              // พบอีเมล ต้องการ password
               $ret['ret_board_password'] = Language::get('Please fill in').' '.Language::get('Password');
             } elseif (!Validator::email($email)) {
-              // อีเมล์ไม่ถูกต้อง
+              // อีเมลไม่ถูกต้อง
               $ret['ret_board_email'] = str_replace(':name', Language::get('Email'), Language::get('Invalid :name'));
             } else {
               // guest

@@ -15,7 +15,7 @@ use \Gcms\Config;
 use \Kotchasan\Validator;
 
 /**
- * บันทึกการตั้งค่าระบบอีเมล์
+ * บันทึกการตั้งค่าระบบอีเมล
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,7 +25,7 @@ class Model extends \Kotchasan\KBase
 {
 
   /**
-   * บันทึกการตั้งค่าระบบอีเมล์ (mailserver.php)
+   * บันทึกการตั้งค่าระบบอีเมล (mailserver.php)
    *
    * @param Request $request
    */
@@ -49,7 +49,7 @@ class Model extends \Kotchasan\KBase
           'email_Username' => $request->post('email_Username')->quote(),
           'email_Password' => $request->post('email_Password')->quote()
         );
-        // อีเมล์
+        // อีเมล
         if (empty($save['noreply_email'])) {
           $ret['ret_noreply_email'] = 'Please fill in';
         } elseif (!Validator::email($save['noreply_email'])) {

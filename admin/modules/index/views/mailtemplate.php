@@ -12,7 +12,7 @@ use \Kotchasan\Http\Request;
 use \Kotchasan\DataTable;
 
 /**
- * ตารางแม่แบบอีเมล์
+ * ตารางแม่แบบอีเมล
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *

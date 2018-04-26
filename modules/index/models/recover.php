@@ -48,7 +48,7 @@ class Model extends \Kotchasan\Model
       if (empty($ret)) {
         // รหัสผ่านใหม่
         $password = Text::rndname(6);
-        // ข้อมูลอีเมล์
+        // ข้อมูลอีเมล
         $replace = array(
           '/%PASSWORD%/' => $password,
           '/%EMAIL%/' => $search['email']

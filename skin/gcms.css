@@ -288,6 +288,10 @@ img.uicon {
 .post-author ~ .post-detail {
   margin-left: 80px;
 }
+.post-detail figure:not(.center) {
+  display: table;
+  margin-bottom: 10px;
+}
 .post-author {
   float: left;
   width: 70px;

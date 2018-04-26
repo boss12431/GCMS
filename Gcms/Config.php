@@ -81,7 +81,7 @@ class Config extends \Kotchasan\Config
    */
   public $usericon_folder = 'datas/member/';
   /**
-   * สมาชิกใหม่ต้องยืนยันอีเมล์
+   * สมาชิกใหม่ต้องยืนยันอีเมล
    *
    * @var bool
    */

@@ -24,7 +24,7 @@ class Controller extends \Gcms\Controller
 {
 
   /**
-   * รายการแม่แบบอีเมล์
+   * รายการแม่แบบอีเมล
    *
    * @param Request $request
    * @return string

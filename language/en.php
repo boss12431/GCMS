@@ -37,6 +37,10 @@ return array(
     2 => 'edit the article',
     3 => 'new comments'
   ),
+  'DOWNLOAD_ACTIONS' => array(
+    0 => 'Download',
+    1 => 'Open file (know file type)'
+  ),
   'EMPTY_SEARCH_MESSAGE' => '<ul><li>make sure that the spelling correct</li><li>try changing or new phrases. synonyms</li><li>try to identify a non-specific too</li><li>specific keywords to search the most concise</li></ul>',
   'FROM_TIME' => 'from H:i',
   'IMG_LAW' => array(

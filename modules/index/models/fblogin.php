@@ -40,7 +40,7 @@ class Model extends \Kotchasan\Model
       );
       $fb_id = $request->post('id')->number();
       if (empty($save['email'])) {
-        // ไม่มีอีเมล์ ของ Facebook
+        // ไม่มีอีเมล ของ Facebook
         $ret['alert'] = Language::replace('Can not use :name account because :field is not available', array(':name' => Language::get('Facebook'), ':field' => Language::get('Email')));
       } else {
         $save['name'] = trim($save['displayname'].' '.$request->post('last_name')->topic());

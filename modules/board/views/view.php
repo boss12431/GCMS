@@ -15,7 +15,7 @@ use \Board\Index\Controller;
 use \Kotchasan\Grid;
 
 /**
- * แสดงกระทู้
+ * module=board&wbid=xxx
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *

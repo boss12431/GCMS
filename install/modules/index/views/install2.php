@@ -37,8 +37,8 @@ class View extends \Gcms\View
       if (!empty($error)) {
         $content[] = '<p class=warning>'.$error.'</p>';
       }
-      $content[] = '<p class=item><label for=email>ที่อยู่อีเมล์</label><span class="g-input icon-email"><input type=email size=70 id=email name=email maxlength=255 value="'.$email.'" autofocus required></span></p>';
-      $content[] = '<p class="comment">ที่อยู่อีเมล์สำหรับผู้ดูแลระบบสูงสุด ใช้ในการการเข้าระบบ</p>';
+      $content[] = '<p class=item><label for=email>ที่อยู่อีเมล</label><span class="g-input icon-email"><input type=email size=70 id=email name=email maxlength=255 value="'.$email.'" autofocus required></span></p>';
+      $content[] = '<p class="comment">ที่อยู่อีเมลสำหรับผู้ดูแลระบบสูงสุด ใช้ในการการเข้าระบบ</p>';
       $content[] = '<p class=item><label for=password>รหัสผ่าน</label><span class="g-input icon-password"><input type=text size=70 id=password name=password maxlength=20 value="'.$password.'" required></span></p>';
       $content[] = '<p class="row comment">ภาษาอังกฤษตัวพิมพ์เล็กและตัวเลข 4-8 หลัก</p>';
       $content[] = '<input type=hidden name=step value=3>';
