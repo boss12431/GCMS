@@ -128,11 +128,11 @@ class Login extends \Kotchasan\KBase implements LoginInterface
           // save login cookie
           $time = time() + 2592000;
           if ($login_remember == 1) {
-            setcookie('login_username', $pw->encode(self::$login_params['username']), $time, '/', null, true, true);
-            setcookie('login_password', $pw->encode(self::$login_params['password']), $time, '/', null, true, true);
-            setcookie('login_remember', $login_remember, $time, '/', null, true, true);
+            setcookie('login_username', $pw->encode(self::$login_params['username']), $time, '/', null, null, true);
+            setcookie('login_password', $pw->encode(self::$login_params['password']), $time, '/', null, null, true);
+            setcookie('login_remember', $login_remember, $time, '/', null, null, true);
           }
-          setcookie('login_id', $login_result['id'], $time, '/', null, true, true);
+          setcookie('login_id', $login_result['id'], $time, '/', null, null, true);
         }
       }
       return $login;

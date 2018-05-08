@@ -154,7 +154,7 @@ class View extends \Gcms\View
           ),
         ));
         // save cookie
-        setcookie('edocument_perPage', $table->perPage, time() + 2592000, '/', null, true, true);
+        setcookie('edocument_perPage', $table->perPage, time() + 2592000, '/', null, null, true);
         // ตาราง
         $detail = $table->render();
       } else {

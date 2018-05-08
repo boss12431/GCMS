@@ -160,8 +160,8 @@ class View extends \Gcms\Adminview
       )
     ));
     // save cookie
-    setcookie('member_perPage', $table->perPage, time() + 2592000, '/', null, true, true);
-    setcookie('member_sort', $table->sort, time() + 2592000, '/', null, true, true);
+    setcookie('member_perPage', $table->perPage, time() + 2592000, '/', null, null, true);
+    setcookie('member_sort', $table->sort, time() + 2592000, '/', null, null, true);
     // คืนค่า HTML
     return $table->render();
   }

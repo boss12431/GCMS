@@ -93,7 +93,7 @@ class View extends \Gcms\View
         )
       ));
       // save cookie
-      setcookie('edocument_perPage', $table->perPage, time() + 2592000, '/', null, true, true);
+      setcookie('edocument_perPage', $table->perPage, time() + 2592000, '/', null, null, true);
       // /edocument/report.html
       $template = Template::create('edocument', 'edocument', 'report');
       $template->add(array(
