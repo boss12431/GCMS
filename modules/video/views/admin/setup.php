@@ -125,7 +125,7 @@ class View extends \Gcms\Adminview
       ),
     ));
     // save cookie
-    setcookie('video_perPage', $table->perPage, time() + 3600 * 24 * 365, '/');
+    setcookie('video_perPage', $table->perPage, time() + 2592000, '/', null, true, true);
     return $table->render();
   }
 

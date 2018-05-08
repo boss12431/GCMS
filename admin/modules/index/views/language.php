@@ -119,8 +119,8 @@ class View extends \Gcms\Adminview
       $table->headers[$lng] ['sort'] = $lng;
     }
     // save cookie
-    setcookie('language_perPage', $table->perPage, time() + 3600 * 24 * 365, '/');
-    setcookie('language_sort', $table->sort, time() + 3600 * 24 * 365, '/');
+    setcookie('language_perPage', $table->perPage, time() + 2592000, '/', null, true, true);
+    setcookie('language_sort', $table->sort, time() + 2592000, '/', null, true, true);
     // Javascript
     $table->script('initLanguageTable("language_table");');
     // คืนค่า HTML

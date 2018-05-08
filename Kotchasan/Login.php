@@ -91,8 +91,8 @@ class Login extends \Kotchasan\KBase implements LoginInterface
       // logout ลบ session และ cookie
       unset($_SESSION['login']);
       $time = time();
-      setCookie('login_username', '', $time, '/');
-      setCookie('login_password', '', $time, '/');
+      setCookie('login_username', '', $time, '/', null, null, true);
+      setCookie('login_password', '', $time, '/', null, null, true);
       self::$login_message = Language::get('Logout successful');
     } elseif (self::$request->post('action')->toString() === 'forgot') {
       // ขอรหัสผ่านใหม่
@@ -119,8 +119,8 @@ class Login extends \Kotchasan\KBase implements LoginInterface
           // logout ลบ session และ cookie
           unset($_SESSION['login']);
           $time = time();
-          setCookie('login_username', '', $time, '/');
-          setCookie('login_password', '', $time, '/');
+          setCookie('login_username', '', $time, '/', null, null, true);
+          setCookie('login_password', '', $time, '/', null, null, true);
         } else {
           // save login session
           $login_result['password'] = self::$login_params['password'];
@@ -128,11 +128,11 @@ class Login extends \Kotchasan\KBase implements LoginInterface
           // save login cookie
           $time = time() + 2592000;
           if ($login_remember == 1) {
-            setcookie('login_username', $pw->encode(self::$login_params['username']), $time, '/');
-            setcookie('login_password', $pw->encode(self::$login_params['password']), $time, '/');
-            setcookie('login_remember', $login_remember, $time, '/');
+            setcookie('login_username', $pw->encode(self::$login_params['username']), $time, '/', null, true, true);
+            setcookie('login_password', $pw->encode(self::$login_params['password']), $time, '/', null, true, true);
+            setcookie('login_remember', $login_remember, $time, '/', null, true, true);
           }
-          setcookie('login_id', $login_result['id'], $time, '/');
+          setcookie('login_id', $login_result['id'], $time, '/', null, true, true);
         }
       }
       return $login;

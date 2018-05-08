@@ -77,7 +77,7 @@ class View extends \Gcms\Adminview
       )
     ));
     // save cookie
-    setcookie('counter_perPage', $table->perPage, time() + 3600 * 24 * 365, '/');
+    setcookie('counter_perPage', $table->perPage, time() + 2592000, '/', null, true, true);
     // คืนค่า HTML
     return $table->render();
   }
