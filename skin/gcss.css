@@ -473,9 +473,9 @@ input[type="color"] {
 input:focus,
 select:focus,
 textarea:focus {
-  box-shadow: 0 0 3px rgba(82,168,236,0.8) inset;
-  -moz-box-shadow: 0 0 3px rgba(82,168,236,0.8) inset;
-  -webkit-box-shadow: 0 0 3px rgba(82,168,236,0.8) inset;
+  box-shadow: 0 0 3px rgba(82,168,236,0.8);
+  -moz-box-shadow: 0 0 3px rgba(82,168,236,0.8);
+  -webkit-box-shadow: 0 0 3px rgba(82,168,236,0.8);
   outline: none;
 }
 input[type="file"]:focus,
@@ -686,16 +686,15 @@ td > .wlabel {
   margin-left: 1px;
   line-height: 1.9em;
 }
-input[readonly],
-select[readonly],
-textarea[readonly] {
+input[readonly]:not([data-keyboard]),
+select[readonly]:not([data-keyboard]),
+textarea[readonly]:not([data-keyboard]) {
   background-color: #F5F5F5;
   cursor: default;
 }
 input:disabled,
 select:disabled,
-textarea:disabled,
-input.gcalendar[type="text"]:disabled:disabled {
+textarea:disabled {
   color: #BBB;
   background-color: #F5F5F5;
   cursor: default;
@@ -721,6 +720,7 @@ textarea.valid,
 .install li.valid {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAK8AAACvABQqw0mAAAABh0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzT7MfTgAAAcRJREFUOI2lk7trlFEQxX9zv+vuohFRFC3sDIJCYvCBzdooNgEhCIIa0ylsQBG1sbaJFqZIEcGsgpjCRgnW/gUR90V8EAtRNBBZNm50H9/jfmORBytZZWWnnJlzOHNmRlSVbsJ0hQbs/zQ/KaRnQHds8vZkLvY9fwcgnY7wKJee9qMvw6oR1tuJanwgc2zuQ0cKpt6cvl4PF4dd7AAP35WL1pjvGxRkc0MHgejy4Zn5tdzj/Lm+H835UhAtIWIBPinJgdvp98vQYmI2f+FE1S+Xlv1yaSp//shqWpaaC89qQY1QUwTOBmGcHFwDryuYfD2SqtQ/1hphxQD0JHfXdvX0Hq82Fs5Um9/GYo0AwYi5cufk22zreBbgc2XWDyOZhMRVUOp+eUszMIXQNWwjdAgWEV7dH5z7A7zBg9EX/ROqXBMBxQGCYFDwBdv74Gzu6z8JAEam+ydcvEICgIIx5tbTS4XxdhtqewdDDw+NO8cNVcUYKb7MFAfagdc9sCJbgW1AIgZP4d7Rm/v3JrcnTi3OVu7KqOzzIAE4IAICoBqp/hRVxYokgdQqoedAgF9gN0MUeSs1BeIWkmak6nd8yn+Lrr/xN4yjzwehHQW9AAAAAElFTkSuQmCC) !important;
 }
+.show[type="submit"],
 input.wait,
 select.wait,
 textarea.wait,
@@ -1019,6 +1019,7 @@ html .button:before,
   background-color: #DDD;
   color: #999;
 }
+.show[type="submit"],
 .button.wait {
   color: transparent;
   text-shadow: none;
@@ -2037,6 +2038,7 @@ html[dir="rtl"] .tab > ul > li:first-child > a {
 }
 /* GInput */
 div.ginput {
+  font-size: 16px;
   display: table;
   margin: 0 auto;
   background-color: #FFF;
@@ -2044,16 +2046,16 @@ div.ginput {
   -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
   text-align: center;
-  width: 17.5em;
+  width: 15em;
 }
 div.ginput a {
   font-size: 1em;
   cursor: pointer;
   color: #333;
   float: left;
-  width: 2.5em;
-  height: 2.5em;
-  line-height: 2.5em;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
   margin: 0.5em;
   border-width: 1px;
   border-style: solid;
@@ -2802,9 +2804,12 @@ aside.tip {
   color: white;
   font-weight: bold;
   float: right;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
   margin-left: 15px;
   font-size: 22px;
-  line-height: 20px;
   cursor: pointer;
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
@@ -3482,7 +3487,7 @@ td.buttons .button:last-child {
     float: none;
     display: block;
   }
-  body.responsive .menu {
+  body.responsive .menu_bg {
     padding: 0;
     width: 100%;
     border-style: none;
@@ -3667,7 +3672,7 @@ td.buttons .button:last-child {
     margin: 0 !important;
     max-width: 100%;
   }
-  body.responsive input.toggle-menu:checked ~ #slidemenu_content .menu {
+  body.responsive input.toggle-menu:checked ~ #slidemenu_content .menu_bg {
     position: absolute;
     top: 0;
     left: 0;
@@ -3895,6 +3900,9 @@ td.buttons .button:last-child {
     margin-left: 5px;
   }
   /* responsive table.responsive-v */
+  body.responsive table.responsive-v {
+    border-style: none none none solid;
+  }
   body.responsive table.responsive-v > thead {
     display: none;
   }
@@ -3937,6 +3945,12 @@ td.buttons .button:last-child {
     border-style: solid solid none;
     border-width: 1px;
     white-space: nowrap;
+  }
+  body.responsive table.responsive-v > tbody > tr > th,
+  body.responsive table.responsive-v > tbody > tr > th:before {
+    background-color: #DDD;
+    border-style: solid none;
+    border-color: rgba(0,0,0,0.1);
   }
   body.responsive table.data.responsive-v > tbody > tr > :before {
     background-color: #f4f9fe;

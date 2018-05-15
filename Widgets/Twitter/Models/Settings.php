@@ -14,7 +14,7 @@ use \Kotchasan\Language;
 use \Gcms\Config;
 
 /**
- * บันทึกการตั้งค่าเว็บไซต์
+ * บันทึกการตั้งค่า
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -23,6 +23,11 @@ use \Gcms\Config;
 class Settings extends \Kotchasan\KBase
 {
 
+  /**
+   * ค่าติดตั้งเรื่มต้น
+   *
+   * @return array
+   */
   public static function defaultSettings()
   {
     return array(
@@ -47,6 +52,7 @@ class Settings extends \Kotchasan\KBase
     // session, token, member, can_config, ไม่ใช่สมาชิกตัวอย่าง
     if ($request->initSession() && $request->isSafe() && $login = Login::adminAccess()) {
       if (Login::checkPermission($login, 'can_config') && Login::notDemoMode($login)) {
+        // ค่าที่ส่งมา
         $save = array(
           'id' => $request->post('twitter_id')->number(),
           'user' => $request->post('twitter_user')->username(),

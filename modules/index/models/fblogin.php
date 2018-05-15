@@ -35,8 +35,7 @@ class Model extends \Kotchasan\Model
       // ข้อมูลที่ส่งมา
       $save = array(
         'displayname' => $request->post('first_name')->topic(),
-        'email' => $request->post('email')->url(),
-        'website' => $request->post('link')->url(),
+        'email' => $request->post('email')->url()
       );
       $fb_id = $request->post('id')->number();
       if (empty($save['email'])) {

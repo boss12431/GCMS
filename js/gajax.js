@@ -1384,13 +1384,15 @@ window.$K = (function () {
       }
       if (parent) {
         if (value && value != '') {
-          var div = document.createElement('div');
-          div.innerHTML = value;
+          var div = document.createElement('div'),
+            innerDiv = document.createElement('div');
           div.className = 'alert ' + (className || 'message');
           var span = document.createElement('span');
           span.innerHTML = '&times;';
           span.className = 'closebtn';
           div.appendChild(span);
+          div.appendChild(innerDiv);
+          innerDiv.innerHTML = value;
           parent.appendChild(div);
         }
         forEach(parent.getElementsByClassName('closebtn'), function () {
@@ -1715,7 +1717,8 @@ window.$K = (function () {
         frm.set('action', frmaction);
       }
       this.loader = null;
-      this.loading = loading || 'wait';
+      this.submitButton = frm.querySelector('[type=submit]');
+      this.loading = loading || this.submitButton || 'wait';
       this.center = center;
       this.onbeforesubmit = Object.isFunction(onbeforesubmit) ? onbeforesubmit : $K.resultFunction;
       var self = this;
@@ -1856,22 +1859,15 @@ window.$K = (function () {
       return io;
     },
     showLoading: function () {
+      if (this.submitButton) {
+        this.submitButton.disabled = true;
+      }
       if (this.loading && $E(this.loading)) {
         this.loading = $G(this.loading);
         if (this.center) {
           this.loading.center();
         }
         this.loading.addClass('show');
-      } else {
-        var self = this;
-        forEach(this.form.getElementsByTagName('input'), function () {
-          if (this.getAttribute('type').toLowerCase() == 'submit') {
-            self.loader = $G(this);
-          }
-        });
-        if (this.loader) {
-          this.loader.addClass('wait');
-        }
       }
       return this;
     },
@@ -1880,6 +1876,9 @@ window.$K = (function () {
         this.loading.removeClass('show');
       } else if (this.loader) {
         this.loader.removeClass('wait');
+      }
+      if (this.submitButton) {
+        this.submitButton.disabled = false;
       }
       return this;
     },
@@ -2851,7 +2850,6 @@ window.$K = (function () {
     initialize: function (id, onchanged) {
       this.input = $G(id);
       this.input.addClass('gcalendar');
-      this.input.set('readonly', true);
       this.onchanged = onchanged || $K.emptyFunction;
       this.mdate = null;
       this.xdate = null;
@@ -2883,9 +2881,7 @@ window.$K = (function () {
           self._toogle(e);
         } else if (key == 37 || key == 39) {
           self.moveDate(key == 39 ? 1 : -1);
-          if (self.calendar.style.display != 'none') {
-            self._draw();
-          }
+          self._draw();
           GEvent.stop(e);
         } else if (key == 38 || key == 40) {
           if (GEvent.isShiftKey(e)) {
@@ -2895,14 +2891,17 @@ window.$K = (function () {
           } else {
             self.moveDate(key == 40 ? 7 : -7);
           }
-          if (self.calendar.style.display != 'none') {
-            self._draw();
-          }
+          self._draw();
           GEvent.stop(e);
         } else if (key == 8) {
           self.setDate(null);
           GEvent.stop(e);
+        } else {
+          GEvent.stop(e);
         }
+      });
+      this.input.addEvent('paste', function (e) {
+        GEvent.stop(e);
       });
       $G(document.body).addEvent('click', function (e) {
         if (!$G(GEvent.element(e)).hasClass('gcalendar')) {

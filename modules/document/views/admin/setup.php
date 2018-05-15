@@ -34,7 +34,7 @@ class View extends \Gcms\Adminview
   private $categories;
 
   /**
-   * ตารางรายการ
+   * ตาราง บทความ
    *
    * @param Request $request
    * @param object $index
@@ -74,7 +74,6 @@ class View extends \Gcms\Adminview
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/document/model/admin/setup/action?mid='.$index->module_id,
       'actionCallback' => 'dataTableActionCallback',
-      'actionConfirm' => 'confirmAction',
       'actions' => array(
         array(
           'id' => 'action',

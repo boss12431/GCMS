@@ -83,6 +83,12 @@ function defaultSubmit(ds) {
       }
       modal.show(val);
       val.evalScript();
+    } else if (prop == 'elem') {
+      el = $E(val);
+      if (el) {
+        el.className = ds.class;
+        el.title = ds.title;
+      }
     } else if (prop == 'location') {
       _location = val;
     } else if (prop == 'url') {
@@ -567,11 +573,11 @@ function initWeb(module) {
       });
     }
   });
-  if (typeof use_ajax != 'undefined' && use_ajax == 1) {
+  if (typeof use_ajax != 'undefined' && use_ajax == 1 && $E('content')) {
     loader = new GLoader(WEB_URL + module + 'loader.php/index/controller/loader/index', function (xhr) {
-      var scroll_to = 'scroll-to';
-      var content = $G('content');
-      var datas = xhr.responseText.toJSON();
+      var scroll_to = 'scroll-to',
+        content = $G('content'),
+        datas = xhr.responseText.toJSON();
       if (datas) {
         for (var prop in datas) {
           var value = datas[prop];

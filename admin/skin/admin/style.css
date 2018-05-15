@@ -65,6 +65,7 @@ a:hover {
 }
 .language-menu {
   position: relative;
+  text-align: right;
 }
 .header .language-menu {
   text-align: center;
@@ -312,7 +313,7 @@ section > header {
   background-repeat: no-repeat;
   display: inline-block;
   min-width: 5em;
-  height: 2.3em;
+  height: 2.299em;
   line-height: 2.3em;
   vertical-align: middle;
   text-align: center;
@@ -333,6 +334,7 @@ section > header {
   cursor: pointer;
   padding: 0 2px;
   min-width: 10em;
+  position: relative;
 }
 .editinplace:hover:after {
   padding: 0 5px;

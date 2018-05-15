@@ -11,7 +11,7 @@ function fbLogin() {
     if (response.authResponse) {
       var accessToken = response.authResponse.accessToken;
       var uid = response.authResponse.userID;
-      FB.api('/' + uid, {access_token: accessToken, fields: 'id,first_name,last_name,email,link'}, function (response) {
+      FB.api('/' + uid, {access_token: accessToken, fields: 'id,first_name,last_name,email'}, function (response) {
         if (!response.error) {
           var q = new Array();
           if ($E('token')) {

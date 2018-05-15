@@ -50,7 +50,7 @@ class Controller extends \Gcms\Controller
       ));
       $ul = $breadcrumbs->add('ul');
       $ul->appendChild('<li><span class="icon-documents">{LNG_Module}</span></li>');
-      $ul->appendChild('<li><a href="{BACKURL?module=content-settings&mid='.$index->module_id.'}">'.ucfirst($index->module).'</a></li>');
+      $ul->appendChild('<li><a href="{BACKURL?module=document-settings&mid='.$index->module_id.'}">'.ucfirst($index->module).'</a></li>');
       $ul->appendChild('<li><span>{LNG_Contents}</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h2 class="icon-list">'.$this->title.'</h2>'

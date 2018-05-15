@@ -18,7 +18,7 @@ use \Kotchasan\Language;
 use \Kotchasan\Currency;
 
 /**
- * แสดงบทความ
+ * module=product&id=xxx
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
