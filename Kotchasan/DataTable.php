@@ -144,6 +144,13 @@ class DataTable extends \Kotchasan\KBase
    */
   private $onBeforeDelete;
   /**
+   * ชื่อฟังก์ชั่น Javascript เรียกเมื่อมีการลบแถวแล้ว (pmButton)
+   * function(){}
+   *
+   * @var string
+   */
+  private $onDelete;
+  /**
    * ชื่อฟังก์ชั่น Javascript เรียกเมื่อมีการเพิ่มแถวใหม่ (pmButton)
    * ฟังก์ชั่นนี้จะมีการเรียกใช้ก่อนเรียกใช้ $onInitRow
    * function(tr)
@@ -718,6 +725,7 @@ class DataTable extends \Kotchasan\KBase
         'actionCallback' => $this->actionCallback,
         'actionConfirm' => $this->actionConfirm,
         'onBeforeDelete' => $this->onBeforeDelete,
+        'onDelete' => $this->onDelete,
         'onInitRow' => $this->onInitRow,
         'onAddRow' => $this->onAddRow,
         'pmButton' => $this->pmButton,
@@ -749,6 +757,17 @@ class DataTable extends \Kotchasan\KBase
         $prop = (object)array(
             'id' => $this->id.'_'.$id
         );
+        $buttons = array();
+        if (!empty($this->buttons)) {
+          foreach ($this->buttons as $btn => $attributes) {
+            if (isset($this->onCreateButton)) {
+              $attributes = call_user_func($this->onCreateButton, $btn, $attributes, $items);
+            }
+            if ($attributes && $attributes !== false) {
+              $buttons[] = $this->button($btn, $attributes);
+            }
+          }
+        }
         if (isset($this->onRow)) {
           $items = call_user_func($this->onRow, $items, $o, $prop);
         }
@@ -783,15 +802,6 @@ class DataTable extends \Kotchasan\KBase
           $i++;
         }
         if (!empty($this->buttons)) {
-          $buttons = array();
-          foreach ($this->buttons as $btn => $attributes) {
-            if (isset($this->onCreateButton)) {
-              $attributes = call_user_func($this->onCreateButton, $btn, $attributes, $items);
-            }
-            if ($attributes && $attributes !== false) {
-              $buttons[] = $this->button($btn, $attributes);
-            }
-          }
           if (!empty($buttons)) {
             $module_id = isset($items['module_id']) ? $items['module_id'] : 0;
             $patt = array();

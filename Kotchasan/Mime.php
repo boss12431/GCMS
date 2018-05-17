@@ -1010,7 +1010,7 @@ class Mime
    * @param string|array $exts
    * @assert (array('jpg','gif','png')) [==]  array('jpg' => 'image/jpeg', 'gif' => 'image/gif', 'png' => 'image/png')
    * @assert ('jpg') [==] 'image/jpeg'
-   * @return string|array
+   * @return string|array|null คืนค่า null ถ้าไม่พบ
    */
   public static function get($exts)
   {
@@ -1018,14 +1018,15 @@ class Mime
     if (is_array($exts)) {
       $result = array();
       foreach ($exts as $ext) {
-        if (!empty($mime_types[$ext])) {
+        if (isset($mime_types[$ext])) {
           $result[$ext] = $mime_types[$ext];
         }
       }
       return $result;
-    } else {
+    } elseif (isset($mime_types[$exts])) {
       return $mime_types[$exts];
     }
+    return null;
   }
 
   /**

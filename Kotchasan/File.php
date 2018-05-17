@@ -40,17 +40,19 @@ class File
    */
   public static function listFiles($dir, &$result, $filter = array())
   {
-    $f = opendir($dir);
-    while (false !== ($text = readdir($f))) {
-      if ($text !== '.' && $text !== '..') {
-        if (is_dir($dir.$text)) {
-          self::listFiles($dir.$text.'/', $result, $filter);
-        } elseif (empty($filter) || in_array(self::ext($text), $filter)) {
-          $result[] = $dir.$text;
+    $f = @opendir($dir);
+    if ($f) {
+      while (false !== ($text = readdir($f))) {
+        if ($text !== '.' && $text !== '..') {
+          if (is_dir($dir.$text)) {
+            self::listFiles($dir.$text.'/', $result, $filter);
+          } elseif (empty($filter) || in_array(self::ext($text), $filter)) {
+            $result[] = $dir.$text;
+          }
         }
       }
+      closedir($f);
     }
-    closedir($f);
   }
 
   /**

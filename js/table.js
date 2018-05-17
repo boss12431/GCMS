@@ -17,6 +17,7 @@
         actionCallback: null,
         actionConfirm: null,
         onBeforeDelete: null,
+        onDelete: null,
         onAddRow: null,
         onInitRow: null,
         pmButton: false,
@@ -39,6 +40,12 @@
         this.options.onBeforeDelete = window[this.options.onBeforeDelete];
         if (!Object.isFunction(this.options.onBeforeDelete)) {
           this.options.onBeforeDelete = null;
+        }
+      }
+      if (this.options.onDelete) {
+        this.options.onDelete = window[this.options.onDelete];
+        if (!Object.isFunction(this.options.onDelete)) {
+          this.options.onDelete = null;
         }
       }
       if (this.options.onInitRow) {
@@ -306,9 +313,8 @@
             if (tbody.elems('tr').length > 1) {
               tr.remove();
               temp.initTBODY(tbody, false);
-            } else {
-              if (temp.options.onAddRow) {
-                temp.options.onAddRow.call(temp, tr);
+              if (temp.options.onDelete) {
+                temp.options.onDelete.call(temp);
               }
             }
           }
