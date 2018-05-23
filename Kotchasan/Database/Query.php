@@ -531,7 +531,7 @@ abstract class Query extends \Kotchasan\Database\Db
         $q = $this->aliasName($key);
         $qs = array();
         $vs = array();
-        foreach ($value as $i => $item) {
+        foreach ($value as $a => $item) {
           if (empty($item)) {
             $qs[] = is_string($item) ? "'$item'" : $item;
           } elseif (is_string($item)) {
@@ -540,12 +540,14 @@ abstract class Query extends \Kotchasan\Database\Db
             } elseif (preg_match('/^`([a-zA-Z0-9_\-]+)`$/', $item, $match)) {
               $qs[] = "`$match[1]`";
             } else {
-              $qs[] = $q.$i;
-              $vs[$q.$i] = $item;
+              $k = $q.($i === null ? '' : $i).$a;
+              $qs[] = $k;
+              $vs[$k] = $item;
             }
           } else {
-            $qs[] = $q.$i;
-            $vs[$q.$i] = $item;
+            $k = $q.($i === null ? '' : $i).$a;
+            $qs[] = $k;
+            $vs[$k] = $item;
           }
         }
         $result = array($key.' '.$operator.' ('.implode(', ', $qs).')', $vs);

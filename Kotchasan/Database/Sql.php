@@ -666,6 +666,19 @@ class Sql
   }
 
   /**
+   * ฟังก์ชั่นสร้างคำสั่ง IS NULL
+   *
+   * @param string $column_name
+   * @return \self
+   *
+   * @assert ('U.id')->text() [==] "U.`id` IS NULL"
+   */
+  public static function ISNULL($column_name)
+  {
+    return self::create(self::fieldName($column_name).' IS NULL');
+  }
+
+  /**
    * ฟังก์ชั่นสำหรับรับค่าเป็นสตริงค์เท่านั้น
    * ผลลัพท์จะถูกครอบด้วย '' (ฟันหนู)
    *

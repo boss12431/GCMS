@@ -218,9 +218,9 @@ class DataTable extends \Kotchasan\KBase
    * จำนวนรายการต่อหน้า
    * ถ้ากำหนดรายการนี้จะแสดงรายการแบ่งหน้า และตัวเลือกแสดงรายการต่อหน้า
    *
-   * @var int
+   * @var int|null
    */
-  public $perPage = 0;
+  public $perPage = null;
   /**
    * ชื่อคอลัมน์ที่ใช้เรียงลำดับ
    *
@@ -250,6 +250,14 @@ class DataTable extends \Kotchasan\KBase
    * @var array array($this, methodName)
    */
   private $onCreateButton;
+  /**
+   * method เรียกเมื่อต้องการสร้าง header
+   * คืนค่า tag tr ที่อยู่ภายใน header
+   * function()
+   *
+   * @var array array($this, methodName)
+   */
+  private $onCreateHeader;
   /**
    * method เรียกเมื่อต้องการสร้าง footer
    * คืนค่า tag tr ที่อยู่ภายใน footer
@@ -297,6 +305,12 @@ class DataTable extends \Kotchasan\KBase
    * @var array
    */
   public $entriesList = array(10, 20, 30, 40, 50, 100);
+  /**
+   * แสดง Query ออกทางจอภาพ
+   *
+   * @var boolean
+   */
+  protected $debug = false;
 
   /**
    * Initial Class
@@ -315,7 +329,7 @@ class DataTable extends \Kotchasan\KBase
       $this->uri = Uri::createFromUri($this->uri);
     }
     // รายการต่อหน้า มาจากการเลือกภายในตาราง
-    if ($this->perPage > 0) {
+    if ($this->perPage !== null) {
       $count = self::$request->globals(array('POST', 'GET'), 'count')->toInt();
       if (in_array($count, $this->entriesList)) {
         $this->perPage = $count;
@@ -378,7 +392,6 @@ class DataTable extends \Kotchasan\KBase
       }
       $this->headers = $headers;
     }
-    $this->sort = self::$request->globals(array('POST', 'GET'), 'sort', $this->sort)->toString();
     if (!empty($this->sort)) {
       $this->uri = $this->uri->withParams(array('sort' => $this->sort));
     }
@@ -428,11 +441,15 @@ class DataTable extends \Kotchasan\KBase
     $content = array('<div class="datatable" id="'.$this->id.'">');
     // form
     $form = array();
-    if ($this->perPage > 0) {
+    if ($this->perPage !== null) {
       $entries = Language::get('entries');
       $options = array();
       foreach ($this->entriesList as $c) {
-        $options[$c] = $c.' '.$entries;
+        if ($c == 0) {
+          $options[0] = Language::get('all items');
+        } else {
+          $options[$c] = $c.' '.$entries;
+        }
       }
       $form[] = $this->addFilter(array(
         'name' => 'count',
@@ -581,8 +598,10 @@ class DataTable extends \Kotchasan\KBase
       }
     }
     if (isset($this->model)) {
-      // debug Query
-      //\Kotchasan::debug($this->model->toArray()->limit($this->perPage, $start)->text());
+      if ($this->debug) {
+        // debug Query
+        \Kotchasan::debug($this->model->toArray()->limit($this->perPage, $start)->text());
+      }
       // query ข้อมูล
       $this->datas = $this->model->toArray()->limit($this->perPage, $start)->execute();
       // รายการสุดท้าย
@@ -597,33 +616,38 @@ class DataTable extends \Kotchasan\KBase
     } else {
       $end = 0;
     }
-    if (!empty($this->headers)) {
-      // property ของ ตาราง
-      $prop = array();
-      $c = array();
-      if (isset($this->class)) {
-        $c[] = $this->class;
-      }
-      if ($this->border) {
-        $c[] = 'border';
-      }
-      if ($this->responsive) {
-        $c[] = 'responsive-v';
-      }
-      if ($this->fullWidth) {
-        $c[] = 'fullwidth';
-      }
-      if (sizeof($c) > 0) {
-        $prop[] = ' class="'.implode(' ', $c).'"';
-      }
-      // table
-      $content[] = '<div class="tablebody"><table'.implode('', $prop).'>';
-      if ($this->showCaption) {
-        $content[] = '<caption>'.$caption.'</caption>';
-      }
+
+    // property ของ ตาราง
+    $prop = array();
+    $c = array();
+    if (isset($this->class)) {
+      $c[] = $this->class;
+    }
+    if ($this->border) {
+      $c[] = 'border';
+    }
+    if ($this->responsive) {
+      $c[] = 'responsive-v';
+    }
+    if ($this->fullWidth) {
+      $c[] = 'fullwidth';
+    }
+    if (sizeof($c) > 0) {
+      $prop[] = ' class="'.implode(' ', $c).'"';
+    }
+    // table
+    $content[] = '<div class="tablebody"><table'.implode('', $prop).'>';
+    if ($this->showCaption) {
+      $content[] = '<caption>'.$caption.'</caption>';
+    }
+    $colCount = 0;
+    // table header
+    $thead = null;
+    if (isset($this->onCreateHeader)) {
+      $thead = call_user_func($this->onCreateHeader);
+    } elseif (!empty($this->headers)) {
       $row = array();
       $i = 0;
-      $colCount = 0;
       $colspan = 0;
       foreach ($this->headers as $key => $attributes) {
         if ($colspan === 0) {
@@ -666,55 +690,58 @@ class DataTable extends \Kotchasan\KBase
       } else {
         $colspan--;
       }
-      // thead
-      $content[] = '<thead><tr>'.implode('', $row).'</tr></thead>';
-      // tbody
-      if (!empty($this->datas)) {
-        $content[] = '<tbody>'.$this->tbody($start, $end).'</tbody>';
-      }
-      // tfoot
-      $tfoot = null;
-      if (isset($this->onCreateFooter)) {
-        $tfoot = call_user_func($this->onCreateFooter);
-      } elseif (!$this->hideCheckbox && $this->checkCol > -1) {
-        $tfoot = '<tr>';
-        $tfoot .= '<td colspan="'.$this->checkCol.'"></td>';
-        $tfoot .= '<td class="check-column"><a class="checkall icon-uncheck"></a></td>';
-        $tfoot .= '<td colspan="'.($colCount - $this->checkCol - 1).'"></td>';
-        $tfoot .= '</tr>';
-      }
-      if (!empty($tfoot)) {
-        $content[] = '<tfoot>'.$tfoot.'</tfoot>';
-      }
-      $content[] = '</table></div>';
-      $table_nav = array();
-      if (!empty($this->actions) && is_array($this->actions)) {
-        foreach ($this->actions as $item) {
-          $table_nav[] = $this->addAction($item);
-        }
-      }
-      if (!empty($this->addNew) && is_array($this->addNew)) {
-        $prop = array();
-        foreach ($this->addNew as $k => $v) {
-          if ($k != 'text') {
-            $prop[$k] = $k.'="'.$v.'"';
-          }
-        }
-        if (preg_match('/^((.*)\s+)?(icon-[a-z0-9\-_]+)(\s+(.*))?$/', $this->addNew['class'], $match)) {
-          $prop['class'] = 'class="'.trim($match[2].' '.(isset($match[5]) ? $match[5] : '')).'"';
-          $table_nav[] = '<a '.implode(' ', $prop).'><span class="'.$match[3].'">'.(isset($this->addNew['text']) ? $this->addNew['text'] : '').'</span></a>';
-        } else {
-          $table_nav[] = '<a '.implode(' ', $prop).'>'.(isset($this->addNew['text']) ? $this->addNew['text'] : '').'</a>';
-        }
-      }
-      if (!empty($table_nav)) {
-        $content[] = '<div class="table_nav action">'.implode('', $table_nav).'</div>';
-      }
-      // แบ่งหน้า
-      if ($this->perPage > 0) {
-        $content[] = '<div class="splitpage">'.$this->uri->pagination($totalpage, $page).'</div>';
+      $thead = '<tr>'.implode('', $row).'</tr>';
+    }
+    if (!empty($thead) && is_string($thead)) {
+      $content[] = '<thead>'.$thead.'</thead>';
+    }
+    // tbody
+    if (!empty($this->datas)) {
+      $content[] = '<tbody>'.$this->tbody($start, $end).'</tbody>';
+    }
+    // tfoot
+    $tfoot = null;
+    if (isset($this->onCreateFooter)) {
+      $tfoot = call_user_func($this->onCreateFooter);
+    } elseif (!$this->hideCheckbox && $this->checkCol > -1) {
+      $tfoot = '<tr>';
+      $tfoot .= '<td colspan="'.$this->checkCol.'"></td>';
+      $tfoot .= '<td class="check-column"><a class="checkall icon-uncheck"></a></td>';
+      $tfoot .= '<td colspan="'.($colCount - $this->checkCol - 1).'"></td>';
+      $tfoot .= '</tr>';
+    }
+    if (!empty($tfoot) && is_string($tfoot)) {
+      $content[] = '<tfoot>'.$tfoot.'</tfoot>';
+    }
+    $content[] = '</table></div>';
+    $table_nav = array();
+    if (!empty($this->actions) && is_array($this->actions)) {
+      foreach ($this->actions as $item) {
+        $table_nav[] = $this->addAction($item);
       }
     }
+    if (!empty($this->addNew) && is_array($this->addNew)) {
+      $prop = array();
+      foreach ($this->addNew as $k => $v) {
+        if ($k != 'text') {
+          $prop[$k] = $k.'="'.$v.'"';
+        }
+      }
+      if (preg_match('/^((.*)\s+)?(icon-[a-z0-9\-_]+)(\s+(.*))?$/', $this->addNew['class'], $match)) {
+        $prop['class'] = 'class="'.trim($match[2].' '.(isset($match[5]) ? $match[5] : '')).'"';
+        $table_nav[] = '<a '.implode(' ', $prop).'><span class="'.$match[3].'">'.(isset($this->addNew['text']) ? $this->addNew['text'] : '').'</span></a>';
+      } else {
+        $table_nav[] = '<a '.implode(' ', $prop).'>'.(isset($this->addNew['text']) ? $this->addNew['text'] : '').'</a>';
+      }
+    }
+    if (!empty($table_nav)) {
+      $content[] = '<div class="table_nav action">'.implode('', $table_nav).'</div>';
+    }
+    // แบ่งหน้า
+    if ($this->perPage > 0) {
+      $content[] = '<div class="splitpage">'.$this->uri->pagination($totalpage, $page).'</div>';
+    }
+
     $content[] = '</div>';
     if ($this->enableJavascript) {
       $script = array(
