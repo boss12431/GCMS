@@ -223,10 +223,11 @@ class DataTable extends \Kotchasan\KBase
   public $perPage = null;
   /**
    * ชื่อคอลัมน์ที่ใช้เรียงลำดับ
+   * ค่าเริ่มต้น null สำหรับการรับค่าอัตโนมัติ
    *
-   * @var string
+   * @var string|null
    */
-  public $sort;
+  public $sort = null;
   /**
    * ข้อมูลการเรียงลำดับที่กำลังใช้งานอยู่
    *
@@ -391,6 +392,9 @@ class DataTable extends \Kotchasan\KBase
         }
       }
       $this->headers = $headers;
+    }
+    if ($this->sort === null) {
+      $this->sort = self::$request->globals(array('POST', 'GET'), 'sort')->toString();
     }
     if (!empty($this->sort)) {
       $this->uri = $this->uri->withParams(array('sort' => $this->sort));

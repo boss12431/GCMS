@@ -257,11 +257,17 @@ mark {
 .term6 {
   background-color: #4CAF50;
 }
-.term9 {
+.term7 {
   background-color: #B71C1C;
 }
+.term8 {
+  background-color: #1F618D;
+}
+.term9 {
+  background-color: #76448A;
+}
 .term10 {
-  background-color: #00F;
+  background-color: #117864;
 }
 /* layout */
 .gcss-wrapper {
@@ -3898,6 +3904,10 @@ td.buttons .button:last-child {
   body.responsive table.responsive > tbody > tr > :first-child {
     display: block;
     background-color: #EEE;
+    border-style: solid none;
+  }
+  body.responsive table.responsive > tbody > tr:not(:first-child) > :first-child {
+    border-top-color: inherit;
   }
   body.responsive table.responsive [data-text]:after {
     content: attr(data-text);
@@ -3945,6 +3955,7 @@ td.buttons .button:last-child {
     display: table-cell;
     padding: 5px 10px;
     background-color: #EEE;
+    border-color: inherit;
     border-style: solid solid none;
     border-width: 1px;
     white-space: nowrap;
@@ -3953,6 +3964,7 @@ td.buttons .button:last-child {
   body.responsive table.responsive-v > tbody > tr > th:before {
     background-color: #DDD;
     border-style: solid none;
+    border-color: inherit;
   }
   body.responsive table.data.responsive-v > tbody > tr > :before {
     background-color: #f4f9fe;

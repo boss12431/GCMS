@@ -605,16 +605,12 @@ table.border {
 }
 table.database,
 table.config_table {
-  border-style: solid;
+  border-style: solid solid none solid;
   border-width: 1px;
 }
 table.database th {
   background-color: #F9F9F9;
   border-right-style: solid;
-}
-table.database > tbody > tr:last-child > td,
-table.config_table > tbody > tr:last-child > * {
-  border-bottom-style: none;
 }
 table.config_table > tbody > tr > td, .no {
   text-align: center;
@@ -960,5 +956,9 @@ div#install li.invalid {
   }
   .inline > .writetab {
     min-width: 30px;
+  }
+  table.database,
+  table.config_table {
+    border-bottom-style: solid;
   }
 }
