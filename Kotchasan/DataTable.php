@@ -376,6 +376,8 @@ class DataTable extends \Kotchasan\KBase
         }
       }
     }
+    // สำหรับตรวจสอบว่าสามารถเรียงลำดับได้หรือไม่ ตาม header ที่ส่งมา
+    $autoSort = false;
     // จัดการ header, ตรวจสอบกับค่ากำหนดมา เรียงลำดับ header ตาม columns
     if (!empty($this->columns)) {
       $headers = array();
@@ -386,6 +388,9 @@ class DataTable extends \Kotchasan\KBase
             if (!isset($headers[$field]['text'])) {
               $headers[$field]['text'] = $field;
             }
+            if (isset($headers[$field]['sort'])) {
+              $autoSort = true;
+            }
           } else {
             $headers[$field]['text'] = $field;
           }
@@ -393,8 +398,9 @@ class DataTable extends \Kotchasan\KBase
       }
       $this->headers = $headers;
     }
-    if ($this->sort === null) {
-      $this->sort = self::$request->globals(array('POST', 'GET'), 'sort')->toString();
+    // รับค่าการเรียงลำดับถ้ามีการกำหนด sort ไว้
+    if ($autoSort) {
+      $this->sort = self::$request->globals(array('POST', 'GET'), 'sort', $this->sort)->toString();
     }
     if (!empty($this->sort)) {
       $this->uri = $this->uri->withParams(array('sort' => $this->sort));
