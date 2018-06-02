@@ -76,10 +76,12 @@ class Tab
             $prop[] = 'href="'.$this->urls[0].'?'.$this->urls[1].'&amp;tab='.$item['id'].'"';
           }
           $prop[] = 'id="tab_'.$item['id'].'"';
-          $prop[] = 'target="_self"';
         }
       } else {
         $prop[] = 'href="'.$item['url'].'"';
+      }
+      if (isset($item['target'])) {
+        $prop[] = 'target="'.$item['target'].'"';
       }
       if ($select == $item['id'] || ($i == 0 && $select == '')) {
         $prop[] = 'class="select"';

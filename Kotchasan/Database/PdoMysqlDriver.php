@@ -277,13 +277,13 @@ class PdoMysqlDriver extends Driver
       } elseif (isset($sqls['delete'])) {
         $sql = 'DELETE FROM '.$sqls['delete'];
       }
-      if (isset($sqls['set'])) {
-        $sql .= ' SET '.implode(', ', $sqls['set']);
-      }
       if (isset($sqls['join'])) {
         foreach ($sqls['join'] AS $join) {
           $sql .= $join;
         }
+      }
+      if (isset($sqls['set'])) {
+        $sql .= ' SET '.implode(', ', $sqls['set']);
       }
       if (isset($sqls['where'])) {
         $sql .= ' WHERE '.$sqls['where'];

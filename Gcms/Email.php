@@ -45,7 +45,9 @@ class Email extends \Kotchasan\Email
       ->toArray()
       ->first('from_email', 'copy_to', 'subject', 'detail');
     if ($email === false) {
-      return Language::get('email template not found');
+      $obj = new static;
+      $obj->error[404] = Language::get('email template not found');
+      return $obj;
     } else {
       // ผู้ส่ง
       $from = empty($email['from_email']) ? self::$cfg->noreply_email : $email['from_email'];

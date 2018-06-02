@@ -101,6 +101,10 @@
         window.history.go(-1);
       }
     },
+    setParams: function (query_string) {
+      var locs = window.location.toString().split('#');
+      window.location = locs[0] + '#' + query_string;
+    },
     reload: function () {
       var locs = window.location.toString().split('#'),
         ret = new Array();

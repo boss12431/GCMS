@@ -43,6 +43,7 @@ class View extends \Gcms\View
         '/{ID}/' => $item->id,
         '/{NO}/' => $item->document_no,
         '/{NAME}/' => $item->topic,
+        '/{UID}/' => $item->sender_id,
         '/{EXT}/' => $item->ext,
         '/{SENDER}/' => $item->displayname == '' ? $item->email : $item->displayname,
         '/{STATUS}/' => $item->status,

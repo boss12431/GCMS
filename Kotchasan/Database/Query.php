@@ -296,7 +296,7 @@ abstract class Query extends \Kotchasan\Database\Db
       }
     } elseif (is_numeric($name)) {
       $ret = $name;
-    } else {
+    } elseif (is_string($name)) {
       $name = trim($name);
       if (strpos($name, '(') !== false && preg_match('/^(.*?)(\s{0,}(as)?\s{0,}`?([a-z0-9_]+)`?)?$/i', $name, $match)) {
         // (...) as pos
@@ -313,6 +313,9 @@ abstract class Query extends \Kotchasan\Database\Db
       } else {
         $ret = $name == '*' ? '*' : '`'.$name.'`';
       }
+    } else {
+      // พารามิเตอร์ ไม่ถูกต้อง
+      throw new \InvalidArgumentException('Invalid arguments in fieldName');
     }
     return $ret;
   }
@@ -580,6 +583,15 @@ abstract class Query extends \Kotchasan\Database\Db
         $q = ':'.preg_replace('/[\.`]/', '', strtolower($key)).($i === null ? '' : $i);
         $result = array($key.' '.$operator.' '.$q, array($q => $value));
       }
+    } elseif ($params instanceof QueryBuilder) {
+      $values = $params->getValues();
+      if (empty($values)) {
+        $result = $key.' '.$operator.' ('.$params->text().')';
+      } else {
+        $result = array($key.' '.$operator.' ('.$params->text().')', $values);
+      }
+    } elseif ($params instanceof Sql) {
+      $result = $params->text();
     } else {
       $result = $params;
     }

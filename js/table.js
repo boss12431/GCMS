@@ -179,6 +179,36 @@
         $G(temp.input_search).addEvent('change', doSearchChanged);
         doSearchChanged.call(temp);
       }
+      if (loader) {
+        forEach(this.table.querySelectorAll('form.table_nav'), function () {
+          this.onsubmit = function () {
+            var urls = this.action.split('?'),
+              obj = new Object;
+            if (urls[1]) {
+              forEach(urls[1].split('&'), function () {
+                var hs = this.split('=');
+                if (hs.length == 2 && hs[1] != '') {
+                  obj[hs[0]] = hs[1];
+                }
+              });
+              forEach(this.querySelectorAll('input,select'), function () {
+                obj[this.name] = this.value;
+              });
+              var q = new Array();
+              for (var prop in obj) {
+                if (prop == 'search') {
+                  q.push(prop + '=' + encodeURIComponent(obj[prop]));
+                } else if (prop != 'time') {
+                  q.push(prop + '=' + obj[prop]);
+                }
+              }
+              q.push('time=' + new Date().getTime());
+              loader.setParams(q.join('&'));
+            }
+            return false;
+          };
+        });
+      }
     },
     callAction: function (el, action) {
       var hs = this.options.action.split('?');

@@ -134,9 +134,16 @@ function defaultSubmit(ds) {
           var label = el.findLabel();
           if (label) {
             t = label.innerHTML.strip_tags();
-            if (t != '') {
-              val += ' ' + t;
+          } else {
+            if (typeof el.placeholder != 'undefined') {
+              t = el.placeholder.strip_tags();
             }
+            if (t == '') {
+              t = el.title.strip_tags();
+            }
+          }
+          if (t != '') {
+            val += ' ' + t;
           }
         } else if (val == 'this') {
           if (typeof el.placeholder != 'undefined') {
@@ -282,14 +289,6 @@ function checkPassword() {
     Repassword.Validator.valid();
   } else {
     this.Validator.invalid(this.Validator.title);
-  }
-}
-function checkAntispam() {
-  var value = this.value;
-  if (value.length > 3) {
-    return 'value=' + value + '&id=' + $E('antispam_id').value;
-  } else {
-    this.invalid(this.placeholder);
   }
 }
 function checkIdcard() {

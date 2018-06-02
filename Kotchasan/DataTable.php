@@ -976,12 +976,14 @@ class DataTable extends \Kotchasan\KBase
     } else {
       // link, button
       $prop = array();
-      if (empty($match[3])) {
-        $text = $item['text'];
-        $prop[] = 'class="'.$item['class'].'"';
-      } else {
-        $text = '<span class="'.$match[3].'">'.$item['text'].'</span>';
-        $prop[] = 'class="'.$match[2].'"';
+      $text = isset($item['text']) ? $item['text'] : '';
+      if (isset($item['class'])) {
+        if (empty($match[3])) {
+          $prop[] = 'class="'.$item['class'].'"';
+        } else {
+          $text = '<span class="'.$match[3].'">'.$text.'</span>';
+          $prop[] = 'class="'.$match[2].'"';
+        }
       }
       foreach ($item as $k => $v) {
         if ($k != 'class' && $k != 'text') {
