@@ -2,6 +2,7 @@
 
 .htaccess
 .gitignore
+.vscode
 robots.txt
 datas/
 settings/
