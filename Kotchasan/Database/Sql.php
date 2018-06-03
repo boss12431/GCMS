@@ -475,6 +475,51 @@ class Sql
   }
 
   /**
+   * แยกชั่วโมงออกจากคอลัมน์ชนิด DATETIME
+   *
+   * @param string $column_name
+   * @param string|null $alias ชื่อรองที่ต้องการ ถ้าไม่ระบุไม่มีชื่อรอง
+   * @return \static
+   *
+   * @assert ('create_date')->text() [==] 'HOUR(`create_date`)'
+   * @assert ('create_date', 'date')->text() [==] 'HOUR(`create_date`) AS `date`'
+   */
+  public static function HOUR($column_name, $alias = null)
+  {
+    return self::create('HOUR('.self::fieldName($column_name).')'.($alias ? " AS `$alias`" : ''));
+  }
+
+  /**
+   * แยกนาทีออกจากคอลัมน์ชนิด DATETIME
+   *
+   * @param string $column_name
+   * @param string|null $alias ชื่อรองที่ต้องการ ถ้าไม่ระบุไม่มีชื่อรอง
+   * @return \static
+   *
+   * @assert ('create_date')->text() [==] 'MINUTE(`create_date`)'
+   * @assert ('create_date', 'date')->text() [==] 'MINUTE(`create_date`) AS `date`'
+   */
+  public static function MINUTE($column_name, $alias = null)
+  {
+    return self::create('MINUTE('.self::fieldName($column_name).')'.($alias ? " AS `$alias`" : ''));
+  }
+
+  /**
+   * แยกวินาทีออกจากคอลัมน์ชนิด DATETIME
+   *
+   * @param string $column_name
+   * @param string|null $alias ชื่อรองที่ต้องการ ถ้าไม่ระบุไม่มีชื่อรอง
+   * @return \static
+   *
+   * @assert ('create_date')->text() [==] 'SECOND(`create_date`)'
+   * @assert ('create_date', 'date')->text() [==] 'SECOND(`create_date`) AS `date`'
+   */
+  public static function SECOND($column_name, $alias = null)
+  {
+    return self::create('SECOND('.self::fieldName($column_name).')'.($alias ? " AS `$alias`" : ''));
+  }
+
+  /**
    * จัดรูปแบบของวันที่ตอนแสดงผล
    *
    * @param string $column_name

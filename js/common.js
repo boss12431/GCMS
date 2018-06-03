@@ -96,7 +96,7 @@ function defaultSubmit(ds) {
       _location = val;
     } else if (prop == 'open') {
       window.setTimeout(function () {
-        window.open(val);
+        window.open(val.replace(/&amp;/g, '&'));
       }, 1);
     } else if (prop == 'tab') {
       initWriteTab("accordient_menu", val);

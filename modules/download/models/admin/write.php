@@ -14,7 +14,6 @@ use \Gcms\Gcms;
 use \Gcms\Login;
 use \Kotchasan\ArrayTool;
 use \Kotchasan\File;
-use \Kotchasan\Text;
 
 /**
  * อ่านข้อมูลโมดูล
@@ -124,9 +123,9 @@ class Model extends \Kotchasan\Model
                     $ret['ret_name'] = 'this';
                   } else {
                     // อัปโหลด
-                    $save['file'] = DATA_FOLDER.'download/'.Text::rndname(10).'.'.$save['ext'];
+                    $save['file'] = DATA_FOLDER.'download/'.uniqid().'.'.$save['ext'];
                     while (file_exists(ROOT_PATH.$save['file'])) {
-                      $save['file'] = DATA_FOLDER.'download/'.Text::rndname(10).'.'.$save['ext'];
+                      $save['file'] = DATA_FOLDER.'download/'.uniqid().'.'.$save['ext'];
                     }
                     try {
                       $file->moveTo(ROOT_PATH.$save['file']);

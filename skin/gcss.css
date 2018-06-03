@@ -235,6 +235,7 @@ mark {
   border-radius: 3px;
   padding: 0 0.4em;
   text-shadow: none;
+  white-space: nowrap;
 }
 .term0 {
   background-color: #4A5DB9;

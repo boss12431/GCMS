@@ -27,10 +27,7 @@ class View extends \Gcms\Adminview
     $l = sizeof($list);
     foreach ($list as $i => $item) {
       list($y, $m, $d) = explode('-', $item['date']);
-      $d = (int)$d;
-      if (is_file(ROOT_PATH.DATA_FOLDER.'counter/'.(int)$y.'/'.(int)$m.'/'.$d.'.dat')) {
-        $d = '<a href="index.php?module=report&amp;date='.$item['date'].'">'.$d.'</a>';
-      }
+      $d = '<a href="index.php?module=report&amp;date='.$item['date'].'">'.(int)$d.'</a>';
       $c = $i > $l - 13 ? $i > $l - 7 ? '' : 'mobile' : 'tablet';
       $thead[] = '<th class='.$c.'>'.$d.'</th>';
       $tbody[] = '<td class='.$c.'>'.number_format($item['pages_view']).'</td>';

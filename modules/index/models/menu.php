@@ -8,8 +8,8 @@
 
 namespace Index\Menu;
 
-use \Kotchasan\Language;
 use \Kotchasan\Database\Sql;
+use \Kotchasan\Language;
 
 /**
  * คลาสสำหรับโหลดรายการเมนูจากฐานข้อมูลของ GCMS
@@ -52,7 +52,7 @@ class Model extends \Kotchasan\Model
       'U.menu_target',
       'U.alias',
       'U.published',
-      Sql::create("(CASE U.`parent` WHEN 'MAINMENU' THEN 0 WHEN 'SIDEMENU' THEN 1 ELSE 2 END ) AS `pos`")
+      Sql::create("(CASE U.`parent` WHEN 'MAINMENU' THEN 0 WHEN 'SIDEMENU' THEN 1 ELSE 2 END ) AS `pos`"),
     );
     $query = $this->db()->createQuery()
       ->select($select)
@@ -62,7 +62,7 @@ class Model extends \Kotchasan\Model
       ->cacheOn()
       ->toArray();
     // จัดลำดับเมนูตามระดับของเมนู
-    foreach ($query->execute() AS $i => $item) {
+    foreach ($query->execute() as $i => $item) {
       $menu_obj = (object)$item;
       $this->menus[] = $menu_obj;
       if ($item['level'] == 0) {

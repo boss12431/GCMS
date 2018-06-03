@@ -78,8 +78,9 @@ class Model extends \Index\Upgrade\Model
     } else {
       $content[] = '<li class="correct">Updated database <b>'.$table.'</b> complete...</li>';
     }
+    $content[] = '<li class="correct">Upgrade to Version <b>13.0.0</b> complete.</li>';
     return (object)array(
-        'content' => '<li class="correct">Upgrade to Version <b>13.0.0</b> complete.</li>',
+        'content' => implode('', $content),
         'version' => '13.0.0'
     );
   }

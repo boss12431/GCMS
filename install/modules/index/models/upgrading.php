@@ -33,9 +33,9 @@ class Model extends \Kotchasan\Model
     } elseif ($version < '13.0.0') {
       // อัปเกรดเป็น 13.0.0
       return \Index\Upgrade1300\Model::upgrade($db);
-    } elseif ($version < '13.1.0') {
-      // อัปเกรดเป็น 13.1.0
-      return \Index\Upgrade1310\Model::upgrade($db);
+    } elseif ($version < '13.2.0') {
+      // อัปเกรดเป็น 13.2.0
+      return \Index\Upgrade1320\Model::upgrade($db);
     }
   }
 }

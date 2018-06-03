@@ -1,14 +1,16 @@
-body, li {
+body,
+li {
   line-height: 1.8;
 }
 .thumbview .description {
   height: 5.4em;
 }
 .menu_bg_color {
-  border-color: rgba(0,0,0,0.1);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 /* font button, language button */
-.font_size, a[id^='lang_'] {
+.font_size,
+a[id^="lang_"] {
   color: inherit;
   margin: 0 5px;
   display: inline-block;
@@ -18,7 +20,7 @@ body, li {
   width: 2em;
   height: 2em;
   line-height: 2em;
-  background-color: rgba(0,0,0,0.05);
+  background-color: rgba(0, 0, 0, 0.05);
   background-repeat: no-repeat;
   background-position: center;
   -webkit-border-radius: 50em;
@@ -30,14 +32,17 @@ body, li {
   -ms-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
 }
-a[id^='lang_']:hover, a[id^='lang_']:focus, .font_size:hover, .font_size:focus {
-  background-color: rgba(0,0,0,0.2);
+a[id^="lang_"]:hover,
+a[id^="lang_"]:focus,
+.font_size:hover,
+.font_size:focus {
+  background-color: rgba(0, 0, 0, 0.2);
   color: inherit;
 }
 /* homepage */
 .content {
-  border-color: #DDD;
-  border-color: rgba(0,0,0,0.1);
+  border-color: #ddd;
+  border-color: rgba(0, 0, 0, 0.1);
 }
 .member_section,
 .bdr_content {
@@ -53,7 +58,8 @@ a[id^='lang_']:hover, a[id^='lang_']:focus, .font_size:hover, .font_size:focus {
 .header h1 {
   font-size: 4em;
 }
-header p, footer p {
+header p,
+footer p {
   margin: 0;
 }
 .header h1 > a {
@@ -87,10 +93,10 @@ time {
 }
 .count,
 .no {
-  color: #007FAE;
+  color: #007fae;
 }
 .ip {
-  color: #7E57C2;
+  color: #7e57c2;
 }
 .asp,
 .icon-upload:before {
@@ -98,7 +104,7 @@ time {
 }
 .comments,
 .icon-edit:before {
-  color: #259B24;
+  color: #259b24;
 }
 .xml,
 .icon-published1:before {
@@ -107,22 +113,22 @@ time {
 .visited,
 .css,
 .icon-loading:before {
-  color: #24B6D5;
+  color: #24b6d5;
 }
 .reply,
 .reply1:before {
-  color: #FD971F;
+  color: #fd971f;
 }
 .html,
 .icon-widgets:before,
 .icon-unpin:before,
 .icon-pin:before {
-  color: #E91E63;
+  color: #e91e63;
 }
 .sql,
 .tags,
 .icon-subcategory:before {
-  color: #03A9F4;
+  color: #03a9f4;
 }
 .htaccess,
 .icon-unlock:before,
@@ -133,19 +139,19 @@ time {
 .icon-valid:before,
 .access:before {
   font-style: normal;
-  color: #FF5722;
+  color: #ff5722;
 }
 span.icon-sex-f:before {
-  color: #F480D1;
+  color: #f480d1;
 }
 span.icon-sex-m:before {
-  color: #36C;
+  color: #36c;
 }
 .icon-quote:before {
-  color: #FF7E57;
+  color: #ff7e57;
 }
 .icon-print:before {
-  color: #4488BB;
+  color: #4488bb;
 }
 .icon-published0:before,
 .reply0:before,
@@ -153,7 +159,7 @@ span.icon-sex-m:before {
 .icon-thumbnail:before,
 .value0:before,
 .disabled:before {
-  color: #CCC;
+  color: #ccc;
 }
 .new:after,
 .update:after,
@@ -171,24 +177,24 @@ span.icon-sex-m:before {
   -webkit-border-radius: 3px;
 }
 .new:after {
-  content: 'new';
-  background-color: #FF8400;
-  color: #FFF;
+  content: "new";
+  background-color: #ff8400;
+  color: #fff;
 }
 .update:after {
-  content: 'update';
-  background-color: #FFFF00;
+  content: "update";
+  background-color: #ffff00;
   color: #000;
 }
 .hot:after {
-  content: 'hot!';
-  background-color: #F00;
-  color: #FFF;
+  content: "hot!";
+  background-color: #f00;
+  color: #fff;
 }
 .recommend:after {
-  content: 'cool';
-  background-color: #259B24;
-  color: #FFF;
+  content: "cool";
+  background-color: #259b24;
+  color: #fff;
 }
 /* header */
 .header {
@@ -246,8 +252,8 @@ span.icon-sex-m:before {
 }
 .counter-detail > .col {
   text-align: left;
-  background-color: #F9F9F9;
-  background-color: rgba(0,0,0,0.02);
+  background-color: #f9f9f9;
+  background-color: rgba(0, 0, 0, 0.02);
 }
 /* Login Form */
 .login p {
@@ -265,8 +271,8 @@ span.icon-sex-m:before {
   border-width: 1px;
   border-style: solid;
   border-color: inherit;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.5) inset;
-  background-color: #F9F9F9;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  background-color: #f9f9f9;
   border-radius: 0 3px 3px 3px;
   -moz-border-radius: 0 3px 3px 3px;
   -webkit-border-radius: 0 3px 3px 3px;
@@ -385,8 +391,8 @@ header.list h2 select {
   position: relative;
 }
 .gbanner:hover .btnnav {
-  color: #FFF;
-  text-shadow: 1px 1px 0 rgba(0,0,0,0.7);
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7);
 }
 .gbanner .btnnav {
   font-size: 1.3em;
@@ -406,7 +412,7 @@ header.list h2 select {
 .gbanner .button_gbanner > a {
   position: relative;
   display: inline-block;
-  background-color: rgba(255,0,0,0.3);
+  background-color: rgba(255, 0, 0, 0.3);
   cursor: pointer;
   font-size: 10px;
   width: 1em;
@@ -429,8 +435,8 @@ header.list h2 select {
 .gbanner figcaption {
   padding: 0.5em;
   position: absolute;
-  background-color: rgba(0,0,0,0.5);
-  color: #FFF;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
   left: 0;
   bottom: -3em;
   line-height: 2em;
@@ -445,10 +451,10 @@ header.list h2 select {
   bottom: 0;
 }
 .gbanner figcaption a {
-  color: #FFF;
+  color: #fff;
 }
 .gbanner a.current {
-  background-color: rgba(255,0,0,0.8);
+  background-color: rgba(255, 0, 0, 0.8);
 }
 .gbanner .button_gbanner > a > span {
   display: none;
@@ -459,13 +465,13 @@ header.list h2 select {
   left: 50%;
   margin-top: -60px;
   margin-left: -25px;
-  border: 1px solid rgba(0,0,0,0.5);
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 .gbanner .button_gbanner span:after {
-  content: '';
+  content: "";
   position: absolute;
   border-width: 6px;
-  border-color: rgba(0,0,0,0.5);
+  border-color: rgba(0, 0, 0, 0.5);
   border-style: solid solid none solid;
   border-left-color: transparent;
   border-right-color: transparent;
@@ -528,13 +534,13 @@ header.list h2 select {
 #search-form p {
   border-width: 1px;
   border-style: solid;
-  border-color: #CCC;
+  border-color: #ccc;
   border-color: rgba(0, 0, 0, 0.2);
 }
 #search-form button {
   background-color: transparent;
   color: #555;
-  text-shadow: 1px 1px 0 #FFF;
+  text-shadow: 1px 1px 0 #fff;
   padding-left: 0.7em;
   padding-right: 0.7em;
   -webkit-transition: all 0.5s ease-out;
@@ -547,7 +553,7 @@ header.list h2 select {
   color: #000;
 }
 #search-form .submit {
-  background-color: #EEE;
+  background-color: #eee;
 }
 #document-search > #search-result {
   text-align: right;
@@ -600,11 +606,11 @@ header.list h2 select {
 }
 .modaldiv .bdr_content,
 .modaldiv form {
-  background-color: #FFF;
+  background-color: #fff;
   margin: 0 !important;
 }
 .info {
-  border: 1px dashed rgba(0,0,0,0.1);
+  border: 1px dashed rgba(0, 0, 0, 0.1);
   margin: 5px 0;
   padding: 10px;
 }

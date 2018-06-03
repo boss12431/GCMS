@@ -8,9 +8,9 @@
 
 namespace Index\Counter;
 
-use \Kotchasan\Http\Request;
-use \Kotchasan\File;
 use \Gcms\Login;
+use \Kotchasan\Database\Sql;
+use \Kotchasan\Http\Request;
 
 /**
  * ข้อมูล Counter และ Useronline
@@ -35,44 +35,31 @@ class Model extends \Kotchasan\Model
       $model = new static;
       // Database
       $db = $model->db();
-      // ตาราง useronline
+      // ตาราง
       $useronline = $model->getTableName('useronline');
+      $logs = $model->getTableName('logs');
       // วันนี้
       $y = (int)date('Y');
       $m = (int)date('m');
       $d = (int)date('d');
-      // โฟลเดอร์ของ counter
-      $counter_dir = ROOT_PATH.DATA_FOLDER.'counter';
+      // ไฟล์สำหรับ counter
+      $counter_file = ROOT_PATH.DATA_FOLDER.'counter.log';
       // ตรวจสอบวันใหม่
-      if (is_file($counter_dir.'/index.php')) {
-        $c = (int)file_get_contents($counter_dir.'/index.php');
+      if (is_file($counter_file)) {
+        $c = (int)file_get_contents($counter_file);
       } else {
         $c = 0;
       }
       if ($d != $c) {
-        $f = @fopen($counter_dir.'/index.php', 'wb');
+        $f = @fopen($counter_file, 'wb');
         if ($f) {
           fwrite($f, date('d-m-Y H:i:s'));
           fclose($f);
         }
         if ($d < $c) {
-          // วันที่ 1 หรือวันแรกของเดือน
-          $f = @opendir($counter_dir);
-          if ($f) {
-            while (false !== ($text = readdir($f))) {
-              if ($text != '.' && $text != '..') {
-                if ($text != $y) {
-                  // ลบไดเร็คทอรี่ของปีก่อน
-                  File::removeDirectory($counter_dir.'/'.$text.'/');
-                }
-              }
-            }
-            closedir($f);
-          }
+          // วันที่ 1 หรือวันแรกของเดือน ลบข้อมูลของปีก่อนๆ
+          $db->delete($logs, array(array(Sql::MONTH('time'), $m), array(Sql::YEAR('time'), '!=', $y)), 0);
         }
-        // ตรวจสอบ + สร้าง โฟลเดอร์
-        File::makeDirectory("$counter_dir/$y");
-        File::makeDirectory("$counter_dir/$y/$m");
         // clear useronline
         $db->emptyTable($useronline);
         // clear visited_today
@@ -82,22 +69,16 @@ class Model extends \Kotchasan\Model
       $counter_ip = $request->getClientIp();
       // session ปัจจุบัน
       $session_id = session_id();
+      // access log
+      $db->insert($logs, array(
+        'time' => date('Y-m-d H:i:s'),
+        'ip' => $counter_ip,
+        'session_id' => $session_id,
+        'referer' => rawurldecode($request->server('HTTP_REFERER')),
+        'user_agent' => $request->server('HTTP_USER_AGENT'),
+      ));
       // วันนี้
       $counter_day = date('Y-m-d');
-      // บันทึกลง log
-      $counter_log = "$counter_dir/$y/$m/$d.dat";
-      if (is_file($counter_log)) {
-        // เปิดไฟล์เพื่อเขียนต่อ
-        $f = @fopen($counter_log, 'ab');
-      } else {
-        // สร้างไฟล์ log ใหม่
-        $f = @fopen($counter_log, 'wb');
-      }
-      if ($f) {
-        $data = $session_id.chr(1).$counter_ip.chr(1).$request->server('HTTP_REFERER').chr(1).$request->server('HTTP_USER_AGENT').chr(1).date('H:i:s')."\n";
-        fwrite($f, $data);
-        fclose($f);
-      }
       // อ่าน useronline
       $q2 = $db->createQuery()
         ->selectCount()
@@ -135,7 +116,7 @@ class Model extends \Kotchasan\Model
       // ตรวจสอบ ว่าเคยเยี่ยมชมหรือไม่
       if ($new || $request->cookie('counter_date')->toInt() != $d) {
         // เข้ามาครั้งแรกในวันนี้, บันทึก counter 1 วัน
-        setCookie('counter_date', $d, time() + 3600 * 24, '/');
+        setCookie('counter_date', $d, time() + 3600 * 24, '/', null, null, true);
         // ยังไม่เคยเยี่ยมชมในวันนี้
         $my_counter['visited'] ++;
         $my_counter['counter'] ++;
