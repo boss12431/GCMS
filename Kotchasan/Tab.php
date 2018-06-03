@@ -46,16 +46,18 @@ class Tab
     /**
      * เพิ่มรายการ Tab.
      *
-     * @param string $id    ID ของแท็บ ใช้สำหรับเลือกแท็บ
-     * @param string $title ข้อความในเมนูแท็บ
-     * @param string $url   URL เมื่อคลิกแท็บ ถ้าไม่กำหนดจะใช้ URL ตอนสร้างแท็บ
+     * @param string $id     ID ของแท็บ ใช้สำหรับเลือกแท็บ
+     * @param string $title  ข้อความในเมนูแท็บ
+     * @param string $url    URL เมื่อคลิกแท็บ ถ้าไม่กำหนดจะใช้ URL ตอนสร้างแท็บ
+     * @param string $target ค่าเริ่มต้น null คือไม่มี target
      */
-    public function add($id, $title, $url = '')
+    public function add($id, $title, $url = '', $target = null)
     {
         $this->datas[] = array(
             'title' => $title,
             'url' => $url,
             'id' => $id,
+            'target' => $target,
         );
     }
 
@@ -83,7 +85,7 @@ class Tab
             } else {
                 $prop[] = 'href="'.$item['url'].'"';
             }
-            if (isset($item['target'])) {
+            if (!empty($item['target'])) {
                 $prop[] = 'target="'.$item['target'].'"';
             }
             if ($select == $item['id'] || ($i == 0 && $select == '')) {

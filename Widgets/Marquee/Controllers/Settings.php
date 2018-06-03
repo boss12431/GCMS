@@ -1,20 +1,22 @@
 <?php
 /**
  * @filesource Widgets/Marquee/Controllers/Settings.php
- * @link http://www.kotchasan.com/
+ *
+ * @see http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
  */
 
 namespace Widgets\Marquee\Controllers;
 
-use \Kotchasan\Http\Request;
-use \Gcms\Login;
-use \Kotchasan\Html;
-use \Kotchasan\Language;
+use Kotchasan\Http\Request;
+use Gcms\Login;
+use Kotchasan\Html;
+use Kotchasan\Language;
 
 /**
- * module=rss-settings
+ * module=rss-settings.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -22,40 +24,41 @@ use \Kotchasan\Language;
  */
 class Settings extends \Gcms\Controller
 {
+    /**
+     * ฟอร์มตั้งค่า Widget.
+     *
+     * @param Request $request
+     *
+     * @return string
+     */
+    public function render(Request $request)
+    {
+        if (defined('MAIN_INIT')) {
+            // ข้อความ title bar
+            $this->title = Language::trans('{LNG_Configuring} {LNG_Marquee}');
+            // เมนู
+            $this->menu = 'widgets';
+            // สามารถตั้งค่าระบบได้
+            if (Login::checkPermission(Login::adminAccess(), 'can_config')) {
+                // แสดงผล
+                $section = Html::create('section');
+                // breadcrumbs
+                $breadcrumbs = $section->add('div', array(
+          'class' => 'breadcrumbs',
+        ));
+                $ul = $breadcrumbs->add('ul');
+                $ul->appendChild('<li><span class="icon-widgets">{LNG_Widgets}</span></li>');
+                $ul->appendChild('<li><span>{LNG_Marquee}</span></li>');
+                $section->add('header', array(
+          'innerHTML' => '<h2 class="icon-widgets">'.$this->title().'</h2>',
+        ));
+                // แสดงฟอร์ม
+                $section->appendChild(createClass('Widgets\Marquee\Views\Settings')->render());
 
-  /**
-   * ฟอร์มตั้งค่า Widget
-   *
-   * @param Request $request
-   * @return string
-   */
-  public function render(Request $request)
-  {
-    if (defined('MAIN_INIT')) {
-      // ข้อความ title bar
-      $this->title = Language::trans('{LNG_Configuring} {LNG_Marquee}');
-      // เมนู
-      $this->menu = 'widget';
-      // สามารถตั้งค่าระบบได้
-      if (Login::checkPermission(Login::adminAccess(), 'can_config')) {
-        // แสดงผล
-        $section = Html::create('section');
-        // breadcrumbs
-        $breadcrumbs = $section->add('div', array(
-          'class' => 'breadcrumbs'
-        ));
-        $ul = $breadcrumbs->add('ul');
-        $ul->appendChild('<li><span class="icon-widgets">{LNG_Widgets}</span></li>');
-        $ul->appendChild('<li><span>{LNG_Marquee}</span></li>');
-        $section->add('header', array(
-          'innerHTML' => '<h2 class="icon-widgets">'.$this->title().'</h2>'
-        ));
-        // แสดงฟอร์ม
-        $section->appendChild(createClass('Widgets\Marquee\Views\Settings')->render());
-        return $section->render();
-      }
+                return $section->render();
+            }
+        }
+        // 404.html
+        return \Index\Error\Controller::page404();
     }
-    // 404.html
-    return \Index\Error\Controller::page404();
-  }
 }
