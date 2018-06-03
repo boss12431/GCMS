@@ -57,7 +57,7 @@ class Model extends \Kotchasan\KBase
               // เคลียร์
               $request->removeToken();
             } else {
-              $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), 'config');
+              $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), 'settings/config.php');
             }
           } else {
             $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), DATA_FOLDER.'intro.'.$save['language'].'.php');

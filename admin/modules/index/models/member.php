@@ -85,6 +85,8 @@ class Model extends \Kotchasan\Model
         $action = $request->post('action')->toString();
         // id ที่ส่งมา
         if (preg_match_all('/,?([0-9]+),?/', $request->post('id')->toString(), $match)) {
+          // ตาราง user
+          $user_table = $this->getTableName('user');
           if ($action === 'delete') {
             // ลบไอคอนสมาชิก
             $query = $this->db()->createQuery()
@@ -100,7 +102,7 @@ class Model extends \Kotchasan\Model
               @unlink(ROOT_PATH.self::$cfg->usericon_folder.$item['icon']);
             }
             // ลบสมาชิก
-            $this->db()->delete($this->getTableName('user'), array(
+            $this->db()->delete($user_table, array(
               array('id', $match[1]),
               array('id', '!=', 1)
               ), 0);
@@ -127,7 +129,7 @@ class Model extends \Kotchasan\Model
             $ret['location'] = 'reload';
           } elseif ($action === 'accept') {
             // ยอมรับสมาชิกที่เลือก
-            $this->db()->update($this->getTableName('user'), array(
+            $this->db()->update($user_table, array(
               array('id', $match[1]),
               array('fb', '0')
               ), array(
@@ -137,7 +139,7 @@ class Model extends \Kotchasan\Model
             $ret['location'] = 'reload';
           } elseif (preg_match('/(ban|active)_([01]{1,1})/', $action, $match2)) {
             // update ban,active
-            $this->db()->update($this->getTableName('user'), array(
+            $this->db()->update($user_table, array(
               array('id', $match[1]),
               array('id', '!=', 1)
               ), array($match2[1] => $match2[2]));
@@ -181,7 +183,7 @@ class Model extends \Kotchasan\Model
               $msgs = array();
               if (!$err->error()) {
                 // อัปเดทรหัสผ่านใหม่
-                $this->db()->update($this->getTableName('user'), $item['id'], $save);
+                $this->db()->update($user_table, $item['id'], $save);
               } else {
                 $msgs[] = $err->getErrorMessage();
               }
@@ -197,7 +199,7 @@ class Model extends \Kotchasan\Model
             $ret['location'] = 'reload';
           } elseif ($request->post('module')->toString() === 'status') {
             // เปลี่ยนสถานะสมาชิก
-            $this->db()->update($this->getTableName('user'), array(
+            $this->db()->update($user_table, array(
               array('id', $match[1]),
               array('id', '!=', 1),
               array('fb', '0')

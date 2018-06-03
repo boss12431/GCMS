@@ -1,9 +1,11 @@
 <?php
 /**
- * load.php
+ * load.php.
  *
  * @author Goragod Wiriya <admin@goragod.com>
- * @link http://www.kotchasan.com/
+ *
+ * @see http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
  */
@@ -25,7 +27,7 @@ define('DATA_FOLDER', 'datas/');
  * 2 แสดงผลข้อผิดพลาดและคำเตือนออกทางหน้าจอ (ใช้เฉพาะตอนออกแบบเท่านั้น)
  */
 define('DEBUG', 0);
-/**
+/*
  * ไฟล์ตั้งค่าระบบ (full path)
  */
 define('CONFIG', ROOT_PATH.'settings/config.php');
@@ -35,6 +37,6 @@ define('CONFIG', ROOT_PATH.'settings/config.php');
  */
 define('DB_LOG', false);
 /**
- * load Kotchasan
+ * load Kotchasan.
  */
 include 'Kotchasan/load.php';
