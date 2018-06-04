@@ -10,9 +10,9 @@
 
 namespace Widgets\Map\Controllers;
 
-use Kotchasan\Http\Request;
 use Gcms\Login;
 use Kotchasan\Html;
+use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
@@ -44,14 +44,14 @@ class Settings extends \Gcms\Controller
                 $section = Html::create('section');
                 // breadcrumbs
                 $breadcrumbs = $section->add('div', array(
-          'class' => 'breadcrumbs',
-        ));
+                    'class' => 'breadcrumbs',
+                ));
                 $ul = $breadcrumbs->add('ul');
                 $ul->appendChild('<li><span class="icon-widgets">{LNG_Widgets}</span></li>');
                 $ul->appendChild('<li><span>{LNG_Google Map}</span></li>');
                 $section->add('header', array(
-          'innerHTML' => '<h2 class="icon-map">'.$this->title().'</h2>',
-        ));
+                    'innerHTML' => '<h2 class="icon-map">'.$this->title().'</h2>',
+                ));
                 // แสดงฟอร์ม
                 $section->appendChild(createClass('Widgets\Map\Views\Settings')->render());
 

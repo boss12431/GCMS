@@ -39,14 +39,14 @@ class Settings extends \Gcms\Controller
                 $section = Html::create('section');
                 // breadcrumbs
                 $breadcrumbs = $section->add('div', array(
-                    'class' => 'breadcrumbs',
-                ));
+          'class' => 'breadcrumbs',
+        ));
                 $ul = $breadcrumbs->add('ul');
                 $ul->appendChild('<li><span class="icon-widgets">{LNG_Widgets}</span></li>');
                 $ul->appendChild('<li><span>{LNG_Twitter}</span></li>');
                 $section->add('header', array(
-                    'innerHTML' => '<h2 class="icon-twitter">'.$this->title().'</h2>',
-                ));
+          'innerHTML' => '<h2 class="icon-twitter">'.$this->title().'</h2>',
+        ));
                 // แสดงฟอร์ม
                 $section->appendChild(createClass('Widgets\Twitter\Views\Settings')->render());
 
