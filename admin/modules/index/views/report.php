@@ -24,6 +24,7 @@ use Kotchasan\Http\Request;
 class View extends \Gcms\Adminview
 {
     private $date;
+    private $ip;
 
     /**
      * แสดงข้อมูลประวัติการเยียมชม
@@ -55,8 +56,9 @@ class View extends \Gcms\Adminview
         $content .= '<script>';
         $content .= 'new GGraphs("report_graph", {type:"line"});';
         $content .= '</script>';
-        // วันที่ ที่กำลังแสดงอยู่
+        // ข้อมูล ที่กำลังแสดงอยู่
         $this->date = $date;
+        $this->ip = $ip;
         // URL สำหรับส่งให้ตาราง
         $uri = $request->createUriWithGlobals(WEB_URL.'admin/index.php');
         // ตาราง
@@ -64,7 +66,7 @@ class View extends \Gcms\Adminview
             /* Uri */
             'uri' => $uri,
             /* Model */
-            'model' => \Index\Report\Model::get($ip, $date),
+            'model' => \Index\Report\Model::get($this->ip, $this->date),
             /* รายการต่อหน้า */
             'perPage' => $request->cookie('counter_perPage', 30)->toInt(),
             /* เรียงลำดับ */
@@ -144,7 +146,11 @@ class View extends \Gcms\Adminview
             }
             $item['referer'] = '<a href="'.$item['referer'].'" target=_blank class="cuttext block" style="max-width:30em">'.$title.'</a>';
         }
-        $item['ip'] = '<a href="index.php?module=report&amp;ip='.$item['ip'].'&amp;date='.$this->date.'">'.$item['ip'].'</a>';
+        if ($this->ip == '') {
+            $item['ip'] = '<a href="index.php?module=report&amp;ip='.$item['ip'].'&amp;date='.$this->date.'">'.$item['ip'].'</a>';
+        } else {
+            $item['ip'] = '<a href="http://'.$item['ip'].'">'.$item['ip'].'</a>';
+        }
 
         return $item;
     }
