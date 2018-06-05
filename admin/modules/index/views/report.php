@@ -149,7 +149,7 @@ class View extends \Gcms\Adminview
         if ($this->ip == '') {
             $item['ip'] = '<a href="index.php?module=report&amp;ip='.$item['ip'].'&amp;date='.$this->date.'">'.$item['ip'].'</a>';
         } else {
-            $item['ip'] = '<a href="http://'.$item['ip'].'">'.$item['ip'].'</a>';
+            $item['ip'] = '<a href="http://'.$item['ip'].'" target=_blank>'.$item['ip'].'</a>';
         }
 
         return $item;
