@@ -24,9 +24,6 @@ a:hover {
   margin: 0 auto;
   max-height: 90%;
 }
-#login_div label {
-  white-space: pre-wrap;
-}
 #login_div h1 {
   text-align: center;
   margin: 0 auto 30px;
