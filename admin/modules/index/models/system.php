@@ -67,7 +67,7 @@ class Model extends \Kotchasan\KBase
                     }
                 }
                 foreach (array('user_icon_typies', 'login_fields') as $key) {
-                    $value = $request->post($key)->text();
+                    $value = $request->post($key, array())->text();
                     if (empty($value)) {
                         $ret['ret_'.$key] = Language::get('Please select at least one item');
                     } else {

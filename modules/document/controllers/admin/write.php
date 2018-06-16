@@ -82,7 +82,7 @@ class Controller extends \Gcms\Controller
             // ภาษาที่ติดตั้ง
             $index->languages = Gcms::installedLanguage();
             // เมนูแท็บ
-            $tab = new \Kotchasan\Tab('accordient_menu', 'index.php?module=document-write&qid='.$index->id);
+            $tab = new \Kotchasan\Tab('accordient_menu', 'index.php?module=document-write&mid='.$index->module_id.'&id='.$index->id);
             foreach ($index->languages as $item) {
                 $tab->add('detail_'.$item, '{LNG_Detail}&nbsp;<img src='.WEB_URL.'language/'.$item.'.gif alt='.$item.'>');
             }
