@@ -1,7 +1,9 @@
 <?php
 /**
  * @filesource modules/board/models/sitemap.php
- * @link http://www.kotchasan.com/
+ *
+ * @see http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
  */
@@ -9,7 +11,7 @@
 namespace Board\Sitemap;
 
 /**
- * กระทู้ทั้งหมด
+ * กระทู้ทั้งหมด.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -17,21 +19,22 @@ namespace Board\Sitemap;
  */
 class Model extends \Kotchasan\Model
 {
+    /**
+     * กระทู้ทั้งหมด.
+     *
+     * @param array $ids แอเรย์ของ module_id
+     *
+     * @return array
+     */
+    public static function getStories($ids)
+    {
+        $model = new static();
 
-  /**
-   * กระทู้ทั้งหมด
-   *
-   * @param array $ids แอเรย์ของ module_id
-   * @return array
-   */
-  public static function getStories($ids)
-  {
-    $model = new static;
-    return $model->db()->createQuery()
-        ->select('id', 'module_id', 'last_update', 'comment_date')
-        ->from('board_q')
-        ->where(array('module_id', $ids))
-        ->cacheOn()
-        ->execute();
-  }
+        return $model->db()->createQuery()
+            ->select('id', 'module_id', 'last_update', 'comment_date')
+            ->from('board_q')
+            ->where(array('module_id', $ids))
+            ->cacheOn()
+            ->execute();
+    }
 }

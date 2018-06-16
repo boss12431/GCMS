@@ -1,19 +1,21 @@
 <?php
 /**
  * @filesource modules/edocument/models/member.php
- * @link http://www.kotchasan.com/
+ *
+ * @see http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
  */
 
 namespace Edocument\Member;
 
-use \Kotchasan\Http\Request;
-use \Gcms\Login;
-use \Kotchasan\Language;
+use Gcms\Login;
+use Kotchasan\Http\Request;
+use Kotchasan\Language;
 
 /**
- * โมเดลสำหรับแสดงรายการเอกสารของสมาชิก (member.php)
+ * โมเดลสำหรับแสดงรายการเอกสารของสมาชิก (member.php).
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -21,69 +23,69 @@ use \Kotchasan\Language;
  */
 class Model extends \Kotchasan\Orm\Field
 {
-  /**
-   * ชื่อตาราง
-   *
-   * @var string
-   */
-  protected $table = 'edocument A';
+    /**
+     * ชื่อตาราง.
+     *
+     * @var string
+     */
+    protected $table = 'edocument A';
 
-  public function getConfig()
-  {
-    return array(
-      'join' => array(
-        array(
-          'INNER',
-          'Index\Modules\Model',
-          array(
-            array('M.id', 'A.module_id')
-          )
-        )
-      )
-    );
-  }
+    public function getConfig()
+    {
+        return array(
+            'join' => array(
+                array(
+                    'INNER',
+                    'Index\Modules\Model',
+                    array(
+                        array('M.id', 'A.module_id'),
+                    ),
+                ),
+            ),
+        );
+    }
 
-  /**
-   * รับค่าจาก action ของ table
-   *
-   * @param Request $request
-   */
-  public static function action(Request $request)
-  {
-    $ret = array();
-    // referer, session, member
-    if ($request->initSession() && $request->isReferer() && $login = Login::isMember()) {
-      if ($login['email'] == 'demo' || !empty($login['fb'])) {
-        $ret['alert'] = Language::get('Unable to complete the transaction');
-      } else {
-        if ($request->post('action')->toString() == 'delete') {
-          // Model
-          $model = new \Kotchasan\Model;
-          $search = $model->db()->createQuery()
-            ->from('edocument')
-            ->where(array(
-              array('id', $request->post('id')->toInt()),
-              array('sender_id', $login['id'])
-            ))
-            ->toArray()
-            ->first('id', 'file');
-          if ($search) {
-            // ลบไฟล์
-            @unlink(ROOT_PATH.$search['file']);
-            // ลบข้อมูล
-            $model->db()->delete($model->getTableName('edocument'), $search['id']);
-            $model->db()->delete($model->getTableName('edocument_download'), array('document_id', $search['id']), 0);
-            // ลบแถวตาราง
-            $ret['remove'] = 'datatable_'.$search['id'];
-          }
+    /**
+     * รับค่าจาก action ของ table.
+     *
+     * @param Request $request
+     */
+    public static function action(Request $request)
+    {
+        $ret = array();
+        // referer, session, member
+        if ($request->initSession() && $request->isReferer() && $login = Login::isMember()) {
+            if ($login['email'] == 'demo' || !empty($login['fb'])) {
+                $ret['alert'] = Language::get('Unable to complete the transaction');
+            } else {
+                if ($request->post('action')->toString() == 'delete') {
+                    // Model
+                    $model = new \Kotchasan\Model();
+                    $search = $model->db()->createQuery()
+                        ->from('edocument')
+                        ->where(array(
+                            array('id', $request->post('id')->toInt()),
+                            array('sender_id', $login['id']),
+                        ))
+                        ->toArray()
+                        ->first('id', 'file');
+                    if ($search) {
+                        // ลบไฟล์
+                        @unlink(ROOT_PATH.$search['file']);
+                        // ลบข้อมูล
+                        $model->db()->delete($model->getTableName('edocument'), $search['id']);
+                        $model->db()->delete($model->getTableName('edocument_download'), array('document_id', $search['id']), 0);
+                        // ลบแถวตาราง
+                        $ret['remove'] = 'datatable_'.$search['id'];
+                    }
+                }
+            }
+        } else {
+            $ret['alert'] = Language::get('Unable to complete the transaction');
         }
-      }
-    } else {
-      $ret['alert'] = Language::get('Unable to complete the transaction');
+        if (!empty($ret)) {
+            // คืนค่าเป็น JSON
+            echo json_encode($ret);
+        }
     }
-    if (!empty($ret)) {
-      // คืนค่าเป็น JSON
-      echo json_encode($ret);
-    }
-  }
 }

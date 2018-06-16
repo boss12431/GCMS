@@ -1,17 +1,19 @@
 <?php
 /**
  * @filesource modules/index/controllers/cron.php
- * @link http://www.kotchasan.com/
+ *
+ * @see http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
  */
 
 namespace Index\Cron;
 
-use \Kotchasan\Http\Request;
+use Kotchasan\Http\Request;
 
 /**
- * Controller สำหรับ Cron เรียกใช้
+ * Controller สำหรับ Cron เรียกใช้.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -19,33 +21,32 @@ use \Kotchasan\Http\Request;
  */
 class Controller extends \Kotchasan\Controller
 {
-
-  /**
-   * มาจากการเรียกด้วย Cron
-   *
-   * @param Request $request
-   */
-  public function index(Request $request)
-  {
-    if (defined('MAIN_INIT')) {
-      // ไดเร็คทอรี่ที่ติดตั้งโมดูล
-      $dir = ROOT_PATH.'modules/';
-      // โมดูลที่ติดตั้ง
-      $f = @opendir($dir);
-      if ($f) {
-        while (false !== ($owner = readdir($f))) {
-          if ($owner != '.' && $owner != '..' && $owner != 'index' && $owner != 'js' && $owner != 'css') {
-            if (is_file($dir.$owner.'/controllers/cron.php')) {
-              include $dir.$owner.'/controllers/cron.php';
-              $class = ucfirst($owner).'\Cron\Controller';
-              if (method_exists($class, 'init')) {
-                createClass($class)->init();
-              }
+    /**
+     * มาจากการเรียกด้วย Cron.
+     *
+     * @param Request $request
+     */
+    public function index(Request $request)
+    {
+        if (defined('MAIN_INIT')) {
+            // ไดเร็คทอรี่ที่ติดตั้งโมดูล
+            $dir = ROOT_PATH.'modules/';
+            // โมดูลที่ติดตั้ง
+            $f = @opendir($dir);
+            if ($f) {
+                while (false !== ($owner = readdir($f))) {
+                    if ($owner != '.' && $owner != '..' && $owner != 'index' && $owner != 'js' && $owner != 'css') {
+                        if (is_file($dir.$owner.'/controllers/cron.php')) {
+                            include $dir.$owner.'/controllers/cron.php';
+                            $class = ucfirst($owner).'\Cron\Controller';
+                            if (method_exists($class, 'init')) {
+                                createClass($class)->init();
+                            }
+                        }
+                    }
+                }
+                closedir($f);
             }
-          }
         }
-        closedir($f);
-      }
     }
-  }
 }

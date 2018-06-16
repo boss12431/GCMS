@@ -1,15 +1,17 @@
 <?php
 /**
  * @filesource modules/index/views/login.php
- * @link http://www.kotchasan.com/
+ *
+ * @see http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
  */
 
 namespace Index\Login;
 
-use \Gcms\Login;
-use \Kotchasan\Template;
+use Gcms\Login;
+use Kotchasan\Template;
 
 /**
  * กรอบสมาชิก
@@ -20,55 +22,57 @@ use \Kotchasan\Template;
  */
 class View extends \Gcms\View
 {
+    /**
+     * ฟอร์มสมาชิก
+     *
+     * @param array $login
+     *
+     * @return string
+     */
+    public function member($login)
+    {
+        $template = Template::create('member', 'member', 'member');
+        if ($template->isEmpty()) {
+            $template = Template::create('member', 'member', 'memberfrm');
+        }
+        $template->add(array(
+            '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
+            '/{WEBTITLE}/' => self::$cfg->web_title,
+            '/{SUBTITLE}/' => empty(Login::$login_message) ? self::$cfg->web_description : '<span class=error>'.Login::$login_message.'</span>',
+            '/{DISPLAYNAME}/' => empty($login['displayname']) ? (empty($login['email']) ? 'Unname' : $login['email']) : $login['displayname'],
+            '/{ID}/' => (int) $login['id'],
+            '/{STATUS}/' => $login['status'],
+            '/{ADMIN}/' => Login::adminAccess() ? '' : 'hidden',
+            '/{TOKEN}/' => self::$request->createToken(),
+            '/{WEBURL}/' => WEB_URL,
+            '/:name/' => self::$cfg->member_status[1],
+        ));
 
-  /**
-   * ฟอร์มสมาชิก
-   *
-   * @param array $login
-   * @return string
-   */
-  public function member($login)
-  {
-    $template = Template::create('member', 'member', 'member');
-    if ($template->isEmpty()) {
-      $template = Template::create('member', 'member', 'memberfrm');
+        return $template->render();
     }
-    $template->add(array(
-      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
-      '/{WEBTITLE}/' => self::$cfg->web_title,
-      '/{SUBTITLE}/' => empty(Login::$login_message) ? self::$cfg->web_description : '<span class=error>'.Login::$login_message.'</span>',
-      '/{DISPLAYNAME}/' => empty($login['displayname']) ? (empty($login['email']) ? 'Unname' : $login['email']) : $login['displayname'],
-      '/{ID}/' => (int)$login['id'],
-      '/{STATUS}/' => $login['status'],
-      '/{ADMIN}/' => Login::adminAccess() ? '' : 'hidden',
-      '/{TOKEN}/' => self::$request->createToken(),
-      '/{WEBURL}/' => WEB_URL,
-      '/:name/' => self::$cfg->member_status[1]
-    ));
-    return $template->render();
-  }
 
-  /**
-   * ฟอร์มเข้าระบบ
-   *
-   * @return string
-   */
-  public function login()
-  {
-    $template = Template::create('member', 'member', 'login');
-    if ($template->isEmpty()) {
-      $template = Template::create('member', 'member', 'loginfrm');
+    /**
+     * ฟอร์มเข้าระบบ.
+     *
+     * @return string
+     */
+    public function login()
+    {
+        $template = Template::create('member', 'member', 'login');
+        if ($template->isEmpty()) {
+            $template = Template::create('member', 'member', 'loginfrm');
+        }
+        $template->add(array(
+            '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
+            '/{SUBTITLE}/' => empty(Login::$login_message) ? self::$cfg->web_description : '<span class=error>'.Login::$login_message.'</span>',
+            '/{EMAIL}/' => isset(Login::$login_params['username']) ? Login::$login_params['username'] : '',
+            '/{PASSWORD}/' => isset(Login::$login_params['password']) ? Login::$login_params['password'] : '',
+            '/{TOKEN}/' => self::$request->createToken(),
+            '/{PLACEHOLDER}/' => \Gcms\Gcms::getLoginPlaceholder(),
+            '/{REMEMBER}/' => self::$request->cookie('login_remember')->toInt() == 1 ? 'checked' : '',
+            '/{FACEBOOK}/' => empty(self::$cfg->facebook_appId) ? 'hidden' : 'facebook',
+        ));
+
+        return $template->render();
     }
-    $template->add(array(
-      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
-      '/{SUBTITLE}/' => empty(Login::$login_message) ? self::$cfg->web_description : '<span class=error>'.Login::$login_message.'</span>',
-      '/{EMAIL}/' => isset(Login::$login_params['username']) ? Login::$login_params['username'] : '',
-      '/{PASSWORD}/' => isset(Login::$login_params['password']) ? Login::$login_params['password'] : '',
-      '/{TOKEN}/' => self::$request->createToken(),
-      '/{PLACEHOLDER}/' => \Gcms\Gcms::getLoginPlaceholder(),
-      '/{REMEMBER}/' => self::$request->cookie('login_remember')->toInt() == 1 ? 'checked' : '',
-      '/{FACEBOOK}/' => empty(self::$cfg->facebook_appId) ? 'hidden' : 'facebook'
-    ));
-    return $template->render();
-  }
 }

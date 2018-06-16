@@ -1,14 +1,16 @@
 <?php
 /**
  * @filesource modules/document/controllers/export.php
- * @link http://www.kotchasan.com/
+ *
+ * @see http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
  */
 
 namespace Document\Export;
 
-use \Kotchasan\Http\Request;
+use Kotchasan\Http\Request;
 
 /**
  * ส่งออกบทความ
@@ -19,17 +21,17 @@ use \Kotchasan\Http\Request;
  */
 class Controller extends \Kotchasan\Controller
 {
-
-  /**
-   * ส่งออกบทความ
-   *
-   * @param Request $request
-   * @param object $index ข้อมูลโมดูล
-   * @return array
-   */
-  public static function init(Request $request, $index)
-  {
-    // พิมพ์บทความ
-    return createClass('Document\Export\View')->printer($request, $index);
-  }
+    /**
+     * ส่งออกบทความ
+     *
+     * @param Request $request
+     * @param object  $index   ข้อมูลโมดูล
+     *
+     * @return array
+     */
+    public static function init(Request $request, $index)
+    {
+        // พิมพ์บทความ
+        return createClass('Document\Export\View')->printer($request, $index);
+    }
 }

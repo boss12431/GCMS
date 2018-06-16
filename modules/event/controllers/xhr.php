@@ -1,17 +1,19 @@
 <?php
 /**
  * @filesource event/controllers/xhr.php
- * @link http://www.kotchasan.com/
+ *
+ * @see http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
  */
 
 namespace Event\Xhr;
 
-use \Kotchasan\Http\Request;
+use Kotchasan\Http\Request;
 
 /**
- * แสดงปฎิทิน (Ajax called)
+ * แสดงปฎิทิน (Ajax called).
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -19,14 +21,13 @@ use \Kotchasan\Http\Request;
  */
 class Controller extends \Kotchasan\Controller
 {
-
-  /**
-   * แสดงปฎิทิน
-   */
-  public function get(Request $request)
-  {
-    if ($request->isReferer()) {
-      echo \Event\Calendar\Controller::render($request);
+    /**
+     * แสดงปฎิทิน.
+     */
+    public function get(Request $request)
+    {
+        if ($request->isReferer()) {
+            echo \Event\Calendar\Controller::render($request);
+        }
     }
-  }
 }
