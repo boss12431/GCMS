@@ -2888,6 +2888,7 @@ window.$K = (function() {
         }
         return false;
       });
+      this.input.value = this._toTime(this.input.value);
     },
     _set: function(c) {
       var times = this.input.value.split(":");
@@ -2903,23 +2904,23 @@ window.$K = (function() {
             this.firstKey = null;
           }
         } else {
-          times[0] = String(this.firstKey) + c;
+          times[0] = String(this.firstKey) + String(Math.min(3, c));
           caret = 3;
           this.firstKey = null;
         }
       } else if (this.highlight == "minute") {
         if (this.firstKey == null) {
           times[1] = "0" + c;
-          if (c < 6) {
-            this.firstKey = c;
-          }
+          this.firstKey = c;
         } else {
-          times[1] = String(this.firstKey) + c;
+          c = floatval(String(this.firstKey) + c);
+          times[1] = c < 10 ? "0" + c : String(Math.min(59, c));
           this.firstKey = null;
         }
         caret = 3;
       }
-      this.input.value = times[0] + ":" + times[1];
+      this.input.value =
+        (times[0] == "" ? "--" : times[0]) + ":" + (times[1] || "--");
       this._setCaret(caret);
     },
     getTime: function() {

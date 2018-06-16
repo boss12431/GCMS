@@ -331,7 +331,7 @@ class DataTable extends \Kotchasan\KBase
         }
         // รายการต่อหน้า มาจากการเลือกภายในตาราง
         if ($this->perPage !== null) {
-            $count = self::$request->globals(array('POST', 'GET'), 'count')->toInt();
+            $count = self::$request->globals(array('POST', 'GET'), 'count', $this->perPage)->toInt();
             if (in_array($count, $this->entriesList)) {
                 $this->perPage = $count;
                 $this->uri = $this->uri->withParams(array('count' => $count));
@@ -431,13 +431,11 @@ class DataTable extends \Kotchasan\KBase
         $url_query = array();
         $hidden_fields = array();
         parse_str($this->uri->getQuery(), $query_string);
-        foreach ($query_string as $key => $value) {
-            if ($value != '') {
-                $url_query[$key] = $key.'='.$value;
-                // แอเรย์เก็บรายการ input ที่ไม่ต้องสร้าง
-                if ($key !== 'search' && $key !== 'count' && $key !== 'page' && $key !== 'action') {
-                    $hidden_fields[$key] = '<input type="hidden" name="'.$key.'" value="'.$value.'">';
-                }
+        self::$request->map($url_query, $query_string);
+        foreach ($url_query as $key => $value) {
+            // แอเรย์เก็บรายการ input ที่ไม่ต้องสร้าง
+            if ($key !== 'search' && $key !== 'count' && $key !== 'page' && $key !== 'action') {
+                $hidden_fields[$key] = '<input type="hidden" name="'.$key.'" value="'.$value.'">';
             }
         }
         if (isset($this->model)) {
@@ -471,7 +469,9 @@ class DataTable extends \Kotchasan\KBase
         // รายการ Query กำหนดโดย User (AND)
         foreach ($this->filters as $key => $items) {
             $form[] = $this->addFilter($items);
-            unset($hidden_fields[$items['name']]);
+            if (isset($items['name'])) {
+                unset($hidden_fields[$items['name']]);
+            }
             if (!isset($items['default'])) {
                 $items['default'] = '';
             }

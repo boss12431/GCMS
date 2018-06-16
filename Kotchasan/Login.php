@@ -67,8 +67,8 @@ class Login extends \Kotchasan\KBase implements LoginInterface
         // ชื่อฟิลด์สำหรับการรับค่าเป็นรายการแรกของ login_fields
         $field_name = reset(self::$cfg->login_fields);
         // อ่านข้อมูลจากฟอร์ม login ฟิลด์ login_username
-        self::$login_params['username'] = self::$request->post('login_username', null)->toString();
-        if (self::$login_params['username'] === null) {
+        self::$login_params['username'] = self::$request->post('login_username')->toString();
+        if (empty(self::$login_params['username'])) {
             if (isset($_SESSION['login']) && isset($_SESSION['login'][$field_name])) {
                 // from session
                 self::$login_params['username'] = $_SESSION['login'][$field_name];
@@ -110,16 +110,7 @@ class Login extends \Kotchasan\KBase implements LoginInterface
             } elseif (!self::$from_submit || (self::$from_submit && self::$request->isReferer())) {
                 // ตรวจสอบการ login กับฐานข้อมูล
                 $login_result = $login->checkLogin(self::$login_params);
-                if (is_string($login_result)) {
-                    // ข้อความผิดพลาด
-                    self::$login_input = self::$login_input == 'password' ? 'login_password' : 'login_username';
-                    self::$login_message = Language::get($login_result);
-                    // logout ลบ session และ cookie
-                    unset($_SESSION['login']);
-                    $time = time();
-                    setcookie('login_username', '', $time, '/', null, null, true);
-                    setcookie('login_password', '', $time, '/', null, null, true);
-                } else {
+                if (is_array($login_result)) {
                     // save login session
                     $login_result['password'] = self::$login_params['password'];
                     $_SESSION['login'] = $login_result;
@@ -130,7 +121,17 @@ class Login extends \Kotchasan\KBase implements LoginInterface
                         setcookie('login_password', $pw->encode(self::$login_params['password']), $time, '/', null, null, true);
                         setcookie('login_remember', $login_remember, $time, '/', null, null, true);
                     }
-                    setcookie('login_id', $login_result['id'], $time, '/', null, null, true);
+                } else {
+                    if (is_string($login_result)) {
+                        // ข้อความผิดพลาด
+                        self::$login_input = self::$login_input == 'password' ? 'login_password' : 'login_username';
+                        self::$login_message = Language::get($login_result);
+                    }
+                    // logout ลบ session และ cookie
+                    unset($_SESSION['login']);
+                    $time = time();
+                    setcookie('login_username', '', $time, '/', null, null, true);
+                    setcookie('login_password', '', $time, '/', null, null, true);
                 }
             }
 

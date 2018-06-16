@@ -306,7 +306,9 @@ var dataTableActionCallback = function(xhr) {
           el = $E(val);
           if (el) {
             el.className = ds.class;
-            el.title = ds.title;
+            if (ds.title) {
+              el.title = ds.title;
+            }
           }
         } else if ($E(prop)) {
           var el = $E(prop),

@@ -146,13 +146,9 @@ class AbstractRequest extends AbstractMessage implements RequestInterface
     public static function createUriWithGet($uri = 'index.php', $exclude = array())
     {
         $query = array();
-        foreach ($_GET as $key => $value) {
-            if ($value != '' && !in_array($key, $exclude)) {
-                $query[$key] = $key.'='.$value;
-            }
-        }
+        self::map($query, $_GET, $exclude);
         if (!empty($query)) {
-            $uri .= (strpos($uri, '?') === false ? '?' : '&').implode('&', $query);
+            $uri .= (strpos($uri, '?') === false ? '?' : '&').http_build_query($query);
         }
 
         return Uri::createFromUri($uri);
@@ -169,13 +165,9 @@ class AbstractRequest extends AbstractMessage implements RequestInterface
     public static function createUriWithPost($uri = 'index.php', $exclude = array())
     {
         $query = array();
-        foreach ($_POST as $key => $value) {
-            if ($value != '' && !in_array($key, $exclude)) {
-                $query[$key] = $key.'='.$value;
-            }
-        }
+        self::map($query, $_POST, $exclude);
         if (!empty($query)) {
-            $uri .= (strpos($uri, '?') === false ? '?' : '&').implode('&', $query);
+            $uri .= (strpos($uri, '?') === false ? '?' : '&').http_build_query($query);
         }
 
         return Uri::createFromUri($uri);
@@ -192,20 +184,34 @@ class AbstractRequest extends AbstractMessage implements RequestInterface
     public function createUriWithGlobals($uri = 'index.php', $exclude = array())
     {
         $query = array();
-        foreach ($_GET as $key => $value) {
-            if ($value != '' && !in_array($key, $exclude)) {
-                $query[$key] = $key.'='.$value;
-            }
-        }
-        foreach ($_POST as $key => $value) {
-            if ($value != '' && !in_array($key, $exclude)) {
-                $query[$key] = $key.'='.$value;
-            }
-        }
+        self::map($query, $_GET, $exclude);
+        self::map($query, $_POST, $exclude);
         if (!empty($query)) {
-            $uri .= (strpos($uri, '?') === false ? '?' : '&').implode('&', $query);
+            $uri .= (strpos($uri, '?') === false ? '?' : '&').http_build_query($query);
         }
 
         return Uri::createFromUri($uri);
+    }
+
+    /**
+     * รวมแอเรย์ $_GET $_POST เป็นข้อมูลเดียวกัน.
+     *
+     * @param array $result  ตัวแปรเก็บผลลัพท์ สำหรับนำไปใช้งานต่อ
+     * @param array $array   ตัวแปรที่ต้องการรวม เช่น $_GET $_POST
+     * @param array $exclude รายการคีย์ของแอเรย์ ที่ไม่ต้องการให้รวมอยู่ในผลลัพท์
+     */
+    public function map(&$result, $array, $exclude = array())
+    {
+        foreach ($array as $key => $value) {
+            if ($value != '' && !in_array($key, $exclude)) {
+                if (is_array($value)) {
+                    foreach ($value as $k => $v) {
+                        $result[$key.'['.$k.']'] = $v;
+                    }
+                } else {
+                    $result[$key] = $value;
+                }
+            }
+        }
     }
 }

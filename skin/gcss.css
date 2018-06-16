@@ -172,7 +172,13 @@ ul.list-style-none {
 }
 .border {
   border-width: 1px;
+}
+.border:not(table) {
   border-style: solid;
+}
+table.border {
+  border-top-style: solid;
+  border-right-style: solid;
 }
 /* Font Style */
 del {
@@ -1803,7 +1809,7 @@ html[dir="rtl"] .tab > ul > li:first-child > a {
 }
 /* gtab */
 .gtab > label {
-  display: inline-block;
+  display: block;
   float: left;
   overflow: hidden;
   padding: 5px 1em;
@@ -2655,7 +2661,7 @@ input.gddcolor.invalid {
 .document-list .col10,
 .document-list .col11,
 .document-list .col12 {
-  display: inline-block;
+  display: block;
   float: left;
   margin: 0 0 1% 1%;
   border-width: 2px;
@@ -3043,15 +3049,18 @@ table.collapse > tfoot > tr > td,
   padding: 0;
 }
 .border > caption,
+.table.border .td,
+.table.border .th {
+  border-style: solid;
+}
 .border > thead > tr > th,
 .border > tbody > tr > th,
 .border > tfoot > tr > th,
 .border > thead > tr > td,
 .border > tbody > tr > td,
-.border > tfoot > tr > td,
-.table.border .td,
-.table.border .th {
-  border-style: solid;
+.border > tfoot > tr > td {
+  border-bottom-style: solid;
+  border-left-style: solid;
 }
 caption,
 thead > tr,
@@ -3063,25 +3072,25 @@ th[scope="rowgroup"],
 tbody tr:not(.thead):not(.tfoot):hover, tbody tr.highlight, tbody tr.select, .data tfoot tr {
   background-color: rgba(0,0,0,0.02);
 }
-.border.horiz-table > thead > tr > td,
-.border.horiz-table > tbody > tr > td,
-.border.horiz-table > tfoot > tr > td,
-.border.horiz-table > thead > tr > th,
-.border.horiz-table > tbody > tr > th,
-.border.horiz-table > tfoot > tr > th,
-.border.horiz-table .td,
-.border.horiz-table .th {
+.border.horiz-table > thead > tr > td:not(:first-child),
+.border.horiz-table > tbody > tr > td:not(:first-child),
+.border.horiz-table > tfoot > tr > td:not(:first-child),
+.border.horiz-table > thead > tr > th:not(:first-child),
+.border.horiz-table > tbody > tr > th:not(:first-child),
+.border.horiz-table > tfoot > tr > th:not(:first-child),
+.border.horiz-table .td:not(:first-child),
+.border.horiz-table .th:not(:first-child) {
   border-left-style: none;
   border-right-style: none;
 }
-.border.vert-table > thead > tr > td,
-.border.vert-table > tbody > tr > td,
-.border.vert-table > tfoot > tr > td,
-.border.vert-table > thead > tr > th,
-.border.vert-table > tbody > tr > th,
-.border.vert-table > tfoot > tr > th,
-.border.vert-table .td,
-.border.vert-table .th {
+.border.vert-table > thead > tr:not(:last-child) > td,
+.border.vert-table > tbody > tr:not(:last-child) > td,
+.border.vert-table > tfoot > tr:not(:last-child) > td,
+.border.vert-table > thead > tr:not(:last-child) > th,
+.border.vert-table > tbody > tr:not(:last-child) > th,
+.border.vert-table > tfoot > tr:not(:last-child) > th,
+.border.vert-table :not(:last-child) .td,
+.border.vert-table :not(:last-child) .th {
   border-top-style: none;
   border-bottom-style: none;
 }
@@ -3251,9 +3260,8 @@ td.buttons .button:last-child {
 .document-list .figure {
   float: left;
   margin: 5px 5px 5px 0;
-  display: inline-block;
+  display: block;
   max-width: 60px;
-  vertical-align: top;
 }
 .thumbview .figure {
   display: table;
@@ -3264,7 +3272,7 @@ td.buttons .button:last-child {
 .listview .figure {
   width: 16px;
   max-width: 100%;
-  display: inline;
+  display: inline-block;
   margin: 0 5px 0 0;
 }
 /* scroller */

@@ -7,49 +7,60 @@
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
  */
-(function () {
-  'use strict';
-  window.GMedia = function (name, src, width, height) {
+(function() {
+  "use strict";
+  window.GMedia = function(name, src, width, height) {
     var c = src.toLowerCase();
-    this.id = name || '';
+    this.id = name || "";
     this.src = src;
     this.width = floatval(width);
     this.height = floatval(height);
     this.params = new Object();
     this.properties = new Object();
-    if (c.indexOf('.swf') > -1) {
-      this.addProperty('classid', 'clsid:D27CDB6E-AE6D-11cf-96B8-444553540000');
-      this.addParam('allowscriptaccess', 'always');
-      this.addParam('allowfullscreen', 'false');
-      this.addParam('quality', 'high');
-      this.addParam('wmode', 'transparent');
-      this._getPlayer = (navigator.plugins && navigator.mimeTypes && navigator.mimeTypes.length) ? this._getEmbed : this._getObject;
-    } else if (c.indexOf('.avi') > -1 || c.indexOf('.wmv') > -1) {
-      this.addParam('type', 'application/x-mplayer2');
-      this.addParam('pluginspage', 'http://www.microsoft.com/Windows/MediaPlayer/');
+    if (c.indexOf(".swf") > -1) {
+      this.addProperty("classid", "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000");
+      this.addParam("allowscriptaccess", "always");
+      this.addParam("allowfullscreen", "false");
+      this.addParam("quality", "high");
+      this.addParam("wmode", "transparent");
+      this._getPlayer =
+        navigator.plugins && navigator.mimeTypes && navigator.mimeTypes.length
+          ? this._getEmbed
+          : this._getObject;
+    } else if (c.indexOf(".avi") > -1 || c.indexOf(".wmv") > -1) {
+      this.addParam("type", "application/x-mplayer2");
+      this.addParam(
+        "pluginspage",
+        "http://www.microsoft.com/Windows/MediaPlayer/"
+      );
       this._getPlayer = this._getEmbed;
-    } else if (c.indexOf('.jpg') > -1 || c.indexOf('.jpeg') > -1 || c.indexOf('.gif') > -1 || c.indexOf('.png') > -1) {
+    } else if (
+      c.indexOf(".jpg") > -1 ||
+      c.indexOf(".jpeg") > -1 ||
+      c.indexOf(".gif") > -1 ||
+      c.indexOf(".png") > -1
+    ) {
       this._getPlayer = this._getImage;
     } else {
       this._getPlayer = this._getEmbed;
     }
   };
   GMedia.prototype = {
-    addParam: function (param, value) {
+    addParam: function(param, value) {
       this.params[param.toLowerCase()] = value;
       return this;
     },
-    _getParams: function () {
+    _getParams: function() {
       return this.params;
     },
-    addProperty: function (prop, value) {
+    addProperty: function(prop, value) {
       this.properties[prop.toLowerCase()] = value;
       return this;
     },
-    _getProperties: function () {
+    _getProperties: function() {
       return this.properties;
     },
-    write: function (id) {
+    write: function(id) {
       if ($E(id)) {
         this.player = $G(id);
         var size = this.player.getDimensions();
@@ -62,8 +73,17 @@
       }
       return this;
     },
-    _getEmbed: function () {
-      var a = '<embed type="application/x-shockwave-flash" id="' + this.id + '" src="' + this.src + '" width="' + this.width + '" height="' + this.height + '" ';
+    _getEmbed: function() {
+      var a =
+        '<embed type="application/x-shockwave-flash" id="' +
+        this.id +
+        '" src="' +
+        this.src +
+        '" width="' +
+        this.width +
+        '" height="' +
+        this.height +
+        '" ';
       var b = this._getParams();
       for (var c in b) {
         a += c + '="' + b[c] + '" ';
@@ -72,26 +92,33 @@
       for (var c in d) {
         a += c + '="' + d[c] + '" ';
       }
-      a += '/>';
+      a += "/>";
       return a;
     },
-    _getObject: function () {
-      var a = '<object id="' + this.id + '" width="' + this.width + '" height="' + this.height + '" ';
+    _getObject: function() {
+      var a =
+        '<object id="' +
+        this.id +
+        '" width="' +
+        this.width +
+        '" height="' +
+        this.height +
+        '" ';
       var b = this._getProperties();
       for (var c in b) {
-        a += ' ' + c + '="' + b[c] + '"';
+        a += " " + c + '="' + b[c] + '"';
       }
-      a += '>';
+      a += ">";
       a += '<param name="movie" value="' + this.src + '" />';
       var d = this._getParams();
       for (var c in d) {
         a += '<param name="' + c + '" value="' + d[c] + '" />';
       }
-      a += '</object>';
+      a += "</object>";
       return a;
     },
-    _getImage: function () {
+    _getImage: function() {
       return '<img id="' + this.id + '" src="' + this.src + '" />';
     }
   };
-}());
+})();

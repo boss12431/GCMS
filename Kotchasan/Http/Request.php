@@ -10,10 +10,10 @@
 
 namespace Kotchasan\Http;
 
-use Psr\Http\Message\RequestInterface;
+use Kotchasan\Files;
 use Kotchasan\InputItem;
 use Kotchasan\Inputs;
-use Kotchasan\Files;
+use Psr\Http\Message\RequestInterface;
 
 /**
  * คลาสสำหรับจัดการตัวแปรต่างๆจาก Server.
@@ -416,9 +416,9 @@ class Request extends AbstractRequest implements RequestInterface
     {
         $token = md5(uniqid(rand(), true));
         $_SESSION[$token] = array(
-      'times' => 0,
-      'expired' => time() + TOKEN_AGE,
-    );
+            'times' => 0,
+            'expired' => time() + TOKEN_AGE,
+        );
 
         return $token;
     }
@@ -523,13 +523,10 @@ class Request extends AbstractRequest implements RequestInterface
     /**
      * อ่านค่าจาก $source.
      *
-     * @param array  $source  ตัวแปร GET POST
-     * @param string $name    ชื่อตัวแปร
-     * @param mixed  $default ค่าเริ่มต้นหากไม่พบตัวแปร
-     *
-     * @return InputItem|Inputs InputItem หรือ Collection ของ InputItem
-     *
-     * @param string|null $type ประเภท Input เช่น GET POST SESSION COOKIE หรือ null ถ้าไม่ได้มาจากรายการข้างต้น
+     * @param array       $source  ตัวแปร GET POST
+     * @param string      $name    ชื่อตัวแปร
+     * @param mixed       $default ค่าเริ่มต้นหากไม่พบตัวแปร
+     * @param string|null $type    ประเภท Input เช่น GET POST SESSION COOKIE หรือ null ถ้าไม่ได้มาจากรายการข้างต้น
      *
      * @return InputItem|Inputs InputItem หรือ Collection ของ InputItem
      */

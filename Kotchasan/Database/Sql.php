@@ -352,6 +352,20 @@ class Sql
     }
 
     /**
+     * คืนค่าข้ออมูลที่ไม่ซ้ำกัน.
+     *
+     * @param string $column_name
+     *
+     * @return \static
+     *
+     * @assert ('id')->text() [==] 'DISTINCT `id`'
+     */
+    public static function DISTINCT($column_name)
+    {
+        return self::create('DISTINCT '.self::fieldName($column_name));
+    }
+
+    /**
      * ผลรวมของคอลัมน์ที่เลือก
      *
      * @param string      $column_name

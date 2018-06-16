@@ -311,7 +311,7 @@ function checkIdcard() {
     for (i = 0, sum = 0; i < 12; i++) {
       sum += parseFloat(value.charAt(i)) * (13 - i);
     }
-    if ((11 - sum % 11) % 10 != parseFloat(value.charAt(12))) {
+    if ((11 - (sum % 11)) % 10 != parseFloat(value.charAt(12))) {
       this.invalid(this.title);
     } else {
       return "value=" + encodeURIComponent(value) + "&id=" + id;
