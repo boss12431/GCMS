@@ -36,7 +36,7 @@ class View extends \Kotchasan\View
         // template
         $template = Template::create('', '', 'login');
         $template->add(array(
-            '/<FACEBOOK>(.*)<\/FACEBOOK>/' => empty(self::$cfg->facebook_appId) || !self::$cfg->demo_mode ? '' : '\\1',
+            '/<FACEBOOK>(.*)<\/FACEBOOK>/s' => empty(self::$cfg->facebook_appId) || !self::$cfg->demo_mode ? '' : '\\1',
             '/{TOKEN}/' => $request->createToken(),
             '/{PLACEHOLDER}/' => \Gcms\Gcms::getLoginPlaceholder(),
             '/{EMAIL}/' => Login::$login_params['username'],
