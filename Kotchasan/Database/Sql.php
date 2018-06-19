@@ -668,6 +668,8 @@ class Sql
      *
      * @return \static
      *
+     * @throws \InvalidArgumentException ถ้ารูปแบบของ $fields ไม่ใช่แอเรย์
+     *
      * @assert (array('fname', 'lname'))->text() [==] "CONCAT(`fname`, `lname`)"
      * @assert (array('U.fname', 'U.`lname`'), 'displayname')->text() [==] "CONCAT(U.`fname`, U.`lname`) AS `displayname`"
      * @assert (array('fname', 'lname'), 'displayname', ' ')->text() [==] "CONCAT_WS(' ', `fname`, `lname`) AS `displayname`"
@@ -675,11 +677,15 @@ class Sql
     public static function CONCAT($fields, $alias = null, $separator = null)
     {
         $fs = array();
-        foreach ($fields as $item) {
-            $fs[] = self::fieldName($item);
-        }
+        if (is_array($fields)) {
+            foreach ($fields as $item) {
+                $fs[] = self::fieldName($item);
+            }
 
-        return self::create(($separator === null ? 'CONCAT(' : "CONCAT_WS('$separator', ").implode(', ', $fs).($alias ? ") AS `$alias`" : ')'));
+            return self::create(($separator === null ? 'CONCAT(' : "CONCAT_WS('$separator', ").implode(', ', $fs).($alias ? ") AS `$alias`" : ')'));
+        } else {
+            throw new \InvalidArgumentException('$fields is array only');
+        }
     }
 
     /**
