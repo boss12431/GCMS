@@ -10,7 +10,6 @@
 
 namespace Personnel\Admin\Setup;
 
-use Kotchasan\ArrayTool;
 use Kotchasan\DataTable;
 use Kotchasan\Http\Request;
 
@@ -96,7 +95,7 @@ class View extends \Gcms\Adminview
                 'category_id' => array(
                     'name' => 'cat',
                     'text' => '{LNG_Personnel groups}',
-                    'options' => ArrayTool::merge(array(0 => '{LNG_all items}'), $this->categories),
+                    'options' => array(0 => '{LNG_all items}') + $this->categories,
                     'default' => 0,
                     'value' => $request->request('cat')->toInt(),
                 ),

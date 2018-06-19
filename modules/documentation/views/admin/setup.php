@@ -10,7 +10,6 @@
 
 namespace Documentation\Admin\Setup;
 
-use Kotchasan\ArrayTool;
 use Kotchasan\DataTable;
 use Kotchasan\Date;
 use Kotchasan\Http\Request;
@@ -94,7 +93,7 @@ class View extends \Gcms\Adminview
                 'category_id' => array(
                     'name' => 'cat',
                     'text' => '{LNG_Category}',
-                    'options' => ArrayTool::merge(array(0 => '{LNG_all items}'), $this->categories),
+                    'options' => array(0 => '{LNG_all items}') + $this->categories,
                     'default' => 0,
                     'value' => $category_id,
                 ),

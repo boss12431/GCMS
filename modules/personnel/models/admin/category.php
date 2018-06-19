@@ -48,13 +48,13 @@ class Model extends \Kotchasan\Model
                 ->cacheOn()
                 ->order('category_id');
             foreach ($query->toArray()->execute() as $item) {
-                $tmp = ArrayTool::merge($default, @unserialize($item['topic']));
+                $tmp = ArrayTool::replace($default, @unserialize($item['topic']));
                 unset($item['topic']);
-                $result[] = ArrayTool::merge($item, $tmp);
+                $result[] = ArrayTool::replace($item, $tmp);
             }
         }
         if (empty($result)) {
-            $result[] = ArrayTool::merge(array('id' => 0, 'category_id' => 1), $default);
+            $result[] = ArrayTool::replace(array('id' => 0, 'category_id' => 1), $default);
         }
 
         return $result;

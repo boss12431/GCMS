@@ -11,7 +11,6 @@
 namespace Download\Admin\Write;
 
 use Gcms\Gcms;
-use Kotchasan\ArrayTool;
 use Kotchasan\Html;
 use Kotchasan\Http\Request;
 use Kotchasan\Text;
@@ -65,7 +64,7 @@ class View extends \Gcms\Adminview
             'label' => '{LNG_Category}',
             'comment' => '{LNG_Select the category you want}',
             'itemClass' => 'item',
-            'options' => ArrayTool::merge(array(0 => '{LNG_Uncategorized}'), \Index\Category\Model::categories((int) $index->module_id)),
+            'options' => array(0 => '{LNG_Uncategorized}') + \Index\Category\Model::categories((int) $index->module_id),
             'value' => isset($index->category_id) ? $index->category_id : 0,
         ));
         // reciever
@@ -76,7 +75,7 @@ class View extends \Gcms\Adminview
             'itemClass' => 'item',
             'label' => '{LNG_Select the group of recipients}',
             'comment' => '{LNG_The recipient is listed in the selected group can be downloaded (You can select multiple groups)}',
-            'options' => \Kotchasan\ArrayTool::merge(array(-1 => '{LNG_Guest}'), self::$cfg->member_status),
+            'options' => array(-1 => '{LNG_Guest}') + self::$cfg->member_status,
             'value' => $index->reciever,
         ));
         // detail

@@ -250,7 +250,7 @@ class View extends \Gcms\Adminview
             array('text' => '{LNG_Moderator}'),
             array('text' => '{LNG_Settings}'),
         ));
-        foreach (\Kotchasan\ArrayTool::merge(array(-1 => '{LNG_Guest}'), self::$cfg->member_status) as $i => $item) {
+        foreach (array(-1 => '{LNG_Guest}') + self::$cfg->member_status as $i => $item) {
             $row = array();
             $row[] = array(
                 'scope' => 'col',

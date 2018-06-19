@@ -138,6 +138,66 @@ class Html extends \Kotchasan\KBase
         return $obj;
     }
 
+    private function addInputGroups($attributes)
+    {
+        $prop = array('class' => empty($attributes['itemClass']) ? 'item' : $attributes['itemClass']);
+        if (isset($attributes['itemId'])) {
+            $prop['id'] = $attributes['itemId'];
+        }
+        $obj = new static('div', $prop);
+        $this->rows[] = $obj;
+        if (isset($attributes['id'])) {
+            $id = $attributes['id'];
+        } else {
+            $id = uniqid();
+        }
+        $c = array('inputgroups');
+        if (isset($attributes['labelClass'])) {
+            $c[] = $attributes['labelClass'];
+        }
+        if (isset($attributes['label'])) {
+            $obj->add('label', array(
+                'innerHTML' => $attributes['label'],
+                'for' => $id,
+            ));
+        }
+        $li = '';
+        if (isset($attributes['value'])) {
+            if (is_array($attributes['value'])) {
+                foreach ($attributes['value'] as $value) {
+                    $li .= '<li><span>'.$value.'</span><button type="button">x</button><input type="hidden" name="'.$id.'[]" value="'.$value.'"></li>';
+                }
+            }
+        }
+        foreach ($attributes as $key => $value) {
+            if ($key == 'validator') {
+                $js = array();
+                $js[] = '"'.$id.'"';
+                $js[] = '"'.$value[0].'"';
+                $js[] = $value[1];
+                if (isset($value[2])) {
+                    $js[] = '"'.$value[2].'"';
+                    $js[] = empty($value[3]) || $value[3] === null ? 'null' : '"'.$value[3].'"';
+                    $js[] = '"'.self::$form->attributes['id'].'"';
+                }
+                self::$form->javascript[] = 'new GValidator('.implode(', ', $js).');';
+            } elseif (!in_array($key, array('id', 'type', 'itemId', 'itemClass', 'labelClass', 'label', 'value'))) {
+                $prop[$key] = $key.'="'.$value.'"';
+            }
+        }
+
+        $prop['id'] = 'id="'.$id.'"';
+        $prop['type'] = 'type="text"';
+        $prop['class'] = 'class="inputgroup"';
+        $li .= '<li><input '.implode(' ', $prop).'></li>';
+        $obj->add('ul', array(
+            'class' => implode(' ', $c),
+            'innerHTML' => $li,
+        ));
+
+        return $obj;
+    }
+
     private function addRadioOrCheckbox($tag, $attributes)
     {
         $prop = array('class' => empty($attributes['itemClass']) ? 'item' : $attributes['itemClass']);
@@ -261,6 +321,8 @@ class Html extends \Kotchasan\KBase
         $tag = strtolower($tag);
         if ($tag == 'groups' || $tag == 'groups-table') {
             $obj = $this->addGroups($tag, $attributes);
+        } elseif ($tag == 'inputgroups') {
+            $obj = self::addInputGroups($attributes);
         } elseif ($tag == 'radiogroups' || $tag == 'checkboxgroups') {
             $obj = self::addRadioOrCheckbox($tag, $attributes);
         } elseif ($tag == 'antispam') {

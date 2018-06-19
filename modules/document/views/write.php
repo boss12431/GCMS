@@ -11,7 +11,6 @@
 namespace Document\Write;
 
 use Gcms\Login;
-use Kotchasan\ArrayTool;
 use Kotchasan\Date;
 use Kotchasan\Html;
 use Kotchasan\Http\Request;
@@ -176,7 +175,7 @@ class View extends \Gcms\View
                 'label' => '{LNG_Category}',
                 'comment' => '{LNG_Select the category you want}',
                 'itemClass' => 'item',
-                'options' => ArrayTool::merge(array(0 => '{LNG_Uncategorized}'), \Index\Category\Model::categories((int) $index->module_id)),
+                'options' => array(0 => '{LNG_Uncategorized}') + \Index\Category\Model::categories((int) $index->module_id),
                 'value' => $index->category_id,
             ));
             $fieldset = $form->add('fieldset', array(

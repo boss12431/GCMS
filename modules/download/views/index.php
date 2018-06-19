@@ -11,7 +11,6 @@
 namespace Download\Index;
 
 use Gcms\Gcms;
-use Kotchasan\ArrayTool;
 use Kotchasan\Grid;
 use Kotchasan\Http\Request;
 use Kotchasan\Template;
@@ -79,7 +78,7 @@ class View extends \Gcms\View
         // หมวดหมู่
         $categoryitem = Grid::create($index->owner, $index->module, 'categoryitem');
         if (!$categoryitem->isEmpty()) {
-            foreach (ArrayTool::merge(array(0 => '{LNG_all items}'), $categories) as $category_id => $topic) {
+            foreach (array(0 => '{LNG_all items}') + $categories as $category_id => $topic) {
                 $categoryitem->add(array(
                     '/{SELECT}/' => $category_id == $index->category_id ? 'selected' : '',
                     '/{TOPIC}/' => $topic,

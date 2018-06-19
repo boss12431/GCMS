@@ -65,7 +65,7 @@ class View extends \Gcms\Adminview
             'itemClass' => 'item',
             'label' => '{LNG_Select the group of recipients}',
             'comment' => '{LNG_The recipient is listed in the selected group can be downloaded (You can select multiple groups)}',
-            'options' => \Kotchasan\ArrayTool::merge(array(-1 => '{LNG_Guest}'), self::$cfg->member_status),
+            'options' => array(-1 => '{LNG_Guest}') + self::$cfg->member_status,
             'value' => $index->reciever,
         ));
         // topic

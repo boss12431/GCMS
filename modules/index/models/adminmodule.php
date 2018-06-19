@@ -56,7 +56,7 @@ class Model extends \Kotchasan\Model
             } else {
                 $index['config'] = ArrayTool::unserialize($index['config']);
             }
-            $index = ArrayTool::merge($index['config'], $index);
+            $index = ArrayTool::replace($index['config'], $index);
             unset($index['config']);
 
             return (object) $index;

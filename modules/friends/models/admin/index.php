@@ -57,7 +57,7 @@ class Model extends \Kotchasan\Model
             $default = ArrayTool::unserialize($index['config'], $default);
             unset($index['config']);
 
-            return (object) ArrayTool::merge($default, $index);
+            return (object) ArrayTool::replace($default, $index);
         }
 
         return null;

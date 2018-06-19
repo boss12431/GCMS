@@ -10,7 +10,6 @@
 
 namespace Document\Admin\Write;
 
-use Kotchasan\ArrayTool;
 use Kotchasan\Html;
 use Kotchasan\Http\Request;
 use Kotchasan\Language;
@@ -163,7 +162,7 @@ class View extends \Gcms\Adminview
             'label' => '{LNG_Category}',
             'comment' => '{LNG_Select the category you want}',
             'itemClass' => 'item',
-            'options' => ArrayTool::merge(array(0 => '{LNG_Uncategorized}'), \Index\Category\Model::categories((int) $index->module_id, 0, false)),
+            'options' => array(0 => '{LNG_Uncategorized}') + \Index\Category\Model::categories((int) $index->module_id, 0, false),
             'value' => isset($index->category_id) ? $index->category_id : 0,
         ));
         // can_reply

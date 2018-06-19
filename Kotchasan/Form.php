@@ -84,7 +84,6 @@ class Form extends \Kotchasan\KBase
                 case 'options':
                 case 'optgroup':
                 case 'multiple':
-                case 'validator':
                 case 'antispamid':
                 case 'text':
                 case 'validator':

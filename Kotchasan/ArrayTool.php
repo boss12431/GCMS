@@ -234,34 +234,6 @@ class ArrayTool
     }
 
     /**
-     * ฟังก์ชั่นรวมแอเรย์ รักษาแอเรย์ต้นฉบับไว้ แทนที่แอเร์ยย่อยด้วย.
-     *
-     * @param array        $source แอเร์ยต้นฉบับ
-     * @param array|object $with   ข้อมูลที่จะนำมารวม
-     * @assert (array(1 => 1, 2 => 2, 3 => 'three'), array(1 => 'one', 2 => 'two')) [==] array(1 => 'one', 2 => 'two', 3 => 'three')
-     *
-     * @return array
-     */
-    public static function merge($source, $with)
-    {
-        foreach (func_get_args() as $i => $items) {
-            if ($i == 0) {
-                $source = $items;
-            } elseif (is_array($items) || is_object($items)) {
-                foreach ($items as $key => $value) {
-                    if (isset($source[$key]) && is_array($source[$key])) {
-                        $source[$key] = self::merge($source[$key], $value);
-                    } else {
-                        $source[$key] = $value;
-                    }
-                }
-            }
-        }
-
-        return $source;
-    }
-
-    /**
      * ฟังก์ชั่นแปลงข้อความ serialize เป็นแอเรย์
      * และรวมข้อมูลเข้ากับ $source.
      *

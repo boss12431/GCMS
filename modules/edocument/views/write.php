@@ -12,7 +12,6 @@ namespace Edocument\Write;
 
 use Gcms\Gcms;
 use Gcms\Login;
-use Kotchasan\ArrayTool;
 use Kotchasan\Http\Request;
 use Kotchasan\Mime;
 use Kotchasan\Template;
@@ -43,7 +42,7 @@ class View extends \Gcms\View
             if ($index) {
                 // กลุ่มผู้รับ
                 $reciever = array();
-                foreach (ArrayTool::merge(array(-1 => '{LNG_Guest}'), self::$cfg->member_status) as $key => $value) {
+                foreach (array(-1 => '{LNG_Guest}') + self::$cfg->member_status as $key => $value) {
                     $sel = in_array($key, $index->reciever) ? ' checked' : '';
                     $sel .= $key == -1 ? ' id=reciever' : '';
                     $reciever[] = '<label><input type=checkbox value='.$key.$sel.' name=reciever[]>&nbsp;'.$value.'</label>';

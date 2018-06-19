@@ -1295,6 +1295,7 @@ form .comment {
   padding: 0.24em 1em 0.24em 0;
   cursor: pointer;
   float: left;
+  color: initial;
 }
 .radiogroups.g-input > label,
 .checkboxgroups.g-input > label {
@@ -1345,6 +1346,58 @@ form .comment {
   line-height: 1;
   color: inherit;
   margin-right: 5px;
+}
+/* inputgroups */
+ul.inputgroups.g-input {
+  padding: 0 0 0 2.5em;
+  color: #000;
+  cursor: text;
+}
+ul.inputgroups > li {
+  white-space: nowrap;
+  float: left;
+  line-height: inherit;
+  margin: 0.2em 0.2em 0.2em 0;
+}
+ul.inputgroups input[type="text"],
+ul.inputgroups > li > button {
+  border-style: none;
+  height: 2.23em;
+  color: inherit;
+}
+ul.inputgroups > li {
+  background-color: rgba(0,0,0,0.03);
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+ul.inputgroups > li > span {
+  padding-left: 10px;
+}
+ul.inputgroups > li > button {
+  outline: none;
+  padding: 0 10px;
+  border-style: none;
+  margin-left: 10px;
+  background-color: rgba(0,0,0,0.03);
+  border-radius: 0 5px 5px 0;
+  -moz-border-radius: 0 5px 5px 0;
+  -webkit-border-radius: 0 5px 5px 0;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+ul.inputgroups > li > button:hover,
+ul.inputgroups > li > button:focus {
+  background-color: rgba(0,0,0,0.05);
+}
+ul.inputgroups button:focus,
+ul.inputgroups input[type="text"]:focus {
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
 }
 /* dropdown panel */
 .gdpanel {
@@ -2208,11 +2261,15 @@ input.gcalendar {
   cursor: pointer;
   background-position: 95% 50%;
 }
+input[type="text"].gcalendar:not(:disabled),
+input[type="text"].gcalendar:not(:disabled) {
+  background-color: #FFF;
+}
 [class*=" icon-"] input[type="text"].gcalendar,
 [class^="icon-"] input[type="text"].gcalendar {
   background-image: url();
   max-width: none;
-  background-color: #FFF;
+
 }
 /* widget calendar */
 div.calendar div {

@@ -12,7 +12,6 @@ namespace Edocument\Member;
 
 use Gcms\Gcms;
 use Gcms\Login;
-use Kotchasan\ArrayTool;
 use Kotchasan\DataTable;
 use Kotchasan\Date;
 use Kotchasan\Http\Request;
@@ -99,7 +98,7 @@ class View extends \Gcms\View
                         'module_id' => array(
                             'name' => 'mid',
                             'text' => '{LNG_Module}',
-                            'options' => ArrayTool::merge(array(0 => '{LNG_all items}'), $this->modules),
+                            'options' => array(0 => '{LNG_all items}') + $this->modules,
                             'default' => 0,
                             'value' => $module_id,
                         ),

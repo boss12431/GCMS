@@ -11,7 +11,6 @@
 namespace Personnel\Admin\Write;
 
 use Gcms\Gcms;
-use Kotchasan\ArrayTool;
 use Kotchasan\Html;
 use Kotchasan\Http\Request;
 
@@ -63,7 +62,7 @@ class View extends \Gcms\Adminview
             'labelClass' => 'g-input icon-group',
             'label' => '{LNG_Personnel groups}',
             'itemClass' => 'item',
-            'options' => ArrayTool::merge(array(0 => '{LNG_Uncategorized}'), \Index\Category\Model::categories((int) $index->module_id)),
+            'options' => array(0 => '{LNG_Uncategorized}') + \Index\Category\Model::categories((int) $index->module_id),
             'value' => isset($index->category_id) ? $index->category_id : 0,
         ));
         // order
