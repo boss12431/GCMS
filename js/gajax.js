@@ -83,7 +83,7 @@ window.$K = (function() {
               elem.addEvent("change", _docheck);
             }
           } else if (obj.tagName == "input") {
-            var c = elem.hasClass("currency number integer color inputgroup");
+            var c = elem.hasClass("currency number integer color");
             if (c !== false) {
               obj.type = c;
             }
@@ -99,8 +99,7 @@ window.$K = (function() {
               var o = {
                 type: "hidden",
                 name: elem.name,
-                id: elem.id,
-                disabled: obj.disabled
+                id: elem.id
               };
               var hidden = $G(text.parentNode).create("input", o);
               text = document.createElement("input");
@@ -280,8 +279,6 @@ window.$K = (function() {
               }
             } else if (obj.type == "range") {
               new GRange(elem);
-            } else if (obj.type == "inputgroup") {
-              new GInputGroup(elem);
             } else if (obj.pattern) {
               new GMask(text, function() {
                 return obj.pattern.test(this.value);
@@ -1334,23 +1331,14 @@ window.$K = (function() {
       });
       return result;
     },
-    sendKey: function(keyCode) {
-      return this.callEvent("keypress", { keyCode: keyCode });
-    },
-    callEvent: function(t, params) {
+    callEvent: function(t) {
       var evt;
       if (document.createEvent) {
         evt = document.createEvent("Events");
         evt.initEvent(t, true, true);
-        for (var prop in params) {
-          evt[prop] = params[prop];
-        }
         this.dispatchEvent(evt);
       } else if (document.createEventObject) {
         evt = document.createEventObject();
-        for (var prop in params) {
-          evt[prop] = params[prop];
-        }
         this.fireEvent("on" + t, evt);
       }
       return this;

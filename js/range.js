@@ -2,7 +2,7 @@
  * GRange
  * Javascript range input
  *
- * @filesource js/range.js
+ * @filesource js/range
  * @link http://www.kotchasan.com/
  * @copyright 2018 Goragod.com
  * @license http://www.kotchasan.com/license/
