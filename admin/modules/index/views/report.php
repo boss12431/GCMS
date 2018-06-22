@@ -144,7 +144,7 @@ class View extends \Gcms\Adminview
             } else {
                 $title = $item['referer'];
             }
-            $item['referer'] = '<a href="'.$item['referer'].'" target=_blank class="cuttext block" style="max-width:30em">'.$title.'</a>';
+            $item['referer'] = '<a href="'.htmlspecialchars($item['referer']).'" target=_blank class="cuttext block" style="max-width:30em">'.htmlspecialchars($title).'</a>';
         }
         if ($this->ip == '') {
             $item['ip'] = '<a href="index.php?module=report&amp;ip='.$item['ip'].'&amp;date='.$this->date.'">'.$item['ip'].'</a>';
