@@ -2916,7 +2916,8 @@ window.$K = (function() {
             this.firstKey = null;
           }
         } else {
-          times[0] = String(this.firstKey) + String(Math.min(3, c));
+          c = floatval(String(this.firstKey) + c);
+          times[0] = c < 10 ? "0" + c : String(Math.min(23, c));
           caret = 3;
           this.firstKey = null;
         }
