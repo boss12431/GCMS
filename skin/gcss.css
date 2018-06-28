@@ -1038,12 +1038,16 @@ html .button:before,
   background-color: #DDD;
   color: #999;
 }
+.wait[class^="icon-"]:before,
+.wait[class*=" icon-"]:before {
+  content: "\e612";
+}
 .wait:not(.button) {
-  -moz-animation: highlight 2s infinite alternate linear;
-  -ms-animation: highlight 2s infinite alternate linear;
-  -o-animation: highlight 2s infinite alternate linear;
-  -webkit-animation: highlight 2s infinite alternate linear;
-  animation: highlight 2s infinite alternate linear;
+  -moz-animation: highlight 1s infinite alternate linear;
+  -ms-animation: highlight 1s infinite alternate linear;
+  -o-animation: highlight 1s infinite alternate linear;
+  -webkit-animation: highlight 1s infinite alternate linear;
+  animation: highlight 1s infinite alternate linear;
 }
 .show[type="submit"],
 .button.wait {

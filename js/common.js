@@ -150,6 +150,8 @@ function defaultSubmit(ds) {
           if (t != "") {
             val += " " + t;
           }
+        } else if (val == "Please select at least one item") {
+          val = trans(val);
         } else if (val == "this") {
           if (typeof el.placeholder != "undefined") {
             t = el.placeholder.strip_tags();
