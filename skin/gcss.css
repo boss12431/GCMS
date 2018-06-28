@@ -1038,6 +1038,13 @@ html .button:before,
   background-color: #DDD;
   color: #999;
 }
+.wait:not(.button) {
+  -moz-animation: highlight 2s infinite alternate linear;
+  -ms-animation: highlight 2s infinite alternate linear;
+  -o-animation: highlight 2s infinite alternate linear;
+  -webkit-animation: highlight 2s infinite alternate linear;
+  animation: highlight 2s infinite alternate linear;
+}
 .show[type="submit"],
 .button.wait {
   color: transparent;
@@ -1096,6 +1103,26 @@ html .button:before,
   color: #FFF;
 }
 /* Loading */
+@keyframes highlight {
+  0% {color: #F00}
+  50% {color: #00F}
+  100% {color: #0F0}
+}
+@-moz-keyframes highlight {
+  0% {color: #F00}
+  50% {color: #00F}
+  100% {color: #0F0}
+}
+@-ms-keyframes highlight {
+  0% {color: #F00}
+  50% {color: #00F}
+  100% {color: #0F0}
+}
+@-webkit-keyframes highlight {
+  0% {color: #F00}
+  50% {color: #00F}
+  100% {color: #0F0}
+}
 @keyframes rainbow {
   0% {background-color: #F00}
   50% {background-color: #00F}
@@ -1401,31 +1428,9 @@ ul.inputgroups input[type="text"]:focus {
 }
 /* dropdown panel */
 .gdpanel {
-  right: 0;
   min-width: 15em;
-  line-height: 1.8em;
-  visibility: hidden;
-  opacity: 0;
   margin-top: 2px;
-  list-style-type: none;
-  padding: 0 !important;
-  z-index: 1;
-  position: absolute;
-  text-align: left;
-  color: #333;
-  background-color: #FFF;
-  border: 1px solid rgba(0,0,0,0.2);
-  -moz-border-radius: 1px;
-  -webkit-border-radius: 1px;
-  border-radius: 1px;
-  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -webkit-transition: opacity 0.2s ease-out;
-  -moz-transition: opacity 0.2s ease-out;
-  -ms-transition: opacity 0.2s ease-out;
-  -o-transition: opacity 0.2s ease-out;
-  transition: opacity 0.2s ease-out;
+  right: 0;
 }
 html[dir="rtl"] .gdpanel {
   left: 0;
@@ -1468,6 +1473,65 @@ html[dir="rtl"] .gdpanel-arrow {
   padding-left: 25px;
   padding-right: 0;
 }
+/* menu button */
+.menubutton {
+  overflow: visible;
+  position: relative;
+  padding-right: 1.7em;
+}
+.gdpanel,
+.menubutton > ul {
+  text-align: initial;
+  line-height: 1.8em;
+  list-style-type: none;
+  padding: 0 !important;
+  position: absolute;
+  z-index: 2;
+  color: #666;
+  background-color: #FFF;
+  border: 1px solid rgba(0,0,0,0.2);
+  -moz-border-radius: 1px;
+  -webkit-border-radius: 1px;
+  border-radius: 1px;
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s ease-out;
+  -moz-transition: opacity 0.2s ease-out;
+  -ms-transition: opacity 0.2s ease-out;
+  -o-transition: opacity 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
+}
+.menubutton > ul {
+  right: -2px;
+}
+.menubutton:focus > ul,
+.menubutton:hover > ul {
+  visibility: visible;
+  opacity: 1;
+}
+.menubutton > ul > li > a,
+.menubutton > ul {
+  -webkit-transition: 0.2s ease-out;
+  -moz-transition: 0.2s ease-out;
+  -ms-transition: 0.2s ease-out;
+  -o-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+}
+.menubutton > ul > li > a {
+  display: block;
+  padding: 5px;
+}
+.menubutton:after {
+  content: "\25BC";
+  position: absolute;
+  right: 0;
+  width: 1em;
+  text-align: center;
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
 /* top menu, side menu, group-button */
 .topmenu {
   position: relative;
@@ -1477,6 +1541,7 @@ html[dir="rtl"] .gdpanel-arrow {
   display: table;
   zoom: 1;
 }
+.menubutton li,
 .topmenu li,
 .sidemenu li,
 .group-button li {
@@ -1517,6 +1582,7 @@ html .sidemenu ul,
   line-height: inherit;
   overflow: visible;
 }
+.menubutton > ul > li > a,
 .topmenu li > a > span,
 .topmenu li > a,
 .sidemenu li > a > span,
@@ -1530,10 +1596,12 @@ html .sidemenu ul,
 .sidemenu > ul ul {
   color: #000;
 }
+.menubutton > ul > li:hover,
 .topmenu > ul ul > li:hover,
 .sidemenu ul > li:hover {
   color: #FFF;
 }
+.menubutton > ul > li:hover > a,
 .topmenu > ul ul > li:hover > a,
 .sidemenu ul > li:hover > a {
   background-color: #333;
@@ -1542,6 +1610,7 @@ html .sidemenu ul,
 .sidemenu ul > li:hover:before {
   color: inherit;
 }
+.menubutton > ul > li > a > span,
 .topmenu li > a > span,
 .sidemenu li > a > span,
 .group-button li > a > span {

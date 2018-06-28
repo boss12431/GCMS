@@ -120,7 +120,7 @@ class DataTable extends \Kotchasan\KBase
     private $actionCallback;
     /**
      * ชื่อฟังก์ชั่น Javascript เรียกหลังจากคลิก action
-     * เช่น confirmAction.
+     * เช่น confirmAction(text, action, id).
      *
      * @var string
      */
@@ -936,33 +936,69 @@ class DataTable extends \Kotchasan\KBase
      */
     private function button($btn, $properties)
     {
-        $prop = array();
-        foreach ($properties as $key => $value) {
-            if ($key === 'id') {
-                $prop[$key] = $key.'="'.$btn.'_'.$value.'"';
-            } elseif ($key !== 'text') {
-                $prop[$key] = $key.'="'.$value.'"';
-            }
-        }
-        if (!empty($properties['class']) && preg_match('/(.*)\s?(icon\-[a-z0-9\-_]+)($|\s(.*))/', $properties['class'], $match)) {
-            $class = array();
-            foreach (array(1, 4)as $i) {
-                if (!empty($match[$i])) {
-                    $class[] = $match[$i];
+        if (isset($properties['submenus'])) {
+            $innerHTML = '';
+            $li = '';
+            $attributes = array();
+            foreach ($properties as $name => $item) {
+                if ($name == 'submenus') {
+                    foreach ($item as $menu) {
+                        $prop = array();
+                        $text = '';
+                        foreach ($menu as $key => $value) {
+                            if ($key == 'text') {
+                                $text = $value;
+                            } else {
+                                $prop[$key] = $key.'="'.$value.'"';
+                            }
+                        }
+                        $li .= '<li><a '.implode(' ', $prop).'>'.$text.'</a></li>';
+                    }
+                } elseif ($name == 'value') {
+                    $innerHTML = $item;
+                } elseif ($name == 'class') {
+                    $attributes['class'] = 'class="'.$item.' menubutton"';
+                } else {
+                    $attributes[$name] = $name.'="'.$item.'"';
                 }
             }
-            if (empty($properties['text'])) {
-                $class[] = 'notext';
-                $prop['class'] = 'class="'.implode(' ', $class).'"';
-
-                return '<a '.implode(' ', $prop).'><span class="'.$match[2].'"></span></a>';
-            } else {
-                $prop['class'] = 'class="'.implode(' ', $class).'"';
-
-                return '<a '.implode(' ', $prop).'><span class="'.$match[2].' button_w_text"><span class=mobile>'.$properties['text'].'</span></span></a>';
+            if (!isset($attributes['class'])) {
+                $attributes['class'] = 'class="menubutton"';
             }
+            if (!isset($attributes['tabindex'])) {
+                $attributes['tabindex'] = 'tabindex="0"';
+            }
+
+            return  '<div '.implode(' ', $attributes).'>'.$innerHTML.'<ul>'.$li.'</ul></div>';
         } else {
-            return '<a'.(empty($prop) ? '' : ' '.implode(' ', $prop)).'></a>';
+            $prop = array();
+            foreach ($properties as $key => $value) {
+                if ($key === 'id') {
+                    $prop[$key] = $key.'="'.$btn.'_'.$value.'"';
+                } elseif ($key !== 'text') {
+                    $prop[$key] = $key.'="'.$value.'"';
+                }
+            }
+            if (!empty($properties['class']) && preg_match('/(.*)\s?(icon\-[a-z0-9\-_]+)($|\s(.*))/', $properties['class'], $match)) {
+                $class = array();
+                foreach (array(1, 4)as $i) {
+                    if (!empty($match[$i])) {
+                        $class[] = $match[$i];
+                    }
+                }
+                if (empty($properties['text'])) {
+                    $class[] = 'notext';
+                    $prop['class'] = 'class="'.implode(' ', $class).'"';
+
+                    return '<a '.implode(' ', $prop).'><span class="'.$match[2].'"></span></a>';
+                } else {
+                    $prop['class'] = 'class="'.implode(' ', $class).'"';
+
+                    return '<a '.implode(' ', $prop).'><span class="'.$match[2].' button_w_text"><span class=mobile>'.$properties['text'].'</span></span></a>';
+                }
+            } else {
+                return '<a'.(empty($prop) ? '' : ' '.implode(' ', $prop)).'></a>';
+            }
         }
     }
 

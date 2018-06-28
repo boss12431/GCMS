@@ -230,18 +230,9 @@
         action += "&value=" + encodeURIComponent(el.value);
       }
       var temp = this;
-      if (el.hasClass("button")) {
-        el.addClass("wait");
-      } else {
-        var _class = el.className;
-        el.className = "icon-loading";
-      }
+      el.addClass("wait");
       send(hs[0], action, function(xhr) {
-        if (el.hasClass("button")) {
-          el.removeClass("wait");
-        } else {
-          el.className = _class;
-        }
+        el.removeClass("wait");
         if (temp.options.actionCallback) {
           var fn = window[temp.options.actionCallback];
           if (Object.isFunction(fn)) {

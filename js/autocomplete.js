@@ -241,27 +241,33 @@ function initAutoComplete(id, link, displayFields, icon, options) {
     obj.valid();
   }
   function doPopulate() {
-    var datas = new Array();
-    for (var i in df) {
-      if (this[df[i]] !== null && this[df[i]] != "") {
-        datas.push(this[df[i]]);
-      }
-    }
-    var row = datas.join(" ").unentityify();
-    forEach(
-      $E(id)
-        .value.replace(/[\s]+/, " ")
-        .split(" "),
-      function() {
-        if (this.length > 0) {
-          var patt = new RegExp("(" + this.preg_quote() + ")", "gi");
-          row = row.replace(patt, "<em>$1</em>");
+    if ($E(id)) {
+      var datas = new Array();
+      for (var i in df) {
+        if (this[df[i]] !== null && this[df[i]] != "") {
+          datas.push(this[df[i]]);
         }
       }
-    );
-    return (
-      '<p><span class="icon-' + (icon || "search") + '">' + row + "</span></p>"
-    );
+      var row = datas.join(" ").unentityify();
+      forEach(
+        $E(id)
+          .value.replace(/[\s]+/, " ")
+          .split(" "),
+        function() {
+          if (this.length > 0) {
+            var patt = new RegExp("(" + this.preg_quote() + ")", "gi");
+            row = row.replace(patt, "<em>$1</em>");
+          }
+        }
+      );
+      return (
+        '<p><span class="icon-' +
+        (icon || "search") +
+        '">' +
+        row +
+        "</span></p>"
+      );
+    }
   }
   var o = {
     get: doGetQuery,

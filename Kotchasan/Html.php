@@ -138,6 +138,57 @@ class Html extends \Kotchasan\KBase
         return $obj;
     }
 
+    private function addMenuButton($attributes)
+    {
+        $prop = array('class' => empty($attributes['itemClass']) ? 'item' : $attributes['itemClass']);
+        if (isset($attributes['itemId'])) {
+            $prop['id'] = $attributes['itemId'];
+        }
+        $obj = new static('div', $prop);
+        $this->rows[] = $obj;
+        if (isset($attributes['id'])) {
+            $id = $attributes['id'];
+        } else {
+            $id = uniqid();
+        }
+        if (isset($attributes['label'])) {
+            $obj->add('label', array(
+                'innerHTML' => $attributes['label'],
+            ));
+        }
+        $div = $obj->add('div', array(
+            'class' => 'g-input',
+        ));
+        $li = '<ul>';
+        if (isset($attributes['submenus']) && is_array($attributes['submenus'])) {
+            foreach ($attributes['submenus'] as $item) {
+                $prop = array();
+                $text = '';
+                foreach ($item as $key => $value) {
+                    if ($key == 'text') {
+                        $text = $value;
+                    } else {
+                        $prop[$key] = $key.'="'.$value.'"';
+                    }
+                }
+                $li .= '<li><a '.implode(' ', $prop).'>'.$text.'</a></li>';
+            }
+        }
+        $li .= '</ul>';
+        $prop = array(
+            'class' => isset($attributes['class']) ? $attributes['class'].' menubutton' : 'menubutton',
+            'tabindex' => 0,
+        );
+        if (isset($attributes['text'])) {
+            $prop['innerHTML'] = $attributes['text'].$li;
+        } else {
+            $prop['innerHTML'] = $li;
+        }
+        $div->add('div', $prop);
+
+        return $obj;
+    }
+
     private function addInputGroups($attributes)
     {
         $prop = array('class' => empty($attributes['itemClass']) ? 'item' : $attributes['itemClass']);
@@ -325,6 +376,8 @@ class Html extends \Kotchasan\KBase
             $obj = self::addInputGroups($attributes);
         } elseif ($tag == 'radiogroups' || $tag == 'checkboxgroups') {
             $obj = self::addRadioOrCheckbox($tag, $attributes);
+        } elseif ($tag == 'menubutton') {
+            $obj = self::addMenuButton($attributes);
         } elseif ($tag == 'antispam') {
             $obj = self::addAntispam($tag, $attributes);
         } elseif ($tag == 'ckeditor') {
