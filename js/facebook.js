@@ -56,7 +56,7 @@ function initFacebook(appId, lng) {
       cookie: true,
       status: true,
       xfbml: true,
-      version: "v2.8"
+      version: "v3.0"
     });
   };
   loadJavascript(
