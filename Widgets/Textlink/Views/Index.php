@@ -73,9 +73,9 @@ class Index extends \Gcms\View
     foreach ($items as $item) {
       $row = '<figure>';
       $row .= '<img class=nozoom src="'.WEB_URL.DATA_FOLDER.'image/'.$item['logo'].'" alt="'.$item['text'].'">';
-      $row .= '<figcaption><a'.(empty($item['url']) ? '' : ' href="'.$item['url'].'"').($item['target'] == '_blank' ? ' target=_blank' : '').' title="'.$item['text'].'">';
-      $row .= $item['text'] == '' ? '' : '<span>'.$item['text'].'</span>';
-      $row .= '</a></figcaption>';
+      if ($item['text'] != '') {
+        $row .= '<figcaption><a'.(empty($item['url']) ? '' : ' href="'.$item['url'].'"').($item['target'] == '_blank' ? ' target=_blank' : '').' title="'.$item['text'].'">'.$item['text'].'</a></figcaption>';
+      }
       $row .= '</figure>';
       $textlinks[] = $row;
     }

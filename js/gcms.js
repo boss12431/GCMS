@@ -312,7 +312,7 @@ function initDocumentView(id, module) {
               $G(ds.remove).remove();
             }
           } else if (xhr.responseText != "") {
-            alert(xhr.responseText);
+            console.log(xhr.responseText);
           }
         },
         this

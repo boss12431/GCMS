@@ -49,7 +49,7 @@ class Controller extends \Gcms\Controller
             $ul->appendChild('<li><span class="icon-widgets">{LNG_Widgets}</span></li>');
             $ul->appendChild('<li><span>{LNG_Tags}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-tags">'.$this->title().'</h2>',
+                'innerHTML' => '<h2 class="icon-tags">' . $this->title() . '</h2>',
             ));
             // แสดงตาราง
             $section->appendChild(createClass('Index\Tags\View')->render($request));

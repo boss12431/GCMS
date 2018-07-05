@@ -121,7 +121,7 @@ class Model extends \Kotchasan\Orm\Field
                             for ($b = 0; $b < $save['level']; ++$b) {
                                 $text .= '&nbsp;&nbsp;&nbsp;';
                             }
-                            $ret["r$i"] = ($text == '' ? '' : $text.'↳&nbsp;').$levels[$i]['menu_text']."|$save[level]|$i";
+                            $ret["r$i"] = ($text == '' ? '' : $text . '↳&nbsp;') . $levels[$i]['menu_text'] . "|$save[level]|$i";
                         }
                     }
                 } elseif ($action == 'move_left' || $action == 'move_right') {
@@ -156,14 +156,14 @@ class Model extends \Kotchasan\Orm\Field
                         for ($i = 0; $i < $save['level']; ++$i) {
                             $text .= '&nbsp;&nbsp;&nbsp;';
                         }
-                        $ret["r$item[id]"] = ($text == '' ? '' : $text.'↳&nbsp;').$item['menu_text']."|$save[level]|$item[id]";
+                        $ret["r$item[id]"] = ($text == '' ? '' : $text . '↳&nbsp;') . $item['menu_text'] . "|$save[level]|$item[id]";
                     }
                 } elseif ($action === 'delete') {
                     // ลบเมนู
                     $id = $request->post('id')->toInt();
                     $model->db()->delete($table_menus, $id);
                     // คืนค่า
-                    $ret['delete_id'] = $request->post('src')->topic().'_'.$id;
+                    $ret['delete_id'] = $request->post('src')->topic() . '_' . $id;
                 }
             }
         }

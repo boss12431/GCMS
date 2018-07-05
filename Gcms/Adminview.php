@@ -59,13 +59,13 @@ class Adminview extends \Kotchasan\View
         foreach (self::$request->getQueryParams() as $key => $value) {
             if ($value != '' && $key != 'module') {
                 $key = ltrim($key, '_');
-                $query_url[$key] = $key.'='.$value;
+                $query_url[$key] = $key . '=' . $value;
             }
         }
         foreach (self::$request->getParsedBody() as $key => $value) {
             if ($value != '' && $key != 'module') {
                 $key = ltrim($key, '_');
-                $query_url[$key] = $key.'='.$value;
+                $query_url[$key] = $key . '=' . $value;
             }
         }
         if (isset($f[2])) {
@@ -80,6 +80,6 @@ class Adminview extends \Kotchasan\View
             }
         }
 
-        return WEB_URL.'admin/index.php?'.implode('&amp;', $query_url);
+        return WEB_URL . 'admin/index.php?' . implode('&amp;', $query_url);
     }
 }

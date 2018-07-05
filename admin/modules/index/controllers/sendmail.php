@@ -49,7 +49,7 @@ class Controller extends \Gcms\Controller
             $ul->appendChild('<li><span class="icon-email">{LNG_Mailbox}</span></li>');
             $ul->appendChild('<li><span>{LNG_Email send}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-email-sent">'.$this->title.'</h2>',
+                'innerHTML' => '<h2 class="icon-email-sent">' . $this->title . '</h2>',
             ));
             // แสดงฟอร์ม
             $section->appendChild(createClass('Index\Sendmail\View')->render($request, $login));

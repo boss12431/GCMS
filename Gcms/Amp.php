@@ -31,7 +31,7 @@ class Amp extends \Gcms\Baseview
         // เนื้อหา
         parent::setContents(array(
             /* AMP CSS */
-            '/{CSS}/' => \Css\Index\View::compress(file_get_contents(ROOT_PATH.'skin/'.self::$cfg->skin.'/amp.css')),
+            '/{CSS}/' => \Css\Index\View::compress(file_get_contents(ROOT_PATH . 'skin/' . self::$cfg->skin . '/amp.css')),
             // widgets
             '/{WIDGET_([A-Z]+)([_\s]+([^}]+))?}/e' => '\Gcms\View::getWidgets(array(1=>"$1",3=>"$3"))',
             /* ภาษา */
@@ -41,7 +41,7 @@ class Amp extends \Gcms\Baseview
         ));
         // JSON-LD
         if (!empty($this->jsonld)) {
-            $this->metas['JsonLd'] = '<script type="application/ld+json">'.json_encode($this->jsonld).'</script>';
+            $this->metas['JsonLd'] = '<script type="application/ld+json">' . json_encode($this->jsonld) . '</script>';
         }
 
         return preg_replace_callback('/<(iframe|img)([^>]+)>(<\/\\1>)?/is', function ($matchs) {
@@ -87,12 +87,12 @@ class Amp extends \Gcms\Baseview
                     if ($key == $value) {
                         $prop[$key] = $key;
                     } else {
-                        $prop[$key] = $key.'="'.$value.'"';
+                        $prop[$key] = $key . '="' . $value . '"';
                     }
                 }
-                $prop = empty($prop) ? '' : ' '.implode(' ', $prop);
+                $prop = empty($prop) ? '' : ' ' . implode(' ', $prop);
 
-                return '<amp-'.$tag.$prop.'></amp-'.$tag.'>';
+                return '<amp-' . $tag . $prop . '></amp-' . $tag . '>';
             }
         }, parent::renderHTML(\Kotchasan\Template::load('', '', 'amp')));
     }

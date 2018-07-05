@@ -66,10 +66,10 @@ class View extends \Gcms\Adminview
             'value' => isset($config->web_description) ? $config->web_description : self::$cfg->web_description,
         ));
         // favicon
-        if (is_file(ROOT_PATH.DATA_FOLDER.'image/favicon.ico')) {
-            $favicon = WEB_URL.DATA_FOLDER.'image/favicon.ico';
+        if (is_file(ROOT_PATH . DATA_FOLDER . 'image/favicon.ico')) {
+            $favicon = WEB_URL . DATA_FOLDER . 'image/favicon.ico';
         } else {
-            $favicon = WEB_URL.'favicon.ico';
+            $favicon = WEB_URL . 'favicon.ico';
         }
         $fieldset->add('file', array(
             'id' => 'favicon',
@@ -90,7 +90,7 @@ class View extends \Gcms\Adminview
         // module_url
         $datas = array();
         foreach (Gcms::$urls as $k => $v) {
-            $datas[$k] = WEB_URL.str_replace(array('{', '}'), '', $v);
+            $datas[$k] = WEB_URL . str_replace(array('{', '}'), '', $v);
         }
         $fieldset->add('select', array(
             'id' => 'module_url',
@@ -120,7 +120,7 @@ class View extends \Gcms\Adminview
             'id' => 'timezone',
             'labelClass' => 'g-input icon-clock',
             'itemClass' => 'item',
-            'label' => '{LNG_Time zone}&nbsp;({LNG_Server time}&nbsp;<em id=server_time>'.date('H:i:s').'</em>&nbsp;{LNG_Local time}&nbsp;<em id=local_time></em>)',
+            'label' => '{LNG_Time zone}&nbsp;({LNG_Server time}&nbsp;<em id=server_time>' . date('H:i:s') . '</em>&nbsp;{LNG_Local time}&nbsp;<em id=local_time></em>)',
             'comment' => '{LNG_Settings the timing of the server to match the local time}',
             'options' => $datas,
             'value' => isset($config->timezone) ? $config->timezone : self::$cfg->timezone,

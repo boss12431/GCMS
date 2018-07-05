@@ -49,7 +49,7 @@ class Controller extends \Gcms\Controller
             $ul->appendChild('<li><span class="icon-tools">{LNG_Tools}</span></li>');
             $ul->appendChild('<li><span>{LNG_Database}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-database">'.$this->title.'</h2>',
+                'innerHTML' => '<h2 class="icon-database">' . $this->title . '</h2>',
             ));
             $div = $section->add('div', array(
                 'class' => 'setup_frm',

@@ -54,12 +54,12 @@ class Model extends \Kotchasan\KBase
                 if (empty($ret)) {
                     if (empty($post['language'])) {
                         // สร้างภาษาใหม่
-                        if (!@copy(ROOT_PATH.'language/'.$post['copy'].'.php', ROOT_PATH.'language/'.$post['language_name'].'.php')) {
+                        if (!@copy(ROOT_PATH . 'language/' . $post['copy'] . '.php', ROOT_PATH . 'language/' . $post['language_name'] . '.php')) {
                             // error copy file
                             $ret['alert'] = sprintf(Language::get('Directory %s cannot be created or is read-only.'), 'language/');
                         } else {
-                            @copy(ROOT_PATH.'language/'.$post['copy'].'.js', ROOT_PATH.'language/'.$post['language_name'].'.js');
-                            @copy(ROOT_PATH.'language/'.$post['copy'].'.gif', ROOT_PATH.'language/'.$post['language_name'].'.gif');
+                            @copy(ROOT_PATH . 'language/' . $post['copy'] . '.js', ROOT_PATH . 'language/' . $post['language_name'] . '.js');
+                            @copy(ROOT_PATH . 'language/' . $post['copy'] . '.gif', ROOT_PATH . 'language/' . $post['language_name'] . '.gif');
                             $config->languages[] = $post['language_name'];
                             // เพิ่อมคอลัมน์ภาษา
                             $model->db()->query("ALTER TABLE `$language_table` ADD `$post[language_name]` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci AFTER `$post[copy]`");
@@ -68,9 +68,9 @@ class Model extends \Kotchasan\KBase
                         }
                     } elseif ($post['language_name'] != $post['language']) {
                         // เปลี่ยนชื่อภาษา
-                        rename(ROOT_PATH.'language/'.$post['language'].'.php', ROOT_PATH.'language/'.$post['language_name'].'.php');
-                        rename(ROOT_PATH.'language/'.$post['language'].'.js', ROOT_PATH.'language/'.$post['language_name'].'.js');
-                        rename(ROOT_PATH.'language/'.$post['language'].'.gif', ROOT_PATH.'language/'.$post['language_name'].'.gif');
+                        rename(ROOT_PATH . 'language/' . $post['language'] . '.php', ROOT_PATH . 'language/' . $post['language_name'] . '.php');
+                        rename(ROOT_PATH . 'language/' . $post['language'] . '.js', ROOT_PATH . 'language/' . $post['language_name'] . '.js');
+                        rename(ROOT_PATH . 'language/' . $post['language'] . '.gif', ROOT_PATH . 'language/' . $post['language_name'] . '.gif');
                         foreach ($config->languages as $i => $item) {
                             if ($item == $post['language']) {
                                 $config->languages[$i] = $post['language_name'];
@@ -88,15 +88,15 @@ class Model extends \Kotchasan\KBase
                                 $ret['alert'] = Language::get('The type of file is invalid');
                             } else {
                                 try {
-                                    $file->moveTo(ROOT_PATH.'language/'.$post['language_name'].'.gif');
+                                    $file->moveTo(ROOT_PATH . 'language/' . $post['language_name'] . '.gif');
                                 } catch (\Exception $exc) {
                                     // ไม่สามารถอัปโหลดได้
-                                    $ret['ret_'.$item] = Language::get($exc->getMessage());
+                                    $ret['ret_' . $item] = Language::get($exc->getMessage());
                                 }
                             }
                         } elseif ($file->hasError()) {
                             // ข้อผิดพลาดการอัปโหลด
-                            $ret['ret_'.$item] = Language::get($file->getErrorMessage());
+                            $ret['ret_' . $item] = Language::get($file->getErrorMessage());
                         }
                     }
                     if (empty($ret)) {

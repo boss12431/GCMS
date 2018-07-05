@@ -38,7 +38,7 @@ class Controller extends \Gcms\Controller
         $ip = $request->request('ip')->filter('0-9\.');
         $date = $request->request('date', date('Y-m-d'))->date();
         // ข้อความ title bar
-        $this->title = Language::get('Visitors report').Date::format($date, ' d M Y').(empty($ip) ? '' : ' IP '.$ip);
+        $this->title = Language::get('Visitors report') . Date::format($date, ' d M Y') . (empty($ip) ? '' : ' IP ' . $ip);
         // เลือกเมนู
         $this->menu = 'home';
         // สามารถตั้งค่าระบบได้
@@ -52,9 +52,9 @@ class Controller extends \Gcms\Controller
             $ul = $breadcrumbs->add('ul');
             $ul->appendChild('<li><span class="icon-home">{LNG_Home}</span></li>');
             $ul->appendChild('<li><a href="index.php?module=pagesview">{LNG_Pages view}</a></li>');
-            $ul->appendChild('<li><a href="index.php?module=report&amp;date='.$date.'">{LNG_Report}</a></li>');
+            $ul->appendChild('<li><a href="index.php?module=report&amp;date=' . $date . '">{LNG_Report}</a></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-stats">'.$this->title.'</h2>',
+                'innerHTML' => '<h2 class="icon-stats">' . $this->title . '</h2>',
             ));
             // แสดงฟอร์ม
             $section->appendChild(createClass('Index\Report\View')->render($request, $ip, $date));

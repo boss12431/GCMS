@@ -48,11 +48,11 @@ class Model extends \Kotchasan\Model
                     }
                 }
                 $web_url = str_replace(array('http://', 'https://', 'www.'), '', WEB_URL);
-                $web_url = '/http(s)?:\/\/(www\.)?'.preg_quote($web_url, '/').'/';
+                $web_url = '/http(s)?:\/\/(www\.)?' . preg_quote($web_url, '/') . '/';
                 // database
                 $model = new static();
                 // ชื่อฐานข้อมูล
-                $db_name = $model->getSetting('dbname').'.sql';
+                $db_name = $model->getSetting('dbname') . '.sql';
                 // memory limit
                 ini_set('memory_limit', '1024M');
                 // prefix
@@ -61,13 +61,13 @@ class Model extends \Kotchasan\Model
                 $tables = $model->db()->customQuery('SHOW TABLE STATUS', true);
                 // ตารางทั้งหมด
                 foreach ($tables as $table) {
-                    if (preg_match('/^'.$prefix.'_(.*?)$/', $table['Name'], $match) && isset($datas[$table['Name']])) {
+                    if (preg_match('/^' . $prefix . '_(.*?)$/', $table['Name'], $match) && isset($datas[$table['Name']])) {
                         if (isset($datas[$table['Name']]['sturcture'])) {
-                            $fields = $model->db()->customQuery('SHOW CREATE TABLE '.$table['Name'], true);
-                            $sqls[] = 'DROP TABLE IF EXISTS `{prefix}_'.$match[1].'`;';
-                            $sqls[] = preg_replace(array('/AUTO_INCREMENT=[0-9]+/', '/[\r\n\t\s]{1,}/s', '/CREATE TABLE `'.$prefix.'_([^`]+)`/'), array(' ', ' ', 'CREATE TABLE `{prefix}_\\1`'), $fields[0]['Create Table']);
+                            $fields = $model->db()->customQuery('SHOW CREATE TABLE ' . $table['Name'], true);
+                            $sqls[] = 'DROP TABLE IF EXISTS `{prefix}_' . $match[1] . '`;';
+                            $sqls[] = preg_replace(array('/AUTO_INCREMENT=[0-9]+/', '/[\r\n\t\s]{1,}/s', '/CREATE TABLE `' . $prefix . '_([^`]+)`/'), array(' ', ' ', 'CREATE TABLE `{prefix}_\\1`'), $fields[0]['Create Table']);
                         }
-                        $fields = $model->db()->customQuery('SHOW FULL FIELDS FROM '.$table['Name'], true);
+                        $fields = $model->db()->customQuery('SHOW FULL FIELDS FROM ' . $table['Name'], true);
                         foreach ($fields as $field) {
                             $database[$table['Name']]['Field'][] = $field['Field'];
                         }
@@ -75,7 +75,7 @@ class Model extends \Kotchasan\Model
                 }
                 // ข้อมูลในตาราง
                 foreach ($tables as $table) {
-                    if (preg_match('/^'.$prefix.'(.*?)$/', $table['Name'], $match)) {
+                    if (preg_match('/^' . $prefix . '(.*?)$/', $table['Name'], $match)) {
                         if ($match[1] == '_language') {
                             if (isset($_POST['language_lang']) && isset($_POST['language_owner'])) {
                                 $l = array_merge(array('key', 'type', 'owner', 'js'), $_POST['language_lang']);
@@ -85,9 +85,9 @@ class Model extends \Kotchasan\Model
                                         $languages[] = "''";
                                     }
                                 }
-                                $table_name = $prefix == '' ? $table['Name'] : preg_replace('/^'.$prefix.'/', '{prefix}', $table['Name']);
-                                $data = "INSERT INTO `$table_name` (`".implode('`, `', $l)."`) VALUES ('%s');";
-                                $sql = 'SELECT `'.implode('`,`', $l).'` FROM `'.$table['Name'].'` WHERE `owner` IN ('.implode(',', $languages).') ORDER BY `owner`,`key`,`js`';
+                                $table_name = $prefix == '' ? $table['Name'] : preg_replace('/^' . $prefix . '/', '{prefix}', $table['Name']);
+                                $data = "INSERT INTO `$table_name` (`" . implode('`, `', $l) . "`) VALUES ('%s');";
+                                $sql = 'SELECT `' . implode('`,`', $l) . '` FROM `' . $table['Name'] . '` WHERE `owner` IN (' . implode(',', $languages) . ') ORDER BY `owner`,`key`,`js`';
                                 foreach ($model->db()->customQuery($sql, true) as $record) {
                                     foreach ($record as $field => $value) {
                                         $record[$field] = ($field == 'owner' && $value == '') ? 'index' : addslashes($value);
@@ -100,9 +100,9 @@ class Model extends \Kotchasan\Model
                                 if (($key = array_search('id', $database[$table['Name']]['Field'])) !== false) {
                                     unset($database[$table['Name']]['Field'][$key]);
                                 }
-                                $table_name = $prefix == '' ? $table['Name'] : preg_replace('/^'.$prefix.'/', '{prefix}', $table['Name']);
-                                $data = "INSERT INTO `$table_name` (`".implode('`, `', $database[$table['Name']]['Field'])."`) VALUES ('%s');";
-                                $records = $model->db()->customQuery('SELECT * FROM '.$table['Name'], true);
+                                $table_name = $prefix == '' ? $table['Name'] : preg_replace('/^' . $prefix . '/', '{prefix}', $table['Name']);
+                                $data = "INSERT INTO `$table_name` (`" . implode('`, `', $database[$table['Name']]['Field']) . "`) VALUES ('%s');";
+                                $records = $model->db()->customQuery('SELECT * FROM ' . $table['Name'], true);
                                 foreach ($records as $record) {
                                     foreach ($record as $field => $value) {
                                         if ($field === 'copy_to' || $field === 'from_email') {
@@ -117,9 +117,9 @@ class Model extends \Kotchasan\Model
                                 }
                             }
                         } elseif (isset($datas[$table['Name']]['datas'])) {
-                            $table_name = $prefix == '' ? $table['Name'] : preg_replace('/^'.$prefix.'/', '{prefix}', $table['Name']);
-                            $data = "INSERT INTO `$table_name` (`".implode('`, `', $database[$table['Name']]['Field'])."`) VALUES ('%s');";
-                            $records = $model->db()->customQuery('SELECT * FROM '.$table['Name'], true);
+                            $table_name = $prefix == '' ? $table['Name'] : preg_replace('/^' . $prefix . '/', '{prefix}', $table['Name']);
+                            $data = "INSERT INTO `$table_name` (`" . implode('`, `', $database[$table['Name']]['Field']) . "`) VALUES ('%s');";
+                            $records = $model->db()->customQuery('SELECT * FROM ' . $table['Name'], true);
                             foreach ($records as $record) {
                                 foreach ($record as $field => $value) {
                                     $record[$field] = addslashes(preg_replace($web_url, '{WEBURL}', $value));
@@ -133,7 +133,7 @@ class Model extends \Kotchasan\Model
                 $response = new Response();
                 $response->withHeaders(array(
                     'Content-Type' => 'application/force-download',
-                    'Content-Disposition' => 'attachment; filename='.$db_name,
+                    'Content-Disposition' => 'attachment; filename=' . $db_name,
                 ))->withContent(preg_replace(array('/[\\\\]+/', '/\\\"/'), array('\\', '"'), implode("\r\n", $sqls)))->send();
                 exit;
             }
@@ -162,7 +162,7 @@ class Model extends \Kotchasan\Model
                     if ($file->hasUploadFile()) {
                         if (!$file->validFileExt(array('sql'))) {
                             // ชนิดของไฟล์ไม่ถูกต้อง
-                            $ret['ret_'.$item] = Language::get('The type of file is invalid');
+                            $ret['ret_' . $item] = Language::get('The type of file is invalid');
                         } else {
                             // long time
                             set_time_limit(0);
@@ -180,7 +180,7 @@ class Model extends \Kotchasan\Model
                         }
                     } elseif ($file->hasError()) {
                         // ข้อผิดพลาดการอัปโหลด
-                        $ret['ret_'.$item] = Language::get($file->getErrorMessage());
+                        $ret['ret_' . $item] = Language::get($file->getErrorMessage());
                     }
                 }
             }

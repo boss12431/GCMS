@@ -93,10 +93,10 @@ class Model extends \Kotchasan\Orm\Field
                         $published = $index->published == 1 ? 0 : 1;
                         $model->db()->update($model->getTableName('index'), $index->id, array('published' => $published));
                         // คืนค่า
-                        $ret['elem'] = 'published_'.$index->id;
+                        $ret['elem'] = 'published_' . $index->id;
                         $lng = Language::get('PUBLISHEDS');
                         $ret['title'] = $lng[$published];
-                        $ret['class'] = 'icon-published'.$published;
+                        $ret['class'] = 'icon-published' . $published;
                     }
                 } elseif ($action === 'delete') {
                     // ลบโมดูลและหน้าเพจ ไม่ลบข้อมูลของโมดูล
@@ -120,7 +120,7 @@ class Model extends \Kotchasan\Orm\Field
                         $model->db()->delete($model->getTableName('modules'), $field->module_id);
                     }
                     // คืนค่า
-                    $ret['delete_id'] = $request->post('src')->toString().'_'.$id;
+                    $ret['delete_id'] = $request->post('src')->toString() . '_' . $id;
                 }
             }
         }

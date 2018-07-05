@@ -60,10 +60,10 @@ class Model extends \Kotchasan\Model
                         $value = Language::get('click to edit');
                         $i = $this->db()->insert($this->getTableName('tags'), array('tag' => $value, 'count' => 0));
                         // ข้อมูลใหม่
-                        $row = '<li id="config_status_'.$i.'">';
-                        $row .= '<span class="no">'.Language::get('Clicked').' [ 0 ]</span>';
-                        $row .= '<span class="icon-delete" id="config_status_delete_'.$i.'" title="'.Language::get('Delete').'"></span>';
-                        $row .= '<span id="config_status_name_'.$i.'" title="'.$value.'">'.$value.'</span>';
+                        $row = '<li id="config_status_' . $i . '">';
+                        $row .= '<span class="no">' . Language::get('Clicked') . ' [ 0 ]</span>';
+                        $row .= '<span class="icon-delete" id="config_status_delete_' . $i . '" title="' . Language::get('Delete') . '"></span>';
+                        $row .= '<span id="config_status_name_' . $i . '" title="' . $value . '">' . $value . '</span>';
                         $row .= '</li>';
                         // คืนค่าข้อมูลเข้ารหัส
                         $ret['data'] = $row;

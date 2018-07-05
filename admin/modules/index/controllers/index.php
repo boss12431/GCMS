@@ -50,7 +50,7 @@ class Controller extends \Gcms\Controller
             Gcms::$menu = \Index\Menu\Controller::init($login);
             // เรียก init ของโมดูล
             foreach (Gcms::$module->getInstalledOwners() as $owner => $modules) {
-                $class = ucfirst($owner).'\Admin\Init\Controller';
+                $class = ucfirst($owner) . '\Admin\Init\Controller';
                 if (class_exists($class) && method_exists($class, 'init')) {
                     $class::init($modules, $login);
                 }
@@ -59,7 +59,7 @@ class Controller extends \Gcms\Controller
             $main = new \Index\Main\Controller();
             $bodyclass = 'mainpage';
             // ckeditor
-            Gcms::$view->addJavascript(WEB_URL.'ckeditor/ckeditor.js');
+            Gcms::$view->addJavascript(WEB_URL . 'ckeditor/ckeditor.js');
         } else {
             // forgot, login, register
             $main = new \Index\Welcome\Controller();
@@ -68,7 +68,7 @@ class Controller extends \Gcms\Controller
         $languages = array();
         $uri = $request->getUri();
         foreach (Gcms::installedLanguage() as $item) {
-            $languages[$item] = '<li><a id=lang_'.$item.' href="'.$uri->withParams(array('lang' => $item), true).'" title="{LNG_Language} '.strtoupper($item).'" style="background-image:url('.WEB_URL.'language/'.$item.'.gif)" tabindex=1>&nbsp;</a></li>';
+            $languages[$item] = '<li><a id=lang_' . $item . ' href="' . $uri->withParams(array('lang' => $item), true) . '" title="{LNG_Language} ' . strtoupper($item) . '" style="background-image:url(' . WEB_URL . 'language/' . $item . '.gif)" tabindex=1>&nbsp;</a></li>';
         }
         // เนื้อหา
         Gcms::$view->setContents(array(

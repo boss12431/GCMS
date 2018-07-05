@@ -50,7 +50,7 @@ class Controller extends \Gcms\Controller
             $ul->appendChild('<li><span class="icon-settings">{LNG_Site settings}</span></li>');
             $ul->appendChild('<li><span>{LNG_Template settings}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-index">'.$this->title.'</h2>',
+                'innerHTML' => '<h2 class="icon-index">' . $this->title . '</h2>',
             ));
             // โหลด config
             $config = Config::load(CONFIG);

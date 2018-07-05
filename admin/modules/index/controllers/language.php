@@ -49,7 +49,7 @@ class Controller extends \Gcms\Controller
             $ul->appendChild('<li><span class="icon-tools">{LNG_Tools}</span></li>');
             $ul->appendChild('<li><span>{LNG_Language}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-language">'.$this->title.'</h2>',
+                'innerHTML' => '<h2 class="icon-language">' . $this->title . '</h2>',
             ));
             // แสดงตาราง
             $section->appendChild(createClass('Index\Language\View')->render($request));

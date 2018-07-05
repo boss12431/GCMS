@@ -49,7 +49,7 @@ class Controller extends \Gcms\Controller
             $ul->appendChild('<li><a class="icon-user" href="index.php?module=member">{LNG_Users}</a></li>');
             $ul->appendChild('<li><span>{LNG_Register}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-register">'.$this->title.'</h2>',
+                'innerHTML' => '<h2 class="icon-register">' . $this->title . '</h2>',
             ));
             // แสดงฟอร์ม
             $section->appendChild(createClass('Index\Register\View')->render());

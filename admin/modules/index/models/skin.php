@@ -42,10 +42,10 @@ class Model extends \Kotchasan\KBase
                 foreach ($request->getUploadedFiles() as $item => $file) {
                     if (in_array($item, array('logo', 'bg_image'))) {
                         /* @var $file \Kotchasan\Http\UploadedFile */
-                        if ($request->post('delete_'.$item)->toBoolean() == 1) {
+                        if ($request->post('delete_' . $item)->toBoolean() == 1) {
                             // ลบรูปภาพ
-                            if (isset($config->$item) && is_file(ROOT_PATH.DATA_FOLDER.'image/'.$config->$item)) {
-                                @unlink(ROOT_PATH.DATA_FOLDER.'image/'.$config->$item);
+                            if (isset($config->$item) && is_file(ROOT_PATH . DATA_FOLDER . 'image/' . $config->$item)) {
+                                @unlink(ROOT_PATH . DATA_FOLDER . 'image/' . $config->$item);
                                 unset($config->$item);
                             }
                         } elseif ($file->hasUploadFile()) {
@@ -53,23 +53,23 @@ class Model extends \Kotchasan\KBase
                             $typies = $item == 'logo' ? array('jpg', 'jpeg', 'gif', 'png', 'swf') : array('jpg', 'jpeg', 'gif', 'png');
                             if (!$file->validFileExt($typies)) {
                                 // ชนิดของไฟล์ไม่รองรับ
-                                $ret['ret_'.$item] = Language::get('The type of file is invalid');
-                            } elseif (!File::makeDirectory(ROOT_PATH.DATA_FOLDER.'image/')) {
+                                $ret['ret_' . $item] = Language::get('The type of file is invalid');
+                            } elseif (!File::makeDirectory(ROOT_PATH . DATA_FOLDER . 'image/')) {
                                 // ไดเรคทอรี่ไม่สามารถสร้างได้
-                                $ret['ret_'.$item] = sprintf(Language::get('Directory %s cannot be created or is read-only.'), DATA_FOLDER.'image/');
+                                $ret['ret_' . $item] = sprintf(Language::get('Directory %s cannot be created or is read-only.'), DATA_FOLDER . 'image/');
                             } else {
                                 try {
                                     $ext = $file->getClientFileExt();
-                                    $file->moveTo(ROOT_PATH.DATA_FOLDER.'image/'.$item.'.'.$ext);
-                                    $config->$item = $item.'.'.$ext;
+                                    $file->moveTo(ROOT_PATH . DATA_FOLDER . 'image/' . $item . '.' . $ext);
+                                    $config->$item = $item . '.' . $ext;
                                 } catch (\Exception $exc) {
                                     // ไม่สามารถอัปโหลดได้
-                                    $ret['ret_'.$item] = Language::get($exc->getMessage());
+                                    $ret['ret_' . $item] = Language::get($exc->getMessage());
                                 }
                             }
                         } elseif ($file->hasError()) {
                             // ข้อผิดพลาดการอัปโหลด
-                            $ret['ret_'.$item] = Language::get($file->getErrorMessage());
+                            $ret['ret_' . $item] = Language::get($file->getErrorMessage());
                         }
                     }
                 }

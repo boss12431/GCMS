@@ -36,7 +36,7 @@ class Controller extends \Gcms\Controller
     {
         if (preg_match('/^([a-z]+)([\/\-]([a-z]+))?$/i', $request->request('module')->toString(), $match)) {
             if (empty($match[3])) {
-                if (is_file(APP_PATH.'modules/'.$match[1].'/controllers/index.php')) {
+                if (is_file(APP_PATH . 'modules/' . $match[1] . '/controllers/index.php')) {
                     $owner = $match[1];
                     $module = empty($default) ? 'error' : $default;
                 } else {
@@ -53,24 +53,24 @@ class Controller extends \Gcms\Controller
             $module = empty($default) ? 'error' : $default;
         }
         // ตรวจสอบหน้าที่เรียก
-        if (is_file(APP_PATH.'modules/'.$owner.'/controllers/'.$module.'.php')) {
+        if (is_file(APP_PATH . 'modules/' . $owner . '/controllers/' . $module . '.php')) {
             // หน้าที่เรียก (Admin)
-            include APP_PATH.'modules/'.$owner.'/controllers/'.$module.'.php';
+            include APP_PATH . 'modules/' . $owner . '/controllers/' . $module . '.php';
 
-            return ucfirst($owner).'\\'.ucfirst($module).'\Controller';
-        } elseif (is_file(ROOT_PATH.'modules/'.$owner.'/controllers/admin/'.$module.'.php')) {
+            return ucfirst($owner) . '\\' . ucfirst($module) . '\Controller';
+        } elseif (is_file(ROOT_PATH . 'modules/' . $owner . '/controllers/admin/' . $module . '.php')) {
             // เรียกโมดูลที่ติดตั้ง
-            include ROOT_PATH.'modules/'.$owner.'/controllers/admin/'.$module.'.php';
+            include ROOT_PATH . 'modules/' . $owner . '/controllers/admin/' . $module . '.php';
 
-            return ucfirst($owner).'\Admin\\'.ucfirst($module).'\Controller';
-        } elseif (is_file(ROOT_PATH.'Widgets/'.ucfirst($owner).'/Controllers/'.ucfirst($module).'.php')) {
+            return ucfirst($owner) . '\Admin\\' . ucfirst($module) . '\Controller';
+        } elseif (is_file(ROOT_PATH . 'Widgets/' . ucfirst($owner) . '/Controllers/' . ucfirst($module) . '.php')) {
             // เรียก Widgets ที่ติดตั้ง
-            include ROOT_PATH.'Widgets/'.ucfirst($owner).'/Controllers/'.ucfirst($module).'.php';
+            include ROOT_PATH . 'Widgets/' . ucfirst($owner) . '/Controllers/' . ucfirst($module) . '.php';
 
-            return 'Widgets\\'.ucfirst($owner).'\\Controllers\\'.ucfirst($module);
+            return 'Widgets\\' . ucfirst($owner) . '\\Controllers\\' . ucfirst($module);
         } else {
             // หน้า default ถ้าไม่พบหน้าที่เรียก
-            include APP_PATH.'modules/index/controllers/home.php';
+            include APP_PATH . 'modules/index/controllers/home.php';
 
             return 'Index\Home\Controller';
         }

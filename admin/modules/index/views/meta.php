@@ -105,7 +105,7 @@ class View extends \Gcms\Adminview
             'label' => '{LNG_Photos for sharing}',
             'comment' => Language::replace('Browse image uploaded, type :type size :width*:height pixel', array(':type' => 'jpg', ':width' => 800, ':height' => 800)),
             'dataPreview' => 'logoImage',
-            'previewSrc' => is_file(ROOT_PATH.DATA_FOLDER.'image/site_logo.jpg') ? WEB_URL.DATA_FOLDER.'image/site_logo.jpg' : WEB_URL.'skin/img/blank.gif',
+            'previewSrc' => is_file(ROOT_PATH . DATA_FOLDER . 'image/site_logo.jpg') ? WEB_URL . DATA_FOLDER . 'image/site_logo.jpg' : WEB_URL . 'skin/img/blank.gif',
         ));
         // delete_site_logo
         $fieldset->add('checkbox', array(

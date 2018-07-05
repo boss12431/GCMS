@@ -41,29 +41,29 @@ class Model extends \Kotchasan\KBase
                 // อัปโหลดไฟล์
                 foreach ($request->getUploadedFiles() as $item => $file) {
                     /* @var $file \Kotchasan\Http\UploadedFile */
-                    if ($request->post('delete_'.$item)->toBoolean() == 1) {
+                    if ($request->post('delete_' . $item)->toBoolean() == 1) {
                         // ลบรูปภาพ
-                        if (is_file(ROOT_PATH.DATA_FOLDER.'image/'.$item.'.jpg')) {
-                            @unlink(ROOT_PATH.DATA_FOLDER.'image/'.$item.'.jpg');
+                        if (is_file(ROOT_PATH . DATA_FOLDER . 'image/' . $item . '.jpg')) {
+                            @unlink(ROOT_PATH . DATA_FOLDER . 'image/' . $item . '.jpg');
                         }
-                    } elseif (!File::makeDirectory(ROOT_PATH.DATA_FOLDER.'image/')) {
+                    } elseif (!File::makeDirectory(ROOT_PATH . DATA_FOLDER . 'image/')) {
                         // ไดเรคทอรี่ไม่สามารถสร้างได้
-                        $ret['ret_'.$item] = sprintf(Language::get('Directory %s cannot be created or is read-only.'), DATA_FOLDER.'image/');
+                        $ret['ret_' . $item] = sprintf(Language::get('Directory %s cannot be created or is read-only.'), DATA_FOLDER . 'image/');
                     } elseif ($file->hasUploadFile()) {
                         // ตรวจสอบไฟล์อัปโหลด
                         if (!$file->validFileExt(array('jpg', 'jpeg'))) {
-                            $ret['ret_'.$item] = Language::get('The type of file is invalid');
+                            $ret['ret_' . $item] = Language::get('The type of file is invalid');
                         } else {
                             try {
-                                $file->moveTo(ROOT_PATH.DATA_FOLDER.'image/'.$item.'.jpg');
+                                $file->moveTo(ROOT_PATH . DATA_FOLDER . 'image/' . $item . '.jpg');
                             } catch (\Exception $exc) {
                                 // ไม่สามารถอัปโหลดได้
-                                $ret['ret_'.$item] = Language::get($exc->getMessage());
+                                $ret['ret_' . $item] = Language::get($exc->getMessage());
                             }
                         }
                     } elseif ($file->hasError()) {
                         // ข้อผิดพลาดการอัปโหลด
-                        $ret['ret_'.$item] = Language::get($file->getErrorMessage());
+                        $ret['ret_' . $item] = Language::get($file->getErrorMessage());
                     }
                 }
                 // other

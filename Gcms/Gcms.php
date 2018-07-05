@@ -119,7 +119,7 @@ class Gcms extends \Kotchasan\KBase
     public static function highlighter($detail, $canview)
     {
         $detail = preg_replace_callback('/\[([uo]l)\](.*)\[\/\\1\]/is', function ($match) {
-            return '<'.$match[1].'><li>'.preg_replace('/<br(\s\/)?>/is', '</li><li>', $match[2]).'</li></'.$match[1].'>';
+            return '<' . $match[1] . '><li>' . preg_replace('/<br(\s\/)?>/is', '</li><li>', $match[2]) . '</li></' . $match[1] . '>';
         }, $detail);
         $patt[] = '/\[(i|dfn|b|strong|u|em|ins|del|sub|sup|small|big)\](.*)\[\/\\1\]/is';
         $replace[] = '<\\1>\\2</\\1>';
@@ -136,15 +136,15 @@ class Gcms extends \Kotchasan\KBase
         $patt[] = '/\[url=(ftp|https?):\/\/(.*)\](.*)\[\/url\]/i';
         $replace[] = '<a href="\\1://\\2" target="_blank" rel="nofollow">\\3</a>';
         $patt[] = '/\[url=(\/)?(.*)\](.*)\[\/url\]/i';
-        $replace[] = '<a href="'.WEB_URL.'\\2" target="_blank" rel="nofollow">\\3</a>';
+        $replace[] = '<a href="' . WEB_URL . '\\2" target="_blank" rel="nofollow">\\3</a>';
         $patt[] = '/\[quote(\s+q=[0-9]+)?\]/i';
-        $replace[] = '<blockquote><b>'.Language::replace('Quotations by :name', array(':name' => Language::get('Topic'))).'</b>';
+        $replace[] = '<blockquote><b>' . Language::replace('Quotations by :name', array(':name' => Language::get('Topic'))) . '</b>';
         $patt[] = '/\[quote\s+r=([0-9]+)\]/i';
-        $replace[] = '<blockquote><b>'.Language::replace('Quotations by :name', array(':name' => Language::get('Comment'))).' <em>#\\1</em></b>';
+        $replace[] = '<blockquote><b>' . Language::replace('Quotations by :name', array(':name' => Language::get('Comment'))) . ' <em>#\\1</em></b>';
         $patt[] = '/\[\/quote\]/i';
         $replace[] = '</blockquote>';
         $patt[] = '/\[code(=([a-z]{1,}))?\](.*?)\[\/code\]/is';
-        $replace[] = $canview ? '<code class="content-code \\2">\\3<a class="copytoclipboard notext" title="'.Language::get('copy to clipboard').'"><span class="icon-copy"></span></a></code>' : '<code class="content-code">'.Language::get('Can not view this content').'</code>';
+        $replace[] = $canview ? '<code class="content-code \\2">\\3<a class="copytoclipboard notext" title="' . Language::get('copy to clipboard') . '"><span class="icon-copy"></span></a></code>' : '<code class="content-code">' . Language::get('Can not view this content') . '</code>';
         $patt[] = '/(&lt;\?(.*?)\?&gt;)/uism';
         $replace[] = '<span class=php>\\1</span>';
         $patt[] = '/(&lt;%(.*?)%&gt;)/uism';
@@ -160,7 +160,7 @@ class Gcms extends \Kotchasan\KBase
         $patt[] = '/(&lt;!--(.*?)--&gt;)/uis';
         $replace[] = '<span class=comment>\\1</span>';
         $patt[] = '/\[search\](.*)\[\/search\]/iU';
-        $replace[] = '<a href="'.WEB_URL.'index.php?module=search&amp;q=\\1" rel="nofollow">\\1</a>';
+        $replace[] = '<a href="' . WEB_URL . 'index.php?module=search&amp;q=\\1" rel="nofollow">\\1</a>';
         $patt[] = '/\[google\](.*?)\[\/google\]/iU';
         $replace[] = '<a class="googlesearch" href="http://www.google.co.th/search?q=\\1&amp;&meta=lr%3Dlang_th" target="_blank" rel="nofollow">\\1</a>';
         $patt[] = '/([^["]]|\r|\n|\s|\t|^)((ftp|https?):\/\/([a-z0-9\.\-_]+)\/([^\s<>\"\']{1,})([^\s<>\"\']{20,20}))/i';
@@ -208,7 +208,7 @@ class Gcms extends \Kotchasan\KBase
     {
         if (!empty(self::$cfg->wordrude) && is_array(self::$cfg->wordrude)) {
             foreach (self::$cfg->wordrude as $item) {
-                $detail = str_replace($item, '<em>'.self::$cfg->wordrude_replace.'</em>', $detail);
+                $detail = str_replace($item, '<em>' . self::$cfg->wordrude_replace . '</em>', $detail);
             }
         }
 
@@ -260,10 +260,10 @@ class Gcms extends \Kotchasan\KBase
         }
         $link = preg_replace($patt, $replace, self::$urls[self::$cfg->module_url]);
         if (!empty($query)) {
-            $link .= (strpos($link, '?') === false ? '?' : '&amp;').$query;
+            $link .= (strpos($link, '?') === false ? '?' : '&amp;') . $query;
         }
 
-        return WEB_URL.$link;
+        return WEB_URL . $link;
     }
 
     /**
@@ -299,7 +299,7 @@ class Gcms extends \Kotchasan\KBase
     public static function showip($ip, $login)
     {
         if ($login['status'] != 1 && preg_match('/([0-9]+\.[0-9]+\.)([0-9\.]+)/', $ip, $ips)) {
-            return $ips[1].preg_replace('/[0-9]/', 'x', $ips[2]);
+            return $ips[1] . preg_replace('/[0-9]/', 'x', $ips[2]);
         } else {
             return $ip;
         }
@@ -409,7 +409,7 @@ class Gcms extends \Kotchasan\KBase
                 $a = $a && (self::lastIndexOf($text, '/script>', $i) >= self::lastIndexOf($text, '<script', $i));
                 $a = $a && (self::lastIndexOf($text, '/style>', $i) >= self::lastIndexOf($text, '<style', $i));
                 if ($a) {
-                    $newtext .= mb_substr($text, 0, $i).'<mark>'.mb_substr($text, $i, $len_needle).'</mark>';
+                    $newtext .= mb_substr($text, 0, $i) . '<mark>' . mb_substr($text, $i, $len_needle) . '</mark>';
                     $text = mb_substr($text, $i + $len_needle);
                     $i = -1;
                 }
@@ -523,7 +523,7 @@ class Gcms extends \Kotchasan\KBase
     public static function showPhone($phone_number)
     {
         if (preg_match('/^([0-9\-\s]{9,})(.*)$/', $phone_number, $match)) {
-            return '<a href="tel:'.trim($match[1]).'">'.$phone_number.'</a>';
+            return '<a href="tel:' . trim($match[1]) . '">' . $phone_number . '</a>';
         }
 
         return $phone_number;

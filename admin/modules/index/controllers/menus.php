@@ -49,7 +49,7 @@ class Controller extends \Gcms\Controller
             $ul->appendChild('<li><span class="icon-modules">{LNG_Menus} &amp; {LNG_Web pages}</span></li>');
             $ul->appendChild('<li><span>{LNG_Menus}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-menus">'.$this->title.'</h2>',
+                'innerHTML' => '<h2 class="icon-menus">' . $this->title . '</h2>',
             ));
             // แสดงตาราง
             $section->appendChild(createClass('Index\Menus\View')->render($request));

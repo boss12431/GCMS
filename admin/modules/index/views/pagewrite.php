@@ -42,7 +42,7 @@ class View extends \Gcms\Adminview
             'token' => true,
         ));
         $fieldset = $form->add('fieldset', array(
-            'title' => '{LNG_Details of} '.Language::get($index->owner === 'index' ? 'Page' : 'Module'),
+            'title' => '{LNG_Details of} ' . Language::get($index->owner === 'index' ? 'Page' : 'Module'),
         ));
         $groups = $fieldset->add('groups-table', array(
             'label' => '{LNG_Language}',

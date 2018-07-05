@@ -49,7 +49,7 @@ class Controller extends \Gcms\Controller
             $ul->appendChild('<li><span class="icon-settings">{LNG_Site settings}</span></li>');
             $ul->appendChild('<li><span>{LNG_Email template}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-email">'.$this->title.'</h2>',
+                'innerHTML' => '<h2 class="icon-email">' . $this->title . '</h2>',
             ));
             // แสดงฟอร์ม
             $section->appendChild(createClass('Index\Mailtemplate\View')->render($request));

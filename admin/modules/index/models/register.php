@@ -79,7 +79,7 @@ class Model extends \Kotchasan\Model
                             break;
                         } else {
                             ++$a;
-                            $save['displayname'] = $displayname.$a;
+                            $save['displayname'] = $displayname . $a;
                         }
                     }
                     // ลงทะเบียนสมาชิกใหม่
@@ -121,12 +121,12 @@ class Model extends \Kotchasan\Model
             $save['password'] = '';
         } else {
             $save['salt'] = uniqid();
-            $save['password'] = md5($save['password'].$save['salt']);
+            $save['password'] = md5($save['password'] . $save['salt']);
         }
         if (!isset($save['country'])) {
             $save['country'] = 'TH';
         }
-        $save['permission'] = empty($permission) ? '' : ','.implode(',', $permission).',';
+        $save['permission'] = empty($permission) ? '' : ',' . implode(',', $permission) . ',';
         $save['active'] = 1;
         $save['ban'] = 0;
         $save['create_date'] = time();

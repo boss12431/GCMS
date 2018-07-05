@@ -40,7 +40,7 @@ class Model extends \Kotchasan\Model
             // ตรวจสอบโมดูลที่ติดตั้งแล้ว
             $search = $db->createQuery()->from('modules')->where(array('module', $module))->first('id');
             if (!$search) {
-                $className = ucfirst($owner).'\Admin\Settings\Model';
+                $className = ucfirst($owner) . '\Admin\Settings\Model';
                 if (class_exists($className) && method_exists($className, 'defaultSettings')) {
                     $config = $className::defaultSettings();
                 }
@@ -95,13 +95,13 @@ class Model extends \Kotchasan\Model
     public static function updateTables($tables)
     {
         // โหลด database
-        $database = \Kotchasan\Config::load(ROOT_PATH.'settings/database.php');
+        $database = \Kotchasan\Config::load(ROOT_PATH . 'settings/database.php');
         // อัปเดท tables
         foreach ($tables as $key => $value) {
             $database->tables[$key] = $value;
         }
         // save database
-        return \Kotchasan\Config::save($database, ROOT_PATH.'settings/database.php');
+        return \Kotchasan\Config::save($database, ROOT_PATH . 'settings/database.php');
     }
 
     /**
@@ -128,13 +128,13 @@ class Model extends \Kotchasan\Model
                     // define
                 } elseif (preg_match('/DROP[\s]+TABLE[\s]+(IF[\s]+EXISTS[\s]+)?`?([a-z0-9_]+)`?/iu', $sql, $match)) {
                     $ret = $db->query($sql);
-                    $content[] = '<li class="'.($ret === false ? 'incorrect' : 'correct')."\">DROP TABLE <b>$match[2]</b> ...</li>";
+                    $content[] = '<li class="' . ($ret === false ? 'incorrect' : 'correct') . "\">DROP TABLE <b>$match[2]</b> ...</li>";
                 } elseif (preg_match('/CREATE[\s]+TABLE[\s]+(IF[\s]+NOT[\s]+EXISTS[\s]+)?`?([a-z0-9_]+)`?/iu', $sql, $match)) {
                     $ret = $db->query($sql);
-                    $content[] = '<li class="'.($ret === false ? 'incorrect' : 'correct')."\">CREATE TABLE <b>$match[2]</b> ...</li>";
+                    $content[] = '<li class="' . ($ret === false ? 'incorrect' : 'correct') . "\">CREATE TABLE <b>$match[2]</b> ...</li>";
                 } elseif (preg_match('/ALTER[\s]+TABLE[\s]+`?([a-z0-9_]+)`?[\s]+ADD[\s]+`?([a-z0-9_]+)`?(.*)/iu', $sql, $match)) {
                     // add column
-                    $sql = "SELECT * FROM `information_schema`.`columns` WHERE `table_schema`='".$model->getSetting('dbname')."' AND `table_name`='$match[1]' AND `column_name`='$match[2]'";
+                    $sql = "SELECT * FROM `information_schema`.`columns` WHERE `table_schema`='" . $model->getSetting('dbname') . "' AND `table_name`='$match[1]' AND `column_name`='$match[2]'";
                     $search = $db->customQuery($sql);
                     if (sizeof($search) == 1) {
                         $sql = "ALTER TABLE `$match[1]` DROP COLUMN `$match[2]`";
@@ -142,15 +142,15 @@ class Model extends \Kotchasan\Model
                     }
                     $ret = $db->query($match[0]);
                     if (sizeof($search) == 1) {
-                        $content[] = '<li class="'.($ret === false ? 'incorrect' : 'correct')."\">REPLACE COLUMN <b>$match[2]</b> to TABLE <b>$match[1]</b></li>";
+                        $content[] = '<li class="' . ($ret === false ? 'incorrect' : 'correct') . "\">REPLACE COLUMN <b>$match[2]</b> to TABLE <b>$match[1]</b></li>";
                     } else {
-                        $content[] = '<li class="'.($ret === false ? 'incorrect' : 'correct')."\">ADD COLUMN <b>$match[2]</b> to TABLE <b>$match[1]</b></li>";
+                        $content[] = '<li class="' . ($ret === false ? 'incorrect' : 'correct') . "\">ADD COLUMN <b>$match[2]</b> to TABLE <b>$match[1]</b></li>";
                     }
                 } elseif (preg_match('/INSERT[\s]+INTO[\s]+`?([a-z0-9_]+)`?(.*)/iu', $sql, $match)) {
                     $ret = $db->query($sql);
                     if (isset($q) && $q != $match[1]) {
                         $q = $match[1];
-                        $content[] = '<li class="'.($ret === false ? 'incorrect' : 'correct')."\">INSERT INTO <b>$match[1]</b> ...</li>";
+                        $content[] = '<li class="' . ($ret === false ? 'incorrect' : 'correct') . "\">INSERT INTO <b>$match[1]</b> ...</li>";
                     }
                 } else {
                     $db->query($sql);

@@ -79,7 +79,7 @@ class View extends \Gcms\Adminview
             'itemClass' => 'item',
             'labelClass' => 'g-input icon-edit',
             'label' => '{LNG_Subject}',
-            'comment' => ''.'{LNG_Please fill in} {LNG_Subject}',
+            'comment' => '' . '{LNG_Please fill in} {LNG_Subject}',
         ));
         // detail
         $fieldset->add('ckeditor', array(

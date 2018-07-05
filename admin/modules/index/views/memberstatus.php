@@ -39,11 +39,11 @@ class View extends \Gcms\Adminview
         ));
         foreach (self::$cfg->member_status as $s => $item) {
             $row = $list->add('li', array(
-                'id' => 'config_status_'.$s,
+                'id' => 'config_status_' . $s,
             ));
             if ($s > 1) {
                 $row->add('span', array(
-                    'id' => 'config_status_delete_'.$s,
+                    'id' => 'config_status_delete_' . $s,
                     'class' => 'icon-delete',
                     'title' => '{LNG_Delete}',
                 ));
@@ -51,11 +51,11 @@ class View extends \Gcms\Adminview
                 $row->add('span');
             }
             $row->add('span', array(
-                'id' => 'config_status_color_'.$s,
+                'id' => 'config_status_color_' . $s,
                 'title' => self::$cfg->color_status[$s],
             ));
             $row->add('span', array(
-                'id' => 'config_status_name_'.$s,
+                'id' => 'config_status_name_' . $s,
                 'innerHTML' => $item,
                 'title' => '{LNG_click to edit}',
             ));

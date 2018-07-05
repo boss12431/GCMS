@@ -37,7 +37,7 @@ class Controller extends \Gcms\Controller
         $id = $request->request('id')->toInt();
         $title = empty($id) ? '{LNG_Create}' : '{LNG_Edit}';
         // ข้อความ title bar
-        $this->title = Language::trans($title.' {LNG_Menu}');
+        $this->title = Language::trans($title . ' {LNG_Menu}');
         // เลือกเมนู
         $this->menu = 'index';
         // สามารถตั้งค่าระบบได้
@@ -53,9 +53,9 @@ class Controller extends \Gcms\Controller
                 $ul = $breadcrumbs->add('ul');
                 $ul->appendChild('<li><span class="icon-modules">{LNG_Menus} &amp; {LNG_Web pages}</span></li>');
                 $ul->appendChild('<li><a href="{BACKURL?module=pages&id=0}">{LNG_Menus}</a></li>');
-                $ul->appendChild('<li><span>'.$title.'</span></li>');
+                $ul->appendChild('<li><span>' . $title . '</span></li>');
                 $section->add('header', array(
-                    'innerHTML' => '<h2 class="icon-write">'.$this->title.'</h2>',
+                    'innerHTML' => '<h2 class="icon-write">' . $this->title . '</h2>',
                 ));
                 // แสดงฟอร์ม
                 $section->appendChild(createClass('Index\Menuwrite\View')->render($request, $index));

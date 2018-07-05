@@ -37,6 +37,10 @@ define('CONFIG', ROOT_PATH.'settings/config.php');
  */
 define('DB_LOG', false);
 /**
+ * ภาษาอัตโนมัติจากบราวเซอร์
+ */
+define('AUTO_LANGUAGE', false);
+/**
  * load Kotchasan.
  */
 include 'Kotchasan/load.php';

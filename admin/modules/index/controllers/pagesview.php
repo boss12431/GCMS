@@ -37,7 +37,7 @@ class Controller extends \Gcms\Controller
         // ค่าที่ส่งมา
         $date = $request->request('date', date('Y-m'))->date();
         // ข้อความ title bar
-        $this->title = Language::get('Visitors report').Date::format($date.'-1', ' M Y');
+        $this->title = Language::get('Visitors report') . Date::format($date . '-1', ' M Y');
         // เลือกเมนู
         $this->menu = 'home';
         // แอดมิน
@@ -52,7 +52,7 @@ class Controller extends \Gcms\Controller
             $ul->appendChild('<li><a class="icon-home" href="index.php">{LNG_Home}</a></li>');
             $ul->appendChild('<li><span>{LNG_Pages view}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-stats">'.$this->title.'</h2>',
+                'innerHTML' => '<h2 class="icon-stats">' . $this->title . '</h2>',
             ));
             // แสดงฟอร์ม
             $section->appendChild(createClass('Index\Pagesview\View')->render($date));

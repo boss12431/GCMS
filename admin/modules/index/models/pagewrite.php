@@ -134,13 +134,13 @@ class Model extends \Kotchasan\Model
                         ->toArray()
                         ->first('D.id', 'D.language', 'D.module_id');
                 }
-                if ((!empty($index_id) && !$index) || !preg_match('/[a-z]{3,}/', $module_save['owner']) || !is_dir(ROOT_PATH.'modules/'.$module_save['owner'])) {
+                if ((!empty($index_id) && !$index) || !preg_match('/[a-z]{3,}/', $module_save['owner']) || !is_dir(ROOT_PATH . 'modules/' . $module_save['owner'])) {
                     // owner ไม่ถูกต้อง
                     $ret['alert'] = Language::get('Unable to complete the transaction');
                 } elseif (!preg_match('/^[a-z0-9]{2,}$/', $module_save['module'])) {
                     // module ไม่ถูกต้อง
                     $ret['ret_module'] = 'this';
-                } elseif ($module_save['owner'] === 'index' && $module_save['module'] != 'home' && is_dir(ROOT_PATH.'modules/'.$module_save['module'])) {
+                } elseif ($module_save['owner'] === 'index' && $module_save['module'] != 'home' && is_dir(ROOT_PATH . 'modules/' . $module_save['module'])) {
                     // index ไม่สามารถใช้ชื่อโมดูลหรือวิดเจ็ตได้
                     $ret['ret_module'] = Language::get('Invalid name');
                 } else {
@@ -183,7 +183,7 @@ class Model extends \Kotchasan\Model
                             // ใหม่
                             if (empty($module_id)) {
                                 // โมดูลใหม่
-                                $class = ucfirst($module_save['owner']).'\Admin\Settings\Model';
+                                $class = ucfirst($module_save['owner']) . '\Admin\Settings\Model';
                                 if (class_exists($class)) {
                                     // ค่าติดตั้งเริ่มต้น
                                     if (method_exists($class, 'defaultSettings')) {

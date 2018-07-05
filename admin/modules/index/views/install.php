@@ -39,12 +39,12 @@ class View extends \Gcms\Adminview
         ));
         if (($type === 'module' && Gcms::$module->findByModule($module) === null) || $type === 'widget') {
             if ($type === 'module') {
-                $className = ucfirst($module).'\Admin\Install\Model';
+                $className = ucfirst($module) . '\Admin\Install\Model';
             } elseif ($type === 'widget') {
-                $className = 'Widgets\\'.ucfirst($module).'\Models\Install';
+                $className = 'Widgets\\' . ucfirst($module) . '\Models\Install';
             }
             if (isset($className) && class_exists($className)) {
-                $div->script("callInstall('".rawurlencode($className)."')");
+                $div->script("callInstall('" . rawurlencode($className) . "')");
                 $div->add('aside', array(
                     'class' => 'tip',
                     'innerHTML' => Language::get('Module or an extension has not been installed correctly the first time. Please click on the button "Install" below to complete installation before.'),
@@ -55,7 +55,7 @@ class View extends \Gcms\Adminview
                 $div2->add('a', array(
                     'class' => 'button ok large',
                     'id' => 'install_btn',
-                    'innerHTML' => '<span class=icon-valid>'.Language::get('Install').'</span>',
+                    'innerHTML' => '<span class=icon-valid>' . Language::get('Install') . '</span>',
                 ));
             } else {
                 $div->add('aside', array(

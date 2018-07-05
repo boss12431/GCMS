@@ -42,10 +42,10 @@ class View extends \Gcms\Baseview
         $tooltip = $tooltip == '' ? $menu : $tooltip;
         if ($url) {
             $this->breadcrumbs_jsonld[] = array('@id' => $url, 'name' => $menu);
-            $this->breadcrumbs[] = '<li><a class="'.$class.'" href="'.$url.'" title="'.$tooltip.'"><span>'.$menu.'</span></a></li>';
+            $this->breadcrumbs[] = '<li><a class="' . $class . '" href="' . $url . '" title="' . $tooltip . '"><span>' . $menu . '</span></a></li>';
         } else {
             $this->breadcrumbs_jsonld[] = array('name' => $menu);
-            $this->breadcrumbs[] = '<li><span class="'.$class.'" title="'.$tooltip.'">'.$menu.'</span></li>';
+            $this->breadcrumbs[] = '<li><span class="' . $class . '" title="' . $tooltip . '">' . $menu . '</span></li>';
         }
     }
 
@@ -83,7 +83,7 @@ class View extends \Gcms\Baseview
         ));
         // JSON-LD
         if (!empty($this->jsonld)) {
-            $this->metas['JsonLd'] = '<script type="application/ld+json">'.json_encode($this->jsonld).'</script>';
+            $this->metas['JsonLd'] = '<script type="application/ld+json">' . json_encode($this->jsonld) . '</script>';
         }
 
         return parent::renderHTML($template);
@@ -112,7 +112,7 @@ class View extends \Gcms\Baseview
                 }
             }
         }
-        $className = '\\Widgets\\'.ucfirst(strtolower($matches[1])).'\\Controllers\\Index';
+        $className = '\\Widgets\\' . ucfirst(strtolower($matches[1])) . '\\Controllers\\Index';
         if (method_exists($className, 'get')) {
             return createClass($className)->get($request);
         }
@@ -149,7 +149,7 @@ class View extends \Gcms\Baseview
     public static function checkEmpty($text, &$array, $prefix = '')
     {
         if ($text != '') {
-            $array[] = $prefix.$text;
+            $array[] = $prefix . $text;
         }
     }
 }

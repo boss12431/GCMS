@@ -48,10 +48,14 @@ final class Language extends \Kotchasan\KBase
         // ภาษาที่เลือก
         $lang = self::$request->get('lang', self::$request->cookie('my_lang', '')->toString())->filter('a-z');
         if (empty($lang)) {
-            if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) && defined('AUTO_LANGUAGE')) {
+            if (defined('AUTO_LANGUAGE') && AUTO_LANGUAGE === true) {
                 // ภาษาจาก Browser
-                $datas = explode(',', preg_replace('/(;\s?q=[0-9\.]+)|\s/i', '', strtolower(trim($_SERVER['HTTP_ACCEPT_LANGUAGE']))));
-                $lang = substr(reset($datas), 0, 2);
+                $languages = self::$request->getAcceptableLanguages();
+                if (!empty($languages) && preg_match('/^([a-z]{2,2}).*?$/', strtolower($languages[0]), $match)) {
+                    $lang = $match[1];
+                } else {
+                    $lang = 'th';
+                }
             }
         }
         // ตรวจสอบภาษา ใช้ภาษาแรกที่เจอ

@@ -64,7 +64,7 @@ class Model extends Field
                         array('email_id', 0),
                     ));
                     // คืนค่า
-                    $ret['delete_id'] = $request->post('src')->toString().'_'.$id;
+                    $ret['delete_id'] = $request->post('src')->toString() . '_' . $id;
                 }
             }
         }

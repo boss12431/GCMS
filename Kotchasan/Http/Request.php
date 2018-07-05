@@ -364,6 +364,38 @@ class Request extends AbstractRequest implements RequestInterface
     }
 
     /**
+     * คืนค่ารายการภาษาที่รองรับ จาก HTTP header.
+     *
+     * @return array
+     */
+    public function getAcceptableLanguages()
+    {
+        $acceptLanguages = empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? array() : explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        $matches = array();
+        if (!empty($acceptLanguages)) {
+            foreach ($acceptLanguages as $item) {
+                $item = array_map('trim', explode(';', $item));
+                if (isset($item[1])) {
+                    $q = str_replace('q=', '', $item[1]);
+                } else {
+                    if ($item[0] == '*/*') {
+                        $q = 0.01;
+                    } elseif (substr($item[0], -1) == '*') {
+                        $q = 0.02;
+                    } else {
+                        $q = 1000 - sizeof($matches);
+                    }
+                }
+                $matches[(string) $q] = $item[0];
+            }
+            krsort($matches, SORT_NUMERIC);
+            $matches = array_values($matches);
+        }
+
+        return $matches;
+    }
+
+    /**
      * ฟังก์ชั่น อ่าน ip ของ client.
      *
      * @return string|null IP ที่อ่านได้

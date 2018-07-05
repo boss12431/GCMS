@@ -77,14 +77,14 @@ class Model extends \Kotchasan\Model
                 // from
                 if (Login::isAdmin()) {
                     if ($save['from'] == self::$cfg->noreply_email) {
-                        $save['from'] = self::$cfg->noreply_email.'<'.strip_tags(self::$cfg->web_title).'>';
+                        $save['from'] = self::$cfg->noreply_email . '<' . strip_tags(self::$cfg->web_title) . '>';
                     } else {
                         $user = $this->db()->createQuery()
                             ->from('user')
                             ->where(array('email', $save['from']))
                             ->first('email', 'displayname');
                         if ($user) {
-                            $save['from'] = $user->email.(empty($user->displayname) ? '' : '<'.$user->displayname.'>');
+                            $save['from'] = $user->email . (empty($user->displayname) ? '' : '<' . $user->displayname . '>');
                         } else {
                             // ไม่พบผู้ส่ง ให้ส่งโดยตัวเอง
                             $save['from'] = $login['email'];

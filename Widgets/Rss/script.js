@@ -35,7 +35,7 @@ GRSS.prototype = {
       }
     };
     var req = new GAjax();
-    if (parseFloat(interval) == 0) {
+    if (floatval(interval) == 0) {
       req.send(WEB_URL + 'xhr.php', query, _callback);
     } else {
       req.autoupdate(WEB_URL + 'xhr.php', interval, query, _callback);
@@ -93,7 +93,7 @@ GRSSTab.prototype = {
             window.clearTimeout(temp.timer);
           }
           var ids = this.href.split('#');
-          temp.select(parseFloat(ids[1]));
+          temp.select(floatval(ids[1]));
           return false;
         };
       });

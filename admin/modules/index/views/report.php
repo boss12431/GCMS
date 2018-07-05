@@ -41,15 +41,15 @@ class View extends \Gcms\Adminview
         $thead = array();
         $tbody = array();
         for ($i = 0; $i < 24; ++$i) {
-            $thead[] = '<th>'.($i + 1).'</th>';
-            $tbody[] = '<td>'.(isset($logs[$i]) ? $logs[$i] : 0).'</td>';
+            $thead[] = '<th>' . ($i + 1) . '</th>';
+            $tbody[] = '<td>' . (isset($logs[$i]) ? $logs[$i] : 0) . '</td>';
         }
         $content = '<div id=report_graph class="ggraphs">';
         $content .= '<canvas></canvas>';
         $content .= '<table class="hidden">';
-        $content .= '<thead><tr><th>{LNG_hour}</th>'.implode('', $thead).'</tr></thead>';
+        $content .= '<thead><tr><th>{LNG_hour}</th>' . implode('', $thead) . '</tr></thead>';
         $content .= '<tbody>';
-        $content .= '<tr><th scope=row>{LNG_People visit the site}</th>'.implode('', $tbody).'</tr>';
+        $content .= '<tr><th scope=row>{LNG_People visit the site}</th>' . implode('', $tbody) . '</tr>';
         $content .= '</tbody>';
         $content .= '</table>';
         $content .= '</div>';
@@ -60,7 +60,7 @@ class View extends \Gcms\Adminview
         $this->date = $date;
         $this->ip = $ip;
         // URL สำหรับส่งให้ตาราง
-        $uri = $request->createUriWithGlobals(WEB_URL.'admin/index.php');
+        $uri = $request->createUriWithGlobals(WEB_URL . 'admin/index.php');
         // ตาราง
         $table = new DataTable(array(
             /* Uri */
@@ -117,7 +117,7 @@ class View extends \Gcms\Adminview
         setcookie('counter_perPage', $table->perPage, time() + 2592000, '/', null, null, true);
         setcookie('counter_sort', $table->sort, time() + 2592000, '/', null, null, true);
         // คืนค่า HTML
-        return $content.$table->render();
+        return $content . $table->render();
     }
 
     /**
@@ -133,9 +133,9 @@ class View extends \Gcms\Adminview
     {
         $item['time'] = Date::format($item['time'], 'H:i:s');
         if (preg_match_all('%(?P<browser>Firefox|Safari|MSIE|AppleWebKit|bingbot|MJ12bot|Baiduspider|Googlebot|DotBot|Twitterbot|LivelapBot|facebookexternalhit|StatusNet|PaperLiBot|SurdotlyBot|Trident|archive\.org_bot|Yahoo\!\sSlurp|Go[a-z\-]+)([\/\s](?P<version>[^;\s]+))?%ix', $item['user_agent'], $result, PREG_PATTERN_ORDER)) {
-            $item['user_agent'] = '<span title="'.$item['user_agent'].'">'.$result['browser'][0].(empty($result['version'][0]) ? '' : '/'.$result['version'][0]).'</span>';
+            $item['user_agent'] = '<span title="' . $item['user_agent'] . '">' . $result['browser'][0] . (empty($result['version'][0]) ? '' : '/' . $result['version'][0]) . '</span>';
         } elseif ($item['user_agent'] != '') {
-            $item['user_agent'] = '<span title="'.$item['user_agent'].'">unknown</span>';
+            $item['user_agent'] = '<span title="' . $item['user_agent'] . '">unknown</span>';
         }
         if ($item['referer'] != '') {
             if (preg_match('/^(https?:\/\/[a-z]+\.google(.*)?.*)\/.*[\&\?](url|q)=([^&]+)($|\&.*)/iu', $item['referer'], $match)) {
@@ -144,12 +144,12 @@ class View extends \Gcms\Adminview
             } else {
                 $title = $item['referer'];
             }
-            $item['referer'] = '<a href="'.htmlspecialchars($item['referer']).'" target=_blank class="cuttext block" style="max-width:30em">'.htmlspecialchars($title).'</a>';
+            $item['referer'] = '<a href="' . htmlspecialchars($item['referer']) . '" target=_blank class="cuttext block" style="max-width:30em">' . htmlspecialchars($title) . '</a>';
         }
         if ($this->ip == '') {
-            $item['ip'] = '<a href="index.php?module=report&amp;ip='.$item['ip'].'&amp;date='.$this->date.'">'.$item['ip'].'</a>';
+            $item['ip'] = '<a href="index.php?module=report&amp;ip=' . $item['ip'] . '&amp;date=' . $this->date . '">' . $item['ip'] . '</a>';
         } else {
-            $item['ip'] = '<a href="http://'.$item['ip'].'" target=_blank>'.$item['ip'].'</a>';
+            $item['ip'] = '<a href="http://' . $item['ip'] . '" target=_blank>' . $item['ip'] . '</a>';
         }
 
         return $item;

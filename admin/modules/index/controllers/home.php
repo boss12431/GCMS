@@ -49,7 +49,7 @@ class Controller extends \Gcms\Controller
             $ul = $breadcrumbs->add('ul');
             $ul->appendChild('<li><span class="icon-home">{LNG_Home}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-dashboard">'.$this->title.'</h2>',
+                'innerHTML' => '<h2 class="icon-dashboard">' . $this->title . '</h2>',
             ));
             // Card
             $card = new Collection();
@@ -69,14 +69,14 @@ class Controller extends \Gcms\Controller
             // quick menu
             $menu = new Collection();
             // โหลด Component หน้า Home
-            $dir = ROOT_PATH.'modules/';
+            $dir = ROOT_PATH . 'modules/';
             $f = @opendir($dir);
             if ($f) {
                 while (false !== ($text = readdir($f))) {
-                    if ($text != '.' && $text != '..' && $text != 'index' && $text != 'css' && $text != 'js' && is_dir($dir.$text)) {
-                        if (is_file($dir.$text.'/controllers/admin/home.php')) {
-                            require_once $dir.$text.'/controllers/admin/home.php';
-                            $className = '\\'.ucfirst($text).'\Admin\Home\Controller';
+                    if ($text != '.' && $text != '..' && $text != 'index' && $text != 'css' && $text != 'js' && is_dir($dir . $text)) {
+                        if (is_file($dir . $text . '/controllers/admin/home.php')) {
+                            require_once $dir . $text . '/controllers/admin/home.php';
+                            $className = '\\' . ucfirst($text) . '\Admin\Home\Controller';
                             if (method_exists($className, 'addCard')) {
                                 $className::addCard($request, $card, $login);
                             }
@@ -149,7 +149,7 @@ class Controller extends \Gcms\Controller
                             $size = 0;
                         }
                         $ggrid->add('div', array(
-                            'class' => 'block'.$item['size'].$item['class'],
+                            'class' => 'block' . $item['size'] . $item['class'],
                             'innerHTML' => $item['content'],
                         ));
                     }
@@ -157,7 +157,7 @@ class Controller extends \Gcms\Controller
             }
             if (!self::$cfg->production) {
                 // GCMS Version
-                $section->script("getUpdate('".self::$cfg->version."');");
+                $section->script("getUpdate('" . self::$cfg->version . "');");
             }
 
             return $section->render();
@@ -177,11 +177,11 @@ class Controller extends \Gcms\Controller
      */
     public static function renderCard($card, $icon, $title, $value, $url = null)
     {
-        $content = '<a class="table fullwidth"'.($url === null ? '' : ' href="'.$url.'"').'>';
-        $content .= '<span class="td '.$icon.' notext"></span>';
+        $content = '<a class="table fullwidth"' . ($url === null ? '' : ' href="' . $url . '"') . '>';
+        $content .= '<span class="td ' . $icon . ' notext"></span>';
         $content .= '<span class="td right">';
-        $content .= '<b class="cuttext">'.$value.'</b>';
-        $content .= '<span class="cuttext">'.$title.'</span>';
+        $content .= '<b class="cuttext">' . $value . '</b>';
+        $content .= '<span class="cuttext">' . $title . '</span>';
         $content .= '</span>';
         $content .= '</a>';
         $card->set($title, $content);
@@ -197,7 +197,7 @@ class Controller extends \Gcms\Controller
      */
     public static function renderQuickMenu($menu, $icon, $title, $url)
     {
-        $menu->set($title, '<a href="'.$url.'"><span class="'.$icon.'">'.$title.'</span></a>');
+        $menu->set($title, '<a href="' . $url . '"><span class="' . $icon . '">' . $title . '</span></a>');
     }
 
     /**
@@ -213,7 +213,7 @@ class Controller extends \Gcms\Controller
     {
         $grid->set($grid->count(), array(
             'size' => $size,
-            'class' => ' float-'.($left ? 'left' : 'right').' '.$class,
+            'class' => ' float-' . ($left ? 'left' : 'right') . ' ' . $class,
             'content' => $content,
         ));
     }

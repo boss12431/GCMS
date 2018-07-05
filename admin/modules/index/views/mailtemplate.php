@@ -32,7 +32,7 @@ class View extends \Gcms\Adminview
     public function render(Request $request)
     {
         // URL สำหรับส่งให้ตาราง
-        $uri = $request->createUriWithGlobals(WEB_URL.'admin/index.php');
+        $uri = $request->createUriWithGlobals(WEB_URL . 'admin/index.php');
         // ตาราง
         $table = new DataTable(array(
             /* Uri */
@@ -104,7 +104,7 @@ class View extends \Gcms\Adminview
     public function onRow($item, $o, $prop)
     {
         $item['name'] = $item['module'] == 'mailmerge' ? $item['subject'] : $item['name'];
-        $item['language'] = empty($item['language']) ? '' : '<img src="'.WEB_URL.'language/'.$item['language'].'.gif" alt="'.$item['language'].'">';
+        $item['language'] = empty($item['language']) ? '' : '<img src="' . WEB_URL . 'language/' . $item['language'] . '.gif" alt="' . $item['language'] . '">';
 
         return $item;
     }

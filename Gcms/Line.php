@@ -41,7 +41,7 @@ class Line extends \Kotchasan\KBase
         } else {
             $ch = new Curl();
             $ch->setHeaders(array(
-                'Authorization' => 'Bearer '.$line_api_key,
+                'Authorization' => 'Bearer ' . $line_api_key,
             ));
             $result = $ch->post('https://notify-api.line.me/api/notify', array('message' => $message));
             if ($ch->error()) {

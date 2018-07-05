@@ -36,9 +36,7 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
         foreach (self::$cfg->login_fields as $field) {
             $where[] = array("U.{$field}", $params['username']);
         }
-        // model
-        $model = new \Kotchasan\Model();
-        $query = $model->db()->createQuery()
+        $query = \Kotchasan\Model::createQuery()
             ->select()
             ->from('user U')
             ->where($where, 'OR')
@@ -46,7 +44,7 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
             ->toArray();
         $login_result = null;
         foreach ($query->execute() as $item) {
-            if ($item['password'] == md5($params['password'].$item['salt'])) {
+            if ($item['password'] == md5($params['password'] . $item['salt'])) {
                 $item['permission'] = empty($item['permission']) ? array() : explode(',', trim($item['permission'], " \t\n\r\0\x0B,"));
                 $login_result = $item;
                 break;
@@ -133,7 +131,8 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
      *
      * @param array        $login
      * @param array|string $permission
-     *                                 array|null คืนค่าข้อมูลสมาชิก (แอเรย์) ถ้าไม่สามารถทำรายการได้คืนค่า null
+     *
+     * @return array|null คืนค่าข้อมูลสมาชิก (แอเรย์) ถ้าไม่สามารถทำรายการได้คืนค่า null
      */
     public static function checkPermission($login, $permission)
     {
@@ -221,7 +220,7 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
                     $save = array(
                         'salt' => uniqid(),
                     );
-                    $save['password'] = md5($password.$save['salt']);
+                    $save['password'] = md5($password . $save['salt']);
                     $model->db()->update($table, (int) $search->id, $save);
                     // คืนค่า
                     self::$login_message = Language::get('Your message was sent successfully');

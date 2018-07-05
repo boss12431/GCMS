@@ -47,9 +47,9 @@ class Controller extends \Gcms\Controller
             ));
             $ul = $breadcrumbs->add('ul');
             $ul->appendChild('<li><span class="icon-tools">{LNG_Tools}</span></li>');
-            $ul->appendChild('<li><span>'.$this->title.'</span></li>');
+            $ul->appendChild('<li><span>' . $this->title . '</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-world">'.$this->title.'</h2>',
+                'innerHTML' => '<h2 class="icon-world">' . $this->title . '</h2>',
             ));
             $div = $section->add('div', array(
                 'class' => 'setup_frm',
