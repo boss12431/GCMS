@@ -1,11 +1,12 @@
 <?php
 /**
- * Widgets/Twitter/preview.php
+ * Widgets/Twitter/preview.php.
  *
  * @author Goragod Wiriya <admin@goragod.com>
- * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 // load Kotchasan
 include '../../load.php';

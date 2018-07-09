@@ -2,17 +2,17 @@
 /**
  * @filesource Widgets/Textlink/Controllers/Write.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Widgets\Textlink\Controllers;
 
-use Kotchasan\Http\Request;
 use Gcms\Login;
 use Kotchasan\Html;
+use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
@@ -47,15 +47,15 @@ class Write extends \Gcms\Controller
                     $section = Html::create('section');
                     // breadcrumbs
                     $breadcrumbs = $section->add('div', array(
-            'class' => 'breadcrumbs',
-          ));
+                        'class' => 'breadcrumbs',
+                    ));
                     $ul = $breadcrumbs->add('ul');
                     $ul->appendChild('<li><span class="icon-widgets">{LNG_Widgets}</span></li>');
                     $ul->appendChild('<li><span>{LNG_Text links}</span></li>');
                     $ul->appendChild('<li><span>{LNG_'.(empty($index->id) ? 'Create' : 'Edit').'}</span></li>');
                     $section->add('header', array(
-            'innerHTML' => '<h2 class="icon-ads">'.$this->title().'</h2>',
-          ));
+                        'innerHTML' => '<h2 class="icon-ads">'.$this->title().'</h2>',
+                    ));
                     // แสดงฟอร์ม
                     $section->appendChild(createClass('Widgets\Textlink\Views\Write')->render($index));
 
@@ -64,6 +64,7 @@ class Write extends \Gcms\Controller
             }
         }
         // 404.html
+
         return \Index\Error\Controller::page404();
     }
 }

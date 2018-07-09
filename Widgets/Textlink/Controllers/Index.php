@@ -1,17 +1,19 @@
 <?php
 /**
  * @filesource Widgets/Textlink/Controllers/Index.php
- * @link http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Widgets\Textlink\Controllers;
 
-use \Kotchasan\Date;
+use Kotchasan\Date;
 
 /**
- * Controller หลัก สำหรับแสดงผล Widget
+ * Controller หลัก สำหรับแสดงผล Widget.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -19,41 +21,41 @@ use \Kotchasan\Date;
  */
 class Index extends \Kotchasan\Controller
 {
-
-  /**
-   * แสดงผล Widget
-   *
-   * @param array $query_string ข้อมูลที่ส่งมาจากการเรียก Widget
-   * @return string
-   */
-  public function get($query_string)
-  {
-    if (defined('MAIN_INIT') && preg_match('/[a-z0-9]{1,11}/', $query_string['module'])) {
-      // อ่านข้อมูล
-      $textlinks = \Widgets\Textlink\Models\Index::get(Date::month(), Date::day(), Date::year());
-      if (!empty($textlinks)) {
-        if (empty($query_string['module'])) {
-          // ไม่ได้กำหนดลิงค์มา ใช้รายการแรกที่พบ
-          $textlink = reset($textlinks);
-        } elseif (isset($textlinks[$query_string['module']])) {
-          // กำหนดชื่อลิงค์มา
-          $textlink = $textlinks[$query_string['module']];
-        } else {
-          // ไม่มีชื่อลิงค์ที่ต้องการ
-          return '';
+    /**
+     * แสดงผล Widget.
+     *
+     * @param array $query_string ข้อมูลที่ส่งมาจากการเรียก Widget
+     *
+     * @return string
+     */
+    public function get($query_string)
+    {
+        if (defined('MAIN_INIT') && preg_match('/[a-z0-9]{1,11}/', $query_string['module'])) {
+            // อ่านข้อมูล
+            $textlinks = \Widgets\Textlink\Models\Index::get(Date::month(), Date::day(), Date::year());
+            if (!empty($textlinks)) {
+                if (empty($query_string['module'])) {
+                    // ไม่ได้กำหนดลิงค์มา ใช้รายการแรกที่พบ
+                    $textlink = reset($textlinks);
+                } elseif (isset($textlinks[$query_string['module']])) {
+                    // กำหนดชื่อลิงค์มา
+                    $textlink = $textlinks[$query_string['module']];
+                } else {
+                    // ไม่มีชื่อลิงค์ที่ต้องการ
+                    return '';
+                }
+                $t = reset($textlink);
+                switch ($t['type']) {
+                    case 'banner':
+                        return \Widgets\Textlink\Views\Index::banner($textlink);
+                    case 'custom':
+                        return \Widgets\Textlink\Views\Index::custom($textlink);
+                    case 'slideshow':
+                        return \Widgets\Textlink\Views\Index::slideshow($textlink);
+                    default:
+                        return \Widgets\Textlink\Views\Index::template($textlink);
+                }
+            }
         }
-        $t = reset($textlink);
-        switch ($t['type']) {
-          case 'banner':
-            return \Widgets\Textlink\Views\Index::banner($textlink);
-          case 'custom':
-            return \Widgets\Textlink\Views\Index::custom($textlink);
-          case 'slideshow':
-            return \Widgets\Textlink\Views\Index::slideshow($textlink);
-          default:
-            return \Widgets\Textlink\Views\Index::template($textlink);
-        }
-      }
     }
-  }
 }
