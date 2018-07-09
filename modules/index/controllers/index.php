@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/controllers/index.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Index;
@@ -41,9 +41,9 @@ class Controller extends \Kotchasan\Controller
         Login::create();
         // template ที่กำลังใช้งานอยู่
         self::$cfg->skin = $request->get('skin', $request->session('skin', self::$cfg->skin)->toString())->filter('a-z0-9\-');
-        self::$cfg->skin = is_file(APP_PATH . 'skin/' . self::$cfg->skin . '/style.css') ? self::$cfg->skin : 'rooster';
+        self::$cfg->skin = is_file(APP_PATH.'skin/'.self::$cfg->skin.'/style.css') ? self::$cfg->skin : 'rooster';
         $_SESSION['skin'] = self::$cfg->skin;
-        Template::init('skin/' . self::$cfg->skin);
+        Template::init('skin/'.self::$cfg->skin);
         // ตรวจสอบหน้าที่จะแสดง
         if (!empty(self::$cfg->maintenance_mode) && !Login::isAdmin()) {
             Gcms::$view = new \Index\Maintenance\View();
@@ -63,15 +63,15 @@ class Controller extends \Kotchasan\Controller
                 '@type' => 'Organization',
                 'name' => self::$cfg->web_title,
                 'description' => self::$cfg->web_description,
-                'url' => WEB_URL . 'index.php',
+                'url' => WEB_URL.'index.php',
             );
             // logo
             $img_logo = '';
-            if (!empty(self::$cfg->logo) && is_file(ROOT_PATH . DATA_FOLDER . 'image/' . self::$cfg->logo)) {
-                $info = @getimagesize(ROOT_PATH . DATA_FOLDER . 'image/' . self::$cfg->logo);
+            if (!empty(self::$cfg->logo) && is_file(ROOT_PATH.DATA_FOLDER.'image/'.self::$cfg->logo)) {
+                $info = @getimagesize(ROOT_PATH.DATA_FOLDER.'image/'.self::$cfg->logo);
                 if ($info && $info[0] > 0 && $info[1] > 0) {
-                    $logo = WEB_URL . DATA_FOLDER . 'image/' . self::$cfg->logo;
-                    $img_logo = '<img src="' . $logo . '" alt="{WEBTITLE}">';
+                    $logo = WEB_URL.DATA_FOLDER.'image/'.self::$cfg->logo;
+                    $img_logo = '<img src="'.$logo.'" alt="{WEBTITLE}">';
                     Gcms::$site['logo'] = array(
                         '@type' => 'ImageObject',
                         'url' => $logo,
@@ -79,12 +79,12 @@ class Controller extends \Kotchasan\Controller
                     );
                 }
             }
-            if (!isset(Gcms::$site['logo']) && is_file(ROOT_PATH . DATA_FOLDER . 'image/site_logo.jpg')) {
-                $info = @getimagesize(ROOT_PATH . DATA_FOLDER . 'image/site_logo.jpg');
+            if (!isset(Gcms::$site['logo']) && is_file(ROOT_PATH.DATA_FOLDER.'image/site_logo.jpg')) {
+                $info = @getimagesize(ROOT_PATH.DATA_FOLDER.'image/site_logo.jpg');
                 if ($info && $info[0] > 0 && $info[1] > 0) {
                     Gcms::$site['logo'] = array(
                         '@type' => 'ImageObject',
-                        'url' => WEB_URL . DATA_FOLDER . 'image/site_logo.jpg',
+                        'url' => WEB_URL.DATA_FOLDER.'image/site_logo.jpg',
                         'width' => $info[0],
                     );
                 }
@@ -92,12 +92,12 @@ class Controller extends \Kotchasan\Controller
             // หน้า home (เมนูรายการแรกสุด)
             $home = Gcms::$menu->homeMenu();
             if ($home) {
-                $home->canonical = WEB_URL . 'index.php';
+                $home->canonical = WEB_URL.'index.php';
                 // breadcrumb หน้า home
                 Gcms::$view->addBreadcrumb($home->canonical, $home->menu_text, $home->menu_tooltip, 'icon-home');
             }
             // โมดูลแรกสุด ใส่ลงใน Javascript
-            Gcms::$view->addScript('var FIRST_MODULE = "' . Gcms::$module->getFirst() . '";');
+            Gcms::$view->addScript('var FIRST_MODULE = "'.Gcms::$module->getFirst().'";');
             // ตรวจสอบโมดูลที่เรียก
             $modules = Gcms::$module->checkModuleCalled($request->getQueryParams());
             if (!empty($modules)) {
@@ -108,42 +108,42 @@ class Controller extends \Kotchasan\Controller
                 // ไม่พบหน้าที่เรียก (index)
                 $page = createClass('Index\Error\Controller')->init('index');
             }
-            $favicon = is_file(ROOT_PATH . DATA_FOLDER . 'image/favicon.ico') ? WEB_URL . DATA_FOLDER . 'image/favicon.ico' : WEB_URL . 'favicon.ico';
+            $favicon = is_file(ROOT_PATH.DATA_FOLDER.'image/favicon.ico') ? WEB_URL.DATA_FOLDER.'image/favicon.ico' : WEB_URL.'favicon.ico';
             // meta tag
             $meta = array(
                 'generator' => '<meta name=generator content="GCMS AJAX CMS design by https://gcms.in.th">',
-                'og:title' => '<meta property="og:title" content="' . $page->topic . '">',
-                'description' => '<meta name=description content="' . $page->description . '">',
-                'og:description' => '<meta property="og:description" content="' . $page->description . '">',
-                'keywords' => '<meta name=keywords content="' . $page->keywords . '">',
-                'og:site_name' => '<meta property="og:site_name" content="' . strip_tags(self::$cfg->web_title) . '">',
+                'og:title' => '<meta property="og:title" content="'.$page->topic.'">',
+                'description' => '<meta name=description content="'.$page->description.'">',
+                'og:description' => '<meta property="og:description" content="'.$page->description.'">',
+                'keywords' => '<meta name=keywords content="'.$page->keywords.'">',
+                'og:site_name' => '<meta property="og:site_name" content="'.strip_tags(self::$cfg->web_title).'">',
                 'og:type' => '<meta property="og:type" content="article">',
-                'shortcut_icon' => '<link rel="shortcut icon" href="' . $favicon . '" type="image/x-icon">',
-                'icon' => '<link rel="icon" href="' . $favicon . '" type="image/x-icon">',
+                'shortcut_icon' => '<link rel="shortcut icon" href="'.$favicon.'" type="image/x-icon">',
+                'icon' => '<link rel="icon" href="'.$favicon.'" type="image/x-icon">',
             );
             if (empty($page->image_src) && isset(Gcms::$site['logo'])) {
                 $page->image_src = Gcms::$site['logo']['url'];
             }
             if (!empty($page->image_src)) {
-                $meta['image_src'] = '<link rel=image_src href="' . $page->image_src . '">';
-                $meta['og:image'] = '<meta property="og:image" content="' . $page->image_src . '">';
-                $meta['og:image:alt'] = '<meta property="og:image:alt" content="' . $page->topic . '">';
+                $meta['image_src'] = '<link rel=image_src href="'.$page->image_src.'">';
+                $meta['og:image'] = '<meta property="og:image" content="'.$page->image_src.'">';
+                $meta['og:image:alt'] = '<meta property="og:image:alt" content="'.$page->topic.'">';
                 if (isset($page->image_width)) {
-                    $meta['og:image:width'] = '<meta property="og:image:width" content="' . $page->image_width . '">';
+                    $meta['og:image:width'] = '<meta property="og:image:width" content="'.$page->image_width.'">';
                 }
                 if (isset($page->image_height)) {
-                    $meta['og:image:height'] = '<meta property="og:image:height" content="' . $page->image_height . '">';
+                    $meta['og:image:height'] = '<meta property="og:image:height" content="'.$page->image_height.'">';
                 }
             }
             if (!empty(self::$cfg->facebook_appId)) {
-                $meta['og:app_id'] = '<meta property="fb:app_id" content="' . self::$cfg->facebook_appId . '">';
+                $meta['og:app_id'] = '<meta property="fb:app_id" content="'.self::$cfg->facebook_appId.'">';
             }
             if (isset($page->canonical)) {
-                $meta['canonical'] = '<meta name=canonical content="' . $page->canonical . '">';
-                $meta['og:url'] = '<meta property="og:url" content="' . $page->canonical . '">';
+                $meta['canonical'] = '<meta name=canonical content="'.$page->canonical.'">';
+                $meta['og:url'] = '<meta property="og:url" content="'.$page->canonical.'">';
             }
             if (!empty(self::$cfg->google_site_verification)) {
-                $meta['google_site_verification'] = '<meta name="google-site-verification" content="' . self::$cfg->google_site_verification . '">';
+                $meta['google_site_verification'] = '<meta name="google-site-verification" content="'.self::$cfg->google_site_verification.'">';
             }
             Gcms::$view->setMetas($meta);
             // ภาษาที่ติดตั้ง
