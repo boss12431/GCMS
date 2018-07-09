@@ -50,6 +50,70 @@ class View extends \Gcms\Baseview
     }
 
     /**
+     * ฟังก์ชั่นตรวจสอบข้อความว่าง ถ้า $text ไม่ว่างให้เพิ่ม $text ลงใน $array.
+     *
+     * @param string $text   ข้อความที่ต้องการตรวจสอบ
+     * @param array  $array  แอเรย์สำหรับรับค่าจาก $text
+     * @param string $prefix ข้อความเติมด้านหน้า $text หากมันไม่ว่าง (ไม่มีไม่ต้องระบุ)
+     */
+    public static function checkEmpty($text, &$array, $prefix = '')
+    {
+        if ($text != '') {
+            $array[] = $prefix.$text;
+        }
+    }
+
+    /**
+     * แปลงวันที่ {DATE 0123456789 d M Y} หรือ {DATE 2016-01-01 12:00:00 d M Y H:i:s}
+     * วันที่รูปแบบ mktime ตัวเลขเท่านั้น
+     * วันที่รูปแบบ YYYY-mm-dd H:i:s จาก MySQL (จะมีเวลาหรือไม่ก็ได้)
+     * ถ้าไม่ได้ระบุรูปแบบ จะใช้ตามรูปแบบของภาษา.
+     *
+     * @param array $matches
+     *
+     * @return string
+     */
+    public static function formatDate($matches)
+    {
+        if (!empty($matches[1])) {
+            return \Kotchasan\Date::format($matches[1], isset($matches[4]) ? $matches[4] : null);
+        }
+
+        return '';
+    }
+
+    /**
+     * แสดงผล Widget.
+     *
+     * @param array $matches
+     *
+     * @return string
+     */
+    public static function getWidgets($matches)
+    {
+        $request = array(
+            'owner' => strtolower($matches[1]),
+        );
+        if (isset($matches[3])) {
+            $request['module'] = $matches[3];
+        }
+        if (!empty($request['module'])) {
+            foreach (explode(';', $request['module']) as $item) {
+                if (strpos($item, '=') !== false) {
+                    list($key, $value) = explode('=', $item);
+                    $request[$key] = $value;
+                }
+            }
+        }
+        $className = '\\Widgets\\'.ucfirst(strtolower($matches[1])).'\\Controllers\\Index';
+        if (method_exists($className, 'get')) {
+            return createClass($className)->get($request);
+        }
+
+        return '';
+    }
+
+    /**
      * ouput เป็น HTML.
      *
      * @param string|null $template HTML Template ถ้าไม่กำหนด (null) จะใช้ index.html
@@ -87,69 +151,5 @@ class View extends \Gcms\Baseview
         }
 
         return parent::renderHTML($template);
-    }
-
-    /**
-     * แสดงผล Widget.
-     *
-     * @param array $matches
-     *
-     * @return string
-     */
-    public static function getWidgets($matches)
-    {
-        $request = array(
-            'owner' => strtolower($matches[1]),
-        );
-        if (isset($matches[3])) {
-            $request['module'] = $matches[3];
-        }
-        if (!empty($request['module'])) {
-            foreach (explode(';', $request['module']) as $item) {
-                if (strpos($item, '=') !== false) {
-                    list($key, $value) = explode('=', $item);
-                    $request[$key] = $value;
-                }
-            }
-        }
-        $className = '\\Widgets\\'.ucfirst(strtolower($matches[1])).'\\Controllers\\Index';
-        if (method_exists($className, 'get')) {
-            return createClass($className)->get($request);
-        }
-
-        return '';
-    }
-
-    /**
-     * แปลงวันที่ {DATE 0123456789 d M Y} หรือ {DATE 2016-01-01 12:00:00 d M Y H:i:s}
-     * วันที่รูปแบบ mktime ตัวเลขเท่านั้น
-     * วันที่รูปแบบ YYYY-mm-dd H:i:s จาก MySQL (จะมีเวลาหรือไม่ก็ได้)
-     * ถ้าไม่ได้ระบุรูปแบบ จะใช้ตามรูปแบบของภาษา.
-     *
-     * @param array $matches
-     *
-     * @return string
-     */
-    public static function formatDate($matches)
-    {
-        if (!empty($matches[1])) {
-            return \Kotchasan\Date::format($matches[1], isset($matches[4]) ? $matches[4] : null);
-        }
-
-        return '';
-    }
-
-    /**
-     * ฟังก์ชั่นตรวจสอบข้อความว่าง ถ้า $text ไม่ว่างให้เพิ่ม $text ลงใน $array.
-     *
-     * @param string $text   ข้อความที่ต้องการตรวจสอบ
-     * @param array  $array  แอเรย์สำหรับรับค่าจาก $text
-     * @param string $prefix ข้อความเติมด้านหน้า $text หากมันไม่ว่าง (ไม่มีไม่ต้องระบุ)
-     */
-    public static function checkEmpty($text, &$array, $prefix = '')
-    {
-        if ($text != '') {
-            $array[] = $prefix.$text;
-        }
     }
 }

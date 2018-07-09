@@ -22,45 +22,6 @@ use Kotchasan\Language;
 class Gcms extends \Kotchasan\KBase
 {
     /**
-     * รายการ breadcrumb ทั้งหมด.
-     *
-     * @var array
-     */
-    public static $breadcrumbs = array();
-    /**
-     * Menu Model (Frontend).
-     *
-     * @var \Index\Module\Controller
-     */
-    public static $module;
-    /**
-     * Menu Model (Frontend).
-     *
-     * @var \Index\Menu\Controller
-     */
-    public static $menu;
-    /**
-     * View.
-     *
-     * @var \Gcms\View
-     */
-    public static $view;
-    /**
-     * ข้อมูลเว็บไซต์ สำหรับใส่ลงใน JSON-LD.
-     *
-     * @var array
-     */
-    public static $site;
-    /**
-     * รูปแบบของ URL สัมพันธ์กันกับ router_rules.
-     *
-     * @var array
-     */
-    public static $urls = array(
-        'index.php?module={module}-{document}&amp;cat={catid}&amp;id={id}',
-        '{module}/{catid}/{id}/{document}.html',
-    );
-    /**
      * ชื่อสงวนของโมดูล.
      *
      * @var array
@@ -79,6 +40,39 @@ class Gcms extends \Kotchasan\KBase
         'login',
         'dologin',
     );
+
+    /**
+     * รายการ breadcrumb ทั้งหมด.
+     *
+     * @var array
+     */
+    public static $breadcrumbs = array();
+
+    /**
+     * tab สำหรับ member.
+     *
+     * @var array
+     */
+    public static $member_tabs = array(
+        'profile' => array('Profile', 'Index\Profile\View'),
+        'password' => array('Change your password', 'Index\Password\View'),
+        'address' => array('Address details', 'Index\Address\View'),
+    );
+
+    /**
+     * Menu Model (Frontend).
+     *
+     * @var \Index\Menu\Controller
+     */
+    public static $menu;
+
+    /**
+     * Menu Model (Frontend).
+     *
+     * @var \Index\Module\Controller
+     */
+    public static $module;
+
     /**
      * รายการเมนูที่สามารถใช้งานได้.
      *
@@ -94,86 +88,68 @@ class Gcms extends \Kotchasan\KBase
             'admin' => array('{LNG_Administrator Area}', '{WEBURL}admin/index.php', 'admin'),
         ),
     );
+
     /**
-     * tab สำหรับ member.
+     * ข้อมูลเว็บไซต์ สำหรับใส่ลงใน JSON-LD.
      *
      * @var array
      */
-    public static $member_tabs = array(
-        'profile' => array('Profile', 'Index\Profile\View'),
-        'password' => array('Change your password', 'Index\Password\View'),
-        'address' => array('Address details', 'Index\Address\View'),
+    public static $site;
+
+    /**
+     * รูปแบบของ URL สัมพันธ์กันกับ router_rules.
+     *
+     * @var array
+     */
+    public static $urls = array(
+        'index.php?module={module}-{document}&amp;cat={catid}&amp;id={id}',
+        '{module}/{catid}/{id}/{document}.html',
     );
 
     /**
-     * ฟังก์ชั่น HTML highlighter
-     * ทำ highlight ข้อความส่วนที่เป็นโค้ด
-     * จัดการแปลง BBCode
-     * แปลงข้อความ http เป็นลิงค์
+     * View.
+     *
+     * @var \Gcms\View
+     */
+    public static $view;
+
+    /**
+     * ฟังก์ชั่นตรวจสอบข้อความ ใช้เป็น alias name
+     * ตัวพิมพ์เล็ก ลบ {}[]() ออก แทนช่องว่างและอักขระพิเศษด้วย _
      * คืนค่าข้อความ
      *
-     * @param string $detail  ข้อความ
-     * @param bool   $canview true จะแสดงข้อความเตือน 'ยังไม่ได้เข้าระบบ' หากไม่ได้เข้าระบบ สำหรับส่วนที่อยู่ในกรอบ code
+     * @param string $text ข้อความ
      *
      * @return string
      */
-    public static function highlighter($detail, $canview)
+    public static function aliasName($text)
     {
-        $detail = preg_replace_callback('/\[([uo]l)\](.*)\[\/\\1\]/is', function ($match) {
-            return '<'.$match[1].'><li>'.preg_replace('/<br(\s\/)?>/is', '</li><li>', $match[2]).'</li></'.$match[1].'>';
-        }, $detail);
-        $patt[] = '/\[(i|dfn|b|strong|u|em|ins|del|sub|sup|small|big)\](.*)\[\/\\1\]/is';
-        $replace[] = '<\\1>\\2</\\1>';
-        $patt[] = '/(&lt;\?(.*?)\?&gt;)/uism';
-        $replace[] = '<span class=php>\\1</span>';
-        $patt[] = '/(&lt;%(.*?)%&gt;)/uism';
-        $replace[] = '<span class=asp>\\1</span>';
-        $patt[] = '/(&lt;(script|style)(&gt;|\s(.*?)&gt;)([^\[]+)&lt;\/\\2&gt;)/uis';
-        $replace[] = '<span class=\\2>\\1</span>';
-        $patt[] = '#(&lt;[\/]?([\!a-z]+)(.*?)&gt;)#';
-        $replace[] = '<span class=html>\\1</span>';
-        $patt[] = '/([^:])(\/\/\s[^\r\n]+)/';
-        $replace[] = '\\1<span class=comment>\\2</span>';
-        $patt[] = '/(\/\*(.*?)\*\/)/s';
-        $replace[] = '<span class=comment>\\1</span>';
-        $patt[] = '/(&lt;!--(.*?)--&gt;)/uis';
-        $replace[] = '<span class=comment>\\1</span>';
-        $patt[] = '/\[color=([#a-z0-9]+)\]/i';
-        $replace[] = '<span style="color:\\1">';
-        $patt[] = '/\[size=([0-9]+)(px|pt|em|\%)\]/i';
-        $replace[] = '<span style="font-size:\\1\\2">';
-        $patt[] = '/\[\/(color|size)\]/i';
-        $replace[] = '</span>';
-        $patt[] = '/\[img\](.*)\[\/img\]/iU';
-        $replace[] = '<figure><img src="\\1" alt=""></figure>';
-        $patt[] = '/\[url\](.*)\[\/url\]/iU';
-        $replace[] = '<a href="\\1" target="_blank" rel="nofollow">\\1</a>';
-        $patt[] = '/\[url=(ftp|https?):\/\/(.*)\](.*)\[\/url\]/i';
-        $replace[] = '<a href="\\1://\\2" target="_blank" rel="nofollow">\\3</a>';
-        $patt[] = '/\[url=(\/)?(.*)\](.*)\[\/url\]/i';
-        $replace[] = '<a href="'.WEB_URL.'\\2" target="_blank" rel="nofollow">\\3</a>';
-        $patt[] = '/\[quote(\s+q=[0-9]+)?\]/i';
-        $replace[] = '<blockquote><b>'.Language::replace('Quotations by :name', array(':name' => Language::get('Topic'))).'</b>';
-        $patt[] = '/\[quote\s+r=([0-9]+)\]/i';
-        $replace[] = '<blockquote><b>'.Language::replace('Quotations by :name', array(':name' => Language::get('Comment'))).' <em>#\\1</em></b>';
-        $patt[] = '/\[\/quote\]/i';
-        $replace[] = '</blockquote>';
-        $patt[] = '/\[code(=([a-z]{1,}))?\](.*?)\[\/code\]/is';
-        $replace[] = $canview ? '<code class="content-code \\2">\\3<a class="copytoclipboard notext" title="'.Language::get('copy to clipboard').'"><span class="icon-copy"></span></a></code>' : '<code class="content-code">'.Language::get('Can not view this content').'</code>';
-        $patt[] = '/\[search\](.*)\[\/search\]/iU';
-        $replace[] = '<a href="'.WEB_URL.'index.php?module=search&amp;q=\\1" rel="nofollow">\\1</a>';
-        $patt[] = '/\[google\](.*?)\[\/google\]/iU';
-        $replace[] = '<a class="googlesearch" href="http://www.google.co.th/search?q=\\1&amp;&meta=lr%3Dlang_th" target="_blank" rel="nofollow">\\1</a>';
-        $patt[] = '/([^["]]|\r|\n|\s|\t|^)((ftp|https?):\/\/([a-z0-9\.\-_]+)\/([^\s<>\"\']{1,})([^\s<>\"\']{20,20}))/i';
-        $replace[] = '\\1<a href="\\2" target="_blank" rel="nofollow">\\3://\\4/...\\6</a>';
-        $patt[] = '/([^["]]|\r|\n|\s|\t|^)((ftp|https?):\/\/([^\s<>\"\']+))/i';
-        $replace[] = '\\1<a href="\\2" target="_blank" rel="nofollow">\\2</a>';
-        $patt[] = '/(<a[^>]+>)(https?:\/\/[^\%<]+)([\%][^\.\&<]+)([^<]{5,})(<\/a>)/i';
-        $replace[] = '\\1\\2...\\4\\5';
-        $patt[] = '/\[youtube\]([a-z0-9-_]+)\[\/youtube\]/i';
-        $replace[] = '<div class="youtube"><iframe src="//www.youtube.com/embed/\\1?wmode=transparent"></iframe></div>';
+        return preg_replace(array('/[\{\}\[\]\(\)]{1,}/isu', '/[_\-\+\#\r\n\s\"\'<>\.\/\\\?&]{1,}/isu', '/^(_)?(.*?)(_)?$/'), array('', '_', '\\2'), strtolower(trim(strip_tags($text))));
+    }
 
-        return preg_replace($patt, $replace, $detail);
+    /**
+     * ฟังก์ชั่น ตรวจสอบและทำ serialize สำหรับภาษา โดยรายการที่มีเพียงภาษาเดียว จะกำหนดให้ไม่มีภาษา
+     * คืนค่าข้อความที่ทำ serialize แล้ว.
+     *
+     * @param array $array ข้อมูลที่ต้องการจะทำ serialize
+     *
+     * @return string
+     */
+    public static function array2Ser($array)
+    {
+        $new_array = array();
+        $l = sizeof($array);
+        if ($l > 0) {
+            foreach ($array as $i => $v) {
+                if ($l == 1 && $i == 0) {
+                    $new_array[''] = $v;
+                } else {
+                    $new_array[$i] = $v;
+                }
+            }
+        }
+
+        return serialize($new_array);
     }
 
     /**
@@ -278,130 +254,6 @@ class Gcms extends \Kotchasan\KBase
     }
 
     /**
-     * ฟังก์ชั่นแสดงเนื้อหา.
-     *
-     * @param string $detail      ข้อความ
-     * @param bool   $canview     true จะแสดงข้อความเตือน 'ยังไม่ได้เข้าระบบ' หากไม่ได้เข้าระบบ สำหรับส่วนที่อยู่ในกรอบ code
-     * @param bool   $rude        (optional) true=ตรวจสอบคำหยาบด้วย (default true)
-     * @param bool   $convert_tab (optional) true=เปลี่ยน tab เป็นช่องว่าง 4 ตัวอักษร (default false)
-     *
-     * @return string
-     */
-    public static function showDetail($detail, $canview, $rude = true, $convert_tab = false)
-    {
-        if ($convert_tab) {
-            $detail = preg_replace('/[\t]/', '&nbsp;&nbsp;&nbsp;&nbsp;', $detail);
-        }
-        if ($rude) {
-            return self::highlighter(self::checkRude($detail), $canview);
-        } else {
-            return self::highlighter($detail, $canview);
-        }
-    }
-
-    /**
-     * ฟังก์ชั่น แสดง ip แบบซ่อนหลักหลัง ถ้าเป็น admin จะแสดงทั้งหมด
-     * คืนค่า ที่อยู่ IP ที่แปลงแล้ว.
-     *
-     * @param string $ip    ที่อยู่ IP ที่ต้องการแปลง (IPV4)
-     * @param array  $login
-     *
-     * @return string
-     */
-    public static function showip($ip, $login)
-    {
-        if ($login['status'] != 1 && preg_match('/([0-9]+\.[0-9]+\.)([0-9\.]+)/', $ip, $ips)) {
-            return $ips[1].preg_replace('/[0-9]/', 'x', $ips[2]);
-        } else {
-            return $ip;
-        }
-    }
-
-    /**
-     * ฟังก์ชั่น highlight ข้อความค้นหา
-     * คืนค่าข้อความ
-     *
-     * @param string $text   ข้อความ
-     * @param string $search ข้อความค้นหา แยกแต่ละคำด้วย ,
-     *
-     * @return string
-     */
-    public static function highlightSearch($text, $search)
-    {
-        foreach (explode(' ', $search) as $i => $q) {
-            if ($q != '') {
-                $text = self::doHighlight($text, $q);
-            }
-        }
-
-        return $text;
-    }
-
-    /**
-     * ฟังก์ชั่น อ่านหมวดหมู่ในรูป serialize ตามภาษาที่เลือก
-     * คืนค่าข้อความ
-     *
-     * @param mixed  $datas ข้อความ serialize
-     * @param string $key   (optional) ถ้า $datas เป็น array ต้องระบุ $key ด้วย
-     *
-     * @return string
-     */
-    public static function ser2Str($datas, $key = '')
-    {
-        if (is_array($datas)) {
-            $datas = isset($datas[$key]) ? $datas[$key] : '';
-        }
-        if (!empty($datas)) {
-            $datas = @unserialize($datas);
-            if (is_array($datas)) {
-                $lng = Language::name();
-                $datas = isset($datas[$lng]) ? $datas[$lng] : (isset($datas['']) ? $datas[''] : '');
-            }
-        }
-
-        return $datas;
-    }
-
-    /**
-     * ฟังก์ชั่น ตรวจสอบและทำ serialize สำหรับภาษา โดยรายการที่มีเพียงภาษาเดียว จะกำหนดให้ไม่มีภาษา
-     * คืนค่าข้อความที่ทำ serialize แล้ว.
-     *
-     * @param array $array ข้อมูลที่ต้องการจะทำ serialize
-     *
-     * @return string
-     */
-    public static function array2Ser($array)
-    {
-        $new_array = array();
-        $l = sizeof($array);
-        if ($l > 0) {
-            foreach ($array as $i => $v) {
-                if ($l == 1 && $i == 0) {
-                    $new_array[''] = $v;
-                } else {
-                    $new_array[$i] = $v;
-                }
-            }
-        }
-
-        return serialize($new_array);
-    }
-
-    /**
-     * ฟังก์ชั่นตรวจสอบข้อความ ใช้เป็น alias name
-     * ตัวพิมพ์เล็ก ลบ {}[]() ออก แทนช่องว่างและอักขระพิเศษด้วย _
-     * คืนค่าข้อความ
-     *
-     * @param string $text ข้อความ
-     *
-     * @return string
-     */
-    public static function aliasName($text)
-    {
-        return preg_replace(array('/[\{\}\[\]\(\)]{1,}/isu', '/[_\-\+\#\r\n\s\"\'<>\.\/\\\?&]{1,}/isu', '/^(_)?(.*?)(_)?$/'), array('', '_', '\\2'), strtolower(trim(strip_tags($text))));
-    }
-
-    /**
      * ฟังก์ชั่น ทำ highlight ข้อความ
      * คืนค่าข้อความ ข้อความที่ highlight จะอยู่ภายใต้ tag mark.
      *
@@ -437,39 +289,117 @@ class Gcms extends \Kotchasan\KBase
     }
 
     /**
-     * ฟังก์ชั่น ค้นหาข้อความย้อนหลัง
-     * คืนค่าตำแหน่งของตัวอักษรที่พบ ตัวแรกคือ หากไม่พบคืนค่า -1.
-     *
-     * @param string $text   ข้อความ
-     * @param string $needle ข้อความค้นหา
-     * @param int    $offset ตำแหน่งเริ่มต้นที่ต้องการค้นหา
-     *
-     * @return int
-     */
-    private static function lastIndexOf($text, $needle, $offset)
-    {
-        $pos = mb_strripos(mb_substr($text, 0, $offset), $needle);
-
-        return $pos == false ? -1 : $pos;
-    }
-
-    /**
-     * ฟังก์ชั่น แปลงข้อความสำหรับการ quote
-     * คืนค่าข้อความ
-     *
-     * @param string $text ข้อความ
-     * @param bool   $u    true=ถอดรหัสอักขระพิเศษด้วย (default false)
+     * ฟังก์ชั่นคืนค่าข้อความ placeholder ของช่อง login.
      *
      * @return string
      */
-    public static function quote($text, $u = false)
+    public static function getLoginPlaceholder()
     {
-        $text = preg_replace('/<br(\s\/)?>/isu', '', $text);
-        if ($u) {
-            $text = str_replace(array('&lt;', '&gt;', '&#92;', '&nbsp;', '&#x007B;', '&#x007D;'), array('<', '>', '\\', ' ', '{', '}'), $text);
+        $login_fields = array(
+            'email' => '{LNG_Email}',
+            'username' => '{LNG_Username}',
+            'phone1' => '{LNG_Phone}',
+            'idcard' => '{LNG_Identification number}',
+        );
+        $placeholder = array();
+        foreach (self::$cfg->login_fields as $item) {
+            if (isset($login_fields[$item])) {
+                $placeholder[] = $login_fields[$item];
+            }
+        }
+
+        return implode('/', $placeholder);
+    }
+
+    /**
+     * ฟังก์ชั่น highlight ข้อความค้นหา
+     * คืนค่าข้อความ
+     *
+     * @param string $text   ข้อความ
+     * @param string $search ข้อความค้นหา แยกแต่ละคำด้วย ,
+     *
+     * @return string
+     */
+    public static function highlightSearch($text, $search)
+    {
+        foreach (explode(' ', $search) as $i => $q) {
+            if ($q != '') {
+                $text = self::doHighlight($text, $q);
+            }
         }
 
         return $text;
+    }
+
+    /**
+     * ฟังก์ชั่น HTML highlighter
+     * ทำ highlight ข้อความส่วนที่เป็นโค้ด
+     * จัดการแปลง BBCode
+     * แปลงข้อความ http เป็นลิงค์
+     * คืนค่าข้อความ
+     *
+     * @param string $detail  ข้อความ
+     * @param bool   $canview true จะแสดงข้อความเตือน 'ยังไม่ได้เข้าระบบ' หากไม่ได้เข้าระบบ สำหรับส่วนที่อยู่ในกรอบ code
+     *
+     * @return string
+     */
+    public static function highlighter($detail, $canview)
+    {
+        $detail = preg_replace_callback('/\[([uo]l)\](.*)\[\/\\1\]/is', function ($match) {
+            return '<'.$match[1].'><li>'.preg_replace('/<br(\s\/)?>/is', '</li><li>', $match[2]).'</li></'.$match[1].'>';
+        }, $detail);
+        $patt[] = '/\[(i|dfn|b|strong|u|em|ins|del|sub|sup|small|big)\](.*)\[\/\\1\]/is';
+        $replace[] = '<\\1>\\2</\\1>';
+        $patt[] = '/(&lt;\?(.*?)\?&gt;)/uism';
+        $replace[] = '<span class=php>\\1</span>';
+        $patt[] = '/(&lt;%(.*?)%&gt;)/uism';
+        $replace[] = '<span class=asp>\\1</span>';
+        $patt[] = '/(&lt;(script|style)(&gt;|\s(.*?)&gt;)([^\[]+)&lt;\/\\2&gt;)/uis';
+        $replace[] = '<span class=\\2>\\1</span>';
+        $patt[] = '#(&lt;[\/]?([\!a-z]+)(.*?)&gt;)#';
+        $replace[] = '<span class=html>\\1</span>';
+        $patt[] = '/([^:])(\/\/\s[^\r\n]+)/';
+        $replace[] = '\\1<span class=comment>\\2</span>';
+        $patt[] = '/(\/\*(.*?)\*\/)/s';
+        $replace[] = '<span class=comment>\\1</span>';
+        $patt[] = '/(&lt;!--(.*?)--&gt;)/uis';
+        $replace[] = '<span class=comment>\\1</span>';
+        $patt[] = '/\[color=([#a-z0-9]+)\]/i';
+        $replace[] = '<span style="color:\\1">';
+        $patt[] = '/\[size=([0-9]+)(px|pt|em|\%)\]/i';
+        $replace[] = '<span style="font-size:\\1\\2">';
+        $patt[] = '/\[\/(color|size)\]/i';
+        $replace[] = '</span>';
+        $patt[] = '/\[img\](.*)\[\/img\]/iU';
+        $replace[] = '<figure><img src="\\1" alt=""></figure>';
+        $patt[] = '/\[url\](.*)\[\/url\]/iU';
+        $replace[] = '<a href="\\1" target="_blank" rel="nofollow">\\1</a>';
+        $patt[] = '/\[url=(ftp|https?):\/\/(.*)\](.*)\[\/url\]/i';
+        $replace[] = '<a href="\\1://\\2" target="_blank" rel="nofollow">\\3</a>';
+        $patt[] = '/\[url=(\/)?(.*)\](.*)\[\/url\]/i';
+        $replace[] = '<a href="'.WEB_URL.'\\2" target="_blank" rel="nofollow">\\3</a>';
+        $patt[] = '/\[quote(\s+q=[0-9]+)?\]/i';
+        $replace[] = '<blockquote><b>'.Language::replace('Quotations by :name', array(':name' => Language::get('Topic'))).'</b>';
+        $patt[] = '/\[quote\s+r=([0-9]+)\]/i';
+        $replace[] = '<blockquote><b>'.Language::replace('Quotations by :name', array(':name' => Language::get('Comment'))).' <em>#\\1</em></b>';
+        $patt[] = '/\[\/quote\]/i';
+        $replace[] = '</blockquote>';
+        $patt[] = '/\[code(=([a-z]{1,}))?\](.*?)\[\/code\]/is';
+        $replace[] = $canview ? '<code class="content-code \\2">\\3<a class="copytoclipboard notext" title="'.Language::get('copy to clipboard').'"><span class="icon-copy"></span></a></code>' : '<code class="content-code">'.Language::get('Can not view this content').'</code>';
+        $patt[] = '/\[search\](.*)\[\/search\]/iU';
+        $replace[] = '<a href="'.WEB_URL.'index.php?module=search&amp;q=\\1" rel="nofollow">\\1</a>';
+        $patt[] = '/\[google\](.*?)\[\/google\]/iU';
+        $replace[] = '<a class="googlesearch" href="http://www.google.co.th/search?q=\\1&amp;&meta=lr%3Dlang_th" target="_blank" rel="nofollow">\\1</a>';
+        $patt[] = '/([^["]]|\r|\n|\s|\t|^)((ftp|https?):\/\/([a-z0-9\.\-_]+)\/([^\s<>\"\']{1,})([^\s<>\"\']{20,20}))/i';
+        $replace[] = '\\1<a href="\\2" target="_blank" rel="nofollow">\\3://\\4/...\\6</a>';
+        $patt[] = '/([^["]]|\r|\n|\s|\t|^)((ftp|https?):\/\/([^\s<>\"\']+))/i';
+        $replace[] = '\\1<a href="\\2" target="_blank" rel="nofollow">\\2</a>';
+        $patt[] = '/(<a[^>]+>)(https?:\/\/[^\%<]+)([\%][^\.\&<]+)([^<]{5,})(<\/a>)/i';
+        $replace[] = '\\1\\2...\\4\\5';
+        $patt[] = '/\[youtube\]([a-z0-9-_]+)\[\/youtube\]/i';
+        $replace[] = '<div class="youtube"><iframe src="//www.youtube.com/embed/\\1?wmode=transparent"></iframe></div>';
+
+        return preg_replace($patt, $replace, $detail);
     }
 
     /**
@@ -534,6 +464,72 @@ class Gcms extends \Kotchasan\KBase
     }
 
     /**
+     * ฟังก์ชั่น แปลงข้อความสำหรับการ quote
+     * คืนค่าข้อความ
+     *
+     * @param string $text ข้อความ
+     * @param bool   $u    true=ถอดรหัสอักขระพิเศษด้วย (default false)
+     *
+     * @return string
+     */
+    public static function quote($text, $u = false)
+    {
+        $text = preg_replace('/<br(\s\/)?>/isu', '', $text);
+        if ($u) {
+            $text = str_replace(array('&lt;', '&gt;', '&#92;', '&nbsp;', '&#x007B;', '&#x007D;'), array('<', '>', '\\', ' ', '{', '}'), $text);
+        }
+
+        return $text;
+    }
+
+    /**
+     * ฟังก์ชั่น อ่านหมวดหมู่ในรูป serialize ตามภาษาที่เลือก
+     * คืนค่าข้อความ
+     *
+     * @param mixed  $datas ข้อความ serialize
+     * @param string $key   (optional) ถ้า $datas เป็น array ต้องระบุ $key ด้วย
+     *
+     * @return string
+     */
+    public static function ser2Str($datas, $key = '')
+    {
+        if (is_array($datas)) {
+            $datas = isset($datas[$key]) ? $datas[$key] : '';
+        }
+        if (!empty($datas)) {
+            $datas = @unserialize($datas);
+            if (is_array($datas)) {
+                $lng = Language::name();
+                $datas = isset($datas[$lng]) ? $datas[$lng] : (isset($datas['']) ? $datas[''] : '');
+            }
+        }
+
+        return $datas;
+    }
+
+    /**
+     * ฟังก์ชั่นแสดงเนื้อหา.
+     *
+     * @param string $detail      ข้อความ
+     * @param bool   $canview     true จะแสดงข้อความเตือน 'ยังไม่ได้เข้าระบบ' หากไม่ได้เข้าระบบ สำหรับส่วนที่อยู่ในกรอบ code
+     * @param bool   $rude        (optional) true=ตรวจสอบคำหยาบด้วย (default true)
+     * @param bool   $convert_tab (optional) true=เปลี่ยน tab เป็นช่องว่าง 4 ตัวอักษร (default false)
+     *
+     * @return string
+     */
+    public static function showDetail($detail, $canview, $rude = true, $convert_tab = false)
+    {
+        if ($convert_tab) {
+            $detail = preg_replace('/[\t]/', '&nbsp;&nbsp;&nbsp;&nbsp;', $detail);
+        }
+        if ($rude) {
+            return self::highlighter(self::checkRude($detail), $canview);
+        } else {
+            return self::highlighter($detail, $canview);
+        }
+    }
+
+    /**
      * คืนค่าลิงค์รูปแบบโทรศัพท์.
      *
      * @param string $phone_number
@@ -550,25 +546,37 @@ class Gcms extends \Kotchasan\KBase
     }
 
     /**
-     * ฟังก์ชั่นคืนค่าข้อความ placeholder ของช่อง login.
+     * ฟังก์ชั่น แสดง ip แบบซ่อนหลักหลัง ถ้าเป็น admin จะแสดงทั้งหมด
+     * คืนค่า ที่อยู่ IP ที่แปลงแล้ว.
+     *
+     * @param string $ip    ที่อยู่ IP ที่ต้องการแปลง (IPV4)
+     * @param array  $login
      *
      * @return string
      */
-    public static function getLoginPlaceholder()
+    public static function showip($ip, $login)
     {
-        $login_fields = array(
-            'email' => '{LNG_Email}',
-            'username' => '{LNG_Username}',
-            'phone1' => '{LNG_Phone}',
-            'idcard' => '{LNG_Identification number}',
-        );
-        $placeholder = array();
-        foreach (self::$cfg->login_fields as $item) {
-            if (isset($login_fields[$item])) {
-                $placeholder[] = $login_fields[$item];
-            }
+        if ($login['status'] != 1 && preg_match('/([0-9]+\.[0-9]+\.)([0-9\.]+)/', $ip, $ips)) {
+            return $ips[1].preg_replace('/[0-9]/', 'x', $ips[2]);
+        } else {
+            return $ip;
         }
+    }
 
-        return implode('/', $placeholder);
+    /**
+     * ฟังก์ชั่น ค้นหาข้อความย้อนหลัง
+     * คืนค่าตำแหน่งของตัวอักษรที่พบ ตัวแรกคือ หากไม่พบคืนค่า -1.
+     *
+     * @param string $text   ข้อความ
+     * @param string $needle ข้อความค้นหา
+     * @param int    $offset ตำแหน่งเริ่มต้นที่ต้องการค้นหา
+     *
+     * @return int
+     */
+    private static function lastIndexOf($text, $needle, $offset)
+    {
+        $pos = mb_strripos(mb_substr($text, 0, $offset), $needle);
+
+        return $pos == false ? -1 : $pos;
     }
 }

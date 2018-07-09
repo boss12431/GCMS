@@ -20,29 +20,13 @@ namespace Gcms;
 class Config extends \Kotchasan\Config
 {
     /**
-     * รายชื่อฟิลด์จากตารางสมาชิก สำหรับตรวจสอบการ login.
+     * กำหนดอายุของแคช (วินาที)
+     * 0 หมายถึงไม่มีการใช้งานแคช.
      *
-     * @var array
+     * @var int
      */
-    public $login_fields = array('email', 'phone1');
-    /**
-     * ตั้งค่า การ login ต่อ 1 IP
-     * true ไม่สามารถ login พร้อมกันหลายบัญชีต่อ 1 เครื่องได้.
-     *
-     * @var bool default false
-     */
-    public $member_only_ip = false;
-    /**
-     * สถานะสมาชิก
-     * 0 สมาชิกทั่วไป
-     * 1 ผู้ดูแลระบบ.
-     *
-     * @var array
-     */
-    public $member_status = array(
-        0 => 'Member',
-        1 => 'Administrator',
-    );
+    public $cache_expire = 5;
+
     /**
      * สีของสมาชิกตามสถานะ.
      *
@@ -52,49 +36,36 @@ class Config extends \Kotchasan\Config
         0 => '#336600',
         1 => '#FF0000',
     );
+
+    /**
+     * จำนวนหลักของตัวนับคนเยี่ยมชม
+     *
+     * @var int
+     */
+    public $counter_digit = 4;
+
     /**
      * ถ้ากำหนดเป็น true บัญชี demo จะสามารถเข้าระบบแอดมินได้.
      *
      * @var bool default false
      */
     public $demo_mode = false;
+
     /**
-     * ความกว้างสูงสุดของรูปประจำตัวสมาชิก
-     *
      * @var int
      */
-    public $user_icon_w = 50;
+    public $document_cols = 1;
+
     /**
-     * ความสูงสูงสุดของรูปประจำตัวสมาชิก
-     *
      * @var int
      */
-    public $user_icon_h = 50;
+    public $document_rows = 20;
+
     /**
-     * ชนิดของรูปถาพที่สามารถอัปโหลดเป็นรูปประจำตัวสมาชิก ได้.
-     *
-     * @var array
+     * การแสดงผลบทความสำหรับหน้าแสดงรายการตามวันที่ และ Tags.
      */
-    public $user_icon_typies = array('jpg', 'jpeg', 'gif', 'png');
-    /**
-     * ไดเร็คทอรี่เก็บ icon สมาชิก
-     *
-     * @var string
-     */
-    public $usericon_folder = 'datas/member/';
-    /**
-     * สมาชิกใหม่ต้องยืนยันอีเมล.
-     *
-     * @var bool
-     */
-    public $user_activate = true;
-    /**
-     * กำหนดรูปแบบของ URL ที่สร้างจากระบบ
-     * ตามที่กำหนดโดย \Settings->urls.
-     *
-     * @var int
-     */
-    public $module_url = 0;
+    public $document_style = 'iconview';
+
     /**
      * กำหนดวิธีการหากเข้าระบบเรียบร้อย
      * 0 (ค่าเริ่มต้น) Ajax Login
@@ -104,53 +75,36 @@ class Config extends \Kotchasan\Config
      * @var int
      */
     public $login_action = 0;
+
     /**
-     * จำนวนหลักของตัวนับคนเยี่ยมชม
+     * รายชื่อฟิลด์จากตารางสมาชิก สำหรับตรวจสอบการ login.
      *
-     * @var int
+     * @var array
      */
-    public $counter_digit = 4;
-    /**
-     * โทรศัพท์.
-     *
-     * @var int
-     */
-    public $member_phone = 0;
+    public $login_fields = array('email', 'phone1');
+
     /**
      * บัตรประชาชน.
      *
      * @var int
      */
     public $member_idcard = 0;
+
     /**
-     * @var int
-     */
-    public $use_ajax = 0;
-    /**
-     * ชื่อเว็บไซต์.
+     * ตั้งค่า การ login ต่อ 1 IP
+     * true ไม่สามารถ login พร้อมกันหลายบัญชีต่อ 1 เครื่องได้.
      *
-     * @var string
+     * @var bool default false
      */
-    public $web_title = 'GCMS Ajax CMS';
+    public $member_only_ip = false;
+
     /**
-     * คำอธิบายเกี่ยวกับเว็บไซต์.
-     *
-     * @var string
-     */
-    public $web_description = 'ระบบบริหารจัดการเว็บไซต์ (CMS) ด้วย Ajax โดยคนไทย';
-    /**
-     * template ที่กำลังใช้งานอยู่ (ชื่อโฟลเดอร์).
-     *
-     * @var string
-     */
-    public $skin = 'rooster';
-    /**
-     * กำหนดอายุของแคช (วินาที)
-     * 0 หมายถึงไม่มีการใช้งานแคช.
+     * โทรศัพท์.
      *
      * @var int
      */
-    public $cache_expire = 5;
+    public $member_phone = 0;
+
     /**
      * ชื่อสงวน ไม่อนุญาติให้ตั้งเป็นชื่อสมาชิก
      *
@@ -169,6 +123,103 @@ class Config extends \Kotchasan\Config
         'edit',
         'forgot',
     );
+
+    /**
+     * สถานะสมาชิก
+     * 0 สมาชิกทั่วไป
+     * 1 ผู้ดูแลระบบ.
+     *
+     * @var array
+     */
+    public $member_status = array(
+        0 => 'Member',
+        1 => 'Administrator',
+    );
+
+    /**
+     * กำหนดรูปแบบของ URL ที่สร้างจากระบบ
+     * ตามที่กำหนดโดย \Settings->urls.
+     *
+     * @var int
+     */
+    public $module_url = 0;
+
+    /**
+     * สถานะของสมาชิก เมื่อมีการสมัครสมาชิกใหม่.
+     *
+     * @var int
+     */
+    public $new_register_status = 0;
+
+    /**
+     * ถ้าเป็น true จะไม่แสดงข่าวสารจาก GCMS และการแจ้งเตือนการอัปเดท
+     * สำหรับสคริปต์ที่ขาย.
+     *
+     * @var bool
+     */
+    public $production = false;
+
+    /**
+     * template ที่กำลังใช้งานอยู่ (ชื่อโฟลเดอร์).
+     *
+     * @var string
+     */
+    public $skin = 'rooster';
+
+    /**
+     * @var int
+     */
+    public $use_ajax = 0;
+
+    /**
+     * สมาชิกใหม่ต้องยืนยันอีเมล.
+     *
+     * @var bool
+     */
+    public $user_activate = true;
+
+    /**
+     * ความสูงสูงสุดของรูปประจำตัวสมาชิก
+     *
+     * @var int
+     */
+    public $user_icon_h = 50;
+
+    /**
+     * ชนิดของรูปถาพที่สามารถอัปโหลดเป็นรูปประจำตัวสมาชิก ได้.
+     *
+     * @var array
+     */
+    public $user_icon_typies = array('jpg', 'jpeg', 'gif', 'png');
+
+    /**
+     * ความกว้างสูงสุดของรูปประจำตัวสมาชิก
+     *
+     * @var int
+     */
+    public $user_icon_w = 50;
+
+    /**
+     * ไดเร็คทอรี่เก็บ icon สมาชิก
+     *
+     * @var string
+     */
+    public $usericon_folder = 'datas/member/';
+
+    /**
+     * คำอธิบายเกี่ยวกับเว็บไซต์.
+     *
+     * @var string
+     */
+    public $web_description = 'ระบบบริหารจัดการเว็บไซต์ (CMS) ด้วย Ajax โดยคนไทย';
+
+    /**
+     * ชื่อเว็บไซต์.
+     *
+     * @var string
+     */
+    public $web_title = 'GCMS Ajax CMS';
+
     /**
      * รายการคำหยาบ.
      *
@@ -215,35 +266,11 @@ class Config extends \Kotchasan\Config
         'ระยำ',
         'ส้นตีน',
     );
+
     /**
      * ข้อความแทนที่คำหยาบ.
      *
      * @var string
      */
     public $wordrude_replace = 'xxx';
-    /**
-     * การแสดงผลบทความสำหรับหน้าแสดงรายการตามวันที่ และ Tags.
-     */
-    public $document_style = 'iconview';
-    /**
-     * @var int
-     */
-    public $document_cols = 1;
-    /**
-     * @var int
-     */
-    public $document_rows = 20;
-    /**
-     * ถ้าเป็น true จะไม่แสดงข่าวสารจาก GCMS และการแจ้งเตือนการอัปเดท
-     * สำหรับสคริปต์ที่ขาย.
-     *
-     * @var bool
-     */
-    public $production = false;
-    /**
-     * สถานะของสมาชิก เมื่อมีการสมัครสมาชิกใหม่.
-     *
-     * @var int
-     */
-    public $new_register_status = 0;
 }

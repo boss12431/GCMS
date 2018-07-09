@@ -20,12 +20,6 @@ namespace Gcms;
 class Baseview extends \Kotchasan\View
 {
     /**
-     * ลิสต์รายการ JSON-LD.
-     *
-     * @var array
-     */
-    protected $jsonld = array();
-    /**
      * ลิสต์รายการ breadcrumb สำหรับ JSON-LD.
      *
      * @var array
@@ -33,14 +27,11 @@ class Baseview extends \Kotchasan\View
     protected $breadcrumbs_jsonld = array();
 
     /**
-     * กำหนดค่า JSON-LD.
+     * ลิสต์รายการ JSON-LD.
      *
-     * @param array $datas
+     * @var array
      */
-    public function setJsonLd($datas)
-    {
-        $this->jsonld[] = $datas;
-    }
+    protected $jsonld = array();
 
     /**
      * สร้างข้อมูล JSON-LD สำหรับ breadcrumb (BreadcrumbList).
@@ -68,5 +59,15 @@ class Baseview extends \Kotchasan\View
         }
 
         return array();
+    }
+
+    /**
+     * กำหนดค่า JSON-LD.
+     *
+     * @param array $datas
+     */
+    public function setJsonLd($datas)
+    {
+        $this->jsonld[] = $datas;
     }
 }

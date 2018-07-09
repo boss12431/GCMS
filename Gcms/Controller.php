@@ -20,17 +20,18 @@ namespace Gcms;
 class Controller extends \Kotchasan\Controller
 {
     /**
-     * ข้อความไตเติลบาร์.
-     *
-     * @var string
-     */
-    protected $title;
-    /**
      * เก็บคลาสของเมนูที่เลือก
      *
      * @var string
      */
     protected $menu;
+
+    /**
+     * ข้อความไตเติลบาร์.
+     *
+     * @var string
+     */
+    protected $title;
 
     /**
      * init Class.
@@ -40,26 +41,6 @@ class Controller extends \Kotchasan\Controller
         // ค่าเริ่มต้นของ Controller
         $this->title = strip_tags(self::$cfg->web_title);
         $this->menu = 'home';
-    }
-
-    /**
-     * ข้อความ title bar.
-     *
-     * @return string
-     */
-    public function title()
-    {
-        return $this->title;
-    }
-
-    /**
-     * ชื่อเมนูที่เลือก
-     *
-     * @return string
-     */
-    public function menu()
-    {
-        return $this->menu;
     }
 
     /**
@@ -90,5 +71,25 @@ class Controller extends \Kotchasan\Controller
         }
 
         return $permissions;
+    }
+
+    /**
+     * ชื่อเมนูที่เลือก
+     *
+     * @return string
+     */
+    public function menu()
+    {
+        return $this->menu;
+    }
+
+    /**
+     * ข้อความ title bar.
+     *
+     * @return string
+     */
+    public function title()
+    {
+        return $this->title;
     }
 }

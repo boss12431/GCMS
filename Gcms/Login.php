@@ -23,52 +23,16 @@ use Kotchasan\Language;
 class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
 {
     /**
-     * ฟังก์ชั่นตรวจสอบสมาชิกกับฐานข้อมูล
-     * คืนค่าข้อมูลสมาชิก (array) ไม่พบคืนค่าข้อความผิดพลาด (string).
+     * ตรวจสอบความสามารถในการเข้าระบบแอดมิน
+     * คืนค่าข้อมูลสมาชิก (แอเรย์) ถ้าสามารถเข้าระบบแอดมินได้ ไม่ใช่คืนค่า null.
      *
-     * @param array $params
-     *
-     * @return array|string
+     * @return array|null
      */
-    public static function checkMember($params)
+    public static function adminAccess()
     {
-        // query Where
-        $where = array();
-        foreach (self::$cfg->login_fields as $field) {
-            $where[] = array("U.{$field}", $params['username']);
-        }
-        $query = \Kotchasan\Model::createQuery()
-            ->select()
-            ->from('user U')
-            ->where($where, 'OR')
-            ->order('U.status DESC')
-            ->toArray();
-        $login_result = null;
-        foreach ($query->execute() as $item) {
-            if ($item['password'] == md5($params['password'].$item['salt'])) {
-                $item['permission'] = empty($item['permission']) ? array() : explode(',', trim($item['permission'], " \t\n\r\0\x0B,"));
-                $login_result = $item;
-                break;
-            }
-        }
-        if ($login_result === null) {
-            // user หรือ password ไม่ถูกต้อง
-            self::$login_input = isset($item) ? 'password' : 'username';
+        $login = self::isMember();
 
-            return isset($item) ? Language::replace('Incorrect :name', array(':name' => Language::get('Password'))) : Language::get('not a registered user');
-        } elseif (!empty($login_result['activatecode'])) {
-            // ยังไม่ได้ activate
-            self::$login_input = 'username';
-
-            return Language::get('No confirmation email, please check your e-mail');
-        } elseif (!empty($login_result['ban'])) {
-            // ติดแบน
-            self::$login_input = 'username';
-
-            return Language::get('Members were suspended');
-        } else {
-            return $login_result;
-        }
+        return isset($login['active']) && $login['active'] == 1 ? $login : null;
     }
 
     /**
@@ -128,6 +92,55 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
     }
 
     /**
+     * ฟังก์ชั่นตรวจสอบสมาชิกกับฐานข้อมูล
+     * คืนค่าข้อมูลสมาชิก (array) ไม่พบคืนค่าข้อความผิดพลาด (string).
+     *
+     * @param array $params
+     *
+     * @return array|string
+     */
+    public static function checkMember($params)
+    {
+        // query Where
+        $where = array();
+        foreach (self::$cfg->login_fields as $field) {
+            $where[] = array("U.{$field}", $params['username']);
+        }
+        $query = \Kotchasan\Model::createQuery()
+            ->select()
+            ->from('user U')
+            ->where($where, 'OR')
+            ->order('U.status DESC')
+            ->toArray();
+        $login_result = null;
+        foreach ($query->execute() as $item) {
+            if ($item['password'] == md5($params['password'].$item['salt'])) {
+                $item['permission'] = empty($item['permission']) ? array() : explode(',', trim($item['permission'], " \t\n\r\0\x0B,"));
+                $login_result = $item;
+                break;
+            }
+        }
+        if ($login_result === null) {
+            // user หรือ password ไม่ถูกต้อง
+            self::$login_input = isset($item) ? 'password' : 'username';
+
+            return isset($item) ? Language::replace('Incorrect :name', array(':name' => Language::get('Password'))) : Language::get('not a registered user');
+        } elseif (!empty($login_result['activatecode'])) {
+            // ยังไม่ได้ activate
+            self::$login_input = 'username';
+
+            return Language::get('No confirmation email, please check your e-mail');
+        } elseif (!empty($login_result['ban'])) {
+            // ติดแบน
+            self::$login_input = 'username';
+
+            return Language::get('Members were suspended');
+        } else {
+            return $login_result;
+        }
+    }
+
+    /**
      * ตรวจสอบความสามารถในการตั้งค่า
      * แอดมินสูงสุด (status=1) ทำได้ทุกอย่าง
      * คืนค่าข้อมูลสมาชิก (แอเรย์) ถ้าไม่สามารถทำรายการได้คืนค่า null.
@@ -160,32 +173,6 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
         // ไม่มีสิทธิ
 
         return null;
-    }
-
-    /**
-     * ตรวจสอบความสามารถในการเข้าระบบแอดมิน
-     * คืนค่าข้อมูลสมาชิก (แอเรย์) ถ้าสามารถเข้าระบบแอดมินได้ ไม่ใช่คืนค่า null.
-     *
-     * @return array|null
-     */
-    public static function adminAccess()
-    {
-        $login = self::isMember();
-
-        return isset($login['active']) && $login['active'] == 1 ? $login : null;
-    }
-
-    /**
-     * ฟังก์ชั่นตรวจสอบว่า เป็นสมาชิกตัวอย่างหรือไม่
-     * คืนค่าข้อมูลสมาชิก (แอเรย์) ถ้าไม่ใช่สมาชิกตัวอย่าง, null ถ้าเป็นสมาชิกตัวอย่างและเปิดโหมดตัวอย่างไว้.
-     *
-     * @param array|null $login
-     *
-     * @return array|null
-     */
-    public static function notDemoMode($login)
-    {
-        return $login && !empty($login['fb']) && self::$cfg->demo_mode ? null : $login;
     }
 
     /**
@@ -236,5 +223,18 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
                 }
             }
         }
+    }
+
+    /**
+     * ฟังก์ชั่นตรวจสอบว่า เป็นสมาชิกตัวอย่างหรือไม่
+     * คืนค่าข้อมูลสมาชิก (แอเรย์) ถ้าไม่ใช่สมาชิกตัวอย่าง, null ถ้าเป็นสมาชิกตัวอย่างและเปิดโหมดตัวอย่างไว้.
+     *
+     * @param array|null $login
+     *
+     * @return array|null
+     */
+    public static function notDemoMode($login)
+    {
+        return $login && !empty($login['fb']) && self::$cfg->demo_mode ? null : $login;
     }
 }
