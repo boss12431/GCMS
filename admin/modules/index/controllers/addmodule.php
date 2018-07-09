@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/controllers/addmodule.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Addmodule;
@@ -51,17 +51,17 @@ class Controller extends \Gcms\Controller
             $ul->appendChild('<li><a href="{BACKURL?module=mods&id=0}">{LNG_Installed module}</a></li>');
             $ul->appendChild('<li><span>{LNG_Create}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-new">' . $this->title . '</h2>',
+                'innerHTML' => '<h2 class="icon-new">'.$this->title.'</h2>',
             ));
             // owner
             $modules = array();
             foreach (Gcms::$module->getInstalledOwners() as $owner => $item) {
-                $class = ucfirst($owner) . '\Admin\Init\Controller';
+                $class = ucfirst($owner).'\Admin\Init\Controller';
                 if (class_exists($class) && method_exists($class, 'description')) {
                     // get module description
                     $description = $class::description();
                     if (!empty($description)) {
-                        $modules[$owner] = $description . ' [' . $owner . ']';
+                        $modules[$owner] = $description.' ['.$owner.']';
                     }
                 }
             }
@@ -71,6 +71,7 @@ class Controller extends \Gcms\Controller
             return $section->render();
         }
         // 404.html
+
         return \Index\Error\Controller::page404();
     }
 }

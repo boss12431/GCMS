@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/models/intro.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Intro;
@@ -43,10 +43,10 @@ class Model extends \Kotchasan\KBase
                 );
                 if (!empty($save['language']) && preg_match('/^[a-z]{2,2}$/', $save['language'])) {
                     // save
-                    $template = ROOT_PATH . DATA_FOLDER . 'intro.' . $save['language'] . '.php';
+                    $template = ROOT_PATH.DATA_FOLDER.'intro.'.$save['language'].'.php';
                     $f = @fopen($template, 'wb');
                     if ($f) {
-                        fwrite($f, "<?php exit;?>\n" . $save['detail']);
+                        fwrite($f, "<?php exit;?>\n".$save['detail']);
                         fclose($f);
                         // โหลด config
                         $config = Config::load(CONFIG);
@@ -61,7 +61,7 @@ class Model extends \Kotchasan\KBase
                             $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), 'settings/config.php');
                         }
                     } else {
-                        $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), DATA_FOLDER . 'intro.' . $save['language'] . '.php');
+                        $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), DATA_FOLDER.'intro.'.$save['language'].'.php');
                     }
                 }
             }

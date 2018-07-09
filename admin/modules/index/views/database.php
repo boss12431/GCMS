@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/database.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Database;
@@ -61,22 +61,22 @@ class View extends \Gcms\Adminview
         // ภาษาที่ติดตั้ง
         $languages = \Gcms\Gcms::installedLanguage();
         foreach ($model->db()->customQuery('SHOW TABLE STATUS', true) as $table) {
-            if (preg_match('/^' . $prefix . '(.*?)$/', $table['Name'], $match)) {
+            if (preg_match('/^'.$prefix.'(.*?)$/', $table['Name'], $match)) {
                 $tr = '<tr>';
-                $tr .= '<th>' . $table['Name'] . '</th>';
-                $tr .= '<td><label class=nowrap><input type=checkbox name=' . $table['Name'] . '[] value=sturcture checked>&nbsp;' . $structure . '</label></td>';
+                $tr .= '<th>'.$table['Name'].'</th>';
+                $tr .= '<td><label class=nowrap><input type=checkbox name='.$table['Name'].'[] value=sturcture checked>&nbsp;'.$structure.'</label></td>';
                 if ($match[1] == 'language') {
                     $tr .= '<td>';
                     foreach ($languages as $lng) {
-                        $tr .= '<label class=nowrap><input type=checkbox name=language_lang[] value=' . $lng . ' checked>&nbsp;' . $lng . '</label>';
+                        $tr .= '<label class=nowrap><input type=checkbox name=language_lang[] value='.$lng.' checked>&nbsp;'.$lng.'</label>';
                     }
                     $tr .= '</td><td>';
                     foreach (\Index\Languageedit\Model::getOwners() as $owner) {
-                        $tr .= '<label class=nowrap><input type=checkbox name=language_owner[] value="' . $owner . '" checked>&nbsp;' . $owner . '</label>';
+                        $tr .= '<label class=nowrap><input type=checkbox name=language_owner[] value="'.$owner.'" checked>&nbsp;'.$owner.'</label>';
                     }
                     $tr .= '</td>';
                 } else {
-                    $tr .= '<td><label class=nowrap><input type=checkbox name=' . $table['Name'] . '[] value=datas checked>&nbsp;' . $datas . '</label></td><td></td>';
+                    $tr .= '<td><label class=nowrap><input type=checkbox name='.$table['Name'].'[] value=datas checked>&nbsp;'.$datas.'</label></td><td></td>';
                 }
                 $tr .= '</tr>';
                 $content[] = $tr;

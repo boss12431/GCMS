@@ -2,10 +2,10 @@
 /**
  * @filesource Gcms/Config.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Gcms;
@@ -211,12 +211,9 @@ class Config extends \Kotchasan\Config
         'ช า ติ ห ม า',
         'ช.า.ติ.ห.ม.า',
         'สัดหมา',
-        'เย็ด',
         'สันดาน',
-        'แม่ง',
         'ระยำ',
         'ส้นตีน',
-        'แตด',
     );
     /**
      * ข้อความแทนที่คำหยาบ.
@@ -228,7 +225,13 @@ class Config extends \Kotchasan\Config
      * การแสดงผลบทความสำหรับหน้าแสดงรายการตามวันที่ และ Tags.
      */
     public $document_style = 'iconview';
+    /**
+     * @var int
+     */
     public $document_cols = 1;
+    /**
+     * @var int
+     */
     public $document_rows = 20;
     /**
      * ถ้าเป็น true จะไม่แสดงข่าวสารจาก GCMS และการแจ้งเตือนการอัปเดท

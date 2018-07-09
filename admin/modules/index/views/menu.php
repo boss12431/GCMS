@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/menu.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Menu;
@@ -40,20 +40,20 @@ class View
                 continue;
             } else {
                 // submenu
-                $link = '<a accesskey=' . $name[0] . ' class=menu-arrow><span>' . $name[1] . '</span></a>';
+                $link = '<a accesskey='.$name[0].' class=menu-arrow><span>'.$name[1].'</span></a>';
             }
-            $mymenu .= '<li class="' . $section . ($section == $select ? ' select' : '') . '">' . $link;
+            $mymenu .= '<li class="'.$section.($section == $select ? ' select' : '').'">'.$link;
             if (!empty($menus[$section])) {
                 $mymenu .= '<ul>';
                 foreach ($menus[$section] as $key => $value) {
                     if (is_array($value)) {
-                        $mymenu .= '<li class="' . $key . '"><a class=menu-arrow tabindex=0><span>{LNG_' . ucfirst($key) . '}</span></a><ul>';
+                        $mymenu .= '<li class="'.$key.'"><a class=menu-arrow tabindex=0><span>{LNG_'.ucfirst($key).'}</span></a><ul>';
                         foreach ($value as $key2 => $value2) {
-                            $mymenu .= '<li class="' . $key2 . '">' . $value2 . '</li>';
+                            $mymenu .= '<li class="'.$key2.'">'.$value2.'</li>';
                         }
                         $mymenu .= '</ul></li>';
                     } else {
-                        $mymenu .= '<li class="' . $key . '">' . $value . '</li>';
+                        $mymenu .= '<li class="'.$key.'">'.$value.'</li>';
                     }
                 }
                 $mymenu .= '</ul>';

@@ -2,10 +2,10 @@
 /**
  * @filesource module.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Module;
@@ -42,11 +42,11 @@ class Controller extends \Gcms\Controller
         // create Class
         $obj = new static();
         // ไดเร็คทอรี่ที่ติดตั้งโมดูล
-        $dir = ROOT_PATH . 'modules/';
+        $dir = ROOT_PATH.'modules/';
         // อ่านรายชื่อโมดูลและไดเร็คทอรี่ของโมดูลทั้งหมดที่ติดตั้งไว้
         $obj->module = new \Index\Module\Model($dir);
         // ส่วนเสริมที่ติดตั้ง
-        $f = @opendir(ROOT_PATH . 'Widgets/');
+        $f = @opendir(ROOT_PATH.'Widgets/');
         if ($f) {
             while (false !== ($owner = readdir($f))) {
                 if ($owner != '.' && $owner != '..') {
@@ -56,6 +56,7 @@ class Controller extends \Gcms\Controller
             closedir($f);
         }
         // คืนค่า Class
+
         return $obj;
     }
 

@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/models/languages.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Languages;
@@ -64,9 +64,9 @@ class Model extends \Kotchasan\KBase
                         $model->db()->query("ALTER TABLE `$language_table` DROP `$match[1]`");
                     }
                     // ลบไฟล์
-                    @unlink(ROOT_PATH . 'language/' . $match[1] . '.php');
-                    @unlink(ROOT_PATH . 'language/' . $match[1] . '.js');
-                    @unlink(ROOT_PATH . 'language/' . $match[1] . '.gif');
+                    @unlink(ROOT_PATH.'language/'.$match[1].'.php');
+                    @unlink(ROOT_PATH.'language/'.$match[1].'.js');
+                    @unlink(ROOT_PATH.'language/'.$match[1].'.gif');
                     $languages = array();
                     foreach ($config->languages as $item) {
                         if ($match[1] !== $item) {
@@ -100,7 +100,7 @@ class Model extends \Kotchasan\KBase
      */
     public static function import()
     {
-        $dir = ROOT_PATH . 'language/';
+        $dir = ROOT_PATH.'language/';
         if (is_dir($dir)) {
             // Model
             $model = new \Kotchasan\Model();
@@ -114,9 +114,9 @@ class Model extends \Kotchasan\KBase
                         $model->db()->query("ALTER TABLE `$language_table` ADD `$match[1]` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci AFTER `key`");
                     }
                     if ($match[2] == 'php') {
-                        self::importPHP($model->db(), $language_table, $match[1], $dir . $text);
+                        self::importPHP($model->db(), $language_table, $match[1], $dir.$text);
                     } else {
-                        self::importJS($model->db(), $language_table, $match[1], $dir . $text);
+                        self::importJS($model->db(), $language_table, $match[1], $dir.$text);
                     }
                 }
             }

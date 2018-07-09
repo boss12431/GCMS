@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/models/getupdate.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Getupdate;
@@ -27,7 +27,7 @@ class Model extends \Kotchasan\Model
     public static function get()
     {
         // url ของตัว update
-        $url = 'https://gcms.in.th/gcmsupdate.php?v=' . self::$request->post('v')->filter('0-9a-z\-\.');
+        $url = 'https://gcms.in.th/gcmsupdate.php?v='.self::$request->post('v')->filter('0-9a-z\-\.');
         if ($feedRef = @fopen($url, 'rb')) {
             $contents = '';
             while (!feof($feedRef)) {

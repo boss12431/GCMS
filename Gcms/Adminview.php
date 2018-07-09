@@ -2,10 +2,10 @@
 /**
  * @filesource Gcms/Adminview.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Gcms;
@@ -47,11 +47,12 @@ class Adminview extends \Kotchasan\View
 
     /**
      * ฟังก์ชั่น แทนที่ query string ด้วยข้อมูลจาก GET และ POST สำหรับส่งต่อไปยัง URL ถัดไป
-     * โดยการรับค่าจาก preg_replace.
+     * โดยการรับค่าจาก preg_replace
+     * คืนค่า URL.
      *
      * @param array $f รับค่าจากตัวแปรที่ส่งมาจาก preg_replace มาสร้าง query string
      *
-     * @return string คืนค่า URL
+     * @return string
      */
     public static function back($f)
     {
@@ -59,13 +60,13 @@ class Adminview extends \Kotchasan\View
         foreach (self::$request->getQueryParams() as $key => $value) {
             if ($value != '' && $key != 'module') {
                 $key = ltrim($key, '_');
-                $query_url[$key] = $key . '=' . $value;
+                $query_url[$key] = $key.'='.$value;
             }
         }
         foreach (self::$request->getParsedBody() as $key => $value) {
             if ($value != '' && $key != 'module') {
                 $key = ltrim($key, '_');
-                $query_url[$key] = $key . '=' . $value;
+                $query_url[$key] = $key.'='.$value;
             }
         }
         if (isset($f[2])) {
@@ -80,6 +81,6 @@ class Adminview extends \Kotchasan\View
             }
         }
 
-        return WEB_URL . 'admin/index.php?' . implode('&amp;', $query_url);
+        return WEB_URL.'admin/index.php?'.implode('&amp;', $query_url);
     }
 }

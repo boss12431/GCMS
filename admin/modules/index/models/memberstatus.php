@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/models/memberstatus.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Memberstatus;
@@ -65,10 +65,10 @@ class Model extends \Kotchasan\KBase
                     // id ของสถานะใหม่
                     $i = sizeof($config->member_status) - 1;
                     // ข้อมูลใหม่
-                    $row = '<li id="config_status_' . $i . '">';
-                    $row .= '<span class="icon-delete" id="config_status_delete_' . $i . '" title="' . Language::get('Delete') . '"></span>';
-                    $row .= '<span id="config_status_color_' . $i . '" title="' . $config->color_status[$i] . '"></span>';
-                    $row .= '<span id="config_status_name_' . $i . '" title="' . $config->member_status[$i] . '">' . htmlspecialchars($config->member_status[$i]) . '</span>';
+                    $row = '<li id="config_status_'.$i.'">';
+                    $row .= '<span class="icon-delete" id="config_status_delete_'.$i.'" title="'.Language::get('Delete').'"></span>';
+                    $row .= '<span id="config_status_color_'.$i.'" title="'.$config->color_status[$i].'"></span>';
+                    $row .= '<span id="config_status_name_'.$i.'" title="'.$config->member_status[$i].'">'.htmlspecialchars($config->member_status[$i]).'</span>';
                     $row .= '</li>';
                     // คืนค่าข้อมูลเข้ารหัส
                     $ret['data'] = $row;

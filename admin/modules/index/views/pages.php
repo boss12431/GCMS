@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/pages.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Pages;
@@ -40,7 +40,7 @@ class View extends \Gcms\Adminview
     {
         $this->publisheds = Language::get('PUBLISHEDS');
         // URL สำหรับส่งให้ตาราง
-        $uri = $request->createUriWithGlobals(WEB_URL . 'admin/index.php');
+        $uri = $request->createUriWithGlobals(WEB_URL.'admin/index.php');
         // ตาราง
         $table = new DataTable(array(
             /* Uri */
@@ -147,10 +147,10 @@ class View extends \Gcms\Adminview
      */
     public function onRow($item, $o, $prop)
     {
-        $item['topic'] = '<a href="../index.php?module=index&amp;id=' . $item['id'] . '" target="preview">' . $item['topic'] . '</a>';
+        $item['topic'] = '<a href="../index.php?module=index&amp;id='.$item['id'].'" target="preview">'.$item['topic'].'</a>';
         $item['last_update'] = Date::format($item['last_update'], 'd M Y H:i');
-        $item['language'] = empty($item['language']) ? '' : '<img src="' . WEB_URL . 'language/' . $item['language'] . '.gif" alt="' . $item['language'] . '">';
-        $item['published'] = '<a id=published_' . $item['id'] . ' class="icon-published' . $item['published'] . '" title="' . $this->publisheds[$item['published']] . '"></a>';
+        $item['language'] = empty($item['language']) ? '' : '<img src="'.WEB_URL.'language/'.$item['language'].'.gif" alt="'.$item['language'].'">';
+        $item['published'] = '<a id=published_'.$item['id'].' class="icon-published'.$item['published'].'" title="'.$this->publisheds[$item['published']].'"></a>';
 
         return $item;
     }

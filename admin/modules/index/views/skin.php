@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/skin.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Skin;
@@ -44,10 +44,10 @@ class View extends \Gcms\Adminview
             'title' => '{LNG_Website display settings}',
         ));
         // logo
-        if (isset($config->logo) && is_file(ROOT_PATH . DATA_FOLDER . 'image/' . $config->logo)) {
-            $img = $config->logo == 'logo.swf' ? WEB_URL . 'admin/skin/' . self::$cfg->skin . '/img/swf.png' : WEB_URL . DATA_FOLDER . 'image/' . $config->logo;
+        if (isset($config->logo) && is_file(ROOT_PATH.DATA_FOLDER.'image/'.$config->logo)) {
+            $img = $config->logo == 'logo.swf' ? WEB_URL.'admin/skin/'.self::$cfg->skin.'/img/swf.png' : WEB_URL.DATA_FOLDER.'image/'.$config->logo;
         } else {
-            $img = WEB_URL . 'skin/img/blank.gif';
+            $img = WEB_URL.'skin/img/blank.gif';
         }
         $fieldset->add('file', array(
             'id' => 'logo',
@@ -66,7 +66,7 @@ class View extends \Gcms\Adminview
             'value' => 1,
         ));
         // bg_image
-        $img = isset($config->bg_image) && is_file(ROOT_PATH . DATA_FOLDER . 'image/' . $config->bg_image) ? WEB_URL . DATA_FOLDER . 'image/' . $config->bg_image : WEB_URL . 'skin/img/blank.gif';
+        $img = isset($config->bg_image) && is_file(ROOT_PATH.DATA_FOLDER.'image/'.$config->bg_image) ? WEB_URL.DATA_FOLDER.'image/'.$config->bg_image : WEB_URL.'skin/img/blank.gif';
         $fieldset->add('file', array(
             'id' => 'bg_image',
             'labelClass' => 'g-input icon-upload',

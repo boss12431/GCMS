@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/home.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Home;
@@ -32,9 +32,9 @@ class View extends \Kotchasan\KBase
         $pageview = array();
         $visited = array();
         foreach (\Index\Home\Model::pageviews() as $i => $item) {
-            $thead[] = '<th><a href="' . WEB_URL . 'admin/index.php?module=pagesview&amp;date=' . $item['year'] . '-' . $item['month'] . '">' . Date::monthName($item['month']) . '</a></th>';
-            $pageview[] = '<td>' . number_format($item['pages_view']) . '</td>';
-            $visited[] = '<td>' . number_format($item['visited']) . '</td>';
+            $thead[] = '<th><a href="'.WEB_URL.'admin/index.php?module=pagesview&amp;date='.$item['year'].'-'.$item['month'].'">'.Date::monthName($item['month']).'</a></th>';
+            $pageview[] = '<td>'.number_format($item['pages_view']).'</td>';
+            $visited[] = '<td>'.number_format($item['visited']).'</td>';
         }
         $content = '<section class=section>';
         $content .= '<header><h3 class=icon-stats>{LNG_People visit the site}</h3></header>';
@@ -42,10 +42,10 @@ class View extends \Kotchasan\KBase
         $content .= '<canvas></canvas>';
         $content .= '<div class=datatable><div class=tablebody>';
         $content .= '<table class="data fullwidth border">';
-        $content .= '<thead><tr><th>{LNG_monthly}</th>' . implode('', $thead) . '</tr></thead>';
+        $content .= '<thead><tr><th>{LNG_monthly}</th>'.implode('', $thead).'</tr></thead>';
         $content .= '<tbody>';
-        $content .= '<tr><th scope=row>{LNG_Total visitors}</th>' . implode('', $visited) . '</tr>';
-        $content .= '<tr class=bg2><th scope=row>{LNG_Pages view}</th>' . implode('', $pageview) . '</tr>';
+        $content .= '<tr><th scope=row>{LNG_Total visitors}</th>'.implode('', $visited).'</tr>';
+        $content .= '<tr class=bg2><th scope=row>{LNG_Pages view}</th>'.implode('', $pageview).'</tr>';
         $content .= '</tbody>';
         $content .= '</table>';
         $content .= '</div></div>';

@@ -36,7 +36,7 @@ define('CONFIG', ROOT_PATH.'settings/config.php');
  * true บันทึกการ query ฐานข้อมูลลง log (ใช้เฉพาะตอนออกแบบเท่านั้น)
  */
 define('DB_LOG', false);
-/**
+/*
  * ภาษาอัตโนมัติจากบราวเซอร์
  */
 define('AUTO_LANGUAGE', false);

@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/controllers/loader.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Loader;
@@ -47,7 +47,7 @@ class Controller extends \Gcms\Controller
                 Gcms::$module = \Index\Module\Controller::create();
                 // เรียก init ของโมดูล
                 foreach (Gcms::$module->getInstalledOwners() as $owner => $modules) {
-                    $class = ucfirst($owner) . '\Admin\Init\Controller';
+                    $class = ucfirst($owner).'\Admin\Init\Controller';
                     if (class_exists($class) && method_exists($class, 'init')) {
                         $class::init($modules, $login);
                     }
@@ -56,7 +56,7 @@ class Controller extends \Gcms\Controller
                 $className = \Index\Main\Controller::parseModule($request, 'home');
             } else {
                 // ถ้าไม่พบหน้าที่เรียก แสดงหน้า 404
-                include APP_PATH . 'modules/index/controllers/error.php';
+                include APP_PATH.'modules/index/controllers/error.php';
                 $className = 'Index\Error\Controller';
             }
             // create Controller

@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/controllers/language.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Language;
@@ -49,7 +49,7 @@ class Controller extends \Gcms\Controller
             $ul->appendChild('<li><span class="icon-tools">{LNG_Tools}</span></li>');
             $ul->appendChild('<li><span>{LNG_Language}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-language">' . $this->title . '</h2>',
+                'innerHTML' => '<h2 class="icon-language">'.$this->title.'</h2>',
             ));
             // แสดงตาราง
             $section->appendChild(createClass('Index\Language\View')->render($request));
@@ -57,6 +57,7 @@ class Controller extends \Gcms\Controller
             return $section->render();
         }
         // 404.html
+
         return \Index\Error\Controller::page404();
     }
 }

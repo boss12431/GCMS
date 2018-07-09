@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/mailtemplate.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Mailtemplate;
@@ -32,7 +32,7 @@ class View extends \Gcms\Adminview
     public function render(Request $request)
     {
         // URL สำหรับส่งให้ตาราง
-        $uri = $request->createUriWithGlobals(WEB_URL . 'admin/index.php');
+        $uri = $request->createUriWithGlobals(WEB_URL.'admin/index.php');
         // ตาราง
         $table = new DataTable(array(
             /* Uri */
@@ -104,7 +104,7 @@ class View extends \Gcms\Adminview
     public function onRow($item, $o, $prop)
     {
         $item['name'] = $item['module'] == 'mailmerge' ? $item['subject'] : $item['name'];
-        $item['language'] = empty($item['language']) ? '' : '<img src="' . WEB_URL . 'language/' . $item['language'] . '.gif" alt="' . $item['language'] . '">';
+        $item['language'] = empty($item['language']) ? '' : '<img src="'.WEB_URL.'language/'.$item['language'].'.gif" alt="'.$item['language'].'">';
 
         return $item;
     }
@@ -112,9 +112,9 @@ class View extends \Gcms\Adminview
     /**
      * ฟังก์ชั่นตรวจสอบว่าสามารถสร้างปุ่มได้หรือไม่.
      *
-     * @param $btn string id ของ button
-     * @param $attributes array property ของปุ่ม
-     * @param $items array ข้อมูลในแถว
+     * @param $btn        string id ของ button
+     * @param $attributes array  property ของปุ่ม
+     * @param $items      array  ข้อมูลในแถว
      */
     public function onCreateButton($btn, $attributes, $items)
     {

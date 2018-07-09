@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/models/debug.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Debug;
@@ -33,7 +33,7 @@ class Model extends \Kotchasan\KBase
                 // action
                 $action = $request->post('action')->toString();
                 // file debug
-                $debug = ROOT_PATH . DATA_FOLDER . 'logs/error_log.php';
+                $debug = ROOT_PATH.DATA_FOLDER.'logs/error_log.php';
                 if (is_file($debug)) {
                     if ($action == 'get') {
                         // อ่าน debug

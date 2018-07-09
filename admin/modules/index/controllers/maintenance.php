@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/controllers/maintenance.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Maintenance;
@@ -43,7 +43,7 @@ class Controller extends \Gcms\Controller
             $language = $request->request('language', Language::name())->toString();
             if (preg_match('/^[a-z]{2,2}$/', $language)) {
                 // maintenance detail
-                $template = ROOT_PATH . DATA_FOLDER . 'maintenance.' . $language . '.php';
+                $template = ROOT_PATH.DATA_FOLDER.'maintenance.'.$language.'.php';
                 if (is_file($template)) {
                     $template = trim(preg_replace('/<\?php exit([\(\);])?\?>/', '', file_get_contents($template)));
                 } else {
@@ -59,7 +59,7 @@ class Controller extends \Gcms\Controller
                 $ul->appendChild('<li><span class="icon-settings">{LNG_Site settings}</span></li>');
                 $ul->appendChild('<li><span>{LNG_Maintenance mode}</span></li>');
                 $section->add('header', array(
-                    'innerHTML' => '<h2 class="icon-write">' . $this->title . '</h2>',
+                    'innerHTML' => '<h2 class="icon-write">'.$this->title.'</h2>',
                 ));
                 // แสดงฟอร์ม
                 $section->appendChild(createClass('Index\Maintenance\View')->render($language, $template));
@@ -68,6 +68,7 @@ class Controller extends \Gcms\Controller
             }
         }
         // 404.html
+
         return \Index\Error\Controller::page404();
     }
 }

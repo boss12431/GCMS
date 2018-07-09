@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/models/editprofile.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Editprofile;
@@ -153,7 +153,7 @@ class Model extends \Kotchasan\Model
                         } else {
                             // password ใหม่ถูกต้อง
                             $save['salt'] = uniqid();
-                            $save['password'] = md5($password . $save['salt']);
+                            $save['password'] = md5($password.$save['salt']);
                             $requirePassword = false;
                         }
                     }
@@ -166,22 +166,22 @@ class Model extends \Kotchasan\Model
                         foreach ($request->getUploadedFiles() as $item => $file) {
                             /* @var $file \Kotchasan\Http\UploadedFile */
                             if ($file->hasUploadFile()) {
-                                if (!File::makeDirectory(ROOT_PATH . self::$cfg->usericon_folder)) {
+                                if (!File::makeDirectory(ROOT_PATH.self::$cfg->usericon_folder)) {
                                     // ไดเรคทอรี่ไม่สามารถสร้างได้
-                                    $ret['ret_' . $item] = sprintf(Language::get('Directory %s cannot be created or is read-only.'), self::$cfg->usericon_folder);
+                                    $ret['ret_'.$item] = sprintf(Language::get('Directory %s cannot be created or is read-only.'), self::$cfg->usericon_folder);
                                 } else {
                                     try {
                                         // อัปโหลด user icon
-                                        $save['icon'] = $user->id . '.jpg';
-                                        $file->cropImage(self::$cfg->user_icon_typies, ROOT_PATH . self::$cfg->usericon_folder . $save['icon'], self::$cfg->user_icon_w, self::$cfg->user_icon_h);
+                                        $save['icon'] = $user->id.'.jpg';
+                                        $file->cropImage(self::$cfg->user_icon_typies, ROOT_PATH.self::$cfg->usericon_folder.$save['icon'], self::$cfg->user_icon_w, self::$cfg->user_icon_h);
                                     } catch (\Exception $exc) {
                                         // ไม่สามารถอัปโหลดได้
-                                        $ret['ret_' . $item] = Language::get($exc->getMessage());
+                                        $ret['ret_'.$item] = Language::get($exc->getMessage());
                                     }
                                 }
                             } elseif ($file->hasError()) {
                                 // ข้อผิดพลาดการอัปโหลด
-                                $ret['ret_' . $item] = Language::get($file->getErrorMessage());
+                                $ret['ret_'.$item] = Language::get($file->getErrorMessage());
                             }
                         }
                     }
@@ -192,7 +192,7 @@ class Model extends \Kotchasan\Model
                         }
                         if ($login['status'] == 1 && $user->id != 1 && $login['id'] != $user->id) {
                             // แอดมินแต่ไม่ใช่ตัวเองและแก้ไขสมาชิกสถานะอื่น
-                            $save['permission'] = empty($permission) ? '' : ',' . implode(',', $permission) . ',';
+                            $save['permission'] = empty($permission) ? '' : ','.implode(',', $permission).',';
                         } else {
                             // ตัวเอง ห้ามแก้ไข
                             unset($save['status']);

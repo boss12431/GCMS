@@ -2,10 +2,10 @@
 /**
  * @filesource Gcms/Login.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Gcms;
@@ -23,11 +23,12 @@ use Kotchasan\Language;
 class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
 {
     /**
-     * ฟังก์ชั่นตรวจสอบสมาชิกกับฐานข้อมูล.
+     * ฟังก์ชั่นตรวจสอบสมาชิกกับฐานข้อมูล
+     * คืนค่าข้อมูลสมาชิก (array) ไม่พบคืนค่าข้อความผิดพลาด (string).
      *
      * @param array $params
      *
-     * @return array|string คืนค่าข้อมูลสมาชิก (array) ไม่พบคืนค่าข้อความผิดพลาด (string)
+     * @return array|string
      */
     public static function checkMember($params)
     {
@@ -44,7 +45,7 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
             ->toArray();
         $login_result = null;
         foreach ($query->execute() as $item) {
-            if ($item['password'] == md5($params['password'] . $item['salt'])) {
+            if ($item['password'] == md5($params['password'].$item['salt'])) {
                 $item['permission'] = empty($item['permission']) ? array() : explode(',', trim($item['permission'], " \t\n\r\0\x0B,"));
                 $login_result = $item;
                 break;
@@ -71,11 +72,12 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
     }
 
     /**
-     * ฟังก์ชั่นตรวจสอบการ login และบันทึกการเข้าระบบ.
+     * ฟังก์ชั่นตรวจสอบการ login และบันทึกการเข้าระบบ
+     * เข้าระบบสำเร็จคืนค่าแอเรย์ข้อมูลสมาชิก, ไม่สำเร็จ คืนค่าข้อความผิดพลาด.
      *
      * @param array $params ข้อมูลการ login ที่ส่งมา $params = array('username' => '', 'password' => '');
      *
-     * @return string|array เข้าระบบสำเร็จคืนค่าแอเรย์ข้อมูลสมาชิก, ไม่สำเร็จ คืนค่าข้อความผิดพลาด
+     * @return string|array
      */
     public function checkLogin($params)
     {
@@ -127,12 +129,13 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
 
     /**
      * ตรวจสอบความสามารถในการตั้งค่า
-     * แอดมินสูงสุด (status=1) ทำได้ทุกอย่าง.
+     * แอดมินสูงสุด (status=1) ทำได้ทุกอย่าง
+     * คืนค่าข้อมูลสมาชิก (แอเรย์) ถ้าไม่สามารถทำรายการได้คืนค่า null.
      *
      * @param array        $login
      * @param array|string $permission
      *
-     * @return array|null คืนค่าข้อมูลสมาชิก (แอเรย์) ถ้าไม่สามารถทำรายการได้คืนค่า null
+     * @return array|null
      */
     public static function checkPermission($login, $permission)
     {
@@ -155,13 +158,15 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
             }
         }
         // ไม่มีสิทธิ
+
         return null;
     }
 
     /**
-     * ตรวจสอบความสามารถในการเข้าระบบแอดมิน.
+     * ตรวจสอบความสามารถในการเข้าระบบแอดมิน
+     * คืนค่าข้อมูลสมาชิก (แอเรย์) ถ้าสามารถเข้าระบบแอดมินได้ ไม่ใช่คืนค่า null.
      *
-     * @return array|null คืนค่าข้อมูลสมาชิก (แอเรย์) ถ้าสามารถเข้าระบบแอดมินได้ ไม่ใช่คืนค่า null
+     * @return array|null
      */
     public static function adminAccess()
     {
@@ -171,11 +176,12 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
     }
 
     /**
-     * ฟังก์ชั่นตรวจสอบว่า เป็นสมาชิกตัวอย่างหรือไม่.
+     * ฟังก์ชั่นตรวจสอบว่า เป็นสมาชิกตัวอย่างหรือไม่
+     * คืนค่าข้อมูลสมาชิก (แอเรย์) ถ้าไม่ใช่สมาชิกตัวอย่าง, null ถ้าเป็นสมาชิกตัวอย่างและเปิดโหมดตัวอย่างไว้.
      *
      * @param array|null $login
      *
-     * @return array|null คืนค่าข้อมูลสมาชิก (แอเรย์) ถ้าไม่ใช่สมาชิกตัวอย่าง, null ถ้าเป็นสมาชิกตัวอย่างและเปิดโหมดตัวอย่างไว้
+     * @return array|null
      */
     public static function notDemoMode($login)
     {
@@ -220,7 +226,7 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
                     $save = array(
                         'salt' => uniqid(),
                     );
-                    $save['password'] = md5($password . $save['salt']);
+                    $save['password'] = md5($password.$save['salt']);
                     $model->db()->update($table, (int) $search->id, $save);
                     // คืนค่า
                     self::$login_message = Language::get('Your message was sent successfully');

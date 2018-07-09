@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/controllers/template.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Template;
@@ -44,13 +44,13 @@ class Controller extends \Gcms\Controller
             // โหลด config
             $config = Config::load(CONFIG);
             // path ของ skin
-            $dir = ROOT_PATH . 'skin';
+            $dir = ROOT_PATH.'skin';
             // action
             $action = $request->request('action')->toString();
             if (!empty($action)) {
                 if (Login::notDemoMode($login)) {
                     $theme = preg_replace('/[\/\\\\]/ui', '', $request->request('theme')->text());
-                    if (is_dir($dir . "/$theme")) {
+                    if (is_dir($dir."/$theme")) {
                         if ($action == 'use') {
                             // skin ที่กำหนด
                             $config->skin = $theme;
@@ -60,11 +60,11 @@ class Controller extends \Gcms\Controller
                                 $request->setSession('my_skin', $config->skin);
                                 $message = '<aside class=message>{LNG_Select a new template successfully}</aside>';
                             } else {
-                                $message = '<aside class=error>' . sprintf(Language::get('File %s cannot be created or is read-only.'), 'settings/config.php') . '</aside>';
+                                $message = '<aside class=error>'.sprintf(Language::get('File %s cannot be created or is read-only.'), 'settings/config.php').'</aside>';
                             }
                         } elseif ($action == 'delete') {
                             // ลบ skin
-                            File::removeDirectory($dir . '/' . $theme . '/');
+                            File::removeDirectory($dir.'/'.$theme.'/');
                             $message = '<aside class=message>{LNG_Successfully remove template files}</aside>';
                         }
                     }
@@ -82,7 +82,7 @@ class Controller extends \Gcms\Controller
             $ul->appendChild('<li><span class="icon-settings">{LNG_Site settings}</span></li>');
             $ul->appendChild('<li><span>{LNG_Template}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-template">' . $this->title . '</h2>',
+                'innerHTML' => '<h2 class="icon-template">'.$this->title.'</h2>',
             ));
             if (!empty($message)) {
                 $section->appendChild($message);
@@ -92,7 +92,7 @@ class Controller extends \Gcms\Controller
             $f = opendir($dir);
             while (false !== ($text = readdir($f))) {
                 if ($text !== $config->skin && $text !== '.' && $text !== '..') {
-                    if (is_dir($dir . "/$text") && is_file($dir . "/$text/style.css")) {
+                    if (is_dir($dir."/$text") && is_file($dir."/$text/style.css")) {
                         $themes[] = $text;
                     }
                 }
@@ -104,6 +104,7 @@ class Controller extends \Gcms\Controller
             return $section->render();
         }
         // 404.html
+
         return \Index\Error\Controller::page404();
     }
 }

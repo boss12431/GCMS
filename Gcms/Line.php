@@ -2,10 +2,10 @@
 /**
  * @filesource Gcms/Line.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Gcms;
@@ -22,12 +22,13 @@ use Kotchasan\Curl;
 class Line extends \Kotchasan\KBase
 {
     /**
-     * เมธอดส่งข้อความไปยังไลน์.
+     * เมธอดส่งข้อความไปยังไลน์
+     * คืนค่าข้อความว่างถ้าสำเร็จ หรือ คืนค่าข้อความผิดพลาด.
      *
      * @param string $message      ข้อความที่จะส่ง
      * @param string $line_api_key
      *
-     * @return string คืนค่าข้อความว่างถ้าสำเร็จ หรือ คืนค่าข้อความผิดพลาด
+     * @return string
      */
     public static function send($message, $line_api_key = null)
     {
@@ -41,7 +42,7 @@ class Line extends \Kotchasan\KBase
         } else {
             $ch = new Curl();
             $ch->setHeaders(array(
-                'Authorization' => 'Bearer ' . $line_api_key,
+                'Authorization' => 'Bearer '.$line_api_key,
             ));
             $result = $ch->post('https://notify-api.line.me/api/notify', array('message' => $message));
             if ($ch->error()) {

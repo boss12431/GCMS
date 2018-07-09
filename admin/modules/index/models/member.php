@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/models/member.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Member;
@@ -102,7 +102,7 @@ class Model extends \Kotchasan\Model
                             ))
                             ->toArray();
                         foreach ($query->execute() as $item) {
-                            @unlink(ROOT_PATH . self::$cfg->usericon_folder . $item['icon']);
+                            @unlink(ROOT_PATH.self::$cfg->usericon_folder.$item['icon']);
                         }
                         // ลบสมาชิก
                         $this->db()->delete($user_table, array(
@@ -110,15 +110,15 @@ class Model extends \Kotchasan\Model
                             array('id', '!=', 1),
                         ), 0);
                         // ไดเร็คทอรี่ที่ติดตั้งโมดูล
-                        $dir = ROOT_PATH . 'modules/';
+                        $dir = ROOT_PATH.'modules/';
                         // ส่วนเสริมที่ติดตั้ง
                         $f = @opendir($dir);
                         if ($f) {
                             while (false !== ($owner = readdir($f))) {
                                 if ($owner != '.' && $owner != '..' && $owner != 'js' && $owner != 'css' && $owner != 'index') {
-                                    if (file_exists($dir . $owner . '/models/admin/member.php')) {
-                                        include $dir . $owner . '/models/admin/member.php';
-                                        $class = ucfirst($owner) . '\Admin\Member\Model';
+                                    if (file_exists($dir.$owner.'/models/admin/member.php')) {
+                                        include $dir.$owner.'/models/admin/member.php';
+                                        $class = ucfirst($owner).'\Admin\Member\Model';
                                         if (method_exists($class, 'delete')) {
                                             // แจ้งลบสมาชิกไปยังโมดูลต่างๆ
                                             $class::delete($this, $match[1]);
@@ -171,7 +171,7 @@ class Model extends \Kotchasan\Model
                             $salt = uniqid();
                             $save = array(
                                 'salt' => $salt,
-                                'password' => md5($password . $salt),
+                                'password' => md5($password.$salt),
                             );
                             if ($action === 'activate' || !empty($item['activatecode'])) {
                                 // activate หรือ ยังไม่ได้ activate

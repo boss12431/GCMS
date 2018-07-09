@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/controllers/menu.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Menu;
@@ -93,8 +93,8 @@ class Controller
         $menus['modules'] = array();
         // Widgets ที่ติดตั้งแล้ว
         foreach (Gcms::$module->getInstalledWidgets() as $item) {
-            if (is_file(ROOT_PATH . 'Widgets/' . $item . '/Controllers/Settings.php')) {
-                $menus['widgets'][$item] = '<a href="index.php?module=' . $item . '-settings"><span>' . $item . '</span></a>';
+            if (is_file(ROOT_PATH.'Widgets/'.$item.'/Controllers/Settings.php')) {
+                $menus['widgets'][$item] = '<a href="index.php?module='.$item.'-settings"><span>'.$item.'</span></a>';
             }
         }
         $menus['widgets']['tags'] = '<a href="index.php?module=tags"><span>{LNG_List of} {LNG_Tags}</span></a>';

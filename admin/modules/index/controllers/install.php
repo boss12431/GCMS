@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/controllers/install.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Install;
@@ -38,7 +38,7 @@ class Controller extends \Gcms\Controller
         $widget = $request->request('w')->filter('a-z');
         $module = $module !== '' ? $module : $widget;
         // ข้อความ title bar
-        $this->title = Language::trans(ucfirst($module) . ' - {LNG_First Install}');
+        $this->title = Language::trans(ucfirst($module).' - {LNG_First Install}');
         // เลือกเมนู
         $this->menu = 'tools';
         // สามารถตั้งค่าระบบได้
@@ -58,7 +58,7 @@ class Controller extends \Gcms\Controller
             if (!empty($type)) {
                 $ul->appendChild('<li><span>{LNG_Install}</span></li>');
                 $section->add('header', array(
-                    'innerHTML' => '<h2 class="icon-inbox">' . $this->title . '</h2>',
+                    'innerHTML' => '<h2 class="icon-inbox">'.$this->title.'</h2>',
                 ));
                 // แสดงฟอร์ม
                 $section->appendChild(createClass('Index\Install\View')->render($type, $module));
@@ -67,6 +67,7 @@ class Controller extends \Gcms\Controller
             }
         }
         // 404.html
+
         return \Index\Error\Controller::page404();
     }
 }

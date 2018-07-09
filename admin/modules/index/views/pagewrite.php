@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/pagewrite.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Pagewrite;
@@ -42,7 +42,7 @@ class View extends \Gcms\Adminview
             'token' => true,
         ));
         $fieldset = $form->add('fieldset', array(
-            'title' => '{LNG_Details of} ' . Language::get($index->owner === 'index' ? 'Page' : 'Module'),
+            'title' => '{LNG_Details of} '.Language::get($index->owner === 'index' ? 'Page' : 'Module'),
         ));
         $groups = $fieldset->add('groups-table', array(
             'label' => '{LNG_Language}',

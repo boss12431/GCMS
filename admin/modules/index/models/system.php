@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/models/system.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\System;
@@ -61,7 +61,7 @@ class Model extends \Kotchasan\KBase
                 foreach (array('web_title', 'web_description') as $key) {
                     $value = $request->post($key)->quote();
                     if (empty($value)) {
-                        $ret['ret_' . $key] = 'Please fill in';
+                        $ret['ret_'.$key] = 'Please fill in';
                     } else {
                         $config->$key = $value;
                     }
@@ -69,7 +69,7 @@ class Model extends \Kotchasan\KBase
                 foreach (array('user_icon_typies', 'login_fields') as $key) {
                     $value = $request->post($key, array())->text();
                     if (empty($value)) {
-                        $ret['ret_' . $key] = Language::get('Please select at least one item');
+                        $ret['ret_'.$key] = Language::get('Please select at least one item');
                     } else {
                         $config->$key = $value;
                     }
@@ -79,29 +79,29 @@ class Model extends \Kotchasan\KBase
                     foreach ($request->getUploadedFiles() as $item => $file) {
                         if ($item == 'favicon') {
                             /* @var $file \Kotchasan\Http\UploadedFile */
-                            if ($request->post('delete_' . $item)->toBoolean() == 1) {
+                            if ($request->post('delete_'.$item)->toBoolean() == 1) {
                                 // ลบรูปภาพ
-                                if (is_file(ROOT_PATH . DATA_FOLDER . 'image/' . $item . '.ico')) {
-                                    @unlink(ROOT_PATH . DATA_FOLDER . 'image/' . $item . '.ico');
+                                if (is_file(ROOT_PATH.DATA_FOLDER.'image/'.$item.'.ico')) {
+                                    @unlink(ROOT_PATH.DATA_FOLDER.'image/'.$item.'.ico');
                                 }
-                            } elseif (!File::makeDirectory(ROOT_PATH . DATA_FOLDER . 'image/')) {
+                            } elseif (!File::makeDirectory(ROOT_PATH.DATA_FOLDER.'image/')) {
                                 // ไดเรคทอรี่ไม่สามารถสร้างได้
-                                $ret['ret_' . $item] = sprintf(Language::get('Directory %s cannot be created or is read-only.'), DATA_FOLDER . 'image/');
+                                $ret['ret_'.$item] = sprintf(Language::get('Directory %s cannot be created or is read-only.'), DATA_FOLDER.'image/');
                             } elseif ($file->hasUploadFile()) {
                                 // ตรวจสอบไฟล์อัปโหลด
                                 if (!$file->validFileExt(array('ico'))) {
-                                    $ret['ret_' . $item] = Language::get('The type of file is invalid');
+                                    $ret['ret_'.$item] = Language::get('The type of file is invalid');
                                 } else {
                                     try {
-                                        $file->moveTo(ROOT_PATH . DATA_FOLDER . 'image/' . $item . '.ico');
+                                        $file->moveTo(ROOT_PATH.DATA_FOLDER.'image/'.$item.'.ico');
                                     } catch (\Exception $exc) {
                                         // ไม่สามารถอัปโหลดได้
-                                        $ret['ret_' . $item] = Language::get($exc->getMessage());
+                                        $ret['ret_'.$item] = Language::get($exc->getMessage());
                                     }
                                 }
                             } elseif ($file->hasError()) {
                                 // ข้อผิดพลาดการอัปโหลด
-                                $ret['ret_' . $item] = Language::get($file->getErrorMessage());
+                                $ret['ret_'.$item] = Language::get($file->getErrorMessage());
                             }
                         }
                     }

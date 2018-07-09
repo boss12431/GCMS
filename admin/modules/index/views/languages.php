@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/languages.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Languages;
@@ -43,29 +43,29 @@ class View extends \Gcms\Adminview
             if (empty($languages[$item])) {
                 $languages[$item] = $item;
                 $row = $list->add('li', array(
-                    'id' => 'L_' . $item,
+                    'id' => 'L_'.$item,
                     'class' => 'sort',
                 ));
                 $row->add('span', array(
                     'class' => 'icon-move',
                 ));
                 $row->add('span', array(
-                    'id' => 'delete_' . $item,
+                    'id' => 'delete_'.$item,
                     'class' => 'icon-delete',
                     'title' => '{LNG_Delete}',
                 ));
                 $row->add('a', array(
                     'class' => 'icon-edit',
-                    'href' => '?module=languageadd&amp;id=' . $item,
+                    'href' => '?module=languageadd&amp;id='.$item,
                     'title' => '{LNG_Edit}',
                 ));
                 $chk = in_array($item, self::$cfg->languages) ? 'check' : 'uncheck';
                 $row->add('span', array(
-                    'id' => 'check_' . $item,
-                    'class' => 'icon-' . $chk,
+                    'id' => 'check_'.$item,
+                    'class' => 'icon-'.$chk,
                 ));
                 $row->add('span', array(
-                    'style' => 'background-image:url(' . WEB_URL . 'language/' . $item . '.gif)',
+                    'style' => 'background-image:url('.WEB_URL.'language/'.$item.'.gif)',
                 ));
                 $row->add('span', array(
                     'innerHTML' => $item,

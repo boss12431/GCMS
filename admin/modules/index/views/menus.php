@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/view/menus.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Menus;
@@ -47,7 +47,7 @@ class View extends \Gcms\Adminview
         $parent = in_array($parent, $menus) ? $parent : reset($menus);
         $this->toplvl = -1;
         // URL สำหรับส่งให้ตาราง
-        $uri = $request->createUriWithGlobals(WEB_URL . 'admin/index.php');
+        $uri = $request->createUriWithGlobals(WEB_URL.'admin/index.php');
         // ตาราง
         $table = new DataTable(array(
             /* Uri */
@@ -156,20 +156,20 @@ class View extends \Gcms\Adminview
      */
     public function onRow($item, $o, $prop)
     {
-        $url = empty($item['menu_url']) ? WEB_URL . 'index.php?module=' . $item['module'] : $item['menu_url'];
+        $url = empty($item['menu_url']) ? WEB_URL.'index.php?module='.$item['module'] : $item['menu_url'];
         $text = '';
         for ($i = 0; $i < $item['level']; ++$i) {
             $text .= '&nbsp;&nbsp;&nbsp;';
         }
-        $item['menu_text'] = (empty($text) ? '' : $text . '↳&nbsp;') . $item['menu_text'];
-        $item['move_left'] = '<a id=move_left_' . $item['move_left'] . ' title="{LNG_Move submenu to the top}" class=' . ($item['level'] == 0 ? 'hidden' : 'icon-move_left') . '></a>';
-        $item['move_right'] = '<a id=move_right_' . $item['move_right'] . ' title="{LNG_Move menu to submenu of the top}" class=' . ($item['level'] > $this->toplvl ? 'hidden' : 'icon-move_right') . '></a>';
+        $item['menu_text'] = (empty($text) ? '' : $text.'↳&nbsp;').$item['menu_text'];
+        $item['move_left'] = '<a id=move_left_'.$item['move_left'].' title="{LNG_Move submenu to the top}" class='.($item['level'] == 0 ? 'hidden' : 'icon-move_left').'></a>';
+        $item['move_right'] = '<a id=move_right_'.$item['move_right'].' title="{LNG_Move menu to submenu of the top}" class='.($item['level'] > $this->toplvl ? 'hidden' : 'icon-move_right').'></a>';
         $item['published'] = $this->publisheds[$item['published']];
-        $item['language'] = empty($item['language']) ? '' : '<img src="' . WEB_URL . 'language/' . $item['language'] . '.gif" alt="' . $item['language'] . '">';
+        $item['language'] = empty($item['language']) ? '' : '<img src="'.WEB_URL.'language/'.$item['language'].'.gif" alt="'.$item['language'].'">';
         if (empty($item['index_id'])) {
             $item['module'] = str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), $item['menu_url']);
         } else {
-            $item['module'] .= empty($item['ilanguage']) ? '' : '&nbsp;<img src="' . WEB_URL . 'language/' . $item['ilanguage'] . '.gif" alt="' . $item['ilanguage'] . '">';
+            $item['module'] .= empty($item['ilanguage']) ? '' : '&nbsp;<img src="'.WEB_URL.'language/'.$item['ilanguage'].'.gif" alt="'.$item['ilanguage'].'">';
         }
         $this->toplvl = $item['level'];
 

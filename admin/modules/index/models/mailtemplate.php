@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/models/mailtemplate.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Mailtemplate;
@@ -64,7 +64,7 @@ class Model extends Field
                         array('email_id', 0),
                     ));
                     // คืนค่า
-                    $ret['delete_id'] = $request->post('src')->toString() . '_' . $id;
+                    $ret['delete_id'] = $request->post('src')->toString().'_'.$id;
                 }
             }
         }

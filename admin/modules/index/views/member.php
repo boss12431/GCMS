@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/member.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Member;
@@ -24,6 +24,9 @@ use Kotchasan\Language;
  */
 class View extends \Gcms\Adminview
 {
+    /**
+     * @var mixed
+     */
     private $sexes;
 
     /**
@@ -41,10 +44,10 @@ class View extends \Gcms\Adminview
         $member_status = array(-1 => '{LNG_all items}');
         foreach (self::$cfg->member_status as $key => $value) {
             $member_status[$key] = $value;
-            $change_member_status[$key] = '{LNG_Change member status to} ' . $value;
+            $change_member_status[$key] = '{LNG_Change member status to} '.$value;
         }
         // URL สำหรับส่งให้ตาราง
-        $uri = $request->createUriWithGlobals(WEB_URL . 'admin/index.php');
+        $uri = $request->createUriWithGlobals(WEB_URL.'admin/index.php');
         // ตาราง
         $table = new DataTable(array(
             /* Uri */
@@ -166,6 +169,7 @@ class View extends \Gcms\Adminview
         setcookie('member_perPage', $table->perPage, time() + 2592000, '/', null, null, true);
         setcookie('member_sort', $table->sort, time() + 2592000, '/', null, null, true);
         // คืนค่า HTML
+
         return $table->render();
     }
 
@@ -180,14 +184,14 @@ class View extends \Gcms\Adminview
      */
     public function onRow($item, $o, $prop)
     {
-        $item['email'] = '<a href="index.php?module=sendmail&to=' . $item['email'] . '" class="status' . $item['status'] . '">' . $item['email'] . '</a>';
+        $item['email'] = '<a href="index.php?module=sendmail&to='.$item['email'].'" class="status'.$item['status'].'">'.$item['email'].'</a>';
         $item['create_date'] = Date::format($item['create_date'], 'd M Y');
-        $item['lastvisited'] = Date::format($item['lastvisited'], 'd M Y H:i') . ' (' . number_format($item['visited']) . ')';
+        $item['lastvisited'] = Date::format($item['lastvisited'], 'd M Y H:i').' ('.number_format($item['visited']).')';
         $item['ban'] = $item['ban'] == 1 ? '<span class="icon-ban ban" title="{LNG_Members were suspended}"></span>' : '<span class="icon-ban"></span>';
         $item['fb'] = $item['fb'] == 1 ? '<span class="icon-facebook"></span>' : '';
-        $item['phone1'] = empty($item['phone1']) ? '' : '<a href="tel:' . $item['phone1'] . '">' . $item['phone1'] . '</a>';
+        $item['phone1'] = empty($item['phone1']) ? '' : '<a href="tel:'.$item['phone1'].'">'.$item['phone1'].'</a>';
         $item['active'] = $item['active'] == 1 ? '<span class="icon-valid access" title="{LNG_Access to the system administrator.}"></span>' : '<span class="icon-valid disabled"></span>';
-        $item['name'] = empty($item['website']) ? $item['name'] : '<a href="' . $item['website'] . '" target="_blank">' . $item['name'] . '</a>';
+        $item['name'] = empty($item['website']) ? $item['name'] : '<a href="'.$item['website'].'" target="_blank">'.$item['name'].'</a>';
 
         return $item;
     }

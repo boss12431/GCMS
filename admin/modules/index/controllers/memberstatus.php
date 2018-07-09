@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/controllers/memberstatus.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Memberstatus;
@@ -49,7 +49,7 @@ class Controller extends \Gcms\Controller
             $ul->appendChild('<li><span class="icon-user">{LNG_Users}</span></li>');
             $ul->appendChild('<li><span>{LNG_Member status}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-users">' . $this->title . '</h2>',
+                'innerHTML' => '<h2 class="icon-users">'.$this->title.'</h2>',
             ));
             // แสดงฟอร์ม
             $section->appendChild(createClass('Index\Memberstatus\View')->render());
@@ -57,6 +57,7 @@ class Controller extends \Gcms\Controller
             return $section->render();
         }
         // 404.html
+
         return \Index\Error\Controller::page404();
     }
 }

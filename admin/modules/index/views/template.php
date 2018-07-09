@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/template.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Template;
@@ -53,7 +53,7 @@ class View extends \Gcms\Adminview
             'id' => 'admin_template',
         ));
         // template ปัจจุบัน
-        $info = $this->parseTheme("$dir/" . $config->skin . '/style.css');
+        $info = $this->parseTheme("$dir/".$config->skin.'/style.css');
         if (!empty($info)) {
             $article = $div->add('article', array(
                 'class' => 'current clear',
@@ -73,7 +73,7 @@ class View extends \Gcms\Adminview
             $article->add('span', array(
                 'class' => 'preview',
                 'title' => '{LNG_Templates in use}',
-                'style' => 'background-image:url(' . WEB_URL . 'skin/' . $config->skin . '/screenshot.jpg)',
+                'style' => 'background-image:url('.WEB_URL.'skin/'.$config->skin.'/screenshot.jpg)',
             ));
             $article->add('h3', array(
                 'innerHTML' => $info['name'],
@@ -116,7 +116,7 @@ class View extends \Gcms\Adminview
             $article2->add('span', array(
                 'class' => 'preview',
                 'title' => '{LNG_Thumbnail}',
-                'style' => 'background-image:url(' . WEB_URL . 'skin/' . $text . '/screenshot.jpg)',
+                'style' => 'background-image:url('.WEB_URL.'skin/'.$text.'/screenshot.jpg)',
             ));
             $article2->add('h3', array(
                 'innerHTML' => $info['name'],
@@ -132,15 +132,15 @@ class View extends \Gcms\Adminview
             $p = $article2->add('p');
             $p->add('a', array(
                 'innerHTML' => '{LNG_Use this template}',
-                'href' => 'index.php?module=template&amp;page=' . $page . '&amp;action=use&amp;theme=' . $text,
+                'href' => 'index.php?module=template&amp;page='.$page.'&amp;action=use&amp;theme='.$text,
             ));
             $p->appendChild('&nbsp;|&nbsp;');
             $p->add('a', array(
                 'innerHTML' => '{LNG_Delete}',
-                'href' => 'index.php?module=template&amp;page=' . $page . '&amp;action=delete&amp;theme=' . $text,
+                'href' => 'index.php?module=template&amp;page='.$page.'&amp;action=delete&amp;theme='.$text,
             ));
         }
-        $div->appendChild('<div class="splitpage">' . $request->createUriWithGlobals(WEB_URL . 'admin/index.php')->pagination($totalpage, $page) . '</div>');
+        $div->appendChild('<div class="splitpage">'.$request->createUriWithGlobals(WEB_URL.'admin/index.php')->pagination($totalpage, $page).'</div>');
 
         return $div->render();
     }

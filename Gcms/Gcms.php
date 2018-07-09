@@ -2,10 +2,10 @@
 /**
  * @filesource Gcms/Gcms.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Gcms;
@@ -109,20 +109,35 @@ class Gcms extends \Kotchasan\KBase
      * ฟังก์ชั่น HTML highlighter
      * ทำ highlight ข้อความส่วนที่เป็นโค้ด
      * จัดการแปลง BBCode
-     * แปลงข้อความ http เป็นลิงค์.
+     * แปลงข้อความ http เป็นลิงค์
+     * คืนค่าข้อความ
      *
      * @param string $detail  ข้อความ
      * @param bool   $canview true จะแสดงข้อความเตือน 'ยังไม่ได้เข้าระบบ' หากไม่ได้เข้าระบบ สำหรับส่วนที่อยู่ในกรอบ code
      *
-     * @return string คืนค่าข้อความ
+     * @return string
      */
     public static function highlighter($detail, $canview)
     {
         $detail = preg_replace_callback('/\[([uo]l)\](.*)\[\/\\1\]/is', function ($match) {
-            return '<' . $match[1] . '><li>' . preg_replace('/<br(\s\/)?>/is', '</li><li>', $match[2]) . '</li></' . $match[1] . '>';
+            return '<'.$match[1].'><li>'.preg_replace('/<br(\s\/)?>/is', '</li><li>', $match[2]).'</li></'.$match[1].'>';
         }, $detail);
         $patt[] = '/\[(i|dfn|b|strong|u|em|ins|del|sub|sup|small|big)\](.*)\[\/\\1\]/is';
         $replace[] = '<\\1>\\2</\\1>';
+        $patt[] = '/(&lt;\?(.*?)\?&gt;)/uism';
+        $replace[] = '<span class=php>\\1</span>';
+        $patt[] = '/(&lt;%(.*?)%&gt;)/uism';
+        $replace[] = '<span class=asp>\\1</span>';
+        $patt[] = '/(&lt;(script|style)(&gt;|\s(.*?)&gt;)([^\[]+)&lt;\/\\2&gt;)/uis';
+        $replace[] = '<span class=\\2>\\1</span>';
+        $patt[] = '#(&lt;[\/]?([\!a-z]+)(.*?)&gt;)#';
+        $replace[] = '<span class=html>\\1</span>';
+        $patt[] = '/([^:])(\/\/\s[^\r\n]+)/';
+        $replace[] = '\\1<span class=comment>\\2</span>';
+        $patt[] = '/(\/\*(.*?)\*\/)/s';
+        $replace[] = '<span class=comment>\\1</span>';
+        $patt[] = '/(&lt;!--(.*?)--&gt;)/uis';
+        $replace[] = '<span class=comment>\\1</span>';
         $patt[] = '/\[color=([#a-z0-9]+)\]/i';
         $replace[] = '<span style="color:\\1">';
         $patt[] = '/\[size=([0-9]+)(px|pt|em|\%)\]/i';
@@ -136,31 +151,17 @@ class Gcms extends \Kotchasan\KBase
         $patt[] = '/\[url=(ftp|https?):\/\/(.*)\](.*)\[\/url\]/i';
         $replace[] = '<a href="\\1://\\2" target="_blank" rel="nofollow">\\3</a>';
         $patt[] = '/\[url=(\/)?(.*)\](.*)\[\/url\]/i';
-        $replace[] = '<a href="' . WEB_URL . '\\2" target="_blank" rel="nofollow">\\3</a>';
+        $replace[] = '<a href="'.WEB_URL.'\\2" target="_blank" rel="nofollow">\\3</a>';
         $patt[] = '/\[quote(\s+q=[0-9]+)?\]/i';
-        $replace[] = '<blockquote><b>' . Language::replace('Quotations by :name', array(':name' => Language::get('Topic'))) . '</b>';
+        $replace[] = '<blockquote><b>'.Language::replace('Quotations by :name', array(':name' => Language::get('Topic'))).'</b>';
         $patt[] = '/\[quote\s+r=([0-9]+)\]/i';
-        $replace[] = '<blockquote><b>' . Language::replace('Quotations by :name', array(':name' => Language::get('Comment'))) . ' <em>#\\1</em></b>';
+        $replace[] = '<blockquote><b>'.Language::replace('Quotations by :name', array(':name' => Language::get('Comment'))).' <em>#\\1</em></b>';
         $patt[] = '/\[\/quote\]/i';
         $replace[] = '</blockquote>';
         $patt[] = '/\[code(=([a-z]{1,}))?\](.*?)\[\/code\]/is';
-        $replace[] = $canview ? '<code class="content-code \\2">\\3<a class="copytoclipboard notext" title="' . Language::get('copy to clipboard') . '"><span class="icon-copy"></span></a></code>' : '<code class="content-code">' . Language::get('Can not view this content') . '</code>';
-        $patt[] = '/(&lt;\?(.*?)\?&gt;)/uism';
-        $replace[] = '<span class=php>\\1</span>';
-        $patt[] = '/(&lt;%(.*?)%&gt;)/uism';
-        $replace[] = '<span class=asp>\\1</span>';
-        $patt[] = '/(&lt;(script|style)(&gt;|\s(.*?)&gt;)(.*?)&lt;\/\\2&gt;)/uis';
-        $replace[] = '<span class=\\2>\\1</span>';
-        $patt[] = '/(&lt;[\/]?([a-z]+)(.*?)&gt;)/isu';
-        $replace[] = '<span class=html>\\1</span>';
-        $patt[] = '/([^:])(\/\/\s[^\r\n]+)/';
-        $replace[] = '\\1<span class=comment>\\2</span>';
-        $patt[] = '/(\/\*(.*?)\*\/)/s';
-        $replace[] = '<span class=comment>\\1</span>';
-        $patt[] = '/(&lt;!--(.*?)--&gt;)/uis';
-        $replace[] = '<span class=comment>\\1</span>';
+        $replace[] = $canview ? '<code class="content-code \\2">\\3<a class="copytoclipboard notext" title="'.Language::get('copy to clipboard').'"><span class="icon-copy"></span></a></code>' : '<code class="content-code">'.Language::get('Can not view this content').'</code>';
         $patt[] = '/\[search\](.*)\[\/search\]/iU';
-        $replace[] = '<a href="' . WEB_URL . 'index.php?module=search&amp;q=\\1" rel="nofollow">\\1</a>';
+        $replace[] = '<a href="'.WEB_URL.'index.php?module=search&amp;q=\\1" rel="nofollow">\\1</a>';
         $patt[] = '/\[google\](.*?)\[\/google\]/iU';
         $replace[] = '<a class="googlesearch" href="http://www.google.co.th/search?q=\\1&amp;&meta=lr%3Dlang_th" target="_blank" rel="nofollow">\\1</a>';
         $patt[] = '/([^["]]|\r|\n|\s|\t|^)((ftp|https?):\/\/([a-z0-9\.\-_]+)\/([^\s<>\"\']{1,})([^\s<>\"\']{20,20}))/i';
@@ -176,19 +177,26 @@ class Gcms extends \Kotchasan\KBase
     }
 
     /**
-     * ฟังก์ชั่น ตรวจสอบสถานะที่กำหนด และ แอดมิน.
+     * ฟังก์ชั่น ตรวจสอบสถานะที่กำหนด และ แอดมิน
+     * คืนค่า true ถ้าสมาชิกที่ login มีสถานะที่กำหนดอยู่ใน $cfg->$key หรือ $cfg[$key].
      *
      * @param array  $login
      * @param object $cfg   ตัวแปรที่มีคีย์ที่ต้องการตรวจสอบเช่น $config
      * @param string $key   คีย์ของ $cfg ที่ต้องการตรวจสอบ, $cfg->$key
      *
-     * @return bool คืนค่า true ถ้าสมาชิกที่ login มีสถานะที่กำหนดอยู่ใน $cfg->$key หรือ $cfg[$key]
+     * @return bool
      */
     public static function canConfig($login, $cfg, $key)
     {
         if (isset($login['status'])) {
             if ($login['status'] == 1) {
                 return true;
+            } elseif (is_array($key)) {
+                foreach ($key as $item) {
+                    if (isset($cfg->$item) && is_array($cfg->$item) && in_array($login['status'], $cfg->$item)) {
+                        return true;
+                    }
+                }
             } elseif (isset($cfg->$key) && is_array($cfg->$key)) {
                 return in_array($login['status'], $cfg->$key);
             }
@@ -198,17 +206,18 @@ class Gcms extends \Kotchasan\KBase
     }
 
     /**
-     * ฟังก์ชั่นแทนที่คำหยาบ.
+     * ฟังก์ชั่นแทนที่คำหยาบ
+     * คืนค่าข้อความที่ แปลงคำหยาบให้เป็น <em>xxx</em>.
      *
      * @param string $detail ข้อความ
      *
-     * @return string คืนค่าข้อความที่ แปลงคำหยาบให้เป็น <em>xxx</em>
+     * @return string
      */
     public static function checkRude($detail)
     {
         if (!empty(self::$cfg->wordrude) && is_array(self::$cfg->wordrude)) {
             foreach (self::$cfg->wordrude as $item) {
-                $detail = str_replace($item, '<em>' . self::$cfg->wordrude_replace . '</em>', $detail);
+                $detail = str_replace($item, '<em>'.self::$cfg->wordrude_replace.'</em>', $detail);
             }
         }
 
@@ -216,7 +225,13 @@ class Gcms extends \Kotchasan\KBase
     }
 
     /**
-     * ฟังก์ชั่นสร้าง URL จากโมดูล.
+     * ฟังก์ชั่นสร้าง URL จากโมดูล
+     * คืนค่า URL ที่สร้าง.
+     *
+     * @assert ('home', 'ทดสอบ', 1, 1, 'action=login&amp;true') [==] "http://localhost/home/1/1/%E0%B8%97%E0%B8%94%E0%B8%AA%E0%B8%AD%E0%B8%9A.html?action=login&amp;true"
+     * @assert ('home', 'ทดสอบ', 1, 1, 'action=login&amp;true', false) [==] "http://localhost/home/1/1/ทดสอบ.html?action=login&amp;true"
+     * @assert ('home', 'ทดสอบ', 1, 1, 'action=login&amp;true') [==] "http://localhost/index.php?module=home-%E0%B8%97%E0%B8%94%E0%B8%AA%E0%B8%AD%E0%B8%9A&amp;cat=1&amp;id=1&amp;action=login&amp;true" [[self::$cfg->module_url = 0]]
+     * @assert ('home', 'ทดสอบ', 1, 1, 'action=login&amp;true', false) [==] "http://localhost/index.php?module=home-ทดสอบ&amp;cat=1&amp;id=1&amp;action=login&amp;true" [[self::$cfg->module_url = 0]]
      *
      * @param string $module   URL ชื่อโมดูล
      * @param string $document (option)
@@ -224,12 +239,8 @@ class Gcms extends \Kotchasan\KBase
      * @param int    $id       (option) id ของข้อมูล (default 0)
      * @param string $query    (option) query string อื่นๆ (default ค่าว่าง)
      * @param bool   $encode   (option) true=เข้ารหัสด้วย rawurlencode ด้วย (default true)
-     * @assert ('home', 'ทดสอบ', 1, 1, 'action=login&amp;true') [==] "http://localhost/home/1/1/%E0%B8%97%E0%B8%94%E0%B8%AA%E0%B8%AD%E0%B8%9A.html?action=login&amp;true"
-     * @assert ('home', 'ทดสอบ', 1, 1, 'action=login&amp;true', false) [==] "http://localhost/home/1/1/ทดสอบ.html?action=login&amp;true"
-     * @assert ('home', 'ทดสอบ', 1, 1, 'action=login&amp;true') [==] "http://localhost/index.php?module=home-%E0%B8%97%E0%B8%94%E0%B8%AA%E0%B8%AD%E0%B8%9A&amp;cat=1&amp;id=1&amp;action=login&amp;true" [[self::$cfg->module_url = 0]]
-     * @assert ('home', 'ทดสอบ', 1, 1, 'action=login&amp;true', false) [==] "http://localhost/index.php?module=home-ทดสอบ&amp;cat=1&amp;id=1&amp;action=login&amp;true" [[self::$cfg->module_url = 0]]
      *
-     * @return string URL ที่สร้าง
+     * @return string
      */
     public static function createUrl($module, $document = '', $catid = 0, $id = 0, $query = '', $encode = true)
     {
@@ -260,10 +271,10 @@ class Gcms extends \Kotchasan\KBase
         }
         $link = preg_replace($patt, $replace, self::$urls[self::$cfg->module_url]);
         if (!empty($query)) {
-            $link .= (strpos($link, '?') === false ? '?' : '&amp;') . $query;
+            $link .= (strpos($link, '?') === false ? '?' : '&amp;').$query;
         }
 
-        return WEB_URL . $link;
+        return WEB_URL.$link;
     }
 
     /**
@@ -289,29 +300,31 @@ class Gcms extends \Kotchasan\KBase
     }
 
     /**
-     * ฟังก์ชั่น แสดง ip แบบซ่อนหลักหลัง ถ้าเป็น admin จะแสดงทั้งหมด.
+     * ฟังก์ชั่น แสดง ip แบบซ่อนหลักหลัง ถ้าเป็น admin จะแสดงทั้งหมด
+     * คืนค่า ที่อยู่ IP ที่แปลงแล้ว.
      *
      * @param string $ip    ที่อยู่ IP ที่ต้องการแปลง (IPV4)
      * @param array  $login
      *
-     * @return string ที่อยู่ IP ที่แปลงแล้ว
+     * @return string
      */
     public static function showip($ip, $login)
     {
         if ($login['status'] != 1 && preg_match('/([0-9]+\.[0-9]+\.)([0-9\.]+)/', $ip, $ips)) {
-            return $ips[1] . preg_replace('/[0-9]/', 'x', $ips[2]);
+            return $ips[1].preg_replace('/[0-9]/', 'x', $ips[2]);
         } else {
             return $ip;
         }
     }
 
     /**
-     * ฟังก์ชั่น highlight ข้อความค้นหา.
+     * ฟังก์ชั่น highlight ข้อความค้นหา
+     * คืนค่าข้อความ
      *
      * @param string $text   ข้อความ
      * @param string $search ข้อความค้นหา แยกแต่ละคำด้วย ,
      *
-     * @return string คืนค่าข้อความ
+     * @return string
      */
     public static function highlightSearch($text, $search)
     {
@@ -326,11 +339,12 @@ class Gcms extends \Kotchasan\KBase
 
     /**
      * ฟังก์ชั่น อ่านหมวดหมู่ในรูป serialize ตามภาษาที่เลือก
+     * คืนค่าข้อความ
      *
      * @param mixed  $datas ข้อความ serialize
      * @param string $key   (optional) ถ้า $datas เป็น array ต้องระบุ $key ด้วย
      *
-     * @return string คืนค่าข้อความ
+     * @return string
      */
     public static function ser2Str($datas, $key = '')
     {
@@ -349,11 +363,12 @@ class Gcms extends \Kotchasan\KBase
     }
 
     /**
-     * ฟังก์ชั่น ตรวจสอบและทำ serialize สำหรับภาษา โดยรายการที่มีเพียงภาษาเดียว จะกำหนดให้ไม่มีภาษา.
+     * ฟังก์ชั่น ตรวจสอบและทำ serialize สำหรับภาษา โดยรายการที่มีเพียงภาษาเดียว จะกำหนดให้ไม่มีภาษา
+     * คืนค่าข้อความที่ทำ serialize แล้ว.
      *
      * @param array $array ข้อมูลที่ต้องการจะทำ serialize
      *
-     * @return string คืนค่าข้อความที่ทำ serialize แล้ว
+     * @return string
      */
     public static function array2Ser($array)
     {
@@ -374,11 +389,12 @@ class Gcms extends \Kotchasan\KBase
 
     /**
      * ฟังก์ชั่นตรวจสอบข้อความ ใช้เป็น alias name
-     * ตัวพิมพ์เล็ก ลบ {}[]() ออก แทนช่องว่างและอักขระพิเศษด้วย _.
+     * ตัวพิมพ์เล็ก ลบ {}[]() ออก แทนช่องว่างและอักขระพิเศษด้วย _
+     * คืนค่าข้อความ
      *
      * @param string $text ข้อความ
      *
-     * @return string คืนค่าข้อความ
+     * @return string
      */
     public static function aliasName($text)
     {
@@ -387,11 +403,12 @@ class Gcms extends \Kotchasan\KBase
 
     /**
      * ฟังก์ชั่น ทำ highlight ข้อความ
+     * คืนค่าข้อความ ข้อความที่ highlight จะอยู่ภายใต้ tag mark.
      *
      * @param string $text   ข้อความ
      * @param string $needle ข้อความที่ต้องการทำ highlight
      *
-     * @return string คืนค่าข้อความ ข้อความที่ highlight จะอยู่ภายใต้ tag mark
+     * @return string
      */
     public static function doHighlight($text, $needle)
     {
@@ -409,7 +426,7 @@ class Gcms extends \Kotchasan\KBase
                 $a = $a && (self::lastIndexOf($text, '/script>', $i) >= self::lastIndexOf($text, '<script', $i));
                 $a = $a && (self::lastIndexOf($text, '/style>', $i) >= self::lastIndexOf($text, '<style', $i));
                 if ($a) {
-                    $newtext .= mb_substr($text, 0, $i) . '<mark>' . mb_substr($text, $i, $len_needle) . '</mark>';
+                    $newtext .= mb_substr($text, 0, $i).'<mark>'.mb_substr($text, $i, $len_needle).'</mark>';
                     $text = mb_substr($text, $i + $len_needle);
                     $i = -1;
                 }
@@ -420,13 +437,14 @@ class Gcms extends \Kotchasan\KBase
     }
 
     /**
-     * ฟังก์ชั่น ค้นหาข้อความย้อนหลัง.
+     * ฟังก์ชั่น ค้นหาข้อความย้อนหลัง
+     * คืนค่าตำแหน่งของตัวอักษรที่พบ ตัวแรกคือ หากไม่พบคืนค่า -1.
      *
      * @param string $text   ข้อความ
      * @param string $needle ข้อความค้นหา
      * @param int    $offset ตำแหน่งเริ่มต้นที่ต้องการค้นหา
      *
-     * @return int คืนค่าตำแหน่งของตัวอักษรที่พบ ตัวแรกคือ 0 หากไม่พบคืนค่า -1
+     * @return int
      */
     private static function lastIndexOf($text, $needle, $offset)
     {
@@ -436,12 +454,13 @@ class Gcms extends \Kotchasan\KBase
     }
 
     /**
-     * ฟังก์ชั่น แปลงข้อความสำหรับการ quote.
+     * ฟังก์ชั่น แปลงข้อความสำหรับการ quote
+     * คืนค่าข้อความ
      *
      * @param string $text ข้อความ
      * @param bool   $u    true=ถอดรหัสอักขระพิเศษด้วย (default false)
      *
-     * @return string คืนค่าข้อความ
+     * @return string
      */
     public static function quote($text, $u = false)
     {
@@ -455,11 +474,12 @@ class Gcms extends \Kotchasan\KBase
 
     /**
      * ฟังก์ชั่น แปลง html เป็น text
-     * สำหรับตัด tag หรือเอา BBCode ออกจากเนื้อหาที่เป็น HTML ให้เหลือแต่ข้อความล้วน.
+     * สำหรับตัด tag หรือเอา BBCode ออกจากเนื้อหาที่เป็น HTML ให้เหลือแต่ข้อความล้วน
+     * คืนค่าข้อความ
      *
      * @param string $text ข้อความ
      *
-     * @return string คืนค่าข้อความ
+     * @return string
      */
     public static function html2txt($text, $len = 0)
     {
@@ -523,7 +543,7 @@ class Gcms extends \Kotchasan\KBase
     public static function showPhone($phone_number)
     {
         if (preg_match('/^([0-9\-\s]{9,})(.*)$/', $phone_number, $match)) {
-            return '<a href="tel:' . trim($match[1]) . '">' . $phone_number . '</a>';
+            return '<a href="tel:'.trim($match[1]).'">'.$phone_number.'</a>';
         }
 
         return $phone_number;

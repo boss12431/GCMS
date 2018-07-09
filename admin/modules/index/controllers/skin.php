@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/controllers/skin.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Skin;
@@ -50,7 +50,7 @@ class Controller extends \Gcms\Controller
             $ul->appendChild('<li><span class="icon-settings">{LNG_Site settings}</span></li>');
             $ul->appendChild('<li><span>{LNG_Template settings}</span></li>');
             $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-index">' . $this->title . '</h2>',
+                'innerHTML' => '<h2 class="icon-index">'.$this->title.'</h2>',
             ));
             // โหลด config
             $config = Config::load(CONFIG);
@@ -60,6 +60,7 @@ class Controller extends \Gcms\Controller
             return $section->render();
         }
         // 404.html
+
         return \Index\Error\Controller::page404();
     }
 }

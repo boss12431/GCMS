@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/sendmail.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Sendmail;
@@ -79,7 +79,7 @@ class View extends \Gcms\Adminview
             'itemClass' => 'item',
             'labelClass' => 'g-input icon-edit',
             'label' => '{LNG_Subject}',
-            'comment' => '' . '{LNG_Please fill in} {LNG_Subject}',
+            'comment' => ''.'{LNG_Please fill in} {LNG_Subject}',
         ));
         // detail
         $fieldset->add('ckeditor', array(
