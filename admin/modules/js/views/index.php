@@ -42,6 +42,7 @@ class View extends \Kotchasan\KBase
         $js[] = file_get_contents(ROOT_PATH.'js/table.js');
         $js[] = file_get_contents(ROOT_PATH.'js/tooltip.js');
         $js[] = file_get_contents(ROOT_PATH.'js/uploads.js');
+        $js[] = file_get_contents(ROOT_PATH.'js/inputgroup.js');
         $js[] = file_get_contents(ROOT_PATH.'js/common.js');
         $js[] = file_get_contents(APP_PATH.'modules/js/views/admin.js');
         $lng = Language::name();

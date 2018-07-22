@@ -2,10 +2,10 @@
 /**
  * @filesource modules/document/models/admin/write.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Document\Admin\Write;
@@ -33,7 +33,7 @@ class Model extends \Kotchasan\Model
      *
      * @param int  $module_id ของโมดูล
      * @param int  $id        ID
-     * @param bool $new       false (default) คืนค่า ID 0 สำหรับรายการใหม่, true คืนค่า ID ถัดไปสำหรับรายการใหม่
+     * @param bool $new       false (default) คืนค่า ID สำหรับรายการใหม่, true คืนค่า ID ถัดไปสำหรับรายการใหม่
      *
      * @return object|null คืนค่าข้อมูล object ไม่พบคืนค่า null
      */
@@ -109,13 +109,16 @@ class Model extends \Kotchasan\Model
             if (Login::notDemoMode($login)) {
                 // details
                 $details = array();
+                $tags = array();
                 $alias_topic = '';
-                $languages = Language::installedLanguage();
+                $languages = Gcms::installedLanguage();
                 foreach ($languages as $lng) {
                     $topic = $request->post('topic_'.$lng)->topic();
                     $alias = Gcms::aliasName($request->post('topic_'.$lng)->toString());
                     $relate = $request->post('relate_'.$lng)->quote();
-                    $keywords = implode(',', $request->post('keywords_'.$lng, array())->topic());
+                    $k = $request->post('keywords_'.$lng, array())->topic();
+                    $tags = array_merge($tags, $k);
+                    $keywords = implode(',', $k);
                     $description = $request->post('description_'.$lng)->description();
                     if (!empty($topic)) {
                         $save = array();
@@ -164,6 +167,7 @@ class Model extends \Kotchasan\Model
                                 if (mb_strlen($values['topic']) < 3) {
                                     $ret['ret_topic_'.$lng] = 'this';
                                     $tab = !$tab ? 'detail_'.$lng : $tab;
+                                    break;
                                 }
                             }
                         }
@@ -256,6 +260,8 @@ class Model extends \Kotchasan\Model
                             if ($save['category_id'] > 0) {
                                 self::updateCategories((int) $index->module_id);
                             }
+                            // update tags
+                            \Index\Tag\Model::update($tags);
                             // ส่งข้อความแจ้งเตือนไปยังไลน์เมื่อมีการเขียนหรือแก้ไขบทความ
                             if (!empty($index->line_notifications)) {
                                 if (empty($id) && in_array(1, $index->line_notifications)) {

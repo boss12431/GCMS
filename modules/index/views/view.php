@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/view.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\View;
@@ -60,6 +60,7 @@ class View extends \Gcms\View
                 $canonical = WEB_URL.'index.php?module=member&amp;id='.$user->id;
                 Gcms::$view->addBreadcrumb($canonical, $topic);
                 // คืนค่า
+
                 return (object) array(
                     'detail' => $template->render(),
                     'keywords' => self::$cfg->web_title,
@@ -70,6 +71,7 @@ class View extends \Gcms\View
                 );
             }
             // ไม่พบสมาชิก
+
             return createClass('Index\Error\Controller')->init('index');
         } else {
             // ไม่ได้ login

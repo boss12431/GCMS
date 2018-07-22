@@ -2,10 +2,10 @@
 /**
  * @filesource modules/document/views/member.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Document\Member;
@@ -32,6 +32,9 @@ class View extends \Gcms\View
      * ข้อมูลโมดูล.
      */
     private $index;
+    /**
+     * @var mixed
+     */
     private $categories;
 
     /**
@@ -179,6 +182,7 @@ class View extends \Gcms\View
             ));
             $index->detail = $template->render();
             // คืนค่า
+
             return $index;
         }
 

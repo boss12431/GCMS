@@ -26,7 +26,7 @@ class Model extends \Kotchasan\Model
     /**
      * อ่านข้อมูลสำหรับใส่ลงในตาราง.
      *
-     * @return array
+     * @return \Kotchasan\Database\QueryBuilder
      */
     public static function toDataTable()
     {

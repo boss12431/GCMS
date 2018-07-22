@@ -31,9 +31,11 @@ class View extends \Kotchasan\KBase
         $js[] = 'var WEB_URL = "'.WEB_URL.'",';
         $js[] = 'MODULE_URL = '.(int) self::$cfg->module_url.';';
         $js[] = file_get_contents(ROOT_PATH.'js/gajax.js');
+        $js[] = file_get_contents(ROOT_PATH.'js/autocomplete.js');
         $js[] = file_get_contents(ROOT_PATH.'js/loader.js');
         $js[] = file_get_contents(ROOT_PATH.'js/ddmenu.js');
         $js[] = file_get_contents(ROOT_PATH.'js/table.js');
+        $js[] = file_get_contents(ROOT_PATH.'js/inputgroup.js');
         $js[] = file_get_contents(ROOT_PATH.'js/range.js');
         $js[] = file_get_contents(ROOT_PATH.'js/common.js');
         $js[] = file_get_contents(ROOT_PATH.'js/tooltip.js');

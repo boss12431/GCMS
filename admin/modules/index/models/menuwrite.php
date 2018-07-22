@@ -119,7 +119,7 @@ class Model extends \Kotchasan\Model
      *
      * @param Request $request
      */
-    public static function action(Request $request)
+    public function action(Request $request)
     {
         // session, referer, member, can_config, ไม่ใช่สมาชิกตัวอย่าง
         if ($request->initSession() && $request->isReferer() && $login = Login::adminAccess()) {
@@ -129,10 +129,11 @@ class Model extends \Kotchasan\Model
                 $action = $request->post('action')->toString();
                 $parent = $request->post('parent')->toString();
                 $id = $request->post('id')->toInt();
-                $model = new static();
+                // Database
+                $db = $this->db();
                 if ($action === 'get' && !empty($parent)) {
                     // query menu
-                    $query = $model->db()->createQuery()
+                    $query = $db->createQuery()
                         ->select('id', 'level', 'menu_text', 'menu_tooltip')
                         ->from('menus')
                         ->where(array('parent', $parent))
@@ -146,14 +147,14 @@ class Model extends \Kotchasan\Model
                     }
                 } elseif ($action === 'copy' && !empty($id)) {
                     // สำเนาเมนู
-                    $table_menus = $model->getTableName('menus');
-                    $menu = $model->db()->first($table_menus, $id);
+                    $table_menus = $this->getTableName('menus');
+                    $menu = $db->first($table_menus, $id);
                     if ($menu->language == '') {
                         $ret['alert'] = Language::get('This entry is displayed in all languages');
                     } else {
                         $lng = strtolower($request->post('lng')->toString());
                         // ตรวจสอบเมนูซ้ำ
-                        $search = $model->db()->first($table_menus, array(
+                        $search = $db->first($table_menus, array(
                             array('index_id', $menu->index_id),
                             array('parent', $menu->parent),
                             array('level', $menu->level),
@@ -164,11 +165,11 @@ class Model extends \Kotchasan\Model
                             $old_lng = $menu->language;
                             // แก้ไขรายการเดิมเป็นภาษาใหม่
                             $menu->language = $lng;
-                            $model->db()->update($table_menus, $menu->id, $menu);
+                            $db->update($table_menus, $menu->id, $menu);
                             unset($menu->id);
                             // เพิ่มรายการใหม่จากรายการเดิม
                             $menu->language = $old_lng;
-                            $model->db()->insert($table_menus, $menu);
+                            $db->insert($table_menus, $menu);
                             $ret['alert'] = Language::get('Copy successfully, you can edit this entry');
                         } else {
                             $ret['alert'] = Language::get('This entry is in selected language');
@@ -227,10 +228,12 @@ class Model extends \Kotchasan\Model
                         $save['index_id'] = $match[4];
                     }
                 }
-                $model = new static();
-                $table_menu = $model->getTableName('menus');
+                // Database
+                $db = $this->db();
+                // table
+                $table_menu = $this->getTableName('menus');
                 if (!empty($id)) {
-                    $menu = $model->db()->first($table_menu, array('id', $id));
+                    $menu = $db->first($table_menu, array('id', $id));
                 } else {
                     $menu = (object) array('id' => 0);
                 }
@@ -274,7 +277,7 @@ class Model extends \Kotchasan\Model
                     }
                     $top_level = 0;
                     // query menu ทั้งหมด, เรียงลำดับเมนูตามที่กำหนด
-                    $query = $model->db()->createQuery()
+                    $query = $db->createQuery()
                         ->select('id', 'level', 'menu_order')
                         ->from('menus')
                         ->where(array('parent', $save['parent']))
@@ -295,7 +298,7 @@ class Model extends \Kotchasan\Model
                                 $changed = true;
                             }
                             if ($changed) {
-                                $model->db()->update($table_menu, $item['id'], $item);
+                                $db->update($table_menu, $item['id'], $item);
                             }
                             if ($toplvl == $item['id']) {
                                 ++$menu_order;
@@ -307,10 +310,10 @@ class Model extends \Kotchasan\Model
                     // บันทึก
                     if (empty($id)) {
                         // ใหม่
-                        $id = $model->db()->insert($table_menu, $save);
+                        $id = $db->insert($table_menu, $save);
                     } else {
                         // แก้ไข
-                        $model->db()->update($table_menu, $id, $save);
+                        $db->update($table_menu, $id, $save);
                     }
                     // ส่งค่ากลับ
                     $ret['alert'] = Language::get('Saved successfully');

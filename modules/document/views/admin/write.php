@@ -2,10 +2,10 @@
 /**
  * @filesource modules/document/views/admin/write.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Document\Admin\Write;
@@ -62,14 +62,13 @@ class View extends \Gcms\Adminview
                 'value' => $details->topic,
             ));
             // keywords
-            $fieldset->add('checkboxgroups', array(
+            $fieldset->add('inputgroups', array(
                 'id' => 'keywords_'.$item,
                 'labelClass' => 'g-input icon-tags',
                 'itemClass' => 'item',
                 'label' => '{LNG_Keywords}',
                 'comment' => '{LNG_Text keywords for SEO or Search Engine to search}',
-                'options' => \Index\Tag\Model::toSelect(),
-                'value' => explode(',', $details->keywords),
+                'value' => $details->keywords == '' ? array() : explode(',', $details->keywords),
             ));
             // relate
             $fieldset->add('text', array(
@@ -236,15 +235,12 @@ class View extends \Gcms\Adminview
         // tab ที่เลือก
         $tab = $request->request('tab')->toString();
         $tab = empty($tab) ? 'detail_'.reset($index->languages) : $tab;
-        $form->script('initWriteTab("accordient_menu", "'.$tab.'");');
-        $form->script('checkSaved("preview", "'.WEB_URL.'index.php?module='.$index->module.'", "id");');
-        $form->script('new GValidator("alias", "keyup,change", checkAlias, "index.php/index/model/checker/alias", null, "setup_frm");');
-        $form->script('selectChanged("category_'.$index->module_id.'","index.php/index/model/admincategory/action",doFormSubmit);');
         // tab
         $fieldset->add('hidden', array(
             'id' => 'tab',
             'value' => $tab,
         ));
+        $form->script('initDocumentWrite(["'.implode('", "', $index->languages).'"], "'.$tab.'", '.$index->module_id.');');
 
         return $form->render();
     }

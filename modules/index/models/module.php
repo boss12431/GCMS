@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/models/module.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Module;
@@ -78,8 +78,7 @@ class Model
      */
     private function getModules()
     {
-        $model = new \Kotchasan\Model();
-        $query = $model->db()->createQuery()
+        $query = \Kotchasan\Model::createQuery()
             ->select('I.id index_id', 'I.module_id', 'M.module', 'M.owner', 'M.config', 'D.topic', 'D.keywords', 'D.description')
             ->from('modules M')
             ->join('index I', 'INNER', array(
@@ -107,13 +106,14 @@ class Model
     }
 
     /**
-     * อ่านข้อมูลโมดูลและค่ากำหนด จาก DB.
+     * อ่านข้อมูลโมดูลและค่ากำหนด จาก DB
+     * คืนค่าข้อมูลโมดูล (Object) ไม่พบคืนค่า false.
      *
      * @param string $owner
      * @param string $module
      * @param int    $module_id
      *
-     * @return object|false คืนค่าข้อมูลโมดูล (Object) ไม่พบคืนค่า false
+     * @return object|false
      */
     public static function getModuleWithConfig($owner, $module = '', $module_id = 0)
     {
@@ -155,18 +155,17 @@ class Model
 
     /**
      * อ่านรายละเอียดของโมดูล
-     * topic, details, keywords, description.
+     * topic, details, keywords, description
+     * ไม่พบคืนค่า null.
      *
      * @param object $index
      *
-     * @return object ไม่พบคืนค่า null
+     * @return object
      */
     public static function getDetails($index)
     {
         if (!empty($index->index_id) && !empty($index->module_id)) {
-            // Model
-            $model = new \Kotchasan\Model();
-            $search = $model->db()->createQuery()
+            $search = \Kotchasan\Model::createQuery()
                 ->from('index I')
                 ->join('index_detail D', 'INNER', array(array('D.id', 'I.id'), array('D.module_id', 'I.module_id'), array('D.language', 'I.language')))
                 ->where(array(

@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/activate.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Activate;
@@ -53,6 +53,7 @@ class View extends \Gcms\View
         $template = Template::create('member', 'member', 'activate');
         $template->add($details);
         // คืนค่า
+
         return (object) array(
             'detail' => $template->render(),
             'keywords' => self::$cfg->web_title,

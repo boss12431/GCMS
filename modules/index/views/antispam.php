@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/antispam.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Antispam;
@@ -22,6 +22,9 @@ use Kotchasan\Http\Request;
  */
 class View extends \Gcms\View
 {
+    /**
+     * @param Request $request
+     */
     public function index(Request $request)
     {
         $request->initSession();

@@ -2,10 +2,10 @@
 /**
  * @filesource modules/document/views/write.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Document\Write;
@@ -17,7 +17,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * ฟอร์มเพิ่ม/แก้ไข บทความ
+ * module=document-write.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -80,14 +80,13 @@ class View extends \Gcms\View
                     'value' => $details->topic,
                 ));
                 // keywords
-                $fieldset->add('checkboxgroups', array(
+                $fieldset->add('inputgroups', array(
                     'id' => 'keywords_'.$item,
                     'labelClass' => 'g-input icon-tags',
                     'itemClass' => 'item',
                     'label' => '{LNG_Keywords}',
                     'comment' => '{LNG_Text keywords for SEO or Search Engine to search}',
-                    'options' => \Index\Tag\Model::toSelect(),
-                    'value' => explode(',', $details->keywords),
+                    'value' => $details->keywords == '' ? array() : explode(',', $details->keywords),
                 ));
                 // relate
                 $fieldset->add('text', array(
@@ -196,7 +195,7 @@ class View extends \Gcms\View
                 'id' => 'module_id',
                 'value' => $index->module_id,
             ));
-            $form->script('new GValidator("alias", "keyup,change", checkAlias, "index.php/index/model/checker/alias", null, "setup_frm");');
+            $form->script('initDocumentWrite(["'.implode('", "', self::$cfg->languages).'"], '.$index->module_id.');');
             // คืนค่า
             $index->detail = $form->render();
             $index->description = $index->topic;

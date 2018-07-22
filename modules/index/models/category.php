@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/models/category.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Category;
@@ -89,7 +89,7 @@ class Model extends \Kotchasan\Orm\Field
      * สำหรับใส่ select หรือ menu.
      *
      * @param int  $module_id
-     * @param int  $group_id  0 (default) หมวดหมู่ทั่วไป, > 0 หมวดหมู่อื่นๆ
+     * @param int  $group_id  (default) หมวดหมู่ทั่วไป, > หมวดหมู่อื่นๆ
      * @param bool $view      true (default) คืนค่ารายการที่เผยแพร่, คืนค่าทั้งหมด
      *
      * @return array

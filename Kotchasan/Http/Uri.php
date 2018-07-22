@@ -10,8 +10,6 @@
 
 namespace Kotchasan\Http;
 
-use Psr\Http\Message\UriInterface;
-
 /**
  * Class สำหรับจัดการ Uri (PSR-7).
  *
@@ -19,7 +17,7 @@ use Psr\Http\Message\UriInterface;
  *
  * @since 1.0
  */
-class Uri extends \Kotchasan\KBase implements UriInterface
+class Uri extends \Kotchasan\KBase implements \Psr\Http\Message\UriInterface
 {
     /**
      * Uri fragment หลัง  #.

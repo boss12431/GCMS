@@ -476,7 +476,6 @@ h3[class]:before {
   padding: 1% 0 1% 1%;
 }
 #admin_template .item {
-  display: inline-block;
   vertical-align: top;
   float: left;
   width: 32.33%;
@@ -636,6 +635,11 @@ td a[class*=" icon-"] {
   background-color: #fff;
   width: 960px;
   max-width: 100%;
+}
+.setup_frm .item {
+  overflow-x: auto;
+  margin-bottom: 0;
+  padding-bottom: 10px;
 }
 .paper {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -868,8 +872,6 @@ div#install li.invalid {
 @media only screen and (max-width: 960px) {
   .setup_frm {
     border-bottom: 1px solid #dbdbdb;
-    overflow-x: auto;
-    overflow-y: hidden;
   }
   .setup_frm {
     display: block;

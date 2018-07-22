@@ -2,10 +2,10 @@
 /**
  * @filesource modules/document/views/export.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Document\Export;
@@ -94,6 +94,7 @@ class View extends \Gcms\View
                     '/{URL}/' => $index->canonical,
                 );
                 // /document/print.html
+
                 return Template::create('document', $index->module, 'print')->add($replace)->render();
             }
         }
@@ -159,6 +160,7 @@ class View extends \Gcms\View
                 $pdf->WriteHTML(Template::create($index->owner, $index->module, 'print')->add($replace)->render());
                 $pdf->Output();
                 // คืนค่าสำเร็จ
+
                 return true;
             }
         }

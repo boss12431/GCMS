@@ -70,7 +70,7 @@ class Controller extends \Gcms\Controller
                 'detail' => Gcms::$view->renderHTML(Template::load('', '', 'loader')),
                 'menu' => $controller->menu(),
                 'topic' => $controller->title(),
-                'to' => $request->post('to', 'scroll-to')->filter('a-z0-9_'),
+                'to' => $request->post('to', 'scroll-to')->filter('a-z0-9\-_'),
             );
             // คืนค่า JSON
             echo json_encode($ret);

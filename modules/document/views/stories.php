@@ -2,10 +2,10 @@
 /**
  * @filesource modules/document/views/stories.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Document\Stories;
@@ -122,6 +122,7 @@ class View extends \Gcms\View
         // JSON-LD (Index)
         Gcms::$view->setJsonLd(\Index\Jsonld\View::webpage($index));
         // คืนค่า
+
         return (object) array(
             'canonical' => $index->canonical,
             'module' => $index->module,

@@ -2,10 +2,10 @@
 /**
  * @filesource modules/document/models/reply.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Document\Reply;
@@ -189,7 +189,7 @@ class Model extends \Kotchasan\Model
     /**
      * อ่านข้อมูล ความคิดเห็น.
      *
-     * @param int $id        ID ของความคิดเห็น, 0 ถ้าเป็นความคิดเห็นใหม่
+     * @param int $id        ID ของความคิดเห็น, ถ้าเป็นความคิดเห็นใหม่
      * @param int $module_id ID ของโมดูล
      * @param int $index_id  ID ของคำถาม
      *

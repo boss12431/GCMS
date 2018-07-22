@@ -2,10 +2,10 @@
 /**
  * @filesource modules/document/views/amp.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Document\Jsonld;
@@ -45,6 +45,7 @@ class View extends \Kotchasan\KBase
             }
         }
         // คืนค่าข้อมูล JSON-LD
+
         return array(
             '@context' => 'http://schema.org',
             '@type' => empty($index->image) ? 'TechArticle' : 'Article',

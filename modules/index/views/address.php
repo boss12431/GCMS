@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/views/address.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Address;
@@ -62,6 +62,7 @@ class View extends \Gcms\View
         $template->add($contents);
         $index->detail = $template->render();
         // คืนค่า
+
         return $index;
     }
 }

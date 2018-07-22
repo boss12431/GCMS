@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/models/admincategory.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Admincategory;
@@ -26,12 +26,13 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\Model
 {
     /**
-     * อ่านข้อมูลหมวดหมู่ทั้งหมด (admin).
+     * อ่านข้อมูลหมวดหมู่ทั้งหมด (admin)
+     * คืนค่าแอเรย์ของ Object ไม่มีคืนค่าแอเรย์ว่าง.
      *
      * @param int  $module_id
      * @param bool $all       true (default) คืนค่าทุกรายการ, false คืนค่าเฉพาะรายการที่เผยแพร่
      *
-     * @return array คืนค่าแอเรย์ของ Object ไม่มีคืนค่าแอเรย์ว่าง
+     * @return array
      */
     public static function toDataTable($module_id, $all = true)
     {

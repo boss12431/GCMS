@@ -2,10 +2,10 @@
 /**
  * @filesource modules/document/models/stories.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Document\Stories;
@@ -41,6 +41,7 @@ class Model extends \Kotchasan\Model
             }
             $where[] = array('D.language', array(Language::name(), ''));
             // คืนค่า
+
             return self::execute($request, $index, $where);
         }
 
@@ -63,6 +64,7 @@ class Model extends \Kotchasan\Model
             array('D.relate', 'LIKE', '%'.$index->tag.'%'),
         );
         // คืนค่า
+
         return self::execute($request, $index, $where);
     }
 
@@ -88,6 +90,7 @@ class Model extends \Kotchasan\Model
                 array('I.create_date', '<=', $selday + 86400),
             );
             // คืนค่า
+
             return self::execute($request, $index, $where);
         }
 
@@ -161,6 +164,7 @@ class Model extends \Kotchasan\Model
             ->limit($list_per_page, $index->start);
         $index->items = $query->cacheOn()->execute();
         // คืนค่า
+
         return $index;
     }
 }

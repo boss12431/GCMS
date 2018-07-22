@@ -3,11 +3,10 @@
  * admin/index.php.
  *
  * @author Goragod Wiriya <admin@goragod.com>
- *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 if (is_file('../settings/config.php') && is_file('../settings/database.php')) {
     // load Kotchasan

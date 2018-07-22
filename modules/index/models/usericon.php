@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/models/usericon.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Usericon;
@@ -22,6 +22,9 @@ use Kotchasan\Http\Response;
  */
 class Model extends \Kotchasan\Model
 {
+    /**
+     * @param Request $request
+     */
     public function index(Request $request)
     {
         if ($request->initSession()) {

@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/controllers/member.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Member;
@@ -40,36 +40,57 @@ class Controller extends \Kotchasan\Controller
         echo json_encode($page);
     }
 
+    /**
+     * @param Request $request
+     */
     public function editprofile(Request $request)
     {
         return createClass('Index\Editprofile\View')->render($request);
     }
 
+    /**
+     * @param Request $request
+     */
     public function sendmail(Request $request)
     {
         return createClass('Index\Sendmail\View')->render($request);
     }
 
+    /**
+     * @param Request $request
+     */
     public function register(Request $request)
     {
         return createClass('Index\Register\View')->render($request, false);
     }
 
+    /**
+     * @param Request $request
+     */
     public function forgot(Request $request)
     {
         return createClass('Index\Forgot\View')->render($request);
     }
 
+    /**
+     * @param Request $request
+     */
     public function dologin(Request $request)
     {
         return createClass('Index\Dologin\View')->render($request);
     }
 
+    /**
+     * @param Request $request
+     */
     public function member(Request $request)
     {
         return createClass('Index\View\View')->render($request);
     }
 
+    /**
+     * @param Request $request
+     */
     public function activate(Request $request)
     {
         return createClass('Index\Activate\View')->render($request);

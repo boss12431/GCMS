@@ -2,10 +2,10 @@
 /**
  * @filesource modules/index/models/tag.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\Tag;
@@ -27,9 +27,7 @@ class Model extends \Kotchasan\Model
      */
     public static function all()
     {
-        $model = new static();
-
-        return $model->db()->createQuery()
+        return static::createQuery()
             ->select()
             ->from('tags')
             ->order('count')
@@ -44,8 +42,7 @@ class Model extends \Kotchasan\Model
      */
     public static function toSelect()
     {
-        $model = new static();
-        $query = $model->db()->createQuery()
+        $query = static::createQuery()
             ->select()
             ->from('tags')
             ->order('tag')
@@ -56,5 +53,32 @@ class Model extends \Kotchasan\Model
         }
 
         return $result;
+    }
+
+    /**
+     * ตรวจสอบและเพิ่ม tag ลงในตารางถ้าเป็น tag ใหม่.
+     *
+     * @param array $tags แอเรย์รายการ tag
+     */
+    public static function update($tags)
+    {
+        if (!empty($tags)) {
+            $query = static::createQuery()
+                ->select('tag')
+                ->from('tags')
+                ->where(array('tag', $tags));
+            $tag_exists = array();
+            foreach ($query->execute() as $item) {
+                $tag_exists[$item->tag] = $item->tag;
+            }
+            $model = new static();
+            $db = $model->db();
+            $table_tags = $model->getTableName('tags');
+            foreach ($tags as $item) {
+                if ($item != '' && !isset($tag_exists[$item])) {
+                    $db->insert($table_tags, array('tag' => $item, 'count' => 0));
+                }
+            }
+        }
     }
 }

@@ -63,7 +63,6 @@
     }
     new GValidator('register_password', 'keyup,change', checkPassword);
     new GValidator('register_repassword', 'keyup,change', checkPassword);
-    new GValidator('antispam', 'keyup,change', checkAntispam, '{WEBURL}index.php/index/model/checker/antispam', null, 'register_frm');
     callClick('register_accept', function () {
       $E('register_submit').disabled = this.checked ? false : true;
     });

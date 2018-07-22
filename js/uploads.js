@@ -376,7 +376,7 @@ function initGUploads(form_id, id, model) {
   };
   var upload = new GUploads({
     form: form_id,
-    input: "fileupload",
+    input: "fileupload_tmp",
     fileprogress: "fsUploadProgress",
     oncomplete: galleryUploadResult,
     onupload: function() {

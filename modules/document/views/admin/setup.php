@@ -2,10 +2,10 @@
 /**
  * @filesource modules/document/views/admin/setup.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Document\Admin\Setup;
@@ -28,10 +28,25 @@ class View extends \Gcms\Adminview
      * ข้อมูลโมดูล.
      */
     private $index;
+    /**
+     * @var mixed
+     */
     private $publisheds;
+    /**
+     * @var mixed
+     */
     private $replies;
+    /**
+     * @var mixed
+     */
     private $thumbnails;
+    /**
+     * @var mixed
+     */
     private $default_icon;
+    /**
+     * @var mixed
+     */
     private $categories;
 
     /**
@@ -107,6 +122,7 @@ class View extends \Gcms\Adminview
             'headers' => array(
                 'topic' => array(
                     'text' => '{LNG_Topic}',
+                    'sort' => 'topic',
                 ),
                 'picture' => array(
                     'text' => '',
@@ -122,14 +138,17 @@ class View extends \Gcms\Adminview
                 'create_date' => array(
                     'text' => '{LNG_Article Date}',
                     'class' => 'center',
+                    'sort' => 'create_date',
                 ),
                 'last_update' => array(
                     'text' => '{LNG_Last updated}',
                     'class' => 'center',
+                    'sort' => 'last_update',
                 ),
                 'visited' => array(
                     'text' => '{LNG_Viewing}',
                     'class' => 'center',
+                    'sort' => 'visited',
                 ),
             ),
             /* รูปแบบการแสดงผลของคอลัมน์ (tbody) */

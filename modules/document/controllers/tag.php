@@ -2,10 +2,10 @@
 /**
  * @filesource modules/document/controllers/tag.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Document\Tag;
@@ -50,6 +50,7 @@ class Controller extends \Kotchasan\Controller
             return createClass('Document\Stories\View')->index($request, $index);
         }
         // 404
+
         return createClass('Index\Error\Controller')->init('document');
     }
 }
