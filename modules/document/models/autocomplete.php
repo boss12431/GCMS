@@ -74,7 +74,7 @@ class Model extends \Kotchasan\Model
                 ->cacheOn()
                 ->execute();
             // คืนค่า JSON
-            echo json_encode($result);
+            echo json_encode(array(array('tag' => $search)) + $result);
         }
     }
 }
