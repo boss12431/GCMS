@@ -67,14 +67,20 @@ class Model extends \Kotchasan\Model
             $result = $this->db()->createQuery()
                 ->select('tag')
                 ->from('tags')
-                ->where(array('tag', 'LIKE', '%'.$search.'%'))
+                ->where(array(
+                    array('tag', 'LIKE', '%'.$search.'%'),
+                    array('tag', '!=', $search),
+                ))
                 ->order('tag')
                 ->limit($request->post('count', 20)->toInt())
                 ->toArray()
                 ->cacheOn()
                 ->execute();
             // คืนค่า JSON
-            echo json_encode(array(array('tag' => $search)) + $result);
+            if ($search != '') {
+                $result = array(array('tag' => $search)) + $result;
+            }
+            echo json_encode($result);
         }
     }
 }

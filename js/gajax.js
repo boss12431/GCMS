@@ -4454,9 +4454,8 @@ window.$K = (function() {
   window.callClick = function(input, func) {
     var doKeyDown = function(e) {
       if (GEvent.keyCode(e) == 13 || e.key == "Enter") {
-        var tmp = e;
         if (func.call(this, e) !== true) {
-          GEvent.stop(tmp);
+          GEvent.stop(e);
           return false;
         }
       }

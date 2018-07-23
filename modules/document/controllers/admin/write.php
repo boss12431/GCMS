@@ -84,9 +84,9 @@ class Controller extends \Gcms\Controller
             // เมนูแท็บ
             $tab = new \Kotchasan\Tab('accordient_menu', 'index.php?module=document-write&mid='.$index->module_id.'&id='.$index->id);
             foreach ($index->languages as $item) {
-                $tab->add('detail_'.$item, '{LNG_Detail}&nbsp;<img src='.WEB_URL.'language/'.$item.'.gif alt='.$item.'>');
+                $tab->add('detail_'.$item, '{LNG_Detail}&nbsp;<img src='.WEB_URL.'language/'.$item.'.gif alt='.$item.'>', '', '_self');
             }
-            $tab->add('options', '{LNG_Other details}');
+            $tab->add('options', '{LNG_Other details}', '', '_self');
             $header->appendChild($tab->render());
             if (!$index) {
                 $section->appendChild('<aside class=error>{LNG_Can not be performed this request. Because they do not find the information you need or you are not allowed}</aside>');
