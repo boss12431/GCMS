@@ -60,12 +60,13 @@ class View extends \Gcms\Adminview
             'onRow' => array($this, 'onRow'),
             /* คอลัมน์ที่ไม่ต้องแสดงผล */
             'hideColumns' => array('id', 'index_id', 'level', 'menu_url', 'ilanguage', 'parent', 'menu_order'),
+            /* ไม่แสดง checkbox */
+            'hideCheckbox' => true,
             /* enable drag row */
             'dragColumn' => 4,
             /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
             'action' => 'index.php/index/model/menus/action',
             'actionCallback' => 'dataTableActionCallback',
-            'actionConfirm' => 'confirmAction',
             'actions' => array(
                 array(
                     'class' => 'button green icon-plus',

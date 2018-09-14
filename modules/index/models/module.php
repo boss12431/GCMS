@@ -159,29 +159,39 @@ class Model
      * ไม่พบคืนค่า null.
      *
      * @param object $index
+     * @param string $page  ถ้าไม่ระบุ (default null) อ่านข้อมูลหลักของโมดูล
      *
      * @return object
      */
-    public static function getDetails($index)
+    public static function getDetails($index, $page = null)
     {
-        if (!empty($index->index_id) && !empty($index->module_id)) {
-            $search = \Kotchasan\Model::createQuery()
-                ->from('index I')
-                ->join('index_detail D', 'INNER', array(array('D.id', 'I.id'), array('D.module_id', 'I.module_id'), array('D.language', 'I.language')))
-                ->where(array(
-                    array('I.id', (int) $index->index_id),
-                    array('I.module_id', (int) $index->module_id),
-                ))
-                ->cacheOn()
-                ->toArray()
-                ->first('D.detail', 'D.keywords', 'D.description');
-            if ($search) {
-                $index->detail = $search['detail'];
-                $index->keywords = $search['keywords'];
-                $index->description = $search['description'];
+        $query = \Kotchasan\Model::createQuery()
+            ->from('index I')
+            ->join('index_detail D', 'INNER', array(array('D.id', 'I.id'), array('D.module_id', 'I.module_id'), array('D.language', 'I.language')))
+            ->cacheOn()
+            ->toArray();
+        if (empty($page)) {
+            $query->where(array(
+                array('I.id', (int) $index->index_id),
+                array('I.module_id', (int) $index->module_id),
+                Sql::ISNULL('I.page'),
+            ));
+        } else {
+            $query->where(array('I.module_id', (int) $index->module_id))
+                ->andWhere(array(
+                    //array('I.id', (int) $index->index_id),
+                    array('I.page', $page),
+                ), 'OR')
+                ->order('I.page DESC');
+        }
+        $search = $query->first('D.topic', 'D.detail', 'D.keywords', 'D.description');
+        if ($search) {
+            $index->topic = $search['topic'];
+            $index->detail = $search['detail'];
+            $index->keywords = $search['keywords'];
+            $index->description = $search['description'];
 
-                return $index;
-            }
+            return $index;
         }
 
         return null;

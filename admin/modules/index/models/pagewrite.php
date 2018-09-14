@@ -53,7 +53,6 @@ class Model extends \Kotchasan\Model
                 );
             } else {
                 // แก้ไข
-                $model = new static();
                 $select = array(
                     'I.id',
                     'I.language',
@@ -68,7 +67,7 @@ class Model extends \Kotchasan\Model
                     'M.owner',
                 );
 
-                return $model->db()->createQuery()
+                return static::createQuery()
                     ->from('index I')
                     ->join('modules M', 'INNER', array(array('M.id', 'I.module_id')))
                     ->join('index_detail D', 'INNER', array(array('D.id', 'I.id'), array('D.module_id', 'I.module_id'), array('D.language', 'I.language')))
@@ -198,7 +197,7 @@ class Model extends \Kotchasan\Model
                             }
                             $index_save['member_id'] = $login['id'];
                             $index_save['create_date'] = $index_save['last_update'];
-                            $index_save['index'] = '1';
+                            $index_save['index'] = 1;
                             $index_save['module_id'] = $module_id;
                             $index_id = $model->db()->insert($table_index, $index_save);
                             $detail_save['id'] = $index_id;

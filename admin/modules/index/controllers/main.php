@@ -54,7 +54,7 @@ class Controller extends \Gcms\Controller
         }
         // ตรวจสอบหน้าที่เรียก
         if (is_file(APP_PATH.'modules/'.$owner.'/controllers/'.$module.'.php')) {
-            // หน้าที่เรียก (Admin)
+            // โหลดคลาส ถ้าพบโมดูลที่เรียก
             include APP_PATH.'modules/'.$owner.'/controllers/'.$module.'.php';
 
             return ucfirst($owner).'\\'.ucfirst($module).'\Controller';

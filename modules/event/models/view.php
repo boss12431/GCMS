@@ -2,10 +2,10 @@
 /**
  * @filesource event/models/view.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Event\View;
@@ -40,9 +40,9 @@ class Model extends \Kotchasan\Model
             'D.keywords',
             'D.detail',
             Sql::DATE('D.begin_date', 'begin_date'),
-            Sql::DATE_FORMAT('D.begin_date', '%h:%i', 'from'),
+            Sql::DATE_FORMAT('D.begin_date', '%H:%i', 'from'),
             Sql::DATE('D.end_date', 'end_date'),
-            Sql::DATE_FORMAT('D.end_date', '%h:%i', 'to'),
+            Sql::DATE_FORMAT('D.end_date', '%H:%i', 'to'),
             'U.name',
             'U.email',
             'U.status',

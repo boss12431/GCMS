@@ -1,15 +1,19 @@
 <?php
 /**
  * @filesource Widgets/Calendar/Controllers/Index.php
- * @link http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Widgets\Calendar\Controllers;
 
+use Gcms\Gcms;
+
 /**
- * Controller หลัก สำหรับแสดงผล Widget
+ * Controller หลัก สำหรับแสดงผล Widget.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -17,19 +21,27 @@ namespace Widgets\Calendar\Controllers;
  */
 class Index extends \Kotchasan\Controller
 {
+    /**
+     * แสดงผล Widget.
+     *
+     * @param array $query_string ข้อมูลที่ส่งมาจากการเรียก Widget
+     *
+     * @return string
+     */
+    public function get($query_string)
+    {
+        if (!empty(Gcms::$module) && !empty($query_string['module']) && $index = Gcms::$module->findByModule($query_string['module'])) {
+            $module = $index->module;
+            $owner = $index->owner;
+        } else {
+            $module = '';
+            $owner = 'document';
+        }
+        $calendar = array(
+            '<div id=widget-calendar></div>',
+            '<script>initWidgetCalendar("widget-calendar", "'.$owner.'", "'.$module.'");</script>',
+        );
 
-  /**
-   * แสดงผล Widget
-   *
-   * @param array $query_string ข้อมูลที่ส่งมาจากการเรียก Widget
-   * @return string
-   */
-  public function get($query_string)
-  {
-    $calendar = array(
-      '<div id=widget-calendar></div>',
-      '<script>widgetsCalendarInit("widget-calendar", true);</script>'
-    );
-    return implode('', $calendar);
-  }
+        return implode('', $calendar);
+    }
 }

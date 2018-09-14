@@ -42,7 +42,7 @@ class Controller extends \Kotchasan\Controller
                 }
             }
             if ($can_upload) {
-                Gcms::$member_tabs['edocument'] = array('E-Document', 'Edocument\Member\View');
+                Gcms::$member_tabs['edocument'] = array('E-Document', 'Edocument\Member\View', 'icon-edocument');
                 Gcms::$member_tabs['edocumentwrite'] = array(null, 'Edocument\Write\View');
                 Gcms::$member_tabs['edocumentreport'] = array(null, 'Edocument\Report\View');
             }

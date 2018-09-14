@@ -2,10 +2,10 @@
 /**
  * @filesource event/models/day.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Event\Day;
@@ -40,9 +40,9 @@ class Model extends \Kotchasan\Model
                 'topic',
                 'description',
                 Sql::DATE('begin_date', 'begin_date'),
-                Sql::DATE_FORMAT('begin_date', '%h:%i', 'from'),
+                Sql::DATE_FORMAT('begin_date', '%H:%i', 'from'),
                 Sql::DATE('end_date', 'end_date'),
-                Sql::DATE_FORMAT('end_date', '%h:%i', 'to'),
+                Sql::DATE_FORMAT('end_date', '%H:%i', 'to'),
             );
             $model = new static();
             $index->items = $model->db()->createQuery()

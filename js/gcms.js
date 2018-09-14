@@ -94,7 +94,7 @@ function initIndex(id) {
     });
     forEach(content.getElementsByClassName("copytoclipboard"), function() {
       callClick(this, function() {
-        var element = this.parentNode;
+        var element = this.nextSibling;
         if (document.selection) {
           var range = document.body.createTextRange();
           range.moveToElementText(element);

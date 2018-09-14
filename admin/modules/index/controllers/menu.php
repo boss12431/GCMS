@@ -14,7 +14,7 @@ use Gcms\Gcms;
 use Gcms\Login;
 
 /**
- * คลาสสำหรับโหลดรายการเมนูของแอดมิน.
+ * คลาสสำหรับโหลดรายการเมนู.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -23,7 +23,7 @@ use Gcms\Login;
 class Controller
 {
     /**
-     * รายการเมนู (Backend).
+     * รายการเมนู.
      *
      * @var array
      */
@@ -81,6 +81,7 @@ class Controller
         $menus['index']['pages'] = '<a href="index.php?module=pages"><span>{LNG_Web pages}</span></a>';
         $menus['index']['insmod'] = '<a href="index.php?module=mods"><span>{LNG_Installed module}</span></a>';
         $menus['index']['menu'] = '<a href="index.php?module=menus"><span>{LNG_Menus}</span></a>';
+        $menus['index']['modulepages'] = '<a href="index.php?module=modulepages"><span>{LNG_Module page}</span></a>';
         // เมนูสมาชิก
         $menus['users']['memberstatus'] = '<a href="index.php?module=memberstatus"><span>{LNG_Member status}</span></a>';
         $menus['users']['member'] = '<a href="index.php?module=member"><span>{LNG_Member list}</span></a>';

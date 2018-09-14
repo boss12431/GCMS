@@ -2,15 +2,17 @@
 /**
  * @filesource event/models/calendar.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Event\Calendar;
 
 use Kotchasan\Database\Sql;
+use Kotchasan\Date;
+use Kotchasan\Http\Request;
 
 /**
  * ปฎิทิน.
@@ -26,13 +28,13 @@ class Model extends \Kotchasan\Model
      *
      * @param int $year
      * @param int $month
+     *
+     * @return array
      */
     public static function get($year, $month)
     {
-        $model = new static();
-
-        return $model->db()->createQuery()
-            ->select('D.id', 'D.topic', 'M.module', 'D.color', Sql::DAY('D.begin_date', 'd'))
+        return static::createQuery()
+            ->select('D.id', 'D.topic', 'M.module', 'D.color', Sql::DATE('D.begin_date', 'begin_date'))
             ->from('event D')
             ->join('modules M', 'INNER', array('M.id', 'D.module_id'))
             ->where(array(
@@ -48,14 +50,38 @@ class Model extends \Kotchasan\Model
      * URL ของปฏิทิน.
      *
      * @param string $module
-     * @param int    $year
-     * @param int    $month
-     * @param int    $day
+     * @param string $date
      *
      * @return string
      */
-    public static function getUri($module, $year, $month, $day)
+    public static function getUri($module, $date)
     {
-        return WEB_URL."index.php?module=$module&d=$year-$month-$day";
+        return WEB_URL.'index.php?module='.$module.'&d='.$date;
+    }
+
+    /**
+     * อ่านข้อมูลปฏิทินจากเดือนและปีที่ส่งมา.
+     *
+     * @param Request $request
+     *
+     * @return JSON
+     */
+    public function toJSON(Request $request)
+    {
+        // session, referer
+        if ($request->initSession() && $request->isReferer()) {
+            $datas = static::get($request->post('year')->toInt(), $request->post('month')->toInt());
+            $events = array();
+            foreach ($datas as $item) {
+                $events[] = array(
+                    'title' => $item->topic,
+                    'start' => $item->begin_date,
+                    'color' => $item->color,
+                    'url' => WEB_URL.'index.php?module='.$item->module.'&d='.$item->begin_date,
+                );
+            }
+
+            echo json_encode($events);
+        }
     }
 }

@@ -653,9 +653,6 @@ caption {
   background-color: #f9f9f9;
   border-bottom: 1px solid #ddd;
 }
-form .item {
-  margin: 0 10px 10px;
-}
 form .subitem {
   margin: -10px 10px 10px;
 }

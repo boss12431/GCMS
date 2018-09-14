@@ -39,6 +39,8 @@ class View extends \Kotchasan\KBase
         $js[] = file_get_contents(ROOT_PATH.'js/range.js');
         $js[] = file_get_contents(ROOT_PATH.'js/common.js');
         $js[] = file_get_contents(ROOT_PATH.'js/tooltip.js');
+        $js[] = file_get_contents(ROOT_PATH.'js/calendar.js');
+        $js[] = file_get_contents(ROOT_PATH.'js/gbanner.js');
         $js[] = file_get_contents(ROOT_PATH.'js/gcms.js');
         $js[] = file_get_contents(ROOT_PATH.'js/facebook.js');
         $lng = Language::name();

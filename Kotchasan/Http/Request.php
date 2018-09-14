@@ -388,7 +388,7 @@ class Request extends AbstractRequest implements \Psr\Http\Message\RequestInterf
     }
 
     /**
-     * อ่านค่าจากตัวแปร POST GET COOKIE ตามลำดับ
+     * อ่านค่าจากตัวแปร POST GET ตามลำดับ
      * คืนค่า InputItem หรือ Collection ของ InputItem.
      *
      * @param string $name    ชื่อตัวแปร
@@ -398,7 +398,7 @@ class Request extends AbstractRequest implements \Psr\Http\Message\RequestInterf
      */
     public function request($name, $default = null)
     {
-        return $this->globals(array('POST', 'GET', 'COOKIE'), $name, $default);
+        return $this->globals(array('POST', 'GET'), $name, $default);
     }
 
     /**
@@ -518,14 +518,20 @@ class Request extends AbstractRequest implements \Psr\Http\Message\RequestInterf
     /**
      * ลบ attributes.
      *
-     * @param string $name ชื่อของ attributes
+     * @param string|array $names ชื่อของ attributes ที่ต้องการลบ
      *
      * @return \static
      */
-    public function withoutAttribute($name)
+    public function withoutAttribute($names)
     {
         $clone = clone $this;
-        unset($clone->attributes[$name]);
+        if (is_array($names)) {
+            foreach ($names as $name) {
+                unset($clone->attributes[$name]);
+            }
+        } else {
+            unset($clone->attributes[$names]);
+        }
 
         return $clone;
     }

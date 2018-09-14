@@ -2,10 +2,10 @@
 /**
  * @filesource event/views/month.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Event\Month;
@@ -50,7 +50,7 @@ class View extends \Gcms\View
         $template->add(array(
             '/{TOPIC}/' => $index->topic,
             '/{DETAIL}/' => $index->detail,
-            '/{CALENDAR}/' => \Event\Calendar\Controller::render($request),
+            '/{CALENDAR}/' => '<div id="event-calendar"></div>',
             '/{MODULE}/' => $index->module,
         ));
         $index->detail = $template->render();

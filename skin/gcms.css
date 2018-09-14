@@ -44,7 +44,6 @@ a[id^="lang_"]:focus,
   border-color: #ddd;
   border-color: rgba(0, 0, 0, 0.1);
 }
-.member_section,
 .bdr_content {
   margin-left: 10px;
   margin-right: 10px;
@@ -390,6 +389,11 @@ header.list h2 select {
 .gbanner {
   position: relative;
 }
+.gbanner .slide_display {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
 .gbanner:hover .btnnav {
   color: #fff;
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7);
@@ -397,19 +401,19 @@ header.list h2 select {
 .gbanner .btnnav {
   font-size: 1.3em;
 }
-.gbanner .button_container_gbanner {
+.gbanner .button_wrapper {
   position: absolute;
   bottom: 0;
-  right: 0;
+  left: 0;
   padding: 10px;
   margin: 0;
   width: 100%;
   text-align: center;
 }
-.gbanner .button_gbanner {
+.gbanner .button_container {
   margin: 0;
 }
-.gbanner .button_gbanner > a {
+.gbanner .button_container > a {
   position: relative;
   display: inline-block;
   background-color: rgba(255, 0, 0, 0.3);
@@ -425,12 +429,31 @@ header.list h2 select {
   border-radius: 50em;
 }
 .gbanner figure {
-  overflow: hidden;
   position: relative;
   float: left;
   width: 100%;
+  height: 100%;
   margin-right: -100%;
-  list-style-type: none;
+  background-position: center;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  opacity: 0;
+  -webkit-transition: opacity 14 ease-in-out;
+  -moz-transition: opacity 2s ease-in-out;
+  -ms-transition: opacity 2s ease-in-out;
+  -o-transition: opacity 2s ease-in-out;
+  transition: opacity 2s ease-in-out;
+  background-position: center;
+  background-size: contain;
+}
+.gbanner figure.show {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+  -moz-opacity: 1;
+  -khtml-opacity: 1;
+  opacity: 1;
 }
 .gbanner figcaption {
   padding: 0.5em;
@@ -456,7 +479,7 @@ header.list h2 select {
 .gbanner a.current {
   background-color: rgba(255, 0, 0, 0.8);
 }
-.gbanner .button_gbanner > a > span {
+.gbanner .button_container > a > span {
   display: none;
   width: 50px;
   height: 50px;
@@ -467,7 +490,7 @@ header.list h2 select {
   margin-left: -25px;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
-.gbanner .button_gbanner span:after {
+.gbanner .button_container span:after {
   content: "";
   position: absolute;
   border-width: 6px;
@@ -479,7 +502,7 @@ header.list h2 select {
   margin-left: -6px;
   left: 50%;
 }
-.gbanner .button_gbanner > a:hover > span {
+.gbanner .button_container > a:hover > span {
   display: block;
   -webkit-animation: fadein 1s ease both;
   -moz-animation: fadein 1s ease both;
@@ -608,6 +631,10 @@ header.list h2 select {
 .modaldiv form {
   background-color: #fff;
   margin: 0 !important;
+}
+.modaldiv form .item {
+  margin-left: 0;
+  margin-right: 0;
 }
 .info {
   border: 1px dashed rgba(0, 0, 0, 0.1);

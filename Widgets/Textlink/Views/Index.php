@@ -88,7 +88,7 @@ class Index extends \Gcms\View
         // แสดงผล
         $id = 'textlinks_slideshow_'.$item['name'];
 
-        return '<div id='.$id.'>'.implode("\n", $textlinks).'</div><script>new GBanner("'.$id.'").playSlideShow();</script>';
+        return '<div id='.$id.'><div>'.implode("\n", $textlinks).'</div></div><script>new GBanner("'.$id.'").playSlideShow();</script>';
     }
 
     /**

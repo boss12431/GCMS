@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource modules/index/views/mods.php
+ * @filesource modules/index/views/modulepages.php
  *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
@@ -8,15 +8,13 @@
  * @see http://www.kotchasan.com/
  */
 
-namespace Index\Mods;
+namespace Index\Modulepages;
 
 use Kotchasan\DataTable;
-use Kotchasan\Date;
 use Kotchasan\Http\Request;
-use Kotchasan\Language;
 
 /**
- * แสดงรายการโมดูลที่ติดตั้งแล้ว.
+ * module=modulepages.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -25,12 +23,7 @@ use Kotchasan\Language;
 class View extends \Gcms\Adminview
 {
     /**
-     * ข้อมูลโมดูล.
-     */
-    private $publisheds;
-
-    /**
-     * module=mods.
+     * แสดงรายการ topic, description สำหรับหน้าเว็บย่อยต่างๆ.
      *
      * @param Request $request
      *
@@ -38,7 +31,6 @@ class View extends \Gcms\Adminview
      */
     public function render(Request $request)
     {
-        $this->publisheds = Language::get('PUBLISHEDS');
         // URL สำหรับส่งให้ตาราง
         $uri = $request->createUriWithGlobals(WEB_URL.'admin/index.php');
         // ตาราง
@@ -46,77 +38,59 @@ class View extends \Gcms\Adminview
             /* Uri */
             'uri' => $uri,
             /* Model */
-            'model' => 'Index\Mods\Model',
-            /* query where */
-            'defaultFilters' => array(
-                array('index', 1),
-            ),
+            'model' => \Index\Modulepages\Model::toDataTable(),
             /* เรียงลำดับ */
-            'sort' => 'owner,module,language',
+            'sort' => 'module,page,language',
+            /* รายการต่อหน้า */
+            'perPage' => $request->cookie('menupages_perPage', 30)->toInt(),
             /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
             'onRow' => array($this, 'onRow'),
             /* คอลัมน์ที่ไม่ต้องแสดงผล */
-            'hideColumns' => array('module_id', 'id', 'index'),
+            'hideColumns' => array('module_id', 'id', 'owner'),
             /* ไม่แสดง checkbox */
             'hideCheckbox' => true,
             /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
-            'action' => 'index.php/index/model/mods/action',
+            'action' => 'index.php/index/model/modulepages/action',
             'actionCallback' => 'dataTableActionCallback',
             'actions' => array(
                 array(
                     'class' => 'button green icon-plus',
-                    'href' => $uri->createBackUri(array('module' => 'addmodule', 'id' => '0')),
-                    'text' => '{LNG_Add New} {LNG_Module}',
+                    'href' => $uri->createBackUri(array('module' => 'modulepage', 'id' => '0')),
+                    'text' => '{LNG_Add New} {LNG_Module page}',
                 ),
             ),
+            /* คอลัมน์ที่สามารถค้นหาได้ */
+            'searchColumns' => array('topic', 'module', 'page'),
             /* ส่วนหัวของตาราง และการเรียงลำดับ (thead) */
             'headers' => array(
+                'module' => array(
+                    'text' => '{LNG_Module name}',
+                ),
+                'page' => array(
+                    'text' => '{LNG_Webpage}',
+                ),
                 'topic' => array(
                     'text' => '{LNG_Topic}',
                 ),
-                'published' => array(
-                    'text' => '{LNG_Status}',
-                    'class' => 'center',
+                'description' => array(
+                    'text' => '{LNG_Description}',
                 ),
                 'language' => array(
                     'text' => '{LNG_Language}',
                     'class' => 'center',
                 ),
-                'module' => array(
-                    'text' => '{LNG_Module name}',
-                ),
-                'owner' => array(
-                    'text' => '&nbsp;',
-                ),
-                'last_update' => array(
-                    'text' => '{LNG_Last updated}',
-                    'class' => 'center',
-                ),
-                'visited' => array(
-                    'text' => '{LNG_Preview}',
-                    'class' => 'center',
-                ),
             ),
             /* รูปแบบการแสดงผลของคอลัมน์ (tbody) */
             'cols' => array(
-                'published' => array(
-                    'class' => 'center',
-                ),
                 'language' => array(
                     'class' => 'center',
-                ),
-                'last_update' => array(
-                    'class' => 'center',
-                ),
-                'visited' => array(
-                    'class' => 'visited',
                 ),
             ),
             /* ปุ่มแสดงในแต่ละแถว */
             'buttons' => array(
                 'edit' => array(
                     'class' => 'icon-edit button green',
-                    'href' => $uri->createBackUri(array('module' => 'pagewrite', 'id' => ':id')),
+                    'href' => $uri->createBackUri(array('module' => 'modulepage', 'id' => ':id')),
                     'text' => '{LNG_Edit}',
                 ),
                 'delete' => array(
@@ -126,6 +100,8 @@ class View extends \Gcms\Adminview
                 ),
             ),
         ));
+        // save cookie
+        setcookie('menupages_perPage', $table->perPage, time() + 2592000, '/', null, null, true);
 
         return $table->render();
     }
@@ -141,9 +117,7 @@ class View extends \Gcms\Adminview
      */
     public function onRow($item, $o, $prop)
     {
-        $item['last_update'] = Date::format($item['last_update'], 'd M Y H:i');
         $item['language'] = empty($item['language']) ? '' : '<img src="'.WEB_URL.'language/'.$item['language'].'.gif" alt="'.$item['language'].'">';
-        $item['published'] = '<a id=published_'.$item['id'].' class="icon-published'.$item['published'].'" title="'.$this->publisheds[$item['published']].'"></a>';
 
         return $item;
     }

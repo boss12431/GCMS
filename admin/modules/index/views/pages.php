@@ -59,10 +59,11 @@ class View extends \Gcms\Adminview
             'onRow' => array($this, 'onRow'),
             /* คอลัมน์ที่ไม่ต้องแสดงผล */
             'hideColumns' => array('module_id', 'id', 'owner'),
+            /* ไม่แสดง checkbox */
+            'hideCheckbox' => true,
             /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
             'action' => 'index.php/index/model/pages/action',
             'actionCallback' => 'dataTableActionCallback',
-            'actionConfirm' => 'confirmAction',
             'actions' => array(
                 array(
                     'class' => 'button green icon-plus',

@@ -14,7 +14,7 @@ use Kotchasan\Language;
 use Kotchasan\Template;
 
 /**
- * หน้า Error.
+ * Error Controller ถ้าไม่สามารถทำรายการได้.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *

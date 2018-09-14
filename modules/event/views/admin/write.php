@@ -2,10 +2,10 @@
 /**
  * @filesource event/views/admin/write.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Event\Admin\Write;
@@ -114,7 +114,7 @@ class View extends \Gcms\Adminview
             'labelClass' => 'g-input icon-file',
             'itemClass' => 'item',
             'label' => '{LNG_Description}',
-            'comment' => '{LNG_Text short summary of your story. Which can be used to show in your theme. (If not the program will fill in the contents of the first paragraph)}',
+            'comment' => '{LNG_Text short summary of your story. Which can be used to show in your theme.} ({LNG_If not, Program will fill in the contents of the first paragraph})',
             'value' => isset($index->description) ? $index->description : '',
         ));
         // detail

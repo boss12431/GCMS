@@ -445,6 +445,28 @@ class Uri extends \Kotchasan\KBase implements \Psr\Http\Message\UriInterface
     }
 
     /**
+     * ฟังก์ลบ Query params ออกจาก URL.
+     *
+     * @param string|array $names  ชื่อของ attributes ที่ต้องการลบ
+     * @param bool         $encode false (default) เชื่อม Querystring ด้วย &, true เชื่อม Querystring ด้วย &amp;
+     *
+     * @return \static
+     */
+    public function withoutParams($names, $encode = false)
+    {
+        $attributes = $this->parseQueryParams($this->query);
+        if (is_array($names)) {
+            foreach ($names as $name) {
+                unset($attributes[$name]);
+            }
+        } else {
+            unset($attributes[$names]);
+        }
+
+        return $this->withQuery($this->paramsToQuery($attributes, $encode));
+    }
+
+    /**
      * กำหนดชื่อ path
      * path ต้องเริ่มต้นด้วย / เช่น /kotchasan
      * หรือเป็นค่าว่าง ถ้าเป็นรากของโดเมน

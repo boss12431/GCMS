@@ -2,10 +2,10 @@
 /**
  * @filesource event/controllers/index.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Event\Index;
@@ -31,24 +31,30 @@ class Controller extends \Kotchasan\Controller
      */
     public function init(Request $request, $index)
     {
+        if ($request->request('id')->exists()) {
+            // แสดงรายการที่เลือก
+            $className = 'Event\View\View';
+            $_page = '';
+        } elseif ($request->request('d')->exists()) {
+            // แสดง event รายวัน
+            $className = 'Event\Day\View';
+            $_page = 'day';
+        } else {
+            // แสดง event รายเดือน
+            $className = 'Event\Month\View';
+            $_page = '';
+        }
+
         // ตรวจสอบโมดูลและอ่านข้อมูลโมดูล
-        $index = \Index\Module\Model::getDetails($index);
+        $index = \Index\Module\Model::getDetails($index, $_page);
         if ($index && MAIN_INIT === 'indexhtml') {
-            if ($request->request('id')->exists()) {
-                // แสดงรายการที่เลือก
-                $page = createClass('Event\View\View')->index($request, $index);
-            } elseif ($request->request('d')->exists()) {
-                // แสดง event รายวัน
-                $page = createClass('Event\Day\View')->index($request, $index);
-            } else {
-                // แสดง event รายเดือน
-                $page = createClass('Event\Month\View')->index($request, $index);
-            }
+            $page = createClass($className)->index($request, $index);
         }
         if ($page) {
             return $page;
         }
         // 404
+
         return createClass('Index\Error\Controller')->init('event');
     }
 }

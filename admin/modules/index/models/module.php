@@ -65,10 +65,8 @@ class Model
      */
     private function getModules()
     {
-        // model
-        $model = new \Kotchasan\Model();
         // โหลดโมดูลที่ติดตั้ง เรียงตามลำดับโฟลเดอร์
-        $query = $model->db()->createQuery()
+        $query = \Kotchasan\Model::createQuery()
             ->select('id', 'module', 'owner', 'config')
             ->from('modules')
             ->where(array('owner', '!=', 'index'))

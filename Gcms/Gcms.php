@@ -381,7 +381,7 @@ class Gcms extends \Kotchasan\KBase
         $patt[] = '/\[\/quote\]/i';
         $replace[] = '</blockquote>';
         $patt[] = '/\[code(=([a-z]{1,}))?\](.*?)\[\/code\]/is';
-        $replace[] = $canview ? '<code class="content-code \\2">\\3<a class="copytoclipboard notext" title="'.Language::get('copy to clipboard').'"><span class="icon-copy"></span></a></code>' : '<code class="content-code">'.Language::get('Can not view this content').'</code>';
+        $replace[] = $canview ? '<code><a class="copytoclipboard notext" title="'.Language::get('copy to clipboard').'"><span class="icon-copy"></span></a><div class="content-code \\2">\\3</div></code>' : '<code class="content-code">'.Language::get('Can not view this content').'</code>';
         $patt[] = '/\[search\](.*)\[\/search\]/iU';
         $replace[] = '<a href="'.WEB_URL.'index.php?module=search&amp;q=\\1">\\1</a>';
         $patt[] = '/\[google\](.*?)\[\/google\]/iU';

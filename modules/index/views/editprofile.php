@@ -55,8 +55,9 @@ class View extends \Gcms\View
                     $tabs = array();
                     foreach (Gcms::$member_tabs as $key => $values) {
                         if (!empty($values[0])) {
+                            $title = Language::get($values[0]);
                             $class = 'tab '.$key.($key == $index->tab ? ' select' : '');
-                            $tabs[] = '<li class="'.$class.'"><a href="{WEBURL}index.php?module=editprofile&amp;tab='.$key.'">'.Language::get($values[0]).'</a></li>';
+                            $tabs[] = '<li class="'.$class.'"><a'.(isset($values[2]) ? ' class='.$values[2] : '').' title="'.$title.'" href="{WEBURL}index.php?module=editprofile&amp;tab='.$key.'"><span>'.$title.'</span></a></li>';
                         }
                     }
                     $template->add(array(

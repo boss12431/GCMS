@@ -85,7 +85,7 @@ class View extends \Gcms\Adminview
                 'labelClass' => 'g-input icon-file',
                 'itemClass' => 'item',
                 'label' => '{LNG_Description}',
-                'comment' => '{LNG_Text short summary of your story. Which can be used to show in your theme. (If not the program will fill in the contents of the first paragraph)}',
+                'comment' => '{LNG_Text short summary of your story. Which can be used to show in your theme.} ({LNG_If not, Program will fill in the contents of the first paragraph})',
                 'value' => $details->description,
             ));
             // detail

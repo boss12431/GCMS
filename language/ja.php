@@ -1,4 +1,5 @@
 <?php
+
 /* language/ja.php */
 return array(
   ':username passwords' => ':usernameのパスワード',
@@ -57,11 +58,11 @@ return array(
   'Board' => 'ニュース',
   'BOARD_NOTIFICATIONS' => array(
     1 => '新しい投稿',
-    2 => '新しいコメント'
+    2 => '新しいコメント',
   ),
   'BOOLEANS' => array(
     0 => '無',
-    1 => '有'
+    1 => '有',
   ),
   'Border color' => '枠線の色',
   'Brief details about the file. (Page may be downloaded).' => 'ファイルの説明を記入して下さい（ダウンロードのページに表示）',
@@ -128,7 +129,7 @@ return array(
   'CURRENCY_UNITS' => array(
     'THB' => 'バーツ',
     'USD' => 'ドル',
-    'JPY' => '円'
+    'JPY' => '円',
   ),
   'Customize the layout of the site' => 'サイトのレイアウトをカスタマイズ',
   'Dashboard' => 'ダッシュボード',
@@ -145,7 +146,7 @@ return array(
     3 => '水曜日',
     4 => '木曜日',
     5 => '金曜日',
-    6 => '土曜日'
+    6 => '土曜日',
   ),
   'DATE_SHORT' => array(
     0 => '日',
@@ -154,7 +155,7 @@ return array(
     3 => '水',
     4 => '木',
     5 => '金',
-    6 => '土'
+    6 => '土',
   ),
   'Dateless' => '無期限',
   'days' => '日',
@@ -187,14 +188,14 @@ return array(
   'DOCUMENT_NOTIFICATIONS' => array(
     1 => '新しい記事を書く',
     2 => '記事を編集する',
-    3 => '新しいコメント'
+    3 => '新しいコメント',
   ),
   'Download' => 'ダウンロード',
   'Download Details' => 'ダウンロードの詳細',
   'Download file' => 'ファイルのダウンロード',
   'DOWNLOAD_ACTIONS' => array(
     0 => 'Download',
-    1 => 'Open file (know file type)'
+    1 => 'Open file (know file type)',
   ),
   'Drag and drop to reorder' => 'ドラッグ＆ドロップで並べ替え',
   'E-Document' => '電子文書',
@@ -272,7 +273,7 @@ return array(
   'Images or flash files on the website header (header) accepted jpg gif png files and swf' => 'サイトのヘッダ（header）に掲載できる画像とフラッシュの種類はjpg、gif、pngとswfです',
   'IMG_LAW' => array(
     0 => 'アップロードは任意とする',
-    1 => 'アップロードを必須とする（確認する）'
+    1 => 'アップロードを必須とする（確認する）',
   ),
   'Import' => 'インポート',
   'Import data from databases or to recover data from a previously backed up' => 'バックアップからリカバリするか、データベースをインポートする',
@@ -312,11 +313,11 @@ return array(
   'LOGIN_ACTIONS' => array(
     0 => '何もしない（Ajaxログイン使用）',
     1 => 'ページをリロードする',
-    2 => '前のページに戻る'
+    2 => '前のページに戻る',
   ),
   'LOGIN_FIELDS' => array(
     'email' => 'メール',
-    'phone1' => '電話'
+    'phone1' => '電話',
   ),
   'Logo' => 'ロゴ',
   'Logout successful' => 'ログアウトしました',
@@ -327,7 +328,7 @@ return array(
   'Mail server settings' => 'メールサーバーの設定',
   'MAIL_PROGRAMS' => array(
     0 => 'PHPで送信',
-    1 => 'PHPMailer（推奨）'
+    1 => 'PHPMailer（推奨）',
   ),
   'Mailbox' => 'メールボックス',
   'Maintenance mode' => 'メンテナンスモード',
@@ -336,7 +337,7 @@ return array(
   'Member status' => 'メンバーのステータス',
   'MEMBER_ONLY_LIST' => array(
     0 => 'システムの警告を表示（デフォルト）',
-    1 => 'コード（[code]..[/code]）を除いてコンテンツを表示'
+    1 => 'コード（[code]..[/code]）を除いてコンテンツを表示',
   ),
   'Members of this group can create or edit' => 'このグループのメンバーは、コンテンツを作成することができます',
   'Members of this group can download file' => 'このグループのメンバーは、ファイルをダウンロードすることができます',
@@ -358,28 +359,28 @@ return array(
   'MENU_ACTIONS' => array(
     0 => '何も実行しない（メニュー及びサブメニューを含む）',
     1 => '追加モジュールを開く',
-    2 => 'カスタムURLを開く'
+    2 => 'カスタムURLを開く',
   ),
   'MENU_PARENTS' => array(
     'MAINMENU' => 'メインメニュー',
     'SIDEMENU' => 'サイドメニュー',
-    'BOTTOMMENU' => 'ボトムメニュー'
+    'BOTTOMMENU' => 'ボトムメニュー',
   ),
   'MENU_PUBLISHEDS' => array(
     0 => '表示しない',
     1 => '表示する',
     2 => 'ログイン後に表示',
-    3 => 'ログイン前に表示'
+    3 => 'ログイン前に表示',
   ),
   'MENU_TARGET' => array(
     '' => '同じウィンドウに開く（デフォルト）',
-    '_blank' => '新規ウィンドウで開く（_blank）'
+    '_blank' => '新規ウィンドウで開く（_blank）',
   ),
   'MENU_TYPES' => array(
     0 => '最初のメニュー（トップページなど）',
     1 => 'メニュー第一階層',
     2 => 'サブメニュー第一階層',
-    3 => 'サブメニュー第二階層'
+    3 => 'サブメニュー第二階層',
   ),
   'Menus' => 'メニュー',
   'message' => 'メッセージ',
@@ -405,7 +406,7 @@ return array(
     9 => '9月',
     10 => '10月',
     11 => '11月',
-    12 => '12月'
+    12 => '12月',
   ),
   'MONTH_SHORT' => array(
     1 => '1',
@@ -419,7 +420,7 @@ return array(
     9 => '9',
     10 => '10',
     11 => '11',
-    12 => '12'
+    12 => '12',
   ),
   'monthly' => '月間',
   'Monthly Report' => '月間レポート',
@@ -462,7 +463,7 @@ return array(
   'People visit the site' => '訪問者数',
   'Permission' => '許可',
   'PERMISSIONS' => array(
-    'can_config' => 'システムを設定することができます'
+    'can_config' => 'システムを設定することができます',
   ),
   'Personal information' => '個人情報',
   'Personnel' => 'グループ',
@@ -498,7 +499,7 @@ return array(
   'Published date' => '掲載日',
   'PUBLISHEDS' => array(
     0 => '掲載しません',
-    1 => '掲載します'
+    1 => '掲載します',
   ),
   'Quotations by :name' => ':name曰く',
   'Quote' => '引用',
@@ -517,7 +518,7 @@ return array(
   'Replace' => '置換',
   'REPLIES' => array(
     0 => 'コメントを拒否する',
-    1 => 'コメントを許可する'
+    1 => 'コメントを許可する',
   ),
   'Request new password' => 'パスワードの再発行',
   'restore to default' => 'デフォルトに戻す',
@@ -573,12 +574,12 @@ return array(
   'Sex' => '性別',
   'SEXES' => array(
     'f' => '女',
-    'm' => '男'
+    'm' => '男',
   ),
   'Short description about your website' => 'サイトに関する説明を入力して下さい',
   'Show' => '表示',
   'SHOW_NEWS' => array(
-    'news' => 'ニュース'
+    'news' => 'ニュース',
   ),
   'Showing page' => '表示ページ',
   'Sign in' => 'ログイン',
@@ -596,7 +597,7 @@ return array(
   'Small header' => '小さいヘッダ',
   'SMTPSECURIES' => array(
     '' => '通常接続',
-    'ssl' => '安全な接続（SSL）'
+    'ssl' => '安全な接続（SSL）',
   ),
   'Some files cannot be deleted' => 'いくつかのファイルが削除できませんでした',
   'Sorry' => '申し訳ありません',
@@ -632,7 +633,7 @@ return array(
   'Text displayed on the menu' => 'メニューに表示するテキストを入力して下さい',
   'Text displayed on the Title Bar of the browser (3 - 255 characters)' => 'ブラウザのタイトルバーに表示するテキストを3〜255文字で入力して下さい',
   'Text keywords for SEO or Search Engine to search' => '検索エンジンまたはSEOに適したキーワードを入力して下さい',
-  'Text short summary of your story. Which can be used to show in your theme. (If not the program will fill in the contents of the first paragraph)' => '本文の要約を記入して下さい。空欄の場合は本文の最初の段落が補填されます',
+  'Text short summary of your story. Which can be used to show in your theme. ({LNG_If not, Program will fill in the contents of the first paragraph})' => '本文の要約を記入して下さい。空欄の場合は本文の最初の段落が補填されます',
   'Text size' => '文字の大きさ',
   'TEXTLINK_TYPIES' => array(
     'custom' => 'Adsense風のカスタムコード',
@@ -640,7 +641,7 @@ return array(
     'menu' => 'メニュー風のリンクテキスト',
     'image' => '単独表示型のバナー画像',
     'banner' => '複数ループ型のバナー画像',
-    'slideshow' => 'スライドショー型のバナー画像'
+    'slideshow' => 'スライドショー型のバナー画像',
   ),
   'Thank you for your comment' => 'コメントありがとうございました',
   'Thank you for your post' => '投稿ありがとうございました',
@@ -685,7 +686,7 @@ return array(
   'Thumbnail' => 'サムネイル',
   'THUMBNAILS' => array(
     0 => 'サムネイルなし',
-    1 => 'サムネイルあり'
+    1 => 'サムネイルあり',
   ),
   'Time' => '時間',
   'Time zone' => '時間帯',
@@ -735,7 +736,7 @@ return array(
   'Use this template' => '使用する',
   'USE_AJAX_LIST' => array(
     0 => '部分的にAjaxを使用する（一般的なサイトと同等）',
-    1 => 'サイト全体でAjaxを使用する'
+    1 => 'サイト全体でAjaxを使用する',
   ),
   'Used for the URL of the web page (SEO) can use letters, numbers and _ only can not have duplicate names.' => '小文字の半角英数字とアンダーバー（_）を使用し、重複しないように入力して下さい',
   'Used to group similar contents' => '類似のコンテンツをグループ化するために使用',
@@ -789,5 +790,5 @@ return array(
   'Your post is already exists. You do not need to post this.' => '同じ内容が投稿されています。重複書き込みはご遠慮下さい。',
   'Your site&#039;s URL (include http://)' => 'サイトのURL（http://を含む）',
   'Your Workplace' => '会社名などを記入して下さい',
-  'Zipcode' => '郵便番号'
+  'Zipcode' => '郵便番号',
 );

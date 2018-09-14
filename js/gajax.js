@@ -1,5 +1,5 @@
 /**
- * Javascript Libraly for Kotchasan Framework
+ * Javascript Library for Kotchasan Framework
  *
  * @filesource js/gajax.js
  * @link http://www.kotchasan.com/
@@ -22,7 +22,8 @@ window.$K = (function() {
     init: function(element) {
       forEach(element.querySelectorAll("input,textarea"), function(elem) {
         var tagName = $G(elem).tagName.toLowerCase(),
-          type = elem.type ? elem.type.toLowerCase() : "";
+          type = elem.get("type"),
+          type = type ? type.toLowerCase() : "";
         if (
           elem.initObj !== true &&
           (tagName == "textarea" ||
@@ -345,6 +346,21 @@ window.$K = (function() {
       return val;
     }
   };
+  window.debug = function(val) {
+    var p = document.createElement("p"),
+      div = $E("gdebug");
+    if (!div) {
+      div = document.createElement("div");
+      div.id = "gdebug";
+      document.body.appendChild(div);
+      div.style.cssText =
+        "left:0;bottom:0;width:100%;height:100px;color:#F00;background-color:#FFF;position:fixed;line-height:1;padding:10px;overflow:auto;";
+    }
+    p.style.cssText = "margin:0;";
+    p.innerText = val;
+    div.appendChild(p);
+    div.scrollTop = div.scrollHeight;
+  };
   Function.prototype.bind = function(o) {
     var __method = this;
     return function() {
@@ -377,6 +393,8 @@ window.$K = (function() {
         return (this.getMonth() + 1).toString().leftPad(2, "0");
       case "M":
         return Date.monthNames[this.getMonth()];
+      case "F":
+        return Date.longMonthNames[this.getMonth()];
       case "H":
         return this.getHours()
           .toString()
@@ -453,13 +471,13 @@ window.$K = (function() {
       month = d.getMonth();
       year = d.getFullYear();
     }
-    var dateStr = this.getDate();
-    var monthStr = this.getMonth();
-    var yearStr = this.getFullYear();
-    var theYear = yearStr - year;
-    var theMonth = monthStr - month;
-    var theDate = dateStr - date;
-    var days = "";
+    var dateStr = this.getDate(),
+      monthStr = this.getMonth(),
+      yearStr = this.getFullYear(),
+      theYear = yearStr - year,
+      theMonth = monthStr - month,
+      theDate = dateStr - date,
+      days = 0;
     if (
       monthStr == 0 ||
       monthStr == 2 ||
@@ -502,11 +520,12 @@ window.$K = (function() {
     } else if (date == dateStr) {
       inDays = 0;
     }
-    var result = ["day", "month", "year"];
-    result.day = inDays;
-    result.month = inMonths;
-    result.year = inYears;
-    return result;
+    return {
+      day: inDays,
+      month: inMonths,
+      year: inYears,
+      days: Math.round((this - d) / 86400000)
+    };
   };
   Date.monthNames = [
     "Jan.",
@@ -555,7 +574,8 @@ window.$K = (function() {
       .replace(/\\/g, "&#92;")
       .replace(/&/g, "&amp;")
       .replace(/\{/g, "&#x007B;")
-      .replace(/\}/g, "&#x007D;");
+      .replace(/\}/g, "&#x007D;")
+      .replace(/\//g, "&#47;");
   };
   String.prototype.unentityify = function() {
     return this.replace(/&lt;/g, "<")
@@ -565,7 +585,8 @@ window.$K = (function() {
       .replace(/&#92;/g, "\\")
       .replace(/&amp;/g, "&")
       .replace(/&#x007B;/g, "{")
-      .replace(/&#x007D;/g, "}");
+      .replace(/&#x007D;/g, "}")
+      .replace(/&#47;/g, "/");
   };
   String.prototype.toJSON = function() {
     try {
@@ -1129,7 +1150,7 @@ window.$K = (function() {
     },
     center: function() {
       var size = this.getDimensions();
-      if (this.style.position == "fixed") {
+      if (this.getStyle("position") == "fixed") {
         this.style.top =
           (document.viewport.getHeight() - size.height) / 2 + "px";
         this.style.left =
@@ -2144,9 +2165,6 @@ window.$K = (function() {
       if (!$E(container_div)) {
         var div = doc.createElement("div");
         div.id = container_div;
-        div.style.left = "-1000px";
-        div.style.top = "-1000px";
-        div.style.position = "absolute";
         doc.body.appendChild(div);
         var c = doc.createElement("div");
         div.appendChild(c);
@@ -2161,51 +2179,41 @@ window.$K = (function() {
       }
       this.div = $G(container_div);
       this.body = $G(this.div.firstChild);
-      this.body.style.overflow = "auto";
     },
     content: function() {
       return this.body;
     },
-    show: function(value) {
-      this.body.style.height = "auto";
-      this.body.style.width = "auto";
+    show: function(value, className) {
       this.body.setHTML(value);
       this.overlay();
-      this.div.style.display = "block";
+      if (className) {
+        this.div.className = className + " show";
+      } else {
+        this.div.className = "show";
+      }
       var self = this;
       window.setTimeout(function() {
-        var dm = self.body.getDimensions();
-        var hOffset =
-          dm.height -
-          self.body.getClientHeight() +
-          parseInt(self.body.getStyle("marginTop")) +
-          parseInt(self.body.getStyle("marginBottom")) +
-          40;
-        var wOffset =
-          dm.width -
-          self.body.getClientWidth() +
-          parseInt(self.body.getStyle("marginLeft")) +
-          parseInt(self.body.getStyle("marginRight")) +
-          20;
-        var h = document.viewport.getHeight() - hOffset;
+        var dm = self.body.getDimensions(),
+          hOffset =
+            dm.height -
+            self.body.getClientHeight() +
+            parseInt(self.body.getStyle("marginTop")) +
+            parseInt(self.body.getStyle("marginBottom")) +
+            40,
+          h = document.viewport.getHeight() - hOffset;
         if (dm.height > h) {
-          self.body.style.height = h + "px";
+          self.div.style.height = h + "px";
         }
-        var w = document.viewport.getWidth() - wOffset;
-        if (dm.width > w) {
-          self.body.style.width = w + "px";
-        }
-        self.div.style.zIndex = 1000;
-        var size = self.div.getDimensions();
-        self.div.style.width = size.width + "px";
         self.div.center();
-        self.div.fadeIn();
       }, 1);
       return this;
     },
     hide: function() {
+      this.div.style.height = null;
+      this.div.style.width = null;
+      this.div.style.top = "-100%";
+      this.div.className = "";
       var self = this;
-      this.div.fadeOut();
       this.iframe.fadeOut(function() {
         self._hide.call(self);
       });
@@ -2241,9 +2249,7 @@ window.$K = (function() {
       return this;
     },
     _hide: function() {
-      this.div.style.width = "auto";
       this.iframe.style.display = "none";
-      this.div.style.display = "none";
       this.body.innerHTML = "";
       if (Object.isFunction(this.onclose)) {
         this.onclose.call(this);
@@ -2936,6 +2942,7 @@ window.$K = (function() {
           self.mouse_click = true;
           self.input.focus();
           GEvent.stop(e);
+          return false;
         });
       });
       var vpo = this.input.viewportOffset(),
@@ -3069,9 +3076,11 @@ window.$K = (function() {
         this.panel.style.display = "none";
         this.panel.style.zIndex = 1001;
         this.input.readOnly = true;
-        this.input.addEvent("click", function() {
+        this.input.addEvent("click", function(e) {
           self.input.select();
           self._draw();
+          GEvent.stop(e);
+          return false;
         });
         $G(document.body).addEvent("click", function(e) {
           if (!$G(GEvent.element(e)).hasClass("ginput")) {
@@ -3203,6 +3212,7 @@ window.$K = (function() {
       this.display = document.createElement("div");
       this.input.appendChild(this.display);
       this.input.tabIndex = 0;
+      this.input.style.cursor = "pointer";
       this.hidden_value = null;
       this.mdate = null;
       this.xdate = null;
@@ -3220,10 +3230,12 @@ window.$K = (function() {
       this.calendar.style.display = "none";
       this.calendar.style.zIndex = 1001;
       var self = this;
-      this.input.addEvent("click", function() {
+      this.input.addEvent("click", function(e) {
         self.mode = 0;
         self.cdate.setTime(self.date ? self.date.valueOf() : new Date());
         self._draw();
+        GEvent.stop(e);
+        return false;
       });
       this.input.addEvent("keydown", function(e) {
         var key = GEvent.keyCode(e);
@@ -3344,22 +3356,24 @@ window.$K = (function() {
         var a = document.createElement("a");
         p.appendChild(a);
         a.innerHTML = "&larr;";
+        a.style.cursor = "pointer";
         $G(a).addEvent("click", function(e) {
           self._move(e, -1);
+          GEvent.stop(e);
+          return false;
         });
         if (this.mode < 2) {
           a = document.createElement("a");
-          p.appendChild(a);
           a.innerHTML = this.cdate.format(this.mode == 1 ? "Y" : "M Y");
           $G(a).addEvent("click", function(e) {
             self.mode++;
             self._draw();
             GEvent.stop(e);
+            return false;
           });
         } else {
           var start_year = this.cdate.getFullYear() - 6;
           a = document.createElement("span");
-          p.appendChild(a);
           a.appendChild(
             document.createTextNode(
               start_year +
@@ -3369,11 +3383,16 @@ window.$K = (function() {
             )
           );
         }
+        p.appendChild(a);
+        a.style.cursor = "pointer";
         a = document.createElement("a");
         p.appendChild(a);
         a.innerHTML = "&rarr;";
+        a.style.cursor = "pointer";
         $G(a).addEvent("click", function(e) {
           self._move(e, 1);
+          GEvent.stop(e);
+          return false;
         });
         var table = document.createElement("table");
         div.appendChild(table);
@@ -3419,6 +3438,7 @@ window.$K = (function() {
               self.mode--;
               self._draw();
               GEvent.stop(e);
+              return false;
             });
           }
         } else if (this.mode == 1) {
@@ -3446,6 +3466,7 @@ window.$K = (function() {
               self.mode--;
               self._draw();
               GEvent.stop(e);
+              return false;
             });
           });
         } else {
@@ -3657,7 +3678,7 @@ window.$K = (function() {
       return this;
     },
     setDate: function(date) {
-      if (date === "" || date === null) {
+      if (date === null || !/[0-9]{2,4}\-[0-9]{1,2}\-[0-9]{1,2}/.test(date)) {
         this.date = null;
       } else {
         this.date = this._toDate(date);
@@ -3939,13 +3960,14 @@ window.$K = (function() {
       this.ddcolor.style.zIndex = 1001;
       this.ddcolor.className = "gddcolor";
       var self = this;
-      var _doPreview = function() {
+      this.input.addEvent("click", function(e) {
         self.createColors();
         self._draw();
         self.showDemo(self.color);
         self.pickColor(self.color);
-      };
-      this.input.addEvent("click", _doPreview);
+        GEvent.stop(e);
+        return false;
+      });
       new GMask(this.input, function(e) {
         return /[0-9a-fA-F]/.test(e.key);
       });
@@ -3956,6 +3978,7 @@ window.$K = (function() {
           self._draw();
           self.ddcolor.firstChild.firstChild.focus();
           GEvent.stop(e);
+          return false;
         }
       });
       if (this.input.type == "text") {
@@ -4109,6 +4132,7 @@ window.$K = (function() {
             self.pickColor(this.title);
           }
           GEvent.stop(e);
+          return false;
         });
         a.addEvent("mouseover", function() {
           self.showDemo(this.title);
@@ -4322,23 +4346,29 @@ window.$K = (function() {
       }
     },
     show: function(obj, fullscreen) {
-      this.overlay();
-      this.zoom.className = fullscreen ? "btnnav zoomin" : "btnnav zoomout";
-      this.zoom.title = trans(fullscreen ? "fit screen" : "full image");
       var img,
         title,
         self = this;
+      if (obj.href) {
+        img = obj.href;
+        title = obj.title;
+      } else if (obj.src) {
+        img = obj.src;
+        title = obj.alt;
+      } else {
+        img = obj.style.backgroundImage.substr(
+          5,
+          obj.style.backgroundImage.length - 7
+        );
+        title = obj.title;
+      }
+      this.overlay();
+      this.zoom.className = fullscreen ? "btnnav zoomin" : "btnnav zoomout";
+      this.zoom.title = trans(fullscreen ? "fit screen" : "full image");
       this.loading.className = this.loadingClass + " show";
       this.prev.className = this.currentId == 0 ? "hidden" : "btnnav prev";
       this.next.className =
         this.currentId == this.imgs.length - 1 ? "hidden" : "btnnav next";
-      if (obj.href) {
-        img = obj.href;
-        title = obj.title;
-      } else {
-        img = obj.src;
-        title = obj.alt;
-      }
       new preload(img, function() {
         self.loading.className = self.loadingClass;
         self.img.src = this.src;
