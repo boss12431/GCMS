@@ -140,7 +140,7 @@ class View extends \Gcms\Adminview
                 'active' => array(
                     'class' => 'center',
                 ),
-                'fb' => array(
+                'social' => array(
                     'class' => 'center',
                 ),
                 'phone' => array(
@@ -188,7 +188,13 @@ class View extends \Gcms\Adminview
         $item['create_date'] = Date::format($item['create_date'], 'd M Y');
         $item['lastvisited'] = Date::format($item['lastvisited'], 'd M Y H:i').' ('.number_format($item['visited']).')';
         $item['ban'] = $item['ban'] == 1 ? '<span class="icon-ban ban" title="{LNG_Members were suspended}"></span>' : '<span class="icon-ban"></span>';
-        $item['fb'] = $item['fb'] == 1 ? '<span class="icon-facebook"></span>' : '';
+        if ($item['social'] == 1) {
+            $item['social'] = '<span class="icon-facebook"></span>';
+        } elseif ($item['social'] == 2) {
+            $item['social'] = '<span class="icon-google"></span>';
+        } else {
+            $item['social'] = '';
+        }
         $item['phone1'] = empty($item['phone1']) ? '' : '<a href="tel:'.$item['phone1'].'">'.$item['phone1'].'</a>';
         $item['active'] = $item['active'] == 1 ? '<span class="icon-valid access" title="{LNG_Access to the system administrator.}"></span>' : '<span class="icon-valid disabled"></span>';
         $item['name'] = empty($item['website']) ? $item['name'] : '<a href="'.$item['website'].'" target="_blank">'.$item['name'].'</a>';

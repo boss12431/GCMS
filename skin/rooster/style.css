@@ -2,26 +2,27 @@
  Name: ระกา
  Description: Template เริ่มต้นสำหรับ GCMS 11.2.0 แบบ 1 คอลัมน์
  Author: Goragod.com
- Author URI: http://www.goragod.com
+ Author URI: https://goragod.com
  Responsive
 */
 body {
   font-size: 14px;
   color: #272727;
-  font-family: 'Kanit', Tahoma, Loma;
+  font-family: "Kanit", Tahoma, Loma;
 }
-body, li {
+body,
+li {
   line-height: 2em;
 }
 a {
-  color: #C30;
+  color: #c30;
 }
 a:hover {
-  color: #0066FF;
+  color: #0066ff;
 }
 #top_header {
   background-color: #252124;
-  color: #DDD;
+  color: #ddd;
   padding: 5px 0;
   font-size: 0.8em;
 }
@@ -31,7 +32,7 @@ a:hover {
   color: inherit;
 }
 #top_header a:hover {
-  color: #FFF;
+  color: #fff;
   background-color: rgba(255, 255, 255, 0.06);
 }
 #top_header .widget-search-form {
@@ -50,7 +51,7 @@ a:hover {
 }
 .header h1 {
   text-align: center;
-  font-family: 'Bungee Outline', cursive;
+  font-family: "Bungee Outline", cursive;
   font-size: 6em;
   padding: 0.5em 0;
 }
@@ -64,27 +65,27 @@ a:hover {
 }
 .footer_bg_color {
   color: rgba(255, 255, 255, 0.7);
-  background-color: #362F34;
+  background-color: #362f34;
 }
 .footer .copyright {
   text-align: center;
   font-size: 0.8em;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   padding: 20px 10px;
 }
 .footer a {
   color: inherit;
 }
 .footer a:hover {
-  color: #FFF;
+  color: #fff;
 }
 .footer_grid h3 {
   margin-bottom: 10px;
   display: inline-block;
   border-width: 3px;
   border-bottom-style: solid;
-  color: #FFF;
-  font-family: 'Bungee Outline', cursive;
+  color: #fff;
+  font-family: "Bungee Outline", cursive;
 }
 #login-box ul,
 .footer_grid ul {
@@ -99,8 +100,8 @@ a:hover {
   padding: 0;
 }
 .topmenu {
-  border-bottom: 3px solid rgba(0,0,0,0.1);
-  border-top: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding: 10px;
 }
 .topmenu > ul > li > a {
@@ -109,20 +110,20 @@ a:hover {
 }
 .topmenu > ul > li.select > a,
 .topmenu > ul > li:hover > a {
-  text-shadow: 0 0 10px rgba(0,0,0,0.3);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 .breadcrumbs {
   text-align: center;
-  color: #AAA;
-  background-color: #F9F9F9;
+  color: #aaa;
+  background-color: #f9f9f9;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   padding: 5px;
-  text-shadow: 1px 1px 0 #FFF;
+  text-shadow: 1px 1px 0 #fff;
 }
 .breadcrumbs li:before {
-  content: '/';
+  content: "/";
 }
 .content header {
   margin: 30px 0;
@@ -141,17 +142,17 @@ a:hover {
 .widget header {
   margin: 0;
   padding: 0;
-  border-bottom: 3px solid #F9F9F9;
+  border-bottom: 3px solid #f9f9f9;
   overflow: hidden;
 }
 .widget header > h2 {
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   float: left;
   font-size: 1.3em;
   padding: 5px 10px;
 }
 .reaction {
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
 }
 .post-detail .no {
   color: #cee7ec;
@@ -162,9 +163,9 @@ a:hover {
   right: 10px;
   bottom: 0;
   z-index: 0;
-  -moz-opacity: .40;
+  -moz-opacity: 0.4;
   filter: alpha(opacity=40);
-  opacity: .40;
+  opacity: 0.4;
   line-height: 1;
 }
 .bdr_content {

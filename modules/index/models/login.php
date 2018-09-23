@@ -13,7 +13,6 @@ namespace Index\Login;
 use Gcms\Login;
 use Kotchasan\Http\Request;
 use Kotchasan\Language;
-use Kotchasan\Template;
 
 /**
  * Controller หลัก สำหรับแสดง frontend ของ GCMS.
@@ -32,11 +31,6 @@ class Model extends \Kotchasan\KBase
     public function chklogin(Request $request)
     {
         if ($request->initSession() && $request->isSafe()) {
-            // template ที่กำลังใช้งานอยู่
-            if (!empty($_SESSION['skin']) && is_file(APP_PATH.'skin/'.$_SESSION['skin'].'/style.css')) {
-                self::$cfg->skin = $_SESSION['skin'];
-            }
-            Template::init('skin/'.self::$cfg->skin);
             // ตรวจสอบการ login
             Login::create();
             // ตรวจสอบสมาชิก
@@ -44,7 +38,7 @@ class Model extends \Kotchasan\KBase
             if ($login) {
                 $ret = array(
                     'alert' => Language::replace('Welcome %s, login complete', array('%s' => empty($login['name']) ? $login['email'] : $login['name'])),
-                    'content' => rawurlencode(\Index\Login\Controller::init($login)),
+                    'content' => rawurlencode(createClass('Index\Login\View')->member($login)),
                     'action' => $request->post('login_action', self::$cfg->login_action)->toString(),
                 );
                 // เคลียร์

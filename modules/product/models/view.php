@@ -2,10 +2,10 @@
 /**
  * @filesource modules/product/models/view.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Product\View;
@@ -99,6 +99,7 @@ class Model extends \Kotchasan\Model
                     }
                 }
                 // คืนค่าข้อมูลบทความ
+
                 return $index;
             }
         }
@@ -106,6 +107,10 @@ class Model extends \Kotchasan\Model
         return null;
     }
 
+    /**
+     * @param $value
+     * @param $currency_unit
+     */
     public static function getPrice($value, $currency_unit)
     {
         $values = @unserialize($value);

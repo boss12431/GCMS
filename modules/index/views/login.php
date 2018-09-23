@@ -23,6 +23,18 @@ use Kotchasan\Template;
 class View extends \Gcms\View
 {
     /**
+     * แสดงกรอบ login.
+     */
+    public function __construct()
+    {
+        // template ที่กำลังใช้งานอยู่
+        if (!empty($_SESSION['skin']) && is_file(APP_PATH.'skin/'.$_SESSION['skin'].'/style.css')) {
+            self::$cfg->skin = $_SESSION['skin'];
+        }
+        Template::init('skin/'.self::$cfg->skin);
+    }
+
+    /**
      * ฟอร์มสมาชิก
      *
      * @param array $login
@@ -69,8 +81,8 @@ class View extends \Gcms\View
             '/{PASSWORD}/' => isset(Login::$login_params['password']) ? Login::$login_params['password'] : '',
             '/{TOKEN}/' => self::$request->createToken(),
             '/{PLACEHOLDER}/' => \Gcms\Gcms::getLoginPlaceholder(),
-            '/{REMEMBER}/' => self::$request->cookie('login_remember')->toInt() == 1 ? 'checked' : '',
             '/{FACEBOOK}/' => empty(self::$cfg->facebook_appId) ? 'hidden' : 'facebook',
+            '/{GOOGLE}/' => empty(self::$cfg->google_client_id) ? 'hidden' : 'google',
         ));
 
         return $template->render();

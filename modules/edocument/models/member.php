@@ -2,10 +2,10 @@
 /**
  * @filesource modules/edocument/models/member.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Edocument\Member;
@@ -55,7 +55,7 @@ class Model extends \Kotchasan\Orm\Field
         $ret = array();
         // referer, session, member
         if ($request->initSession() && $request->isReferer() && $login = Login::isMember()) {
-            if ($login['email'] == 'demo' || !empty($login['fb'])) {
+            if ($login['email'] == 'demo' || !empty($login['social'])) {
                 $ret['alert'] = Language::get('Unable to complete the transaction');
             } else {
                 if ($request->post('action')->toString() == 'delete') {

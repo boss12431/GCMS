@@ -53,7 +53,7 @@ class View extends \Gcms\View
                     '/{REPLY}/' => number_format($user->reply),
                     '/{STATUS}/' => isset(self::$cfg->member_status[$user->status]) ? self::$cfg->member_status[$user->status] : 'Unknow',
                     '/{COLOR}/' => $user->status,
-                    '/{SOCIAL}/' => $user->fb == 1 ? 'icon-facebook' : '',
+                    '/{SOCIAL}/' => $user->social == 1 ? 'icon-facebook' : ($user->social == 2 ? 'icon-google' : ''),
                     '/{TOPIC}/' => $topic,
                 ));
                 // breadcrumbs

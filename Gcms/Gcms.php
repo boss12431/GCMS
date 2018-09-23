@@ -54,9 +54,9 @@ class Gcms extends \Kotchasan\KBase
      * @var array
      */
     public static $member_tabs = array(
-        'profile' => array('Profile', 'Index\Profile\View'),
-        'password' => array('Change your password', 'Index\Password\View'),
-        'address' => array('Address details', 'Index\Address\View'),
+        'profile' => array('Profile', 'Index\Profile\View', 'icon-profile'),
+        'password' => array('Change your password', 'Index\Password\View', 'icon-password'),
+        'address' => array('Address details', 'Index\Address\View', 'icon-address'),
     );
 
     /**

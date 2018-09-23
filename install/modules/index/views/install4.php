@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @filesource modules/index/views/install.php
  *
@@ -65,7 +66,7 @@ class View extends \Gcms\View
             // database default
             $database_cfg = include ROOT_PATH.'install/settings/database.php';
             $content[] = '<h2>{TITLE}</h2>';
-            $content[] = '<p>การติดตั้งได้ดำเนินการเสร็จเรียบร้อยแล้ว หากคุณต้องการความช่วยเหลือ คุณสามารถ ติดต่อสอบถามได้ที่ <a href="http://www.goragod.com" target="_blank">http://www.goragod.com</a> หรือ <a href="http://gcms.in.th" target="_blank">http://gcms.in.th</a></p>';
+            $content[] = '<p>การติดตั้งได้ดำเนินการเสร็จเรียบร้อยแล้ว หากคุณต้องการความช่วยเหลือ คุณสามารถ ติดต่อสอบถามได้ที่ <a href="https://goragod.com" target="_blank">https://goragod.com</a> หรือ <a href="http://gcms.in.th" target="_blank">http://gcms.in.th</a></p>';
             $content[] = '<ul>';
             // install database
             $sqlfiles = array();
@@ -116,7 +117,7 @@ class View extends \Gcms\View
             }
             // install Admin
             $salt = uniqid();
-            $sql = "INSERT INTO `$_SESSION[prefix]_user` (`id`, `password`, `email`, `salt`, `displayname`,`country`, `status`, `fb`, `active`, `create_date`, `permission`) VALUES (1,'".md5($_SESSION['password'].$salt)."','$_SESSION[email]', '$salt', 'Admin','TH',1,'0','1',".time().",'can_config');";
+            $sql = "INSERT INTO `$_SESSION[prefix]_user` (`id`, `password`, `email`, `salt`, `displayname`,`country`, `status`, `social`, `active`, `create_date`, `permission`) VALUES (1,'".sha1($_SESSION['password'].$salt)."','$_SESSION[email]', '$salt', 'Admin','TH',1,'0','1',".time().",'can_config');";
             $db->query($sql);
             if (!empty($_SESSION['typ'])) {
                 if (is_dir(ROOT_PATH.'install/demo/'.$_SESSION['typ'].'/datas/')) {
@@ -184,24 +185,16 @@ class View extends \Gcms\View
             $datas[] = 'RewriteCond %{REQUEST_FILENAME} !-d';
             $datas[] = 'RewriteRule . '.$base_path.'index.php [L,QSA]';
             $datas[] = '</IfModule>';
-            $datas[] = '<IfModule mod_expires.c>';
-            $datas[] = 'ExpiresActive On';
-            $datas[] = '<FilesMatch "\.(ico|tpl|eot|svg|ttf|woff)$">';
-            $datas[] = 'ExpiresDefault "access plus 1 year"';
-            $datas[] = '</FilesMatch>';
-            $datas[] = 'ExpiresByType image/x-icon "access plus 1 year"';
-            $datas[] = 'ExpiresByType image/jpeg "access plus 1 year"';
-            $datas[] = 'ExpiresByType image/png "access plus 1 year"';
-            $datas[] = 'ExpiresByType image/gif "access plus 1 year"';
-            $datas[] = 'ExpiresByType application/x-shockwave-flash "access plus 1 year"';
-            $datas[] = 'ExpiresByType text/html "access plus 3600 seconds"';
-            $datas[] = 'ExpiresByType application/xhtml+xml "access plus 3600 seconds"';
-            $datas[] = 'ExpiresByType text/javascript "access plus 1 month"';
-            $datas[] = 'ExpiresByType text/css "access plus 1 month"';
+            $datas[] = '# cache 1 week';
+            $datas[] = '<filesMatch ".(jpg|jpeg|png|gif|ico)$">';
+            $datas[] = 'Header set Cache-Control "max-age=604800, public"';
+            $datas[] = '</filesMatch>';
+            $datas[] = '<filesMatch ".(css|js|ttf|woff|svg|eot)$">';
+            $datas[] = 'Header set Cache-Control "max-age=604800, public"';
+            $datas[] = '</filesMatch>';
+            $datas[] = '<IfModule mod_headers.c>';
+            $datas[] = 'Header set X-XSS-Protection "1; mode=block"';
             $datas[] = '</IfModule>';
-            $datas[] = '<FilesMatch "\.(ico|jpg|jpeg|png|gif|swf|tpl|eot|svg|ttf|woff|js|css)$">';
-            $datas[] = 'FileETag MTime Size';
-            $datas[] = '</FilesMatch>';
             $f = @fopen(ROOT_PATH.'.htaccess', 'wb');
             if ($f) {
                 fwrite($f, implode("\n", $datas));

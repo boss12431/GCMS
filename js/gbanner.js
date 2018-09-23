@@ -1,7 +1,7 @@
 /**
  @name GBanner
  @description คลาสสำหรับการแสดงรูปภาพแบบไสลด์โชว์
- @author http://www.goragod.com (goragod wiriya)
+ @author https://goragod.com (goragod wiriya)
  @version 07-08-61
 
  @param string className คลาสของ GBanner ค่าเริ่มต้นคือ gbanner

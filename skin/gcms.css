@@ -626,15 +626,17 @@ header.list h2 select {
 }
 .modaldiv form {
   padding: 10px;
-}
-.modaldiv .bdr_content,
-.modaldiv form {
-  background-color: #fff;
-  margin: 0 !important;
+  margin: 0;
+  width: auto;
+  max-width: auto;
 }
 .modaldiv form .item {
   margin-left: 0;
   margin-right: 0;
+}
+.modaldiv form .submit {
+  padding: 0;
+  margin: 0;
 }
 .info {
   border: 1px dashed rgba(0, 0, 0, 0.1);

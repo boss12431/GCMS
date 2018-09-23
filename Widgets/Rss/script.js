@@ -1,7 +1,7 @@
 /**
  GRSS and GRSSTab
  display RSS Ajax with tab
- design by http://www.goragod.com (goragod wiriya)
+ design by https://goragod.com (goragod wiriya)
  20-09-56
  */
 var GRSS = GClass.create();

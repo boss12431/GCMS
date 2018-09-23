@@ -2,10 +2,10 @@
 /**
  * @filesource modules/product/models/admin/write.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Product\Admin\Write;
@@ -181,7 +181,7 @@ class Model extends \Kotchasan\Model
      *
      * @param int  $module_id ของโมดูล
      * @param int  $id        ID ของบทความ
-     * @param bool $new_id    true คืนค่า ID ของบทความรายการใหม่ (สำหรับการบันทึก), false คืนค่า ID 0 หากเป็นรายการใหม่
+     * @param bool $new_id    true คืนค่า ID ของบทความรายการใหม่ (สำหรับการบันทึก), false คืนค่า ID หากเป็นรายการใหม่
      *
      * @return object|null คืนค่าข้อมูล object ไม่พบคืนค่า null
      */

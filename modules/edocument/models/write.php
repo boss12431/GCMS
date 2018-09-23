@@ -2,10 +2,10 @@
 /**
  * @filesource modules/edocument/models/write.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Edocument\Write;
@@ -127,7 +127,7 @@ class Model extends \Kotchasan\Model
         $ret = array();
         // session, token, member
         if ($request->initSession() && $request->isSafe() && $login = Login::isMember()) {
-            if ($login['email'] == 'demo' || !empty($login['fb'])) {
+            if ($login['email'] == 'demo' || !empty($login['social'])) {
                 $ret['alert'] = Language::get('Unable to complete the transaction');
             } else {
                 // ค่าที่ส่งมา

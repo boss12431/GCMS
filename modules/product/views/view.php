@@ -2,10 +2,10 @@
 /**
  * @filesource modules/product/views/view.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Product\View;
@@ -97,6 +97,7 @@ class View extends \Gcms\View
             // JSON-LD
             Gcms::$view->setJsonLd(\Product\Jsonld\View::generate($index));
             // คืนค่า
+
             return (object) array(
                 'image_src' => $index->picture == '' ? '' : WEB_URL.$index->picture,
                 'canonical' => $index->canonical,
@@ -108,6 +109,7 @@ class View extends \Gcms\View
             );
         }
         // 404
+
         return createClass('Index\Error\Controller')->init('product');
     }
 }

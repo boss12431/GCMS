@@ -15,19 +15,14 @@
         <input type=text name=login_username id=login_username value="{EMAIL}" maxlength=255 placeholder="{PLACEHOLDER}">
       </label>
       <label class="g-input icon-password">
-        <input type=password name=login_password id=login_password value="{PASSWORD}" maxlength=10 placeholder="{LNG_Password}">
+        <input type=password name=login_password id=login_password value="{PASSWORD}" maxlength=20 placeholder="{LNG_Password}" autocomplete="off">
       </label>
-      <div class="table fullwidth collapse">
-        <label class="td right">{LNG_Remember me}&nbsp;
-          <input type="checkbox" name="login_remember" value="1">
-        </label>
-      </div>
     </fieldset>
     <fieldset>
       <button type=submit class="button login wide">{LNG_Sign in}</button>
       <FACEBOOK>
         <button type=button class="button facebook wide margin-top" id=facebook_login>
-          <span class="icon-facebook">Login with Facebook</span>
+          <span class="icon-facebook">{LNG_Login with Facebook}</span>
         </button>
       </FACEBOOK>
       <input type="hidden" name="token" id="token" value="{TOKEN}">
@@ -39,8 +34,6 @@
   </form>
   <script>
     new GForm('login_frm');
-    if ($E('facebook_login')) {
-      callClick('facebook_login', fbLogin);
-    }
+    initFacebookButton('facebook_login');
   </script>
 </article>

@@ -39,7 +39,7 @@ class Model extends \Kotchasan\Model
             } else {
                 $search = $this->db()->createQuery()
                     ->from('user')
-                    ->where(array(array('email', $email), array('fb', '0')))
+                    ->where(array(array('email', $email), array('social', 0)))
                     ->first('id', 'email', 'salt');
                 if ($search === false) {
                     $ret['ret_forgot_email'] = Language::get('not a registered user');
@@ -57,7 +57,7 @@ class Model extends \Kotchasan\Model
                 $err = Email::send(3, 'member', $replace, $search->email);
                 if (!$err->error()) {
                     // อัปเดทรหัสผ่านใหม่
-                    $save = array('password' => md5($password.$search->salt));
+                    $save = array('password' => sha1($password.$search->salt));
                     $this->db()->createQuery()->update('user')->set($save)->where($search->id)->execute();
                     // คืนค่า
                     $ret['alert'] = Language::get('Your message was sent successfully');

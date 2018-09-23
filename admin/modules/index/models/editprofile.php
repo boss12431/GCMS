@@ -153,7 +153,7 @@ class Model extends \Kotchasan\Model
                         } else {
                             // password ใหม่ถูกต้อง
                             $save['salt'] = uniqid();
-                            $save['password'] = md5($password.$save['salt']);
+                            $save['password'] = sha1($password.$save['salt']);
                             $requirePassword = false;
                         }
                     }
@@ -198,7 +198,7 @@ class Model extends \Kotchasan\Model
                             unset($save['status']);
                             unset($save['point']);
                         }
-                        if (!empty($user->fb)) {
+                        if (!empty($user->social)) {
                             // social ห้ามแก้ไข
                             unset($save['email']);
                             unset($save['password']);

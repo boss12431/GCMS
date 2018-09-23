@@ -60,7 +60,7 @@ class View extends \Gcms\Adminview
         ));
         // email_from
         $datas = array($login['email'] => $login['email']);
-        if (Login::isAdmin() && empty($login['fb'])) {
+        if (Login::isAdmin() && empty($login['social'])) {
             $datas[self::$cfg->noreply_email] = self::$cfg->noreply_email;
             foreach (\Index\Sendmail\Model::findAdmin() as $item) {
                 $datas[$item] = $item;

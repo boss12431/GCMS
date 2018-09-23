@@ -60,8 +60,17 @@ class View extends \Gcms\Adminview
             'labelClass' => 'g-input icon-edit',
             'itemClass' => 'item',
             'label' => '{LNG_Google page ID}',
-            'comment' => '{LNG_https://plus.google.com/<em>xxxxxxxxxx</em>/}',
+            'comment' => 'https://plus.google.com/<em>xxxxxxxxxx</em>/',
             'value' => isset($config->google_profile) ? $config->google_profile : '',
+        ));
+        // google_client_id
+        $fieldset->add('text', array(
+            'id' => 'google_client_id',
+            'labelClass' => 'g-input icon-edit',
+            'itemClass' => 'item',
+            'label' => '{LNG_Google client ID}',
+            'comment' => '<em>xxxxxxxxxx</em>.apps.googleusercontent.com',
+            'value' => isset($config->google_client_id) ? $config->google_client_id : '',
         ));
         // amp
         $fieldset->add('select', array(

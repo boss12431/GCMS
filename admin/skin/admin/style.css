@@ -311,7 +311,7 @@ section > header {
   background-repeat: no-repeat;
   display: inline-block;
   min-width: 5em;
-  height: 2.299em;
+  height: 2.287em;
   line-height: 2.3em;
   vertical-align: middle;
   text-align: center;
@@ -410,7 +410,6 @@ h3[class]:before {
 }
 .card a {
   color: #fff;
-  line-height: 1.8em;
 }
 .card:nth-child(1) > a {
   background-color: #8cc152;
@@ -638,8 +637,8 @@ td a[class*=" icon-"] {
 }
 .setup_frm .item {
   overflow-x: auto;
-  margin-bottom: 0;
   padding-bottom: 10px;
+  margin: 0 10px;
 }
 .paper {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -760,7 +759,11 @@ a.icon-delete:before,
   margin: 0;
 }
 .icon-facebook:before {
-  color: #798eb8;
+  color: #3b5998;
+  margin-left: 0;
+}
+.icon-google:before {
+  color: #eb4132;
   margin-left: 0;
 }
 td .icon-unpin:before,
@@ -829,18 +832,8 @@ div#install li.invalid {
   background-position: 100% 50%;
   color: #b71c1c;
 }
-#GModal_modaldiv > .modaldiv > article,
-#GModal_modaldiv > .modaldiv > form {
-  padding: 10px;
-  margin: 0;
-  background-color: #fff;
-  max-width: 600px;
-}
 .modaldiv header {
   margin: 0 0 10px 0;
-}
-.modaldiv form .submit {
-  padding-bottom: 0;
 }
 .postbox {
   margin: 0 10px;

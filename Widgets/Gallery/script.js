@@ -2,7 +2,7 @@
  RSSGal
  display RSS Gallery from http://gallery.gcms.in.th
  for GCMS 4.0.0
- design by http://www.goragod.com (goragod wiriya)
+ design by https://goragod.com (goragod wiriya)
  8-11-53
  */
 RSSGal = GClass.create();

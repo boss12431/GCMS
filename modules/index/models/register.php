@@ -79,7 +79,7 @@ class Model extends \Kotchasan\Model
                     $ret['ret_register_repassword'] = Language::get('Enter your password to match the two inputs');
                 } else {
                     $save['salt'] = uniqid();
-                    $save['password'] = md5($password.$save['salt']);
+                    $save['password'] = sha1($password.$save['salt']);
                 }
                 // phone1
                 if (!empty($save['phone1'])) {

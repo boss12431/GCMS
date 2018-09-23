@@ -29,8 +29,8 @@ class Model extends \Kotchasan\Model
      */
     public function chklogin(Request $request)
     {
-        // session, referer
-        if ($request->initSession() && $request->isReferer()) {
+        // session, token
+        if ($request->initSession() && $request->isSafe()) {
             // สุ่มรหัสผ่านใหม่
             $password = uniqid();
             // ข้อมูลที่ส่งมา
@@ -38,7 +38,7 @@ class Model extends \Kotchasan\Model
                 'displayname' => $request->post('first_name')->topic(),
                 'email' => $request->post('email')->url(),
             );
-            $fb_id = $request->post('id')->number();
+            $id = $request->post('id')->number();
             if (empty($save['email'])) {
                 // ไม่มีอีเมล ของ Facebook
                 $ret['alert'] = Language::replace('Can not use :name account because :field is not available', array(':name' => Language::get('Facebook'), ':field' => Language::get('Email')));
@@ -66,24 +66,24 @@ class Model extends \Kotchasan\Model
                     }
                     $save['status'] = self::$cfg->new_register_status;
                     $save['id'] = $db->getNextId($this->getTableName('user'));
-                    $save['fb'] = 1;
+                    $save['social'] = 1;
                     $save['visited'] = 1;
                     $save['ip'] = $request->getClientIp();
                     $save['salt'] = uniqid();
-                    $save['password'] = md5($password.$save['salt']);
+                    $save['password'] = sha1($password.$save['salt']);
                     $save['lastvisited'] = time();
                     $save['create_date'] = $save['lastvisited'];
                     $save['icon'] = $save['id'].'.jpg';
                     $save['country'] = 'TH';
                     $db->insert($user_table, $save);
-                } elseif ($search['fb'] == 1) {
+                } elseif ($search['social'] == 1) {
                     // facebook เคยเยี่ยมชมแล้ว อัปเดทการเยี่ยมชม
                     $save = $search;
                     ++$save['visited'];
                     $save['lastvisited'] = time();
                     $save['ip'] = $request->getClientIp();
                     $save['salt'] = uniqid();
-                    $save['password'] = md5($password.$save['salt']);
+                    $save['password'] = sha1($password.$save['salt']);
                     // อัปเดท
                     $db->update($user_table, $search['id'], $save);
                 } else {
@@ -92,9 +92,9 @@ class Model extends \Kotchasan\Model
                     $ret['alert'] = Language::replace('This :name already exist', array(':name' => Language::get('User')));
                     $ret['isMember'] = 0;
                 }
-                if (is_array($save) && !empty($fb_id)) {
+                if (is_array($save) && !empty($id)) {
                     // อัปเดท icon สมาชิก
-                    $data = @file_get_contents('https://graph.facebook.com/'.$fb_id.'/picture');
+                    $data = @file_get_contents('https://graph.facebook.com/'.$id.'/picture');
                     if ($data) {
                         $f = @fopen(ROOT_PATH.self::$cfg->usericon_folder.$save['icon'], 'wb');
                         if ($f) {
@@ -109,6 +109,9 @@ class Model extends \Kotchasan\Model
                     // คืนค่า
                     $ret['action'] = $request->post('login_action', self::$cfg->login_action)->toString();
                     $ret['alert'] = Language::replace('Welcome %s, login complete', array('%s' => $save['name']));
+                    $ret['content'] = rawurlencode(createClass('Index\Login\View')->member($save));
+                    // เคลียร์
+                    $request->removeToken();
                 }
             }
             // คืนค่าเป็น json

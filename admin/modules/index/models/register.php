@@ -121,7 +121,7 @@ class Model extends \Kotchasan\Model
             $save['password'] = '';
         } else {
             $save['salt'] = uniqid();
-            $save['password'] = md5($save['password'].$save['salt']);
+            $save['password'] = sha1($save['password'].$save['salt']);
         }
         if (!isset($save['country'])) {
             $save['country'] = 'TH';

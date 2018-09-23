@@ -31,7 +31,7 @@ class Model extends \Kotchasan\Model
     public static function toDataTable()
     {
         return static::createQuery()
-            ->select('id', 'name', 'ban', 'active', 'fb', 'displayname', 'email', 'phone1', 'status', 'create_date', 'lastvisited', 'visited', 'website')
+            ->select('id', 'name', 'ban', 'active', 'social', 'displayname', 'email', 'phone1', 'status', 'create_date', 'lastvisited', 'visited', 'website')
             ->from('user');
     }
 
@@ -64,7 +64,7 @@ class Model extends \Kotchasan\Model
             'U.status',
             'U.action',
             'U.icon',
-            'U.fb',
+            'U.social',
         );
 
         return static::createQuery()
@@ -134,7 +134,7 @@ class Model extends \Kotchasan\Model
                         // ยอมรับสมาชิกที่เลือก
                         $this->db()->update($user_table, array(
                             array('id', $match[1]),
-                            array('fb', '0'),
+                            array('social', 0),
                         ), array(
                             'activatecode' => '',
                         ));
@@ -156,7 +156,7 @@ class Model extends \Kotchasan\Model
                             ->where(array(
                                 array('id', $match[1]),
                                 array('id', '!=', 1),
-                                array('fb', '0'),
+                                array('social', 0),
                             ))
                             ->toArray();
                         $msgs = array();
@@ -171,7 +171,7 @@ class Model extends \Kotchasan\Model
                             $salt = uniqid();
                             $save = array(
                                 'salt' => $salt,
-                                'password' => md5($password.$salt),
+                                'password' => sha1($password.$salt),
                             );
                             if ($action === 'activate' || !empty($item['activatecode'])) {
                                 // activate หรือ ยังไม่ได้ activate
@@ -205,7 +205,7 @@ class Model extends \Kotchasan\Model
                         $this->db()->update($user_table, array(
                             array('id', $match[1]),
                             array('id', '!=', 1),
-                            array('fb', '0'),
+                            array('social', 0),
                         ), array(
                             'status' => (int) $action,
                         ));

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @filesource modules/index/views/upgrade2.php
  *
@@ -31,7 +32,7 @@ class View extends \Gcms\View
         $content = array();
         if (defined('INSTALL')) {
             $content[] = '<h2>{TITLE}</h2>';
-            $content[] = '<p>อัปเกรดเรียบร้อย ก่อนการใช้งานกรุณาตรวจสอบค่าติดตั้งต่างๆให้เรียบร้อยก่อน ทั้งการตั้งค่าเว็บไซต์ และการตั้งค่าโมดูล หากคุณต้องการความช่วยเหลือ คุณสามารถ ติดต่อสอบถามได้ที่ <a href="http://www.goragod.com" target="_blank">http://www.goragod.com</a> หรือ <a href="http://gcms.in.th" target="_blank">http://gcms.in.th</a></p>';
+            $content[] = '<p>อัปเกรดเรียบร้อย ก่อนการใช้งานกรุณาตรวจสอบค่าติดตั้งต่างๆให้เรียบร้อยก่อน ทั้งการตั้งค่าเว็บไซต์ และการตั้งค่าโมดูล หากคุณต้องการความช่วยเหลือ คุณสามารถ ติดต่อสอบถามได้ที่ <a href="https://goragod.com" target="_blank">https://goragod.com</a> หรือ <a href="http://gcms.in.th" target="_blank">http://gcms.in.th</a></p>';
             $content[] = '<ul>';
             // ตรวจสอบการเชื่อมต่อฐานข้อมูล
             $db = \Kotchasan\Database::create(array(

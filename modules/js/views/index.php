@@ -43,6 +43,7 @@ class View extends \Kotchasan\KBase
         $js[] = file_get_contents(ROOT_PATH.'js/gbanner.js');
         $js[] = file_get_contents(ROOT_PATH.'js/gcms.js');
         $js[] = file_get_contents(ROOT_PATH.'js/facebook.js');
+        $js[] = file_get_contents(ROOT_PATH.'js/google.js');
         $lng = Language::name();
         $data_folder = Language::languageFolder();
         if (is_file($data_folder.$lng.'.js')) {
@@ -94,7 +95,10 @@ class View extends \Kotchasan\KBase
             $js[] = 'var use_ajax = 1;';
         }
         if (!empty(self::$cfg->facebook_appId)) {
-            $js[] = 'initFacebook("'.self::$cfg->facebook_appId.'", "'.Language::name().'");';
+            $js[] = 'initFacebook("'.self::$cfg->facebook_appId.'", "'.$lng.'");';
+        }
+        if (!empty(self::$cfg->google_client_id)) {
+            $js[] = 'initGooleSignin("'.self::$cfg->google_client_id.'");';
         }
         // compress javascript
         $patt = array('#/\*(?:[^*]*(?:\*(?!/))*)*\*/#u', '#[\r\t]#', '#\n//.*\n#', '#;//.*\n#', '#[\n]#', '#[\s]{2,}#');

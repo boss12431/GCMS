@@ -2,10 +2,10 @@
 /**
  * @filesource modules/product/views/amp.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Product\Amp;
@@ -57,6 +57,7 @@ class View extends \Gcms\View
             // สกุลเงิน
             $currency_units = Language::get('CURRENCY_UNITS');
             // คืนค่า
+
             return (object) array(
                 // /product/amp.html
                 'content' => Template::create('product', $index->module, 'amp')->render(),
@@ -73,6 +74,7 @@ class View extends \Gcms\View
             );
         }
         // 404
+
         return createClass('Index\Error\Controller')->init('product');
     }
 }

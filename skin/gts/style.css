@@ -2,11 +2,11 @@
  Name: Go To School
  Description: แม่แบบสองคอลัมน์ ยอดนิยม สำหรับเว็บไซต์โรงเรียน
  Author: Goragod.com
- Author URI: http://www.goragod.com
+ Author URI: https://goragod.com
  Responsive
 */
 body {
-  background-color: #EEE;
+  background-color: #eee;
   color: #666;
 }
 a {
@@ -17,7 +17,7 @@ a:hover {
 }
 #top_header {
   background-color: #333;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
   white-space: nowrap;
   line-height: 24px;
 }
@@ -27,15 +27,19 @@ a:hover {
 #login_editprofile:hover,
 .widget_share a:hover,
 .language_menu a:hover {
-  color: #FFF;
+  color: #fff;
 }
 @media only screen and (max-width: 768px) {
   #top_header {
     white-space: normal;
   }
-  #top_header div.td, #top_header div.table {
+  #top_header div.td,
+  #top_header div.table {
     display: block;
     text-align: center !important;
+  }
+  body .member_section {
+    margin-left: 0;
   }
 }
 #logo {
@@ -49,13 +53,13 @@ a:hover {
 #login_editprofile:after {
   border-width: 7px;
   border-style: solid solid none solid;
-  border-color: #DDD transparent #DDD transparent;
+  border-color: #ddd transparent #ddd transparent;
   content: "";
   display: inline-block;
   margin-left: 5px;
 }
 #login_editprofile:hover:after {
-  border-color: #FFF transparent #FFF transparent;
+  border-color: #fff transparent #fff transparent;
 }
 .sidebar section.widget-like {
   text-align: right;
@@ -73,26 +77,27 @@ a:hover {
   color: #000;
 }
 .sidebar .gallery-box .table_rss_gallery_class a {
-  border: 1px solid #DDD;
+  border: 1px solid #ddd;
 }
 .sidebar_bg_color {
-  background-color: #FFF;
+  background-color: #fff;
   padding: 10px;
-  border-color: rgba(0,0,0,0.2);
+  border-color: rgba(0, 0, 0, 0.2);
 }
-#text-links, .footer {
+#text-links,
+.footer {
   padding: 10px;
   overflow: hidden;
 }
 .footer_bg_color {
   background-color: #313131;
-  color: #FFF;
+  color: #fff;
 }
 .footer a {
-  color: #FFC459;
+  color: #ffc459;
 }
 #register_frm dl.info {
-  border: 1px dashed #DDD;
+  border: 1px dashed #ddd;
   padding: 5px 10px;
   line-height: 1.8em;
   margin-top: 8px;
@@ -100,12 +105,13 @@ a:hover {
 #register_frm dl.info dt {
   padding-bottom: 5px;
 }
-.member_section,
-.tab > ul > li.select > a {
-  background-color: #FFF;
+.member_section {
+  padding: 10px;
+  margin-left: 10px;
+  background-color: #fff;
 }
 .reaction {
-  background-color: #F9F7EE;
+  background-color: #f9f7ee;
   overflow: hidden;
   white-space: nowrap;
   clear: both;
@@ -132,7 +138,7 @@ fieldset > legend > span,
   margin-bottom: 10px;
 }
 #comment-list .r-body > .detail {
-  z-Index: 2;
+  z-index: 2;
   margin-left: 60px;
   position: relative;
 }
@@ -144,7 +150,7 @@ fieldset > legend > span,
   margin: 0 10px 10px 0;
 }
 nav.breadcrumbs {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   padding: 5px 1%;
   position: absolute;
   top: 0;
@@ -152,12 +158,13 @@ nav.breadcrumbs {
   width: 102%;
 }
 nav.breadcrumbs li a {
-  text-shadow: 1px 1px 0 rgba(255,255,255,0.4), -1px -1px 0 rgba(255,255,255,0.2);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4),
+    -1px -1px 0 rgba(255, 255, 255, 0.2);
 }
 nav.breadcrumbs li:before {
   border-width: 5px;
   border-style: solid none solid solid;
-  border-color: transparent #33CCFF;
+  border-color: transparent #33ccff;
   content: "";
   display: inline-block;
 }
@@ -166,7 +173,7 @@ nav.breadcrumbs li:before {
 }
 .subcontent .widget_bdr,
 .bdr_content {
-  background-color: #FFF;
+  background-color: #fff;
 }
 .bdr_content {
   padding: 0 1% 1%;
@@ -175,8 +182,8 @@ nav.breadcrumbs li:before {
 .subcontent .bdr_content {
   border-width: 1px;
   border-style: solid;
-  border-color: #DDD;
-  box-shadow: 0 0 2px rgba(0,0,0,0.1);
+  border-color: #ddd;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
   margin-bottom: 1%;
 }
 .mainform.bdr_content,
@@ -195,7 +202,8 @@ nav.breadcrumbs li:before {
 .bdr_content h2 {
   line-height: 2;
 }
-.bdr_content > header, header.header {
+.bdr_content > header,
+header.header {
   position: relative;
   margin-bottom: 1%;
 }
@@ -204,16 +212,16 @@ nav.breadcrumbs li:before {
   padding-right: 5px;
 }
 .homepage .bar1 {
-  background-color: #FF6600;
-  color: #FFF;
+  background-color: #ff6600;
+  color: #fff;
 }
 .homepage .bar2 {
-  background-color: #8C153B;
-  color: #FFF;
+  background-color: #8c153b;
+  color: #fff;
 }
 .homepage .bartop {
-  background-color: #691F74;
-  color: #FFF;
+  background-color: #691f74;
+  color: #fff;
 }
 .homepage .icon-next {
   margin: 5px;
@@ -223,16 +231,19 @@ nav.breadcrumbs li:before {
   background-color: #333;
 }
 .menu_wrapper .topmenu > ul > li > a {
-  border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.2) rgba(0,0,0,0.2);
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.2)
+    rgba(0, 0, 0, 0.2);
   border-width: 1px;
   border-style: solid;
-  text-shadow: -1px -1px 0 rgba(0,0,0,0.4), 1px 1px 0 rgba(0,0,0,0.2);
-  color: #A5A5A5;
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.4), 1px 1px 0 rgba(0, 0, 0, 0.2);
+  color: #a5a5a5;
 }
-.menu_wrapper .topmenu > ul > li:hover > a, .menu_wrapper .topmenu > ul > li.select > a {
-  background-color: #FFC459;
-  color: #2C2C2C;
-  text-shadow: 1px 1px 0 rgba(255,255,255,0.4), -1px -1px 0 rgba(255,255,255,0.2);
+.menu_wrapper .topmenu > ul > li:hover > a,
+.menu_wrapper .topmenu > ul > li.select > a {
+  background-color: #ffc459;
+  color: #2c2c2c;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4),
+    -1px -1px 0 rgba(255, 255, 255, 0.2);
 }
 .sidemenu {
   border-width: 1px;
@@ -246,11 +257,11 @@ nav.breadcrumbs li:before {
   border-color: inherit;
 }
 .sidemenu > ul ul {
-  box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
 #GModal_modaldiv > .modaldiv form {
   padding: 10px;
-  background-color: #FFF;
+  background-color: #fff;
 }
 .mainform p {
   padding-left: 0;

@@ -622,7 +622,7 @@ input[type="email"],
 input[type="url"],
 input[type="color"] {
   line-height: 2.3em;
-  height: 2.3em;
+  height: 2.287em;
 }
 .grange_div {
   margin: 9px 0;
@@ -1005,7 +1005,7 @@ textarea.cke_editable {
   white-space: nowrap;
   overflow: hidden;
   line-height: 2.3em;
-  height: 2.3em;
+  height: 2.287em;
   padding: 0 0.7em;
   outline: none;
   cursor: pointer;
@@ -1190,6 +1190,9 @@ html .button:before,
 .button.facebook,
 .facebook .blue {
   background-color: #5b74a8;
+}
+.button.google {
+  background-color: #df4930;
 }
 .color-pink {
   color: #e91e63;
@@ -1646,7 +1649,6 @@ form p {
   margin: 2px 0;
 }
 form .item {
-  margin: 0 10px;
   padding-bottom: 10px;
   overflow-x: auto;
 }
@@ -2649,7 +2651,7 @@ div.ginput a:hover {
   min-width: 7em;
   padding-left: 0.1em;
   padding-right: 0.1em;
-  height: 2.3em;
+  height: 2.287em;
   line-height: 2.3em;
 }
 div.gcalendar {
@@ -2834,7 +2836,7 @@ div.gcalendar td.month {
   box-shadow: 0 0 1px #fff inset;
 }
 .event-calendar td {
-  padding: 0;
+  padding: 0 !important;
 }
 .event-calendar td div {
   position: relative;
@@ -3812,7 +3814,7 @@ fieldset.search {
   -webkit-border-radius: 0.5em;
   border-radius: 0.5em;
   overflow: hidden;
-  height: 2.3em;
+  height: 2.287em;
 }
 fieldset.search input[type="text"] {
   -moz-border-radius: 0.5em 0 0 0.5em;

@@ -40,7 +40,7 @@ class View extends \Gcms\View
             $tab = $request->request('tab')->toString();
             $tab = empty($tab) ? ArrayTool::getFirstKey(Gcms::$member_tabs) : $tab;
             $index = (object) array('description' => self::$cfg->web_description, 'tab' => $tab);
-            if (!empty($login['fb'])) {
+            if (!empty($login['social'])) {
                 unset(Gcms::$member_tabs['password']);
             }
             if (isset(Gcms::$member_tabs[$tab])) {
