@@ -137,8 +137,8 @@ class View extends \Gcms\Adminview
             ),
         ));
         // save cookie
-        setcookie('album_perPage', $table->perPage, time() + 2592000, '/', null, null, true);
-        setcookie('album_sort', $table->sort, time() + 2592000, '/', null, null, true);
+        setcookie('album_perPage', $table->perPage, time() + 2592000, '/', null, HOST, true);
+        setcookie('album_sort', $table->sort, time() + 2592000, '/', null, HOST, true);
 
         return $table->render();
     }

@@ -109,7 +109,7 @@ class Model extends \Kotchasan\Model
                 }
                 $search['description'] = $index->description;
                 $search['tab'] = $index->tab;
-                // คืนค่า
+
                 return (object) $search;
             }
         }
