@@ -69,7 +69,7 @@ class View extends \Gcms\Adminview
             'labelClass' => 'g-input icon-edit',
             'itemClass' => 'item',
             'label' => '{LNG_Google client ID}',
-            'comment' => '<em>xxxxxxxxxx</em>.apps.googleusercontent.com',
+            'comment' => '<em>xxxxxxxxxx</em>.apps.googleusercontent.com <a class=icon-help href="https://gcms.in.th/index.php?module=howto&id=374" target=_blank></a>',
             'value' => isset($config->google_client_id) ? $config->google_client_id : '',
         ));
         // amp
@@ -133,7 +133,7 @@ class View extends \Gcms\Adminview
             'labelClass' => 'g-input icon-password',
             'itemClass' => 'item',
             'label' => '{LNG_Access token}',
-            'comment' => '{LNG_Generate access token (For developers)} <a href="https://gcms.in.th/index.php?module=howto&id=367" class=icon-help></a>',
+            'comment' => '{LNG_Generate access token (For developers)} <a class=icon-help href="https://gcms.in.th/index.php?module=howto&id=367" target=_blank></a>',
             'value' => isset($config->line_api_key) ? $config->line_api_key : '',
         ));
         $fieldset = $form->add('fieldset', array(
