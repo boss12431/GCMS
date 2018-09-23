@@ -117,7 +117,7 @@ class Model extends \Kotchasan\Model
                         }
                     }
                     // แก้ไขรหัสผ่าน
-                    if ($user->scial == 0 && (!empty($password) || !empty($repassword))) {
+                    if ($user->social == 0 && (!empty($password) || !empty($repassword))) {
                         if (mb_strlen($password) < 4) {
                             // รหัสผ่านต้องไม่น้อยกว่า 4 ตัวอักษร
                             $ret['ret_register_password'] = 'this';

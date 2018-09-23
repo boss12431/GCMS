@@ -98,7 +98,6 @@ class Model extends \Kotchasan\Model
                             break;
                     }
                 }
-                // คืนค่าข้อมูลบทความ
 
                 return $index;
             }

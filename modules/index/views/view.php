@@ -38,6 +38,7 @@ class View extends \Gcms\View
         if (Login::isMember()) {
             $user = \Index\User\Model::getUserById($request->request('id')->toInt());
             if ($user) {
+                $social = array(1 => 'icon-facebook', 2 => 'icon-google');
                 // /member/view.html
                 $template = Template::create('member', 'member', 'view');
                 $template->add(array(
@@ -53,7 +54,7 @@ class View extends \Gcms\View
                     '/{REPLY}/' => number_format($user->reply),
                     '/{STATUS}/' => isset(self::$cfg->member_status[$user->status]) ? self::$cfg->member_status[$user->status] : 'Unknow',
                     '/{COLOR}/' => $user->status,
-                    '/{SOCIAL}/' => $user->social == 1 ? 'icon-facebook' : ($user->social == 2 ? 'icon-google' : ''),
+                    '/{SOCIAL}/' => isset($social[$user->social]) ? $social[$user->social] : '',
                     '/{TOPIC}/' => $topic,
                 ));
                 // breadcrumbs
