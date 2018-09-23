@@ -67,16 +67,6 @@ class Config extends \Kotchasan\Config
     public $document_style = 'iconview';
 
     /**
-     * กำหนดวิธีการหากเข้าระบบเรียบร้อย
-     * 0 (ค่าเริ่มต้น) Ajax Login
-     * 1 โหลดหน้าใหม่
-     * 2 กลับไปหน้าก่อนหน้า.
-     *
-     * @var int
-     */
-    public $login_action = 0;
-
-    /**
      * รายชื่อฟิลด์จากตารางสมาชิก สำหรับตรวจสอบการ login.
      *
      * @var array

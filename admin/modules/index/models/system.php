@@ -115,7 +115,6 @@ class Model extends \Kotchasan\KBase
                     $config->demo_mode = $request->post('demo_mode')->toBoolean();
                     $config->user_activate = $request->post('user_activate')->toBoolean();
                     $config->member_only_ip = $request->post('member_only_ip')->toBoolean();
-                    $config->login_action = $request->post('login_action')->toInt();
                     $config->member_phone = $request->post('member_phone')->toInt();
                     $config->member_idcard = $request->post('member_idcard')->toInt();
                     $config->use_ajax = $request->post('use_ajax')->toBoolean();

@@ -249,16 +249,6 @@ class View extends \Gcms\Adminview
             'options' => Language::get('BOOLEANS'),
             'value' => isset($config->member_only_ip) ? $config->member_only_ip : self::$cfg->member_only_ip,
         ));
-        // login_action
-        $fieldset->add('select', array(
-            'id' => 'login_action',
-            'labelClass' => 'g-input icon-signin',
-            'itemClass' => 'item',
-            'label' => '{LNG_When logging in}',
-            'comment' => '{LNG_Determine how to log in successfully}',
-            'options' => Language::get('LOGIN_ACTIONS'),
-            'value' => isset($config->login_action) ? $config->login_action : self::$cfg->login_action,
-        ));
         $fieldset = $form->add('fieldset', array(
             'class' => 'submit',
         ));

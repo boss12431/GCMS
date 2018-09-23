@@ -103,7 +103,7 @@ class Model extends \Kotchasan\Model
                 $save['password'] = $password;
                 $_SESSION['login'] = $save;
                 // คืนค่า
-                $ret['action'] = $request->post('login_action', self::$cfg->login_action)->toString();
+                $ret['action'] = $request->post('login_action')->toString();
                 $ret['alert'] = Language::replace('Welcome %s, login complete', array('%s' => $save['name']));
                 $ret['content'] = rawurlencode(createClass('Index\Login\View')->member($save));
                 // เคลียร์

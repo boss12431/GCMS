@@ -39,7 +39,7 @@ class Model extends \Kotchasan\KBase
                 $ret = array(
                     'alert' => Language::replace('Welcome %s, login complete', array('%s' => empty($login['name']) ? $login['email'] : $login['name'])),
                     'content' => rawurlencode(createClass('Index\Login\View')->member($login)),
-                    'action' => $request->post('login_action', self::$cfg->login_action)->toString(),
+                    'action' => $request->post('login_action')->toString(),
                 );
                 // เคลียร์
                 $request->removeToken();
