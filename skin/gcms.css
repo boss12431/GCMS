@@ -629,6 +629,7 @@ header.list h2 select {
   margin: 0;
   width: auto;
   max-width: auto;
+  display: block;
 }
 .modaldiv form .item {
   margin-left: 0;

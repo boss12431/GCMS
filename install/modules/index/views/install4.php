@@ -187,13 +187,13 @@ class View extends \Gcms\View
             $datas[] = '</IfModule>';
             $datas[] = '# cache 1 week';
             $datas[] = '<filesMatch ".(jpg|jpeg|png|gif|ico)$">';
-            $datas[] = 'Header set Cache-Control "max-age=604800, public"';
+            $datas[] = '#Header set Cache-Control "max-age=604800, public"';
             $datas[] = '</filesMatch>';
             $datas[] = '<filesMatch ".(css|js|ttf|woff|svg|eot)$">';
-            $datas[] = 'Header set Cache-Control "max-age=604800, public"';
+            $datas[] = '#Header set Cache-Control "max-age=604800, public"';
             $datas[] = '</filesMatch>';
             $datas[] = '<IfModule mod_headers.c>';
-            $datas[] = 'Header set X-XSS-Protection "1; mode=block"';
+            $datas[] = '#Header set X-XSS-Protection "1; mode=block"';
             $datas[] = '</IfModule>';
             $f = @fopen(ROOT_PATH.'.htaccess', 'wb');
             if ($f) {

@@ -73,7 +73,7 @@ class Model extends \Kotchasan\Model
                 $save['country'] = 'TH';
                 $db->insert($user_table, $save);
             } elseif ($search['social'] == 2) {
-                // facebook เคยเยี่ยมชมแล้ว อัปเดทการเยี่ยมชม
+                // google เคยเยี่ยมชมแล้ว อัปเดทการเยี่ยมชม
                 $save = $search;
                 ++$save['visited'];
                 $save['lastvisited'] = time();
