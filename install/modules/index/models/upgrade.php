@@ -43,7 +43,7 @@ class Model extends \Kotchasan\KBase
      *
      * @param resource $db
      * @param string   $table_name
-     * @param type     $field
+     * @param string   $field
      *
      * @return bool
      */

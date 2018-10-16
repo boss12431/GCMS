@@ -42,6 +42,11 @@ class Model extends \Index\Upgrade\Model
             $db->query("ALTER TABLE `$table` DROP `fb`");
         }
         $db->query("ALTER TABLE `$table` CHANGE `password` `password` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL");
+        // index table
+        $table = $_SESSION['prefix'].'_index';
+        if (!self::fieldExists($db, $table, 'page')) {
+            $db->query("ALTER TABLE `$table` ADD `page` VARCHAR(20) NULL DEFAULT NULL");
+        }
         $content[] = '<li class="correct">Updated database <b>'.$table.'</b> complete...</li>';
         $content[] = '<li class="correct">Upgrade to Version <b>13.3.0</b> complete.</li>';
 
