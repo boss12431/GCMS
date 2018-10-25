@@ -50,11 +50,8 @@ class Controller extends \Kotchasan\Controller
                         '/{CONTENT}/' => $detail,
                     ));
                     echo $view->renderHTML(Template::load('', '', 'print'));
-                    // สำเร็จ
-                    $detail = true;
+                    exit;
                 }
-
-                return $detail;
             }
         }
         // ไม่พบโมดูลหรือไม่มีสิทธิ

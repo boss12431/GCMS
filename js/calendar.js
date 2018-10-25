@@ -225,7 +225,7 @@ Calendar.prototype = {
       }
       div.appendChild(a);
       a.onclick = function() {
-        return self.onclick(this, d);
+        return self.onclick.call(this, d);
       };
       return a;
     }

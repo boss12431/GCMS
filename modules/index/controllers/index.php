@@ -67,6 +67,7 @@ class Controller extends \Kotchasan\Controller
             );
             // logo
             $img_logo = '';
+            $logo = '';
             if (!empty(self::$cfg->logo) && is_file(ROOT_PATH.DATA_FOLDER.'image/'.self::$cfg->logo)) {
                 $info = @getimagesize(ROOT_PATH.DATA_FOLDER.'image/'.self::$cfg->logo);
                 if ($info && $info[0] > 0 && $info[1] > 0) {
@@ -159,6 +160,7 @@ class Controller extends \Kotchasan\Controller
                 '/{CONTENT}/' => $page->detail,
                 // โลโก
                 '/{LOGO}/' => $img_logo,
+                '/{BGLOGO}/' => $logo,
                 // title
                 '/{TITLE}/' => $page->topic,
                 // ภาษาที่ติดตั้ง

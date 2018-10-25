@@ -2,10 +2,10 @@
 /**
  * @filesource modules/gallery/models/admin/write.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Gallery\Admin\Write;
@@ -33,7 +33,7 @@ class Model extends \Kotchasan\Model
      *
      * @param int  $module_id ของโมดูล
      * @param int  $id        ID
-     * @param bool $new       false (default) คืนค่า ID 0 สำหรับรายการใหม่, true คืนค่า ID ถัดไปสำหรับรายการใหม่
+     * @param bool $new       false (default) คืนค่า ID สำหรับรายการใหม่, true คืนค่า ID ถัดไปสำหรับรายการใหม่
      *
      * @return object|null คืนค่าข้อมูล object ไม่พบคืนค่า null
      */

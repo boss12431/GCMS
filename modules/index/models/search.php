@@ -37,8 +37,8 @@ class Model extends \Kotchasan\Model
         // model
         $model = new static();
         $db = $model->db();
-        // ข้อความค้นหา
-        $index->q = $request->globals(array('POST', 'GET'), 'q')->topic();
+        // ข้อความค้นหา จำกัดไม่เกิน 100 ตัวอักษร
+        $index->q = mb_substr($request->globals(array('POST', 'GET'), 'q')->topic(), 0, 255);
         $index->words = array();
         $where1 = array();
         $where2 = array();

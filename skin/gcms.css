@@ -650,9 +650,6 @@ header.list h2 select {
     max-width: 10em;
   }
 }
-/* tablet only */
-@media only screen and (min-width: 481px) and (max-width: 768px) {
-}
 /* iphone and small device */
 @media only screen and (max-width: 480px) {
   body.responsie .header h1 {

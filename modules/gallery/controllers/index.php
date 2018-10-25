@@ -2,10 +2,10 @@
 /**
  * @filesource modules/gallery/controllers/index.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Gallery\Index;
@@ -48,6 +48,7 @@ class Controller extends \Kotchasan\Controller
             }
         }
         // 404
+
         return createClass('Index\Error\Controller')->init('gallery');
     }
 

@@ -43,6 +43,7 @@ class View extends \Kotchasan\View
             '/{PASSWORD}/' => Login::$login_params['password'],
             '/{MESSAGE}/' => Login::$login_message,
             '/{CLASS}/' => empty(Login::$login_message) ? 'hidden' : (empty(Login::$login_input) ? 'message' : 'error'),
+            '/{LOGIN_ACTION}/' => $request->getUri(),
         ));
 
         return (object) array(

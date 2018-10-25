@@ -1,5 +1,4 @@
 <?php
-
 /* language/th.php */
 return array(
   ':username passwords' => 'รหัสผ่านของ :username',
@@ -58,11 +57,11 @@ return array(
   'Board' => 'เว็บบอร์ด',
   'BOARD_NOTIFICATIONS' => array(
     1 => 'มีกระทู้ใหม่',
-    2 => 'มีความคิดเห็นใหม่',
+    2 => 'มีความคิดเห็นใหม่'
   ),
   'BOOLEANS' => array(
     0 => 'ปิดใช้งาน',
-    1 => 'เปิดใช้งาน',
+    1 => 'เปิดใช้งาน'
   ),
   'Border color' => 'สีของกรอบ',
   'Brief details about the file. (Page may be downloaded).' => 'รายละเอียดสั้นๆเกี่ยวกับไฟล์ (อาจใช้แสดงในหน้าดาวน์โหลดได้)',
@@ -128,7 +127,7 @@ return array(
   'Cron last running at' => 'ครอนทำงานล่าสุดเมื่อ',
   'CURRENCY_UNITS' => array(
     'THB' => 'บาท',
-    'USD' => 'ดอลล่าร์',
+    'USD' => 'ดอลล่าร์'
   ),
   'Customize the layout of the site' => 'ปรับแต่งรูปแบบของเว็บไซต์',
   'Dashboard' => 'แผงควบคุมหลัก',
@@ -145,7 +144,7 @@ return array(
     3 => 'พุธ',
     4 => 'พฤหัสบดี',
     5 => 'ศุกร์',
-    6 => 'เสาร์',
+    6 => 'เสาร์'
   ),
   'DATE_SHORT' => array(
     0 => 'อา.',
@@ -154,7 +153,7 @@ return array(
     3 => 'พ.',
     4 => 'พฤ.',
     5 => 'ศ.',
-    6 => 'ส.',
+    6 => 'ส.'
   ),
   'Dateless' => 'ไม่มีวันหมดอายุ',
   'days' => 'วัน',
@@ -187,7 +186,7 @@ return array(
   'DOCUMENT_NOTIFICATIONS' => array(
     1 => 'เพิ่มเรื่องใหม่',
     2 => 'แก้ไขเรื่อง',
-    3 => 'ความคิดเห็นใหม่',
+    3 => 'ความคิดเห็นใหม่'
   ),
   'Download' => 'ดาวน์โหลด',
   'Download Details' => 'รายละเอียดการดาวน์โหลด',
@@ -212,7 +211,7 @@ return array(
   'EMPTY_SEARCH_MESSAGE' => '<ul><li>ตรวจสอบให้แน่ใจว่าการสะกดคำถูกต้อง</li><li>ลองเปลี่ยนวลีใหม่หรือใช้คำเหมือน</li><li>ลองระบุคำที่ไม่เฉพาะเจาะจงเกินไป</li><li>ระบุคำที่ต้องการค้นหาให้รัดกุมมากที่สุด</li></ul>',
   'Enable SSL encryption for sending email' => 'เปิดใช้งานการเข้ารหัส SSL สำหรับการส่งอีเมล',
   'Enable/Disable intro page' => 'เปิด/ปิด การแสดงหน้าต้อนรับ',
-  'Enable/Disable Maintenance mode' => 'เปิด/ปิด โหมดบำรุงรักษา',
+  'Enable/Disable maintenance mode' => 'เปิด/ปิด โหมดบำรุงรักษา',
   'Enabled and required' => 'เปิดใช้งานและบังคับต้องกรอกเสมอ',
   'Enabled but not required' => 'เปิดใช้งานแต่ไม่ต้องกรอกก็ได้',
   'English lowercase and number only' => 'ภาษาอังกฤษตัวพิมพ์เล็กและตัวเลขเท่านั้น',
@@ -262,6 +261,7 @@ return array(
   'How to define user authentication for mail servers. If you enable it, you must configure below correctly.' => 'กำหนดวิธีการตรวจสอบผู้ใช้สำหรับเมล์เซิร์ฟเวอร์ หากคุณเปิดใช้งานคุณต้องกำหนดค่าต่างๆด้านล่างถูกต้อง',
   'Icon' => 'ไอคอน',
   'Identification number' => 'เลขประชาชน',
+  'If not, Program will fill in the contents of the first paragraph' => 'ถ้าไม่กำหนดโปรแกรมจะกรอกให้จากเนื้อหาในย่อหน้าแรก',
   'If you choose to unpublish contributions will not be displayed on the page immediately. The Admin can review and published it later.' => 'ถ้าคุณเลือกระงับการเผยแพร่เรื่องที่เขียนจะไม่สามารถแสดงผลในหน้าเว็บได้โดยทันที ซึ่งแอดมินสามารถตรวจสอบและเผยแพร่ได้ในภายหลัง',
   'If you enable it, System will send a confirmation email to the email address registered.' => 'ถ้าคุณเปิดการใช้งาน ระบบจะส่งอีเมลยืนยันการสมัครสมาชิกไปยังที่อยู่อีเมลที่ลงทะเบียนไว้',
   'Image' => 'รูปภาพ',
@@ -269,7 +269,7 @@ return array(
   'Images or flash files on the website header (header) accepted jpg gif png files and swf' => 'รูปภาพหรือไฟล์แฟลชแสดงบนส่วนหัวของเว็บไซต์ (header) ยอมรับไฟล์ jpg gif png และ swf',
   'IMG_LAW' => array(
     0 => 'อัปโหลดรูปภาพหรือไม่ก็ได้',
-    1 => 'บังคับอัปโหลดรูปภาพเสมอ (สำหรับคำถาม)',
+    1 => 'บังคับอัปโหลดรูปภาพเสมอ (สำหรับคำถาม)'
   ),
   'Import' => 'นำเข้า',
   'Import data from databases or to recover data from a previously backed up' => 'นำเข้าข้อมูลจากฐานข้อมูลหรือการกู้คืนข้อมูลจากที่ได้สำรองไว้ก่อนแล้ว',
@@ -309,11 +309,11 @@ return array(
   'LOGIN_ACTIONS' => array(
     0 => 'ไม่ต้องทำอะไร (Ajax Login)',
     1 => 'โหลดหน้าเว็บใหม่',
-    2 => 'กลับไปหน้าก่อนหน้า',
+    2 => 'กลับไปหน้าก่อนหน้า'
   ),
   'LOGIN_FIELDS' => array(
     'email' => 'อีเมล',
-    'phone1' => 'โทรศัพท์',
+    'phone1' => 'โทรศัพท์'
   ),
   'Logo' => 'โลโก',
   'Logout successful' => 'ออกจากระบบเรียบร้อย',
@@ -324,7 +324,7 @@ return array(
   'Mail server settings' => 'ค่ากำหนดของเมล์เซิร์ฟเวอร์',
   'MAIL_PROGRAMS' => array(
     0 => 'ส่งจดหมายด้วย PHP',
-    1 => 'ส่งจดหมายด้วย PHPMailer (แนะนำ)',
+    1 => 'ส่งจดหมายด้วย PHPMailer (แนะนำ)'
   ),
   'Mailbox' => 'กล่องจดหมาย',
   'Maintenance mode' => 'โหมดบำรุงรักษา',
@@ -333,7 +333,7 @@ return array(
   'Member status' => 'สถานะสมาชิก',
   'MEMBER_ONLY_LIST' => array(
     0 => 'ระบบจะแสดงข้อความเตือน (ค่าเริ่มต้น)',
-    1 => 'แสดงเนื้อหาบางส่วนยกเว้นภายในกรอบโค้ด ([code]..[/code])',
+    1 => 'แสดงเนื้อหาบางส่วนยกเว้นภายในกรอบโค้ด ([code]..[/code])'
   ),
   'Members of this group can create or edit' => 'สมาชิกในกลุ่มนี้สามารถเขียนหรือแก้ไขได้',
   'Members of this group can download file' => 'สมาชิกในกลุ่มนี้สามารถดาวน์โหลดไฟล์ได้',
@@ -355,28 +355,28 @@ return array(
   'MENU_ACTIONS' => array(
     0 => 'ไม่ต้องดำเนินการใดๆเลย (เช่นเมนูที่มีเมนูย่อย)',
     1 => 'เปิดโมดูลที่ติดตั้งแล้วบนเว็บไซต์',
-    2 => 'เปิด URL ที่กำหนดเอง',
+    2 => 'เปิด URL ที่กำหนดเอง'
   ),
   'MENU_PARENTS' => array(
     'MAINMENU' => 'เมนูหลัก',
     'SIDEMENU' => 'เมนูข้าง',
-    'BOTTOMMENU' => 'เมนูล่าง',
+    'BOTTOMMENU' => 'เมนูล่าง'
   ),
   'MENU_PUBLISHEDS' => array(
     0 => 'ไม่แสดงผล',
     1 => 'แสดงผล',
     2 => 'แสดงเมื่อเข้าระบบแล้ว',
-    3 => 'แสดงเมื่อยังไม่ได้เข้าระบบ',
+    3 => 'แสดงเมื่อยังไม่ได้เข้าระบบ'
   ),
   'MENU_TARGET' => array(
     '' => 'เปิดลิงค์ในหน้าเดิม (ปกติ)',
-    '_blank' => 'เปิดลิงค์ในหน้าใหม่ (_blank)',
+    '_blank' => 'เปิดลิงค์ในหน้าใหม่ (_blank)'
   ),
   'MENU_TYPES' => array(
     0 => 'เป็นเมนูหลัก (รายการแรกสุด เช่น หน้าหลัก)',
     1 => 'เป็นเมนูลำดับแรกสุด',
     2 => 'เป็นเมนูย่อยลำดับที่ 1',
-    3 => 'เป็นเมนูย่อยลำดับที่ 2',
+    3 => 'เป็นเมนูย่อยลำดับที่ 2'
   ),
   'Menus' => 'เมนู',
   'message' => 'ข้อความ',
@@ -386,6 +386,7 @@ return array(
   'Module' => 'โมดูล',
   'Module name' => 'ชื่อโมดูล',
   'Module or an extension has not been installed correctly the first time. Please click on the button "Install" below to complete installation before.' => 'โมดูลหรือส่วนเสริมนี้ยังไม่ได้ถูกติดตั้งอย่างถูกต้องในครั้งแรก กรุณาคลิกที่ปุ่ม "ติดตั้ง" ด้านล่างเพื่อดำเนินการติดตั้งให้แล้วเสร็จก่อน',
+  'Module page' => 'หน้าเว็บของโมดูล',
   'Module settings' => 'ตั้งค่าโมดูล',
   'Modules' => 'โมดูล',
   'Modules for writing blogs, news or article' => 'โมดูลสำหรับเขียนบล๊อก ข่าว หรือ บทความ',
@@ -402,7 +403,7 @@ return array(
     9 => 'กันยายน',
     10 => 'ตุลาคม',
     11 => 'พฤศจิกายน',
-    12 => 'ธันวาคม',
+    12 => 'ธันวาคม'
   ),
   'MONTH_SHORT' => array(
     1 => 'ม.ค.',
@@ -416,7 +417,7 @@ return array(
     9 => 'ก.ย.',
     10 => 'ต.ค.',
     11 => 'พ.ย.',
-    12 => 'ธ.ค.',
+    12 => 'ธ.ค.'
   ),
   'monthly' => 'ประจำเดือน',
   'Monthly Report' => 'รายงานประจำเดือน',
@@ -433,7 +434,6 @@ return array(
   'New password will be sent to the email address registered. If you do not remember or do not receive emails. Please contact your system administrator (Please check in the Junk Box)' => 'รหัสผ่านใหม่จะส่งไปยังอีเมลที่ลงทะเบียนไว้ ถ้าคุณจำไม่ได้หรือไม่ได้รับอีเมลกรุณาติดต่อแอดมิน (ตรวจสอบใน Junk ด้วย)',
   'News' => 'ข่าว',
   'NEWTOPIC_INTRODUCTION' => '<ul><li>กรุณาใช้ข้อความที่สุภาพ ละเว้นการให้ร้ายผู้อื่น หยาบคาย ก้าวร้าว ลามกอนาจาร หรือโพสต์ข้อมูลส่วนตัวของผู้อื่นอันจะทำให้ผู้อื่นได้รับความเดือดร้อน</li><li>ขอความร่วมมือไม่โพสต์ข้อความลูกโซ่ โฆษณา หรือข้อความที่ไม่เกี่ยวกับเนื้อหาในหน้านี้</li><li>ห้ามเสนอข้อความพาดพิงสถาบันพระมหากษัตริย์ และราชวงศ์ เป็นอันขาด</li><li>ทุกความคิดเห็นไม่เกี่ยวข้องกับผู้ดำเนินการเว็บไซต์ ผู้โพสต์ความคิดเห็นจะต้องรับผิดชอบต่อข้อความของท่าน ทีมงานขอสงวนสิทธ์ในการถอดข้อความคิดเห็นโดยไม่ต้องชี้แจงหรือแจ้งล่วงหน้า</li></ul>',
-  'Next Month' => 'เดือนถัดไป',
   'No confirmation email, please check your e-mail' => 'ยังไม่ได้ยืนยันอีเมล กรุณาตรวจสอบอีเมล',
   'No need to enter text in English (en) or fill in the two matches' => 'ไม่จำเป็นต้องกรอกข้อความในภาษาอังกฤษ (en) หรือ กรอกทั้งสองช่องให้ตรงกัน',
   'No results were found for' => 'ไม่พบผลลัพธ์การค้นหาสำหรับ',
@@ -459,7 +459,7 @@ return array(
   'People visit the site' => 'จำนวนผู้เยี่ยมชม',
   'Permission' => 'สิทธิ์การใช้งาน',
   'PERMISSIONS' => array(
-    'can_config' => 'สามารถตั้งค่าระบบได้',
+    'can_config' => 'สามารถตั้งค่าระบบได้'
   ),
   'Personal information' => 'ข้อมูลสมาชิก',
   'Personnel' => 'บุคลากร',
@@ -482,7 +482,6 @@ return array(
   'Posted' => 'โพสต์เมื่อ',
   'Posted by' => 'โพสต์โดย',
   'Posting' => 'การตั้งกระทู้',
-  'Prev Month' => 'เดือนก่อน',
   'Preview' => 'เปิดดู',
   'Principal amount of the counter for preview' => 'กำหนดจำนวนหลักของตัวนับคนเยี่ยมชม สำหรับแสดงที่หน้าเว็บไซต์',
   'Print' => 'พิมพ์',
@@ -495,7 +494,7 @@ return array(
   'Published date' => 'วันที่เผยแพร่',
   'PUBLISHEDS' => array(
     0 => 'ระงับการเผยแพร่',
-    1 => 'เผยแพร่',
+    1 => 'เผยแพร่'
   ),
   'Quotations by :name' => 'อ้างอิงจาก :name',
   'Quote' => 'อ้างอิง',
@@ -514,7 +513,7 @@ return array(
   'Replace' => 'แทนที่',
   'REPLIES' => array(
     0 => 'ปิดการแสดงความคิดเห็น',
-    1 => 'สามารถแสดงความคิดเห็นได้',
+    1 => 'สามารถแสดงความคิดเห็นได้'
   ),
   'Request new password' => 'ขอรหัสผ่านใหม่',
   'restore to default' => 'คืนค่าเริ่มต้น',
@@ -570,12 +569,12 @@ return array(
   'Sex' => 'เพศ',
   'SEXES' => array(
     'f' => 'หญิง',
-    'm' => 'ชาย',
+    'm' => 'ชาย'
   ),
   'Short description about your website' => 'ข้อความสั้นๆอธิบายว่าเป็นเว็บไซต์เกี่ยวกับอะไร',
   'Show' => 'แสดง',
   'SHOW_NEWS' => array(
-    'news' => 'ตัวเลือก news',
+    'news' => 'ตัวเลือก news'
   ),
   'Showing page' => 'แสดงหน้าที่',
   'Sign in' => 'เข้าสู่ระบบ',
@@ -593,7 +592,7 @@ return array(
   'Small header' => 'ใช้ส่วนหัวขนาดเล็ก',
   'SMTPSECURIES' => array(
     '' => 'การเชื่อมต่อแบบปกติ',
-    'ssl' => 'การเชื่อมต่อที่ปลอดภัย (SSL)',
+    'ssl' => 'การเชื่อมต่อที่ปลอดภัย (SSL)'
   ),
   'Some files cannot be deleted' => 'บางไฟล์ไม่สามารถลบได้',
   'Sorry' => 'ขออภัย',
@@ -629,7 +628,7 @@ return array(
   'Text displayed on the menu' => 'ข้อความแสดงบนเมนู',
   'Text displayed on the Title Bar of the browser (3 - 255 characters)' => 'ข้อความแสดงบนไตเติลบาร์ของบราวเซอร์ (3-255 ตัวอักษร)',
   'Text keywords for SEO or Search Engine to search' => 'ข้อความเป็นคีย์เวิร์ดสำหรับการทำ SEO หรือการค้นหาโดย Search Engine',
-  'Text short summary of your story. Which can be used to show in your theme. ({LNG_If not, Program will fill in the contents of the first paragraph})' => 'ข้อความสรุปสั้นๆของเรื่องของคุณ ซึ่งสามารถใช้แสดงในแม่แบบของคุณได้ (ถ้าไม่กำหนดโปรแกรมจะกรอกให้จากเนื้อหาในย่อหน้าแรก)',
+  'Text short summary of your story. Which can be used to show in your theme.' => 'ข้อความสรุปสั้นๆของเรื่องของคุณ ซึ่งสามารถใช้แสดงในแม่แบบของคุณได้',
   'Text size' => 'เปลี่ยนการแสดงผล',
   'TEXTLINK_TYPIES' => array(
     'custom' => 'กำหนดเองเช่น Adsense',
@@ -637,7 +636,7 @@ return array(
     'menu' => 'ลิงค์ข้อความอย่างเดียว แสดงเป็นเมนู',
     'image' => 'แบนเนอร์รูปภาพ แสดงทั้งหมด',
     'banner' => 'แบนเนอร์รูปภาพ แสดงทีละรูปวนไปเรื่อยๆ',
-    'slideshow' => 'แบนเนอร์ไสลด์โชว์',
+    'slideshow' => 'แบนเนอร์ไสลด์โชว์'
   ),
   'Thank you for your comment' => 'ขอบคุณสำหรับความคิดเห็น',
   'Thank you for your post' => 'ขอบคุณสำหรับโพสต์',
@@ -676,13 +675,14 @@ return array(
   'The system will send the registration information to this e-mail. Please use real email address' => 'ระบบจะส่งข้อความไปยังอีเมลนี้ กรุณาใช้ที่อยู่ที่ติดต่อได้',
   'The type of file is invalid' => 'ชนิดของไฟล์ไม่ถูกต้อง',
   'The types of files that can be uploaded as a avatar' => 'ชนิดของไฟล์ที่สามารถอัปโหลดเป็นรูปประจำตัวสมาชิกได้',
+  'The web page of the module you want to edit is located in the Address bar when the page is called' => 'หน้าเว็บไซต์ของโมดูลที่ต้องการจะแก้ไข ดูได้จาก Address bar เมื่อมีการเรียกหน้าเว็บไซต์',
   'This :name already exist' => 'มี :name อยู่ก่อนแล้ว',
   'This entry is displayed in all languages' => 'รายการนี้แสดงในทุกภาษาอยู่แล้ว',
   'This entry is in selected language' => 'มีรายการนี้ในภาษาที่เลือกอยู่ก่อนแล้ว',
   'Thumbnail' => 'รูปภาพสัญลักษณ์',
   'THUMBNAILS' => array(
     0 => 'ไม่มีรูปภาพ',
-    1 => 'รูปภาพ',
+    1 => 'รูปภาพ'
   ),
   'Time' => 'เวลา',
   'Time zone' => 'เขตเวลา',
@@ -732,7 +732,7 @@ return array(
   'Use this template' => 'ใช้แม่แบบนี้',
   'USE_AJAX_LIST' => array(
     0 => 'เปิดการใช้งาน Ajax บางส่วนกับเว็บไซต์ (แสดงผลเว็บไซต์เหมือนเว็บทั่วไป)',
-    1 => 'เปิดการใช้งาน Ajax เต็มรูปแบบกับเว็บไซต์',
+    1 => 'เปิดการใช้งาน Ajax เต็มรูปแบบกับเว็บไซต์'
   ),
   'Used for the URL of the web page (SEO) can use letters, numbers and _ only can not have duplicate names.' => 'ใช้สำหรับเป็น URL ของหน้าเว็บ (SEO) สามารถใช้ตัวอักษร ตัวเลข และ _ ได้เท่านั้น ไม่สามารถมีชื่อซ้ำได้',
   'Used to group similar contents' => 'ใช้สำหรับจัดกลุ่มเรื่องที่คล้ายกัน',
@@ -785,5 +785,5 @@ return array(
   'Your post is already exists. You do not need to post this.' => 'คุณได้โพสต์ความคิดเห็นนี้แล้วในวันนี้ คุณไม่จำเป็นต้องเขียนซ้ำอีก',
   'Your site&#039;s URL (include http://)' => 'เว็บไซต์ของคุณ (รวม http://)',
   'Your Workplace' => 'สถานที่ทำงานของคุณ',
-  'Zipcode' => 'รหัสไปรษณีย์',
+  'Zipcode' => 'รหัสไปรษณีย์'
 );

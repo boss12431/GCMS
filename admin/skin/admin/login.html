@@ -2,7 +2,7 @@
   <h1>
     <a href="{WEBURL}index.php" id=logo>{WEBTITLE}</a>
   </h1>
-  <form id=login_frm method=post autocomplete=off action="index.php?action=login">
+  <form id=login_frm method=post autocomplete=off action="{LOGIN_ACTION}">
     <h2 class="table fullwidth">
       <span class="td icon-signin">{LNG_Sign in}</span>
       <span class="td icon-language language-menu" title="{LNG_Change language}">
@@ -26,7 +26,7 @@
         </button>
       </FACEBOOK>
       <input type="hidden" name="token" id="token" value="{TOKEN}">
-      <input type="hidden" name="login_action" id="login_action" value="{WEBURL}admin/index.php?action=login">
+      <input type="hidden" name="login_action" id="login_action" value="{LOGIN_ACTION}">
     </fieldset>
     <fieldset class="center">
       <a href="index.php?action=forgot">{LNG_Forgot}</a>
