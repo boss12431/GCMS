@@ -40,10 +40,10 @@ class View extends \Kotchasan\View
             '/{TOKEN}/' => $request->createToken(),
             '/{PLACEHOLDER}/' => \Gcms\Gcms::getLoginPlaceholder(),
             '/{EMAIL}/' => Login::$login_params['username'],
-            '/{PASSWORD}/' => Login::$login_params['password'],
+            '/{PASSWORD}/' => isset(Login::$login_params['password']) ? Login::$login_params['password'] : '',
             '/{MESSAGE}/' => Login::$login_message,
             '/{CLASS}/' => empty(Login::$login_message) ? 'hidden' : (empty(Login::$login_input) ? 'message' : 'error'),
-            '/{LOGIN_ACTION}/' => $request->getUri(),
+            '/{LOGIN_ACTION}/' => $request->getUri()->withoutParams('action'),
         ));
 
         return (object) array(

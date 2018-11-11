@@ -53,7 +53,7 @@ class View extends \Gcms\Adminview
             'itemClass' => 'item',
             'label' => '{LNG_Album}',
             'comment' => '{LNG_Enter the name of the album}',
-            'maxlength' => 64,
+            'maxlength' => 255,
             'value' => $index->topic,
         ));
         // detail

@@ -274,7 +274,7 @@ class Model extends \Index\Upgrade\Model
     }
 
     /**
-     * @param $data
+     * @param  $data
      *
      * @return mixed
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource modules/index/models/upgrade1330.php
+ * @filesource modules/index/models/upgrade1331.php
  *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
@@ -8,7 +8,7 @@
  * @see http://www.kotchasan.com/
  */
 
-namespace Index\Upgrade1330;
+namespace Index\Upgrade1331;
 
 /**
  * อัปเกรด.
@@ -20,7 +20,7 @@ namespace Index\Upgrade1330;
 class Model extends \Index\Upgrade\Model
 {
     /**
-     * อัปเกรดเป็นเวอร์ชั่น 13.3.0.
+     * อัปเกรดเป็นเวอร์ชั่น 13.3.1.
      *
      * @return string
      */
@@ -42,17 +42,21 @@ class Model extends \Index\Upgrade\Model
             $db->query("ALTER TABLE `$table` DROP `fb`");
         }
         $db->query("ALTER TABLE `$table` CHANGE `password` `password` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL");
+        if (!\Index\Upgrade\Model::fieldExists($db, $table, 'token')) {
+            $db->query("ALTER TABLE `$table` ADD `token` VARCHAR(50) NULL  AFTER `password`");
+        }
+        $content[] = '<li class="correct">Updated database <b>'.$table.'</b> complete...</li>';
         // index table
         $table = $_SESSION['prefix'].'_index';
         if (!self::fieldExists($db, $table, 'page')) {
             $db->query("ALTER TABLE `$table` ADD `page` VARCHAR(20) NULL DEFAULT NULL");
+            $content[] = '<li class="correct">Updated database <b>'.$table.'</b> complete...</li>';
         }
-        $content[] = '<li class="correct">Updated database <b>'.$table.'</b> complete...</li>';
-        $content[] = '<li class="correct">Upgrade to Version <b>13.3.0</b> complete.</li>';
+        $content[] = '<li class="correct">Upgrade to Version <b>13.3.1</b> complete.</li>';
 
         return (object) array(
             'content' => implode('', $content),
-            'version' => '13.3.0',
+            'version' => '13.3.1',
         );
     }
 }

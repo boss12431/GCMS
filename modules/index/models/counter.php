@@ -118,7 +118,7 @@ class Model extends \Kotchasan\Model
             // ตรวจสอบ ว่าเคยเยี่ยมชมหรือไม่
             if ($new || $request->cookie('counter_date')->toInt() != $d) {
                 // เข้ามาครั้งแรกในวันนี้, บันทึก counter 1 วัน
-                setcookie('counter_date', $d, time() + 3600 * 24, '/', null, HOST, true);
+                setcookie('counter_date', $d, time() + 3600 * 24, '/', HOST, HTTPS, true);
                 // ยังไม่เคยเยี่ยมชมในวันนี้
                 ++$my_counter['visited'];
                 ++$my_counter['counter'];

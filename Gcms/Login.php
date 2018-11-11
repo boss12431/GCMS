@@ -47,16 +47,22 @@ class Login extends \Kotchasan\Login
     {
         // ตรวจสอบสมาชิกกับฐานข้อมูล
         $login_result = self::checkMember($params);
-        if (is_string($login_result)) {
-            return $login_result;
-        } else {
+        if (is_array($login_result)) {
             // model
             $model = new \Kotchasan\Model();
+            // Database
+            $db = $model->db();
             // ip ที่ login
             $ip = self::$request->getClientIp();
+            // current session
+            $session_id = session_id();
+            // token
+            $login_result['token'] = sha1(uniqid());
+            // ลบ password
+            unset($login_result['password']);
             // ตรวจสอบการ login มากกว่า 1 ip
             if (self::$cfg->member_only_ip && !empty($ip)) {
-                $online = $model->db()->createQuery()
+                $online = $db->createQuery()
                     ->from('useronline')
                     ->where(array(
                         array('member_id', (int) $login_result['id']),
@@ -70,22 +76,27 @@ class Login extends \Kotchasan\Login
                     return Language::get('Members of this system already');
                 }
             }
-            // current session
-            $session_id = session_id();
             // อัปเดทการเยี่ยมชม
             if ($session_id != $login_result['session_id']) {
                 ++$login_result['visited'];
-                $model->db()->createQuery()
-                    ->update('user')
-                    ->set(array(
-                        'session_id' => $session_id,
-                        'visited' => $login_result['visited'],
-                        'lastvisited' => time(),
-                        'ip' => $ip,
-                    ))
-                    ->where((int) $login_result['id'])
-                    ->execute();
+                $save = array(
+                    'session_id' => $session_id,
+                    'visited' => $login_result['visited'],
+                    'lastvisited' => time(),
+                    'ip' => $ip,
+                    'token' => $login_result['token'],
+                );
+            } else {
+                $save = array(
+                    'token' => $login_result['token'],
+                );
             }
+            // บันทึกการเข้าระบบ
+            $db->createQuery()
+                ->update('user')
+                ->set($save)
+                ->where((int) $login_result['id'])
+                ->execute();
         }
 
         return $login_result;
@@ -114,8 +125,12 @@ class Login extends \Kotchasan\Login
             ->toArray();
         $login_result = null;
         foreach ($query->execute() as $item) {
-            if ($item['password'] == sha1($params['password'].$item['salt'])) {
-                $item['permission'] = empty($item['permission']) ? array() : explode(',', trim($item['permission'], " \t\n\r\0\x0B,"));
+            if (isset($params['password']) && $item['password'] == sha1($params['password'].$item['salt'])) {
+                // ตรวจสอบรหัสผ่าน
+                $login_result = $item;
+                break;
+            } elseif (isset($params['token']) && $params['token'] == $item['token']) {
+                // ตรวจสอบ token
                 $login_result = $item;
                 break;
             }
@@ -136,6 +151,9 @@ class Login extends \Kotchasan\Login
 
             return Language::get('Members were suspended');
         } else {
+            // permission
+            $login_result['permission'] = empty($login_result['permission']) ? array() : explode(',', trim($login_result['permission'], " \t\n\r\0\x0B,"));
+
             return $login_result;
         }
     }
@@ -219,6 +237,7 @@ class Login extends \Kotchasan\Login
                     self::$login_message = Language::get('Your message was sent successfully');
                     self::$request = $request->withQueryParams(array('action' => 'login'));
                 } else {
+                    // ไม่สำเร็จ
                     self::$login_message = $err->getErrorMessage();
                 }
             }

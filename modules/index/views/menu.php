@@ -60,7 +60,7 @@ class View
                     foreach ($items[$level] as $level2 => $item2) {
                         if ($item2->published != 0) {
                             if (isset($items[$level2]) && sizeof($items[$level2]) > 0) {
-                                $mymenu .= $this->createItem($item2).'<ul>';
+                                $mymenu .= $this->createItem($item2, $select, true).'<ul>';
                                 foreach ($items[$level2] as $item3) {
                                     $mymenu .= $this->createItem($item3).'</li>';
                                 }

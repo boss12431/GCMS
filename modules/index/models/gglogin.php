@@ -79,7 +79,7 @@ class Model extends \Kotchasan\Model
                 $save['lastvisited'] = time();
                 $save['ip'] = $request->getClientIp();
                 $save['salt'] = uniqid();
-                $save['password'] = sha1($password.$save['salt']);
+                $save['token'] = sha1($password.$save['salt']);
                 // อัปเดท
                 $db->update($user_table, $search['id'], $save);
             } else {
@@ -100,7 +100,6 @@ class Model extends \Kotchasan\Model
                 }
                 // login
                 $save['permission'] = empty($save['permission']) ? array() : explode(',', trim($save['permission'], " \t\n\r\0\x0B,"));
-                $save['password'] = $password;
                 $_SESSION['login'] = $save;
                 // คืนค่า
                 $ret['action'] = $request->post('login_action')->toString();

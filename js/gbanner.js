@@ -85,14 +85,17 @@ GBanner.prototype = {
   add: function(picture, detail, url) {
     var figure = document.createElement("figure");
     this.container.appendChild(figure);
+    var a = document.createElement("a");
+    a.href = url;
+    figure.appendChild(a);
     var img = document.createElement("img");
     img.src = picture;
     img.className = "nozoom";
-    figure.appendChild(img);
+    a.appendChild(img);
     if (detail && detail != "") {
       var figcaption = document.createElement("figcaption");
       figure.appendChild(figcaption);
-      var a = document.createElement("a");
+      a = document.createElement("a");
       a.href = url;
       a.target = "_blank";
       figcaption.appendChild(a);

@@ -54,7 +54,7 @@ $config['ConfigAllowedCommands'] = array('QuickUpload', 'FileUpload', 'GetFolder
 $config['ConfigAllowedTypes'] = array('File', 'Image', 'Flash', 'Media');
 // For security, HTML is allowed in the first Kb of data for files having the
 // following extensions only.
-$config['HtmlExtensions'] = array('html', 'htm', 'xml', 'xsd', 'txt', 'js');
+$config['HtmlExtensions'] = array("html", "htm", "xml", "xsd", "txt", "js");
 // After file is uploaded, sometimes it is required to change its permissions
 // so that it was possible to access it at the later time.
 // If possible, it is recommended to set more restrictive permissions, like 0755.
