@@ -2,10 +2,10 @@
 /**
  * @filesource modules/board/views/writeedit.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Board\Writeedit;
@@ -89,6 +89,7 @@ class View extends \Gcms\View
         $topic = Language::get('Edit').' '.Language::get('Post');
         Gcms::$view->addBreadcrumb($canonical, $topic);
         // คืนค่า
+
         return (object) array(
             'module' => $index->module->module,
             'canonical' => $canonical,

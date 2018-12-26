@@ -33,7 +33,7 @@ class Model extends \Kotchasan\Model
      * query ข้อมูลสำหรับการบันทึก
      *
      * @param int $module_id
-     * @param int $id        0 สำหรับรายการใหม่, > 0 สำหรับการแก้ไข
+     * @param int $id        สำหรับรายการใหม่, > สำหรับการแก้ไข
      *
      * @return JSON
      */
@@ -68,7 +68,7 @@ class Model extends \Kotchasan\Model
     /**
      * อ่านข้อมูลรายการที่เลือก
      *
-     * @param int    $id    ID 0 ใหม่, > 0 แก้ไข
+     * @param int    $id    ID ใหม่, > แก้ไข
      * @param object $index ข้อมูลที่ส่งมา
      *
      * @return object|null คืนค่าข้อมูล object ไม่พบคืนค่า null

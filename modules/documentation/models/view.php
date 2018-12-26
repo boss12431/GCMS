@@ -2,10 +2,10 @@
 /**
  * @filesource modules/documentation/models/view.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Documentation\View;
@@ -77,6 +77,7 @@ class Model extends \Kotchasan\Model
                 $index->$key = $value;
             }
             // คืนค่าข้อมูลบทความ
+
             return $index;
         }
 

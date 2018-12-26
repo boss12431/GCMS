@@ -2,10 +2,10 @@
 /**
  * @filesource modules/board/views/view.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Board\View;
@@ -180,6 +180,7 @@ class View extends \Gcms\View
             return (object) $result;
         }
         // 404
+
         return createClass('Index\Error\Controller')->init('board');
     }
 }

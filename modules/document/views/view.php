@@ -134,7 +134,7 @@ class View extends \Gcms\View
                     '/{DISPLAYNAME}/' => $index->displayname,
                     '/{STATUS}/' => $index->status,
                     '/{UID}/' => (int) $index->member_id,
-                    '/{LOGIN_PASSWORD}/' => $login['password'],
+                    '/{LOGIN_PASSWORD}/' => '',
                     '/{LOGIN_EMAIL}/' => $login['email'],
                     '/{QID}/' => $index->id,
                     '/{URL}/' => $index->canonical,

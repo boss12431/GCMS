@@ -2,10 +2,10 @@
 /**
  * @filesource modules/documentation/views/admin/setup.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Documentation\Admin\Setup;
@@ -28,7 +28,13 @@ class View extends \Gcms\Adminview
      * ข้อมูลโมดูล.
      */
     private $index;
+    /**
+     * @var mixed
+     */
     private $publisheds;
+    /**
+     * @var mixed
+     */
     private $categories;
 
     /**

@@ -11,6 +11,7 @@
 namespace Index\Module;
 
 use Kotchasan\ArrayTool;
+use Kotchasan\Database\Sql;
 
 /**
  * คลาสสำหรับโหลดรายการโมดูลที่ติดตั้งแล้วทั้งหมด จากฐานข้อมูลของ GCMS (Admin).
@@ -80,5 +81,53 @@ class Model
         }
 
         return $result;
+    }
+
+    /**
+     * อ่านข้อมูลโมดูลและค่ากำหนด จาก DB
+     * คืนค่าข้อมูลโมดูล (Object) ไม่พบคืนค่า false.
+     *
+     * @param string $owner
+     * @param string $module
+     * @param int    $module_id
+     *
+     * @return object|false
+     */
+    public static function getModuleWithConfig($owner, $module = '', $module_id = 0)
+    {
+        if (empty($module) && empty($module_id)) {
+            $where = array('owner', Sql::strValue($owner));
+        } elseif (empty($owner) && empty($module)) {
+            $where = array('id', (int) $module_id);
+        } elseif (empty($owner) && empty($module_id)) {
+            $where = array('module', Sql::strValue($module));
+        } elseif (empty($module_id)) {
+            $where = array(array('module', Sql::strValue($module)), array('owner', Sql::strValue($owner)));
+        } else {
+            $where = array(array('id', (int) $module_id), array('owner', Sql::strValue($owner)));
+        }
+        $model = new \Kotchasan\Model();
+        $search = $model->db()->createQuery()
+            ->from('modules')
+            ->where($where)
+            ->cacheOn()
+            ->toArray()
+            ->first('id', 'module', 'owner', 'config');
+        if ($search) {
+            $config = @unserialize($search['config']);
+            if (is_array($config)) {
+                $config['id'] = $search['id'];
+                $config['module'] = $search['module'];
+                $config['owner'] = $search['owner'];
+
+                return (object) $config;
+            } else {
+                unset($search['config']);
+
+                return (object) $search;
+            }
+        }
+
+        return null;
     }
 }

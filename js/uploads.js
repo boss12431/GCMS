@@ -181,7 +181,7 @@
         }
       });
     },
-    cancle: function() {
+    cancel: function() {
       this.uploading = false;
     },
     _ext: function(name) {
@@ -385,7 +385,7 @@ function initGUploads(form_id, id, model) {
     customSettings: { albumId: id }
   });
   callClick("btnCancel", function() {
-    upload.cancle();
+    upload.cancel();
   });
   callClick("btnDelete", _doDelete);
   callClick("selectAll", _setSel);

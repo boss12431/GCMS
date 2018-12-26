@@ -2,10 +2,10 @@
 /**
  * @filesource modules/board/views/view.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Board\Write;
@@ -81,6 +81,7 @@ class View extends \Gcms\View
         $topic = Language::get('Create topic');
         Gcms::$view->addBreadcrumb($canonical, $topic);
         // คืนค่า
+
         return (object) array(
             'module' => $index->module,
             'canonical' => $canonical,

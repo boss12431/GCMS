@@ -2,10 +2,10 @@
 /**
  * @filesource modules/board/models/write.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Board\Write;
@@ -254,7 +254,7 @@ class Model extends \Kotchasan\Model
     /**
      * อ่านข้อมูล คำถาม
      *
-     * @param int $id          ID ของคำถาม, 0 ถ้าเป็นคำถามใหม่
+     * @param int $id          ID ของคำถาม, ถ้าเป็นคำถามใหม่
      * @param int $module_id   ID ของโมดูล
      * @param int $category_id หมวดหมู่ที่เลือก
      *

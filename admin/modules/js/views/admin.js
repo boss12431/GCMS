@@ -282,9 +282,9 @@ var dataTableActionCallback = function(xhr) {
     toplv = -1,
     ds = xhr.responseText.toJSON();
   if (ds) {
-    if (ds.showmodal) {
-      modal = new GModal().show(ds.showmodal);
-      ds.showmodal.evalScript();
+    if (ds.modal) {
+      modal = new GModal().show(ds.modal);
+      ds.modal.evalScript();
     } else {
       for (prop in ds) {
         val = ds[prop];

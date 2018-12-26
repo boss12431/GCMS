@@ -2,10 +2,10 @@
 /**
  * @filesource modules/edocument/views/member.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Edocument\Member;
@@ -170,6 +170,7 @@ class View extends \Gcms\View
             ));
             $index->detail = $template->render();
             // คืนค่า
+
             return $index;
         }
 

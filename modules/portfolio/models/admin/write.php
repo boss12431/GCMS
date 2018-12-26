@@ -2,10 +2,10 @@
 /**
  * @filesource modules/portfolio/models/admin/write.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Portfolio\Admin\Write;

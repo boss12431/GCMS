@@ -77,15 +77,17 @@ function defaultSubmit(ds) {
     } else if (prop == "alert") {
       _alert = val;
     } else if (prop == "modal") {
-      if (modal && val == "close") {
-        modal.hide();
+      if (val == "close") {
+        if (modal) {
+          modal.hide();
+        }
+      } else {
+        if (!modal) {
+          modal = new GModal();
+        }
+        modal.show(val);
+        val.evalScript();
       }
-    } else if (prop == "showmodal") {
-      if (!modal) {
-        modal = new GModal();
-      }
-      modal.show(val);
-      val.evalScript();
     } else if (prop == "elem") {
       el = $E(val);
       if (el) {
@@ -548,6 +550,33 @@ var doLoginSubmit = function(xhr) {
     console.log(xhr.responseText);
   }
 };
+function initEditProfile(prefix, countries) {
+  prefix = prefix ? prefix + "_" : "";
+  var countryChanged = function() {
+    var province = $E(prefix + "province"),
+      provinceID = $E(prefix + "provinceID");
+    if (countries.indexOf(this.value) === -1) {
+      if (provinceID) {
+        $G(provinceID.parentNode.parentNode).addClass("hidden");
+      }
+      if (province) {
+        $G(province.parentNode.parentNode).removeClass("hidden");
+      }
+    } else {
+      if (province) {
+        $G(province.parentNode.parentNode).addClass("hidden");
+      }
+      if (provinceID) {
+        $G(provinceID.parentNode.parentNode).removeClass("hidden");
+      }
+    }
+  };
+  new GMultiSelect([prefix + "country"], {
+    action: WEB_URL + "index.php/index/model/province/toJSON",
+    prefix: prefix,
+    onchange: countryChanged
+  });
+}
 var createLikeButton;
 function initWeb(module) {
   module = module ? module + "/" : "";

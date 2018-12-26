@@ -61,6 +61,16 @@ class Province
     }
 
     /**
+     * คืนค่ารายการประเทศที่มีการติดดตั้ง.
+     *
+     * @return array
+     */
+    public static function countries()
+    {
+        return array('TH', 'LA');
+    }
+
+    /**
      * อ่านชื่อจังหวัดจาก ISO ตามภาษา (ถ้าไม่มีใช้ภาษาอังกฤษ)
      * คืนค่าว่างถ้าไม่พบ.
      *

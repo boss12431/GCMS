@@ -1156,7 +1156,7 @@ html .button:before,
 }
 .bg-red,
 .button.red,
-.button.cancle,
+.button.cancel,
 .button.admin,
 .button.delete {
   background-color: #f44336;
@@ -3569,8 +3569,7 @@ body .tooltip-right,
 body .tooltip-left,
 body .tooltip-top,
 body .tooltip-top-left,
-body .tooltip-top,
--right,
+body .tooltip-top-right,
 body .tooltip-bottom,
 body .tooltip-bottom-left,
 body .tooltip-bottom-right {
@@ -3595,8 +3594,7 @@ body .tooltip-bottom-right {
 .tooltip-top:after,
 .tooltip-bottom:after,
 .tooltip-top-left:after,
-.tooltip-top,
--right:after,
+.tooltip-top-right:after,
 .tooltip-bottom-left:after,
 .tooltip-bottom-right:after {
   border-color: #000;
@@ -3623,8 +3621,7 @@ body .tooltip-bottom-right {
   left: -6px;
 }
 .tooltip-top-left:after,
-.tooltip-top,
--right:after,
+.tooltip-top-right:after,
 .tooltip-top:after {
   border-style: none solid solid solid;
   border-left-color: transparent;
@@ -3645,8 +3642,7 @@ body .tooltip-bottom-right {
 .tooltip-bottom-left:after {
   left: 15px;
 }
-.tooltip-top,
--right:after,
+.tooltip-top-right:after,
 .tooltip-bottom-right:after {
   right: 15px;
 }

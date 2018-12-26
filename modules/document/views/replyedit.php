@@ -63,7 +63,7 @@ class View extends \Gcms\View
             Gcms::$view->addBreadcrumb(Gcms::createUrl($index->module->module, '', $index->category_id), $category);
         }
         // breadcrumb ของกระทู้
-        Gcms::$view->addBreadcrumb(Gcms::createUrl($index->module->module, '', 0, 0, 'id='.$index->id), $index->topic);
+        Gcms::$view->addBreadcrumb(Gcms::createUrl($index->module->module, '', 0, 0, 'id='.$index->index_id), $index->topic);
         // breadcrumb ของหน้า
         $canonical = WEB_URL.'index.php?module='.$index->module->module.'-edit&amp;rid='.$index->id;
         $topic = Language::get('Edit').' '.Language::get('Comment');

@@ -2,10 +2,10 @@
 /**
  * @filesource modules/board/models/stories.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Board\Stories;
@@ -72,6 +72,7 @@ class Model extends \Kotchasan\Model
                 $index->items[] = $item;
             }
             // คืนค่า
+
             return $index;
         }
 

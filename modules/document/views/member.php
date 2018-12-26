@@ -64,7 +64,7 @@ class View extends \Gcms\View
                     /* Uri */
                     'uri' => $uri,
                     /* className */
-                    'class' => 'data',
+                    'class' => 'horiz-table border',
                     /* Model */
                     'model' => 'Document\Admin\Setup\Model',
                     /* query where */

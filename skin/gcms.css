@@ -645,6 +645,11 @@ header.list h2 select {
   margin: 5px 0;
   padding: 10px;
 }
+.check-column {
+  padding: 0;
+  width: 2.5em;
+  text-align: center !important;
+}
 /* phone, tablet */
 @media only screen and (max-width: 768px) {
   body.responsie #board-list .col2 {

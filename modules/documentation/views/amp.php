@@ -2,10 +2,10 @@
 /**
  * @filesource modules/documentation/views/amp.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Documentation\Amp;
@@ -45,6 +45,7 @@ class View extends \Gcms\View
             // JSON-LD
             Gcms::$view->setJsonLd(\Documentation\Jsonld\View::generate($index));
             // คืนค่า
+
             return (object) array(
                 // /documentation/amp.html
                 'content' => Template::create('documentation', $index->module, 'amp')->render(),
@@ -54,6 +55,7 @@ class View extends \Gcms\View
             );
         }
         // 404
+
         return createClass('Index\Error\Controller')->init('document');
     }
 }

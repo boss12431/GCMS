@@ -19,6 +19,7 @@ Calendar.prototype = {
     this.calendar = $G(document.createElement("div"));
     this.calendar.className = "event-calendar";
     this.showToday = false;
+    this.first_day = null;
     for (var property in o) {
       if (property == "month") {
         this.cdate.setMonth(floatval(o[property]) - 1);
@@ -144,6 +145,7 @@ Calendar.prototype = {
       tmp_month = initial_day == 1 ? intmonth : floatval(tmp_prev_month),
       tmp_year = initial_day == 1 ? intyear : floatval(tmp_prev_year),
       flag_end = 0,
+      d,
       div;
     r = 0;
     for (var x = 0; x < 42; x++) {
@@ -169,10 +171,11 @@ Calendar.prototype = {
       span.innerHTML = pointer;
       cell.appendChild(span);
       div = document.createElement("div");
-      div.id =
-        this.id +
-        "-" +
-        new Date(tmp_year, tmp_month - 1, pointer, 0, 0, 0, 0).format("y-m-d");
+      d = new Date(tmp_year, tmp_month - 1, pointer, 0, 0, 0, 0);
+      if (self.first_day === null) {
+        self.first_day = d;
+      }
+      div.id = this.id + "-" + d.format("y-m-d");
       cell.appendChild(div);
       cls = tmp_month == intmonth ? "curr" : "ex";
       if (
@@ -232,42 +235,63 @@ Calendar.prototype = {
     return null;
   },
   _drawEvents: function() {
-    var self = this;
+    var a,
+      diff,
+      elems,
+      top,
+      start,
+      d,
+      self = this;
     forEach(this.events, function() {
       if (this.start) {
-        var a = self._addLabel(new Date(this.start), this, true);
+        a = new Date(this.start);
+        diff = a.compare(self.first_day);
+        if (diff.days < 0) {
+          a = self._addLabel(self.first_day, this, true);
+          this.start = self.first_day.format("y-m-d H:i:s");
+        } else {
+          a = self._addLabel(a, this, true);
+        }
         if (a && this.end) {
-          var diff = new Date(this.end).compare(new Date(this.start));
+          diff = new Date(this.end).compare(new Date(this.start));
           if (diff.days > 0) {
-            var elems = [a],
-              top = a.offsetTop,
-              start = Date.parse(this.start);
+            elems = [a];
+            top = a.offsetTop;
+            start = Date.parse(this.start);
             for (var i = 1; i <= diff.days; i++) {
-              a = self._addLabel(new Date(start + i * 86400000), this, false);
+              d = new Date(start + i * 86400000);
+              a = self._addLabel(d, this, false);
               if (a) {
-                elems.push(a);
-                top = Math.max(top, a.offsetTop);
+                if (d.getDay() == 0) {
+                  self._align(elems, top);
+                  top = a.offsetTop;
+                  elems = [a];
+                } else {
+                  top = Math.max(top, a.offsetTop);
+                  elems.push(a);
+                }
               }
             }
-            forEach(elems, function() {
-              if (this.offsetTop != top) {
-                this.style.top = top + "px";
-              }
-            });
+            self._align(elems, top);
           }
         }
       }
     });
   },
-  _get: function(date) {
+  _align: function(elems, top) {
+    forEach(elems, function() {
+      if (this.offsetTop != top) {
+        this.style.top = top + "px";
+      }
+    });
+  },
+  _get: function(d) {
     var self = this,
-      q =
-        (this.params == "" ? "" : this.params + "&") +
-        ("month=" + (floatval(date.getMonth()) + 1)) +
-        ("&year=" + date.getFullYear());
+      q = ["month=" + (floatval(d.getMonth()) + 1), "year=" + d.getFullYear()];
+    q = (this.params == "" ? "" : this.params + "&") + q.join("&");
     new GAjax().send(this.url, q, function(xhr) {
       var ds = xhr.responseText.toJSON();
-      self.cdate = date;
+      self.cdate = d;
       self.events = ds || {};
       self._drawMonth();
       self._drawEvents();

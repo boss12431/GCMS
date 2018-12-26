@@ -2,10 +2,10 @@
 /**
  * @filesource modules/personnel/views/admin/setup.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Personnel\Admin\Setup;
@@ -26,6 +26,9 @@ class View extends \Gcms\Adminview
      * ข้อมูลโมดูล.
      */
     private $categories;
+    /**
+     * @var mixed
+     */
     private $uri;
 
     /**
