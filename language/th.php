@@ -191,6 +191,10 @@ return array(
   'Download' => 'ดาวน์โหลด',
   'Download Details' => 'รายละเอียดการดาวน์โหลด',
   'Download file' => 'ไฟล์ดาวน์โหลด',
+  'DOWNLOAD_ACTIONS' => array(
+    0 => 'ดาวน์โหลดไฟล์',
+    1 => 'เปิดไฟล์ (ที่รู้จัก)'
+  ),
   'Drag and drop to reorder' => 'ลากและวางเพื่อจัดลำดับ',
   'E-Document' => 'เอกสาร',
   'E-mail address for replies. If you do not want a response, please leave blank.' => 'ที่อยู่อีเมลสำหรับการตอบกลับ หากคุณไม่ต้องการให้มีการตอบกลับกรุณาเว้นว่างไว้',
@@ -759,6 +763,7 @@ return array(
   'Welcome %s, login complete' => 'สวัสดี คุณ %s ยินดีต้อนรับเข้าสู่ระบบ',
   'When adding a new document Email alert to the recipient. When enabled this option.' => 'เมื่อมีการเพิ่มเอกสารใหม่ ส่งอีเมลแจ้งเตือนไปยังผู้รับด้วย เมื่อเปิดใช้งานตัวเลือกนี้',
   'When choosing the menu' => 'เมื่อคลิกเมนู',
+  'When download' => 'เมื่อคลิกดาวน์โหลด',
   'When logging in' => 'เมื่อมีการเข้าสู่ระบบ',
   'When you press the button below. GCMS will create <em>:dbname.sql</em> file for save on your computer. This file contains all the information in the database. You can use it to restore your system, or used to move data to another site.' => 'เมื่อคุณกดปุ่มด้านล่าง GCMS จะทำการสร้างไฟล์ <em>:dbname.sql</em> สำหรับบันทึกลงในคอมพิวเตอร์ของคุณ ไฟล์นี้จะประกอบไปด้วยข้อมูลทั้งหมดในฐานข้อมูลของ GCMS ตามที่คุณได้เลือกไว้ คุณสามารถใช้ไฟล์นี้ในการกู้คืนระบบของคุณในกรณีฉุกเฉินหรือนำเข้าข้อมูลไปยัง GCMS อื่นได้',
   'Widget for displaying thumbnails from RSS' => 'ส่วนเสริมสำหรับแสดงรูปภาพจาก RSS',

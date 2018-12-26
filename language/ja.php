@@ -1,5 +1,4 @@
 <?php
-
 /* language/ja.php */
 return array(
   ':username passwords' => ':usernameのパスワード',
@@ -246,6 +245,7 @@ return array(
   'Fill out the topic with short and clear' => '簡潔なタイトルを心掛けましょう',
   'First Install' => '初回インストール',
   'For display by Date or Tag' => 'タグまたは日付による表示',
+  'forever' => '無期限',
   'Forgot' => 'パスワード再発行',
   'Friend&#039;s faces' => 'フレンドリスト',
   'from time' => 'から',
@@ -390,6 +390,7 @@ return array(
   'Module' => 'モジュール',
   'Module name' => 'モジュール名',
   'Module or an extension has not been installed correctly the first time. Please click on the button "Install" below to complete installation before.' => 'モジュールまたは拡張機能が適切にインストールされていません。「インストール」ボタンを押して再インストールして下さい。',
+  'Module page' => 'モジュールのWebページ',
   'Module settings' => 'モジュールの設定',
   'Modules' => 'モジュール',
   'Modules for writing blogs, news or article' => 'ニュース記事やブログ用途のモジュール',

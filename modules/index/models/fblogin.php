@@ -75,6 +75,7 @@ class Model extends \Kotchasan\Model
                     $save['create_date'] = $save['lastvisited'];
                     $save['icon'] = $save['id'].'.jpg';
                     $save['country'] = 'TH';
+                    $save['token'] = sha1($password.$save['salt']);
                     $db->insert($user_table, $save);
                 } elseif ($search['social'] == 1) {
                     // facebook เคยเยี่ยมชมแล้ว อัปเดทการเยี่ยมชม
