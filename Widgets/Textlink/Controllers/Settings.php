@@ -24,42 +24,43 @@ use Kotchasan\Language;
  */
 class Settings extends \Gcms\Controller
 {
-    /**
-     * แสดงผล.
-     *
-     * @param Request $request
-     *
-     * @return string
-     */
-    public function render(Request $request)
-    {
-        if (defined('MAIN_INIT')) {
-            // ข้อความ title bar
-            $this->title = Language::get('Widgets for controlling and managing the links or banners');
-            // เมนู
-            $this->menu = 'widgets';
-            // สามารถตั้งค่าระบบได้
-            if (Login::checkPermission(Login::adminAccess(), 'can_config')) {
-                // แสดงผล
-                $section = Html::create('section');
-                // breadcrumbs
-                $breadcrumbs = $section->add('div', array(
-                    'class' => 'breadcrumbs',
-                ));
-                $ul = $breadcrumbs->add('ul');
-                $ul->appendChild('<li><span class="icon-widgets">{LNG_Widgets}</span></li>');
-                $ul->appendChild('<li><span>{LNG_Text links}</span></li>');
-                $section->add('header', array(
-                    'innerHTML' => '<h2 class="icon-ads">'.$this->title().'</h2>',
-                ));
-                // แสดงฟอร์ม
-                $section->appendChild(createClass('Widgets\Textlink\Views\Settings')->render($request));
 
-                return $section->render();
-            }
-        }
-        // 404.html
+  /**
+   * แสดงผล.
+   *
+   * @param Request $request
+   *
+   * @return string
+   */
+  public function render(Request $request)
+  {
+    if (defined('MAIN_INIT')) {
+      // ข้อความ title bar
+      $this->title = Language::get('Widgets for controlling and managing the links or banners');
+      // เมนู
+      $this->menu = 'widgets';
+      // สามารถตั้งค่าระบบได้
+      if (Login::checkPermission(Login::adminAccess(), 'can_config')) {
+        // แสดงผล
+        $section = Html::create('section');
+        // breadcrumbs
+        $breadcrumbs = $section->add('div', array(
+          'class' => 'breadcrumbs',
+        ));
+        $ul = $breadcrumbs->add('ul');
+        $ul->appendChild('<li><span class="icon-widgets">{LNG_Widgets}</span></li>');
+        $ul->appendChild('<li><span>{LNG_Text links}</span></li>');
+        $section->add('header', array(
+          'innerHTML' => '<h2 class="icon-ads">'.$this->title().'</h2>',
+        ));
+        // แสดงฟอร์ม
+        $section->appendChild(createClass('Widgets\Textlink\Views\Settings')->render($request));
 
-        return \Index\Error\Controller::page404();
+        return $section->render();
+      }
     }
+    // 404.html
+
+    return \Index\Error\Controller::page404();
+  }
 }

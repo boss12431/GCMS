@@ -19,15 +19,18 @@ namespace Index\Export;
  */
 class View extends \Gcms\View
 {
-    /**
-     * แสดงผล.
-     *
-     * @param object $index ข้อมูลโมดูล
-     */
-    public function printer($index)
-    {
-        if ($index) {
-        } else {
-        }
+
+  /**
+   * แสดงผล.
+   *
+   * @param object $index ข้อมูลโมดูล
+   */
+  public function printer($index)
+  {
+    if ($index) {
+
+    } else {
+
     }
+  }
 }

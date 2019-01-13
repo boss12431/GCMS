@@ -7,9 +7,9 @@
  * @license http://www.kotchasan.com/license/
  */
 function initFacebookButton(button) {
-  callClick(button, function() {
+  callClick(button, function () {
     FB.login(
-      function(response) {
+      function (response) {
         if (response.authResponse) {
           var accessToken = response.authResponse.accessToken;
           var uid = response.authResponse.userID;
@@ -19,7 +19,7 @@ function initFacebookButton(button) {
               access_token: accessToken,
               fields: "id,first_name,last_name,email"
             },
-            function(response) {
+            function (response) {
               if (!response.error) {
                 var q = new Array();
                 if ($E("token")) {
@@ -28,32 +28,32 @@ function initFacebookButton(button) {
                 if ($E("login_action")) {
                   q.push(
                     "login_action=" +
-                      encodeURIComponent($E("login_action").value)
-                  );
+                    encodeURIComponent($E("login_action").value)
+                    );
                 }
                 for (var prop in response) {
                   q.push(prop + "=" + encodeURIComponent(response[prop]));
                 }
                 send(
                   WEB_URL +
-                    "index.php/" +
-                    ($E("facebook_action")
-                      ? $E("facebook_action").value
-                      : "index/model/fblogin/chklogin"),
+                  "index.php/" +
+                  ($E("facebook_action")
+                    ? $E("facebook_action").value
+                    : "index/model/fblogin/chklogin"),
                   q.join("&"),
                   doLoginSubmit
-                );
+                  );
               }
             }
           );
         }
       },
-      { scope: "email,public_profile" }
+      {scope: "email,public_profile"}
     );
   });
 }
 function initFacebook(appId, lng) {
-  window.fbAsyncInit = function() {
+  window.fbAsyncInit = function () {
     FB.init({
       appId: appId,
       cookie: true,
@@ -65,5 +65,5 @@ function initFacebook(appId, lng) {
   loadJavascript(
     "facebook-jssdk",
     "//connect.facebook.net/" + (lng == "th" ? "th_TH" : "en_US") + "/sdk.js"
-  );
+    );
 }

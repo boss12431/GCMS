@@ -19,26 +19,27 @@ namespace Index\Sitemap;
  */
 class Model extends \Kotchasan\Model
 {
-    /**
-     * อ่านรายชื่อโมดูลทั้งหมดที่ติดตั้งแล้ว.
-     *
-     * @return array
-     */
-    public static function getModules()
-    {
-        if (defined('MAIN_INIT')) {
-            $model = new static();
 
-            return $model->db()->createQuery()
-                ->select('M.id', 'M.module', 'M.owner', 'I.language')
-                ->from('modules M')
-                ->join('index I', 'LEFT', array(array('I.module_id', 'M.id'), array('I.index', 1)))
-                ->where(array('I.published', '1'))
-                ->cacheOn()
-                ->execute();
-        } else {
-            // เรียก method โดยตรง
-            new \Kotchasan\Http\NotFound('Do not call method directly');
-        }
+  /**
+   * อ่านรายชื่อโมดูลทั้งหมดที่ติดตั้งแล้ว.
+   *
+   * @return array
+   */
+  public static function getModules()
+  {
+    if (defined('MAIN_INIT')) {
+      $model = new static();
+
+      return $model->db()->createQuery()
+          ->select('M.id', 'M.module', 'M.owner', 'I.language')
+          ->from('modules M')
+          ->join('index I', 'LEFT', array(array('I.module_id', 'M.id'), array('I.index', 1)))
+          ->where(array('I.published', '1'))
+          ->cacheOn()
+          ->execute();
+    } else {
+      // เรียก method โดยตรง
+      new \Kotchasan\Http\NotFound('Do not call method directly');
     }
+  }
 }

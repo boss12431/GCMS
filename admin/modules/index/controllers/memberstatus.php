@@ -24,40 +24,41 @@ use Kotchasan\Language;
  */
 class Controller extends \Gcms\Controller
 {
-    /**
-     * จัดการสถานะสมาชิก
-     *
-     * @param Request $request
-     *
-     * @return string
-     */
-    public function render(Request $request)
-    {
-        // ข้อความ title bar
-        $this->title = Language::get('The members status of the site');
-        // เลือกเมนู
-        $this->menu = 'users';
-        // สามารถตั้งค่าระบบได้
-        if (Login::checkPermission(Login::adminAccess(), 'can_config')) {
-            // แสดงผล
-            $section = Html::create('section');
-            // breadcrumbs
-            $breadcrumbs = $section->add('div', array(
-                'class' => 'breadcrumbs',
-            ));
-            $ul = $breadcrumbs->add('ul');
-            $ul->appendChild('<li><span class="icon-user">{LNG_Users}</span></li>');
-            $ul->appendChild('<li><span>{LNG_Member status}</span></li>');
-            $section->add('header', array(
-                'innerHTML' => '<h2 class="icon-users">'.$this->title.'</h2>',
-            ));
-            // แสดงฟอร์ม
-            $section->appendChild(createClass('Index\Memberstatus\View')->render());
 
-            return $section->render();
-        }
-        // 404.html
+  /**
+   * จัดการสถานะสมาชิก
+   *
+   * @param Request $request
+   *
+   * @return string
+   */
+  public function render(Request $request)
+  {
+    // ข้อความ title bar
+    $this->title = Language::get('The members status of the site');
+    // เลือกเมนู
+    $this->menu = 'users';
+    // สามารถตั้งค่าระบบได้
+    if (Login::checkPermission(Login::adminAccess(), 'can_config')) {
+      // แสดงผล
+      $section = Html::create('section');
+      // breadcrumbs
+      $breadcrumbs = $section->add('div', array(
+        'class' => 'breadcrumbs',
+      ));
+      $ul = $breadcrumbs->add('ul');
+      $ul->appendChild('<li><span class="icon-user">{LNG_Users}</span></li>');
+      $ul->appendChild('<li><span>{LNG_Member status}</span></li>');
+      $section->add('header', array(
+        'innerHTML' => '<h2 class="icon-users">'.$this->title.'</h2>',
+      ));
+      // แสดงฟอร์ม
+      $section->appendChild(createClass('Index\Memberstatus\View')->render());
 
-        return \Index\Error\Controller::page404();
+      return $section->render();
     }
+    // 404.html
+
+    return \Index\Error\Controller::page404();
+  }
 }

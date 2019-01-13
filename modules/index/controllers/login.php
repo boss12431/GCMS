@@ -19,20 +19,21 @@ namespace Index\Login;
  */
 class Controller extends \Kotchasan\Controller
 {
-    /**
-     * แสดงผลกรอบ login.
-     *
-     * @param array $login ข้อมูลการ Login
-     *
-     * @return string ฟอร์ม
-     */
-    public static function init($login)
-    {
-        // ฟอร์ม
-        if ($login) {
-            return createClass('Index\Login\View')->member($login);
-        } else {
-            return createClass('Index\Login\View')->login();
-        }
+
+  /**
+   * แสดงผลกรอบ login.
+   *
+   * @param array $login ข้อมูลการ Login
+   *
+   * @return string ฟอร์ม
+   */
+  public static function init($login)
+  {
+    // ฟอร์ม
+    if ($login) {
+      return createClass('Index\Login\View')->member($login);
+    } else {
+      return createClass('Index\Login\View')->login();
     }
+  }
 }

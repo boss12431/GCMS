@@ -579,11 +579,6 @@ td.thumb > img {
   max-width: 48px;
   max-height: 48px;
 }
-.check-column {
-  padding: 0;
-  width: 2.5em;
-  text-align: center !important;
-}
 tbody th,
 tbody td,
 thead th {

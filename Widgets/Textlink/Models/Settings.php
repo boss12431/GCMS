@@ -19,10 +19,10 @@ namespace Widgets\Textlink\Models;
  */
 class Settings extends \Kotchasan\Orm\Field
 {
-    /**
-     * ชื่อตาราง.
-     *
-     * @var string
-     */
-    protected $table = 'textlink';
+  /**
+   * ชื่อตาราง.
+   *
+   * @var string
+   */
+  protected $table = 'textlink';
 }

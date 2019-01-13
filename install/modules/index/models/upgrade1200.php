@@ -19,16 +19,17 @@ namespace Index\Upgrade1200;
  */
 class Model extends \Index\Upgrade\Model
 {
-    /**
-     * อัปเกรดเป็นเวอร์ชั่น 12.0.0.
-     *
-     * @return string
-     */
-    public static function upgrade($db)
-    {
-        return (object) array(
-            'content' => '<li class="correct">Upgrade to Version <b>12.0.0</b> complete.</li>',
-            'version' => '12.0.0',
-        );
-    }
+
+  /**
+   * อัปเกรดเป็นเวอร์ชั่น 12.0.0.
+   *
+   * @return string
+   */
+  public static function upgrade($db)
+  {
+    return (object)array(
+        'content' => '<li class="correct">Upgrade to Version <b>12.0.0</b> complete.</li>',
+        'version' => '12.0.0',
+    );
+  }
 }

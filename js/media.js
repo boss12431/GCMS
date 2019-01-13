@@ -7,9 +7,9 @@
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
  */
-(function() {
+(function () {
   "use strict";
-  window.GMedia = function(name, src, width, height) {
+  window.GMedia = function (name, src, width, height) {
     var c = src.toLowerCase();
     this.id = name || "";
     this.src = src;
@@ -25,42 +25,42 @@
       this.addParam("wmode", "transparent");
       this._getPlayer =
         navigator.plugins && navigator.mimeTypes && navigator.mimeTypes.length
-          ? this._getEmbed
-          : this._getObject;
+        ? this._getEmbed
+        : this._getObject;
     } else if (c.indexOf(".avi") > -1 || c.indexOf(".wmv") > -1) {
       this.addParam("type", "application/x-mplayer2");
       this.addParam(
         "pluginspage",
         "http://www.microsoft.com/Windows/MediaPlayer/"
-      );
+        );
       this._getPlayer = this._getEmbed;
     } else if (
       c.indexOf(".jpg") > -1 ||
       c.indexOf(".jpeg") > -1 ||
       c.indexOf(".gif") > -1 ||
       c.indexOf(".png") > -1
-    ) {
+      ) {
       this._getPlayer = this._getImage;
     } else {
       this._getPlayer = this._getEmbed;
     }
   };
   GMedia.prototype = {
-    addParam: function(param, value) {
+    addParam: function (param, value) {
       this.params[param.toLowerCase()] = value;
       return this;
     },
-    _getParams: function() {
+    _getParams: function () {
       return this.params;
     },
-    addProperty: function(prop, value) {
+    addProperty: function (prop, value) {
       this.properties[prop.toLowerCase()] = value;
       return this;
     },
-    _getProperties: function() {
+    _getProperties: function () {
       return this.properties;
     },
-    write: function(id) {
+    write: function (id) {
       if ($E(id)) {
         this.player = $G(id);
         var size = this.player.getDimensions();
@@ -73,7 +73,7 @@
       }
       return this;
     },
-    _getEmbed: function() {
+    _getEmbed: function () {
       var a =
         '<embed type="application/x-shockwave-flash" id="' +
         this.id +
@@ -95,7 +95,7 @@
       a += "/>";
       return a;
     },
-    _getObject: function() {
+    _getObject: function () {
       var a =
         '<object id="' +
         this.id +
@@ -117,7 +117,7 @@
       a += "</object>";
       return a;
     },
-    _getImage: function() {
+    _getImage: function () {
       return '<img id="' + this.id + '" src="' + this.src + '" />';
     }
   };

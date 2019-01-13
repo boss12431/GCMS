@@ -19,23 +19,24 @@ namespace Document\Sitemap;
  */
 class Model extends \Kotchasan\Model
 {
-    /**
-     * บทความทั้งหมด.
-     *
-     * @param array  $ids  แอเรย์ของ module_id
-     * @param string $date วันที่วันนี้
-     *
-     * @return array
-     */
-    public static function getStories($ids, $date)
-    {
-        $model = new static();
 
-        return $model->db()->createQuery()
-            ->select('id', 'module_id', 'alias', 'create_date')
-            ->from('index')
-            ->where(array(array('module_id', $ids), array('index', 0), array('published', 1), array('published_date', '<=', $date)))
-            ->cacheOn()
-            ->execute();
-    }
+  /**
+   * บทความทั้งหมด.
+   *
+   * @param array  $ids  แอเรย์ของ module_id
+   * @param string $date วันที่วันนี้
+   *
+   * @return array
+   */
+  public static function getStories($ids, $date)
+  {
+    $model = new static();
+
+    return $model->db()->createQuery()
+        ->select('id', 'module_id', 'alias', 'create_date')
+        ->from('index')
+        ->where(array(array('module_id', $ids), array('index', 0), array('published', 1), array('published_date', '<=', $date)))
+        ->cacheOn()
+        ->execute();
+  }
 }

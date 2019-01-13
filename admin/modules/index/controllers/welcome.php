@@ -21,24 +21,25 @@ use Kotchasan\Http\Request;
  */
 class Controller extends \Gcms\Controller
 {
-    /**
-     * forgot, login.
-     *
-     * @param Request $request
-     *
-     * @return string
-     */
-    public function execute(Request $request)
-    {
-        // action ที่เลือก
-        $action = $request->get('action')->toString();
-        // ตรวจสอบ method ที่กำหนดไว่เท่านั้น
-        $action = $action == 'forgot' ? 'forgot' : 'login';
-        // เรียก method ที่ส่งมา
-        $view = \Index\Welcome\View::$action($request);
-        // คืนค่า
-        $this->title = $view->title;
 
-        return $view->content;
-    }
+  /**
+   * forgot, login.
+   *
+   * @param Request $request
+   *
+   * @return string
+   */
+  public function execute(Request $request)
+  {
+    // action ที่เลือก
+    $action = $request->get('action')->toString();
+    // ตรวจสอบ method ที่กำหนดไว่เท่านั้น
+    $action = $action == 'forgot' ? 'forgot' : 'login';
+    // เรียก method ที่ส่งมา
+    $view = \Index\Welcome\View::$action($request);
+    // คืนค่า
+    $this->title = $view->title;
+
+    return $view->content;
+  }
 }

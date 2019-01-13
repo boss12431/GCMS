@@ -19,26 +19,26 @@ namespace Edocument\Admin\Report;
  */
 class Model extends \Kotchasan\Orm\Field
 {
-    /**
-     * ชื่อตาราง.
-     *
-     * @var string
-     */
-    protected $table = 'edocument_download D';
+  /**
+   * ชื่อตาราง.
+   *
+   * @var string
+   */
+  protected $table = 'edocument_download D';
 
-    public function getConfig()
-    {
-        return array(
-            'select' => array('D.member_id id', 'U.name', 'U.email', 'U.status', 'D.last_update', 'D.downloads', 'D.document_id'),
-            'join' => array(
-                array(
-                    'LEFT',
-                    'Index\User\Model',
-                    array(
-                        array('U.id', 'D.member_id'),
-                    ),
-                ),
-            ),
-        );
-    }
+  public function getConfig()
+  {
+    return array(
+      'select' => array('D.member_id id', 'U.name', 'U.email', 'U.status', 'D.last_update', 'D.downloads', 'D.document_id'),
+      'join' => array(
+        array(
+          'LEFT',
+          'Index\User\Model',
+          array(
+            array('U.id', 'D.member_id'),
+          ),
+        ),
+      ),
+    );
+  }
 }

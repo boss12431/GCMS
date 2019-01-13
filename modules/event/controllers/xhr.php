@@ -21,13 +21,14 @@ use Kotchasan\Http\Request;
  */
 class Controller extends \Kotchasan\Controller
 {
-    /**
-     * แสดงปฎิทิน.
-     */
-    public function get(Request $request)
-    {
-        if ($request->isReferer()) {
-            echo \Event\Calendar\Controller::render($request);
-        }
+
+  /**
+   * แสดงปฎิทิน.
+   */
+  public function get(Request $request)
+  {
+    if ($request->isReferer()) {
+      echo \Event\Calendar\Controller::render($request);
     }
+  }
 }

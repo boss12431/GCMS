@@ -625,7 +625,9 @@ header.list h2 select {
   -ms-transition: all 1s ease-out;
   transition: all 1s ease-out;
 }
+.modaldiv article,
 .modaldiv form {
+  background-color: #fff;
   padding: 10px;
   margin: 0;
   width: auto;

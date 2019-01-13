@@ -19,10 +19,10 @@ namespace Product\Admin\Detail;
  */
 class Model extends \Kotchasan\Orm\Field
 {
-    /**
-     * ชื่อตาราง.
-     *
-     * @var string
-     */
-    protected $table = 'product_detail D';
+  /**
+   * ชื่อตาราง.
+   *
+   * @var string
+   */
+  protected $table = 'product_detail D';
 }

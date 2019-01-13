@@ -19,22 +19,23 @@ namespace Board\Sitemap;
  */
 class Model extends \Kotchasan\Model
 {
-    /**
-     * กระทู้ทั้งหมด.
-     *
-     * @param array $ids แอเรย์ของ module_id
-     *
-     * @return array
-     */
-    public static function getStories($ids)
-    {
-        $model = new static();
 
-        return $model->db()->createQuery()
-            ->select('id', 'module_id', 'last_update', 'comment_date')
-            ->from('board_q')
-            ->where(array('module_id', $ids))
-            ->cacheOn()
-            ->execute();
-    }
+  /**
+   * กระทู้ทั้งหมด.
+   *
+   * @param array $ids แอเรย์ของ module_id
+   *
+   * @return array
+   */
+  public static function getStories($ids)
+  {
+    $model = new static();
+
+    return $model->db()->createQuery()
+        ->select('id', 'module_id', 'last_update', 'comment_date')
+        ->from('board_q')
+        ->where(array('module_id', $ids))
+        ->cacheOn()
+        ->execute();
+  }
 }

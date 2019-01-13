@@ -19,31 +19,32 @@ namespace Widgets\Twitter\Views;
  */
 class Preview extends \Kotchasan\View
 {
-    /**
-     * Twitter Page.
-     *
-     * @param array $query_string
-     *
-     * @return string
-     */
-    public static function render($query_string)
-    {
-        // หน้าเว็บ Twitter
-        $content = '<!DOCTYPE html>';
-        $content .= '<html>';
-        $content .= '<head>';
-        $content .= '<title>Twitter</title>';
-        $content .= '<meta charset=utf-8>';
-        $content .= '<style>';
-        $content .= '#fb-root{display: none}';
-        $content .= '.fb_iframe_widget, .fb_iframe_widget span, .fb_iframe_widget span iframe[style] {width: 100% !important;}';
-        $content .= '</style>';
-        $content .= '</head>';
-        $content .= '<body>';
-        $content .= \Widgets\Twitter\Views\Index::render($query_string);
-        $content .= '</body>';
-        $content .= '</html>';
 
-        return $content;
-    }
+  /**
+   * Twitter Page.
+   *
+   * @param array $query_string
+   *
+   * @return string
+   */
+  public static function render($query_string)
+  {
+    // หน้าเว็บ Twitter
+    $content = '<!DOCTYPE html>';
+    $content .= '<html>';
+    $content .= '<head>';
+    $content .= '<title>Twitter</title>';
+    $content .= '<meta charset=utf-8>';
+    $content .= '<style>';
+    $content .= '#fb-root{display: none}';
+    $content .= '.fb_iframe_widget, .fb_iframe_widget span, .fb_iframe_widget span iframe[style] {width: 100% !important;}';
+    $content .= '</style>';
+    $content .= '</head>';
+    $content .= '<body>';
+    $content .= \Widgets\Twitter\Views\Index::render($query_string);
+    $content .= '</body>';
+    $content .= '</html>';
+
+    return $content;
+  }
 }

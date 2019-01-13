@@ -13,7 +13,7 @@
  */
 var GBanner = GClass.create();
 GBanner.prototype = {
-  initialize: function(div, options) {
+  initialize: function (div, options) {
     this.options = {
       className: "gbanner",
       slideTime: 5000,
@@ -37,14 +37,14 @@ GBanner.prototype = {
     this.next = this.container.create("span");
     this.next.className = "btnnav next";
     this.next.title = trans("Next");
-    callClick(this.next, function() {
+    callClick(this.next, function () {
       window.clearTimeout(tmp.SlideTime);
       tmp._nextSlide();
     });
     this.prev = this.container.create("span");
     this.prev.className = "btnnav prev";
     this.prev.title = trans("Prev");
-    callClick(this.prev, function() {
+    callClick(this.prev, function () {
       window.clearTimeout(tmp.SlideTime);
       tmp._prevSlide();
     });
@@ -55,17 +55,17 @@ GBanner.prototype = {
     this.button.className = "button_container scroll";
     this.button.style.position = "relative";
     this.datas = new Array();
-    forEach(this.container.elems("figure"), function() {
+    forEach(this.container.elems("figure"), function () {
       tmp._initItem(this);
     });
     this.drag = false;
     if (this.options.touchThumbnail) {
       new GDragMove(this.button, this.buttons, {
-        beginDrag: function(e) {
+        beginDrag: function (e) {
           tmp.button.className = "button_container";
           return true;
         },
-        moveDrag: function(e) {
+        moveDrag: function (e) {
           tmp.drag = true;
           var l = tmp.buttons.getWidth() - tmp.button.getWidth();
           if (l < 0) {
@@ -73,7 +73,7 @@ GBanner.prototype = {
               Math.min(0, Math.max(l, e.mousePos.x - e.mouseOffset.x)) + "px";
           }
         },
-        endDrag: function() {
+        endDrag: function () {
           tmp.button.className = "button_container scroll";
           tmp.drag = false;
           return true;
@@ -82,7 +82,7 @@ GBanner.prototype = {
     }
     this.currentId = -1;
   },
-  add: function(picture, detail, url) {
+  add: function (picture, detail, url) {
     var figure = document.createElement("figure");
     this.container.appendChild(figure);
     var a = document.createElement("a");
@@ -106,16 +106,17 @@ GBanner.prototype = {
     this._initItem(figure);
     return this;
   },
-  JSONData: function(data) {
+  JSONData: function (data) {
     try {
       var datas = eval(data);
       for (var i = 0; i < datas.length; i++) {
         this.add(datas[i].picture, datas[i].detail || "", datas[i].url || "");
       }
-    } catch (e) {}
+    } catch (e) {
+    }
     return this;
   },
-  _initItem: function(obj) {
+  _initItem: function (obj) {
     var i = this.datas.length;
     this.datas.push($G(obj));
     var img = obj.querySelector("img"),
@@ -139,14 +140,14 @@ GBanner.prototype = {
     }
     var tmp = this;
     a.style.cursor = "pointer";
-    a.addEvent("mouseup", function() {
+    a.addEvent("mouseup", function () {
       if (tmp.drag == false) {
         window.clearTimeout(tmp.SlideTime);
         tmp._show(floatval(this.rel));
       }
     });
   },
-  _prevSlide: function() {
+  _prevSlide: function () {
     if (this.datas.length > 0) {
       var next = this.currentId - 1;
       if (next < 0 && this.options.loop) {
@@ -155,7 +156,7 @@ GBanner.prototype = {
       this._playIng(next);
     }
   },
-  _nextSlide: function() {
+  _nextSlide: function () {
     if (this.datas.length > 0) {
       var next = this.currentId + 1;
       if (next >= this.datas.length && this.options.loop) {
@@ -164,25 +165,25 @@ GBanner.prototype = {
       this._playIng(next);
     }
   },
-  _playIng: function(id) {
+  _playIng: function (id) {
     if ($E(this.slideshow.id)) {
       this._show(id);
       if (this.datas.length > 1) {
         var temp = this;
-        this.SlideTime = window.setTimeout(function() {
+        this.SlideTime = window.setTimeout(function () {
           temp.playSlideShow.call(temp);
         }, this.options.slideTime);
       }
     }
   },
-  playSlideShow: function() {
+  playSlideShow: function () {
     this._nextSlide();
     return this;
   },
-  _show: function(id) {
+  _show: function (id) {
     if (this.datas[id]) {
       var figcaption;
-      forEach(this.datas, function(item, index) {
+      forEach(this.datas, function (item, index) {
         figcaption = item.querySelector("figcaption");
         if (id == index) {
           item.className = "show";
@@ -202,10 +203,10 @@ GBanner.prototype = {
       this.currentId = id;
     }
   },
-  _setButton: function(id) {
+  _setButton: function (id) {
     var tmp = this,
       current;
-    forEach(this.button.elems("a"), function() {
+    forEach(this.button.elems("a"), function () {
       if (this.rel == id) {
         this.className = "current";
         current = this;
@@ -213,7 +214,7 @@ GBanner.prototype = {
         this.className = "";
       }
     });
-    window.setTimeout(function() {
+    window.setTimeout(function () {
       var cw = tmp.buttons.getWidth(),
         bw = tmp.button.getWidth(),
         l = current.getLeft() - tmp.buttons.getLeft(),

@@ -21,26 +21,27 @@ use Gcms\Gcms;
  */
 class View extends \Kotchasan\KBase
 {
-    /**
-     * สร้างโค้ดสำหรับ JSON-LD.
-     *
-     * @param object $index
-     *
-     * @return array
-     */
-    public static function generate($index)
-    {
-        return array(
-            '@context' => 'http://schema.org',
-            '@type' => 'TechArticle',
-            'mainEntityOfPage' => array(
-                '@type' => 'WebPage',
-                '@id' => Gcms::createUrl($index->module),
-                'publisher' => Gcms::$site,
-            ),
-            'headline' => $index->topic,
-            'description' => $index->description,
-            'url' => $index->canonical,
-        );
-    }
+
+  /**
+   * สร้างโค้ดสำหรับ JSON-LD.
+   *
+   * @param object $index
+   *
+   * @return array
+   */
+  public static function generate($index)
+  {
+    return array(
+      '@context' => 'http://schema.org',
+      '@type' => 'TechArticle',
+      'mainEntityOfPage' => array(
+        '@type' => 'WebPage',
+        '@id' => Gcms::createUrl($index->module),
+        'publisher' => Gcms::$site,
+      ),
+      'headline' => $index->topic,
+      'description' => $index->description,
+      'url' => $index->canonical,
+    );
+  }
 }

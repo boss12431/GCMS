@@ -19,22 +19,23 @@ namespace Portfolio\Sitemap;
  */
 class Model extends \Kotchasan\Model
 {
-    /**
-     * query ข้อมูลทั้งหมดสำหรับสร้าง sitemap.
-     *
-     * @param array $ids แอเรย์ของ module_id
-     *
-     * @return array
-     */
-    public static function getAll($ids)
-    {
-        $model = new static();
 
-        return $model->db()->createQuery()
-            ->select('id', 'module_id', 'create_date')
-            ->from('portfolio')
-            ->where(array('module_id', $ids))
-            ->cacheOn()
-            ->execute();
-    }
+  /**
+   * query ข้อมูลทั้งหมดสำหรับสร้าง sitemap.
+   *
+   * @param array $ids แอเรย์ของ module_id
+   *
+   * @return array
+   */
+  public static function getAll($ids)
+  {
+    $model = new static();
+
+    return $model->db()->createQuery()
+        ->select('id', 'module_id', 'create_date')
+        ->from('portfolio')
+        ->where(array('module_id', $ids))
+        ->cacheOn()
+        ->execute();
+  }
 }

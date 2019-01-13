@@ -22,69 +22,68 @@ use Kotchasan\Template;
  */
 class View extends \Gcms\View
 {
-    /**
-     * แสดงกรอบ login.
-     */
-    public function __construct()
-    {
-        // template ที่กำลังใช้งานอยู่
-        if (!empty($_SESSION['skin']) && is_file(APP_PATH.'skin/'.$_SESSION['skin'].'/style.css')) {
-            self::$cfg->skin = $_SESSION['skin'];
-        }
-        Template::init('skin/'.self::$cfg->skin);
+
+  /**
+   * แสดงกรอบ login.
+   */
+  public function __construct()
+  {
+    // template ที่กำลังใช้งานอยู่
+    if (!empty($_SESSION['skin']) && is_file(APP_PATH.'skin/'.$_SESSION['skin'].'/style.css')) {
+      self::$cfg->skin = $_SESSION['skin'];
     }
+    Template::init('skin/'.self::$cfg->skin);
+  }
 
-    /**
-     * ฟอร์มสมาชิก
-     *
-     * @param array $login
-     *
-     * @return string
-     */
-    public function member($login)
-    {
-        $template = Template::create('member', 'member', 'member');
-        if ($template->isEmpty()) {
-            $template = Template::create('member', 'member', 'memberfrm');
-        }
-        $template->add(array(
-            '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
-            '/{WEBTITLE}/' => self::$cfg->web_title,
-            '/{SUBTITLE}/' => empty(Login::$login_message) ? self::$cfg->web_description : '<span class=error>'.Login::$login_message.'</span>',
-            '/{DISPLAYNAME}/' => empty($login['displayname']) ? (empty($login['email']) ? 'Unname' : $login['email']) : $login['displayname'],
-            '/{ID}/' => (int) $login['id'],
-            '/{STATUS}/' => $login['status'],
-            '/{ADMIN}/' => Login::adminAccess() ? '' : 'hidden',
-            '/{TOKEN}/' => self::$request->createToken(),
-            '/{WEBURL}/' => WEB_URL,
-            '/:name/' => self::$cfg->member_status[1],
-        ));
-
-        return $template->render();
+  /**
+   * ฟอร์มสมาชิก
+   *
+   * @param array $login
+   *
+   * @return string
+   */
+  public function member($login)
+  {
+    $template = Template::create('member', 'member', 'member');
+    if ($template->isEmpty()) {
+      $template = Template::create('member', 'member', 'memberfrm');
     }
+    $template->add(array(
+      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
+      '/{WEBTITLE}/' => self::$cfg->web_title,
+      '/{SUBTITLE}/' => empty(Login::$login_message) ? self::$cfg->web_description : '<span class=error>'.Login::$login_message.'</span>',
+      '/{DISPLAYNAME}/' => empty($login['displayname']) ? (empty($login['email']) ? 'Unname' : $login['email']) : $login['displayname'],
+      '/{ID}/' => (int)$login['id'],
+      '/{STATUS}/' => $login['status'],
+      '/{ADMIN}/' => Login::adminAccess() ? '' : 'hidden',
+      '/{TOKEN}/' => self::$request->createToken(),
+      '/{WEBURL}/' => WEB_URL,
+      '/:name/' => self::$cfg->member_status[1],
+    ));
+    return $template->render();
+  }
 
-    /**
-     * ฟอร์มเข้าระบบ.
-     *
-     * @return string
-     */
-    public function login()
-    {
-        $template = Template::create('member', 'member', 'login');
-        if ($template->isEmpty()) {
-            $template = Template::create('member', 'member', 'loginfrm');
-        }
-        $template->add(array(
-            '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
-            '/{SUBTITLE}/' => empty(Login::$login_message) ? self::$cfg->web_description : '<span class=error>'.Login::$login_message.'</span>',
-            '/{EMAIL}/' => isset(Login::$login_params['username']) ? Login::$login_params['username'] : '',
-            '/{PASSWORD}/' => isset(Login::$login_params['password']) ? Login::$login_params['password'] : '',
-            '/{TOKEN}/' => self::$request->createToken(),
-            '/{PLACEHOLDER}/' => \Gcms\Gcms::getLoginPlaceholder(),
-            '/{FACEBOOK}/' => empty(self::$cfg->facebook_appId) ? 'hidden' : 'facebook',
-            '/{GOOGLE}/' => empty(self::$cfg->google_client_id) ? 'hidden' : 'google',
-        ));
-
-        return $template->render();
+  /**
+   * ฟอร์มเข้าระบบ.
+   *
+   * @return string
+   */
+  public function login()
+  {
+    $template = Template::create('member', 'member', 'login');
+    if ($template->isEmpty()) {
+      $template = Template::create('member', 'member', 'loginfrm');
     }
+    $template->add(array(
+      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
+      '/{SUBTITLE}/' => empty(Login::$login_message) ? self::$cfg->web_description : '<span class=error>'.Login::$login_message.'</span>',
+      '/{EMAIL}/' => isset(Login::$login_params['username']) ? Login::$login_params['username'] : '',
+      '/{PASSWORD}/' => isset(Login::$login_params['password']) ? Login::$login_params['password'] : '',
+      '/{TOKEN}/' => self::$request->createToken(),
+      '/{PLACEHOLDER}/' => \Gcms\Gcms::getLoginPlaceholder(),
+      '/{FACEBOOK}/' => empty(self::$cfg->facebook_appId) ? 'hidden' : 'facebook',
+      '/{GOOGLE}/' => empty(self::$cfg->google_client_id) ? 'hidden' : 'google',
+    ));
+    return $template->render();
+  }
 }

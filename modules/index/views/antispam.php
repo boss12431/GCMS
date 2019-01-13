@@ -22,13 +22,14 @@ use Kotchasan\Http\Request;
  */
 class View extends \Gcms\View
 {
-    /**
-     * @param Request $request
-     */
-    public function index(Request $request)
-    {
-        $request->initSession();
-        // Antispam Image
-        Antispam::createImage($request->get('id')->toString());
-    }
+
+  /**
+   * @param Request $request
+   */
+  public function index(Request $request)
+  {
+    $request->initSession();
+    // Antispam Image
+    Antispam::createImage($request->get('id')->toString());
+  }
 }

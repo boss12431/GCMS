@@ -21,27 +21,28 @@ use Gcms\Gcms;
  */
 class Index extends \Kotchasan\Controller
 {
-    /**
-     * แสดงผล Widget.
-     *
-     * @param array $query_string ข้อมูลที่ส่งมาจากการเรียก Widget
-     *
-     * @return string
-     */
-    public function get($query_string)
-    {
-        if (!empty(Gcms::$module) && !empty($query_string['module']) && $index = Gcms::$module->findByModule($query_string['module'])) {
-            $module = $index->module;
-            $owner = $index->owner;
-        } else {
-            $module = '';
-            $owner = 'document';
-        }
-        $calendar = array(
-            '<div id=widget-calendar></div>',
-            '<script>initWidgetCalendar("widget-calendar", "'.$owner.'", "'.$module.'");</script>',
-        );
 
-        return implode('', $calendar);
+  /**
+   * แสดงผล Widget.
+   *
+   * @param array $query_string ข้อมูลที่ส่งมาจากการเรียก Widget
+   *
+   * @return string
+   */
+  public function get($query_string)
+  {
+    if (!empty(Gcms::$module) && !empty($query_string['module']) && $index = Gcms::$module->findByModule($query_string['module'])) {
+      $module = $index->module;
+      $owner = $index->owner;
+    } else {
+      $module = '';
+      $owner = 'document';
     }
+    $calendar = array(
+      '<div id=widget-calendar></div>',
+      '<script>initWidgetCalendar("widget-calendar", "'.$owner.'", "'.$module.'");</script>',
+    );
+
+    return implode('', $calendar);
+  }
 }

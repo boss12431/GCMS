@@ -22,47 +22,48 @@ use Kotchasan\Http\Request;
  */
 class Model extends \Kotchasan\Model
 {
-    /**
-     * อ่านรายการที่เลือก
-     *
-     * @param Request $request
-     * @param object  $index
-     *
-     * @return object
-     */
-    public static function get(Request $request, $index)
-    {
-        $select = array(
-            'D.id',
-            'D.color',
-            'D.topic',
-            'D.description',
-            'D.keywords',
-            'D.detail',
-            Sql::DATE('D.begin_date', 'begin_date'),
-            Sql::DATE_FORMAT('D.begin_date', '%H:%i', 'from'),
-            Sql::DATE('D.end_date', 'end_date'),
-            Sql::DATE_FORMAT('D.end_date', '%H:%i', 'to'),
-            'U.name',
-            'U.email',
-            'U.status',
-        );
-        $model = new static();
-        $search = $model->db()->createQuery()
-            ->from('event D')
-            ->join('user U', 'LEFT', array('U.id', 'D.member_id'))
-            ->where(array(array('D.id', $request->request('id')->toInt()), array('D.module_id', (int) $index->module_id)))
-            ->cacheOn()
-            ->toArray()
-            ->first($select);
-        if ($search) {
-            foreach ($search as $key => $value) {
-                $index->$key = $value;
-            }
 
-            return $index;
-        }
+  /**
+   * อ่านรายการที่เลือก
+   *
+   * @param Request $request
+   * @param object  $index
+   *
+   * @return object
+   */
+  public static function get(Request $request, $index)
+  {
+    $select = array(
+      'D.id',
+      'D.color',
+      'D.topic',
+      'D.description',
+      'D.keywords',
+      'D.detail',
+      Sql::DATE('D.begin_date', 'begin_date'),
+      Sql::DATE_FORMAT('D.begin_date', '%H:%i', 'from'),
+      Sql::DATE('D.end_date', 'end_date'),
+      Sql::DATE_FORMAT('D.end_date', '%H:%i', 'to'),
+      'U.name',
+      'U.email',
+      'U.status',
+    );
+    $model = new static();
+    $search = $model->db()->createQuery()
+      ->from('event D')
+      ->join('user U', 'LEFT', array('U.id', 'D.member_id'))
+      ->where(array(array('D.id', $request->request('id')->toInt()), array('D.module_id', (int)$index->module_id)))
+      ->cacheOn()
+      ->toArray()
+      ->first($select);
+    if ($search) {
+      foreach ($search as $key => $value) {
+        $index->$key = $value;
+      }
 
-        return null;
+      return $index;
     }
+
+    return null;
+  }
 }

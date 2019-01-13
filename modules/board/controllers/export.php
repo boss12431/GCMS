@@ -21,17 +21,18 @@ use Kotchasan\Http\Request;
  */
 class Controller extends \Kotchasan\Controller
 {
-    /**
-     * ส่งออกกระทู้.
-     *
-     * @param Request $request
-     * @param object  $index   ข้อมูลโมดูล
-     *
-     * @return array
-     */
-    public static function init(Request $request, $index)
-    {
-        // พิมพ์กระทู้
-        return createClass('Board\Export\View')->printer($request, $index);
-    }
+
+  /**
+   * ส่งออกกระทู้.
+   *
+   * @param Request $request
+   * @param object  $index   ข้อมูลโมดูล
+   *
+   * @return array
+   */
+  public static function init(Request $request, $index)
+  {
+    // พิมพ์กระทู้
+    return createClass('Board\Export\View')->printer($request, $index);
+  }
 }
