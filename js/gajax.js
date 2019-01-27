@@ -15,9 +15,7 @@ window.$K = (function () {
       return true;
     },
     isMobile: function () {
-      return navigator.userAgent.match(
-        /(iPhone|iPod|iPad|Android|webOS|BlackBerry|Windows Phone)/i
-        );
+      return navigator.userAgent.match(/(iPhone|iPod|iPad|Android|webOS|BlackBerry|Windows Phone)/i);
     },
     init: function (element) {
       forEach(element.querySelectorAll("input,textarea"), function (elem) {
@@ -61,20 +59,9 @@ window.$K = (function () {
               var _docheck = function () {
                 if (this.value == "" && obj.required !== null) {
                   this.addClass("required");
-                  this.invalid(
-                    obj.title !== ""
-                    ? obj.title
-                    : trans("Please fill in") +
-                    (this.placeholder == "" ? "" : " " + this.placeholder)
-                    );
-                } else if (
-                  this.value != "" &&
-                  obj.pattern &&
-                  !obj.pattern.test(this.value)
-                  ) {
-                  this.invalid(
-                    obj.title !== "" ? obj.title : trans("Invalid data")
-                    );
+                  this.invalid(obj.title !== "" ? obj.title : trans("Please fill in") + (this.placeholder == "" ? "" : " " + this.placeholder));
+                } else if (this.value != "" && obj.pattern && !obj.pattern.test(this.value)) {
+                  this.invalid(obj.title !== "" ? obj.title : trans("Invalid data"));
                 } else if (obj.required !== null || obj.pattern) {
                   this.reset();
                 }
@@ -172,9 +159,7 @@ window.$K = (function () {
                   }
                 }
                 if (obj.dataset["keyboard"]) {
-                  obj.pattern = new RegExp(
-                    "^(?:[" + obj.dataset["keyboard"].preg_quote() + "]+)$"
-                    );
+                  obj.pattern = new RegExp("^(?:[" + obj.dataset["keyboard"].preg_quote() + "]+)$");
                   if (obj.type == "currency") {
                     new GInput(text, obj.dataset["keyboard"], function () {
                       var val = floatval(this.value);
@@ -810,17 +795,7 @@ window.$K = (function () {
       s = n < 0 ? "-" : "",
       i = String(parseInt((n = Math.abs(Number(n) || 0).toFixed(decimals)))),
       j = (j = i.length) > 3 ? j % 3 : 0;
-    return (
-      s +
-      (j ? i.substr(0, j) + thousands_sep : "") +
-      i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands_sep) +
-      (decimals
-        ? dec_point +
-        Math.abs(n - i)
-        .toFixed(decimals)
-        .slice(2)
-        : "")
-      );
+    return (s + (j ? i.substr(0, j) + thousands_sep : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands_sep) + (decimals ? dec_point + Math.abs(n - i).toFixed(decimals).slice(2) : ""));
   };
   document.viewport = {
     getWidth: function () {
@@ -1109,12 +1084,7 @@ window.$K = (function () {
       s = s == "float" && this.currentStyle ? "styleFloat" : s;
       s = s == "borderColor" ? "borderBottomColor" : s;
       var v = this.currentStyle ? this.currentStyle[s] : null;
-      v =
-        !v && window.getComputedStyle
-        ? document.defaultView
-        .getComputedStyle(this, null)
-        .getPropertyValue(s.replace(/([A-Z])/g, "-$1").toLowerCase())
-        : v;
+      v = !v && window.getComputedStyle ? document.defaultView.getComputedStyle(this, null).getPropertyValue(s.replace(/([A-Z])/g, "-$1").toLowerCase()) : v;
       if (s == "opacity") {
         return Object.isNull(v) ? 100 : floatval(v) * 100;
       } else {
@@ -1705,8 +1675,7 @@ window.$K = (function () {
     html: "text/html",
     text: "text/plain",
     json: "application/json, text/javascript",
-    all:
-      "text/html, text/plain, application/xml, text/xml, application/json, text/javascript"
+    all: "text/html, text/plain, application/xml, text/xml, application/json, text/javascript"
   };
   window.GAjax = GClass.create();
   GAjax.prototype = {

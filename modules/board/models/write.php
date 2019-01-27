@@ -245,7 +245,11 @@ class Model extends \Kotchasan\Model
             // ส่งข้อความแจ้งเตือนไปยังไลน์เมื่อมีโพสต์ใหม่
             if (!empty($index->line_notifications) && in_array(1, $index->line_notifications)) {
               $msg = Language::get('BOARD_NOTIFICATIONS');
-              \Gcms\Line::send($msg[1].' '.$ret['location']);
+              \Gcms\Line::send(implode("\n", array(
+                $post['sender'].' '.$msg[1].':',
+                $post['topic'],
+                $ret['location']
+              )));
             }
           }
         }
@@ -304,10 +308,8 @@ class Model extends \Kotchasan\Model
       }
       unset($index['mconfig']);
       unset($index['config']);
-
       return (object)$index;
     }
-
     return false;
   }
 }

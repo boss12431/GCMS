@@ -180,7 +180,11 @@ class Model extends \Kotchasan\Model
             // ส่งข้อความแจ้งเตือนไปยังไลน์เมื่อมีความคิดเห็นใหม่
             if (!empty($index->line_notifications) && in_array(3, $index->line_notifications)) {
               $msg = Language::get('DOCUMENT_NOTIFICATIONS');
-              \Gcms\Line::send($msg[3].' '.$location.'#R_'.$id);
+              \Gcms\Line::send(implode("\n", array(
+                $post['sender'].' '.$msg[3].':',
+                $post['detail'],
+                $location.'#R_'.$id
+              )));
             }
             $location .= self::$cfg->use_ajax == 1 ? "&to=R_$id" : "#R_$id";
             $ret['location'] = $location;

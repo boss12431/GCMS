@@ -191,14 +191,24 @@ class Model extends \Kotchasan\Model
               \Index\Tag\Model::update($tags);
               // ส่งข้อความแจ้งเตือนไปยังไลน์เมื่อมีการเขียนหรือแก้ไขบทความ
               if (!empty($index->line_notifications)) {
+                $msg = Language::get('DOCUMENT_NOTIFICATIONS');
                 if (empty($id) && in_array(1, $index->line_notifications)) {
                   // เขียน
-                  $msg = Language::get('DOCUMENT_NOTIFICATIONS');
-                  \Gcms\Line::send($msg[1].' '.WEB_URL.'index.php?module='.$index->module.'&id='.$index->id);
+                  $line = array(
+                    $login['name'].' '.$msg[1].':',
+                    $save['topic'],
+                    WEB_URL.'index.php?module='.$index->module.'&id='.$index->id
+                  );
                 } elseif (!empty($id) && in_array(2, $index->line_notifications)) {
                   //  แก้ไข
-                  $msg = Language::get('DOCUMENT_NOTIFICATIONS');
-                  \Gcms\Line::send($msg[2].' '.WEB_URL.'index.php?module='.$index->module.'&id='.$index->id);
+                  $line = array(
+                    $login['name'].' '.$msg[2].':',
+                    $save['topic'],
+                    WEB_URL.'index.php?module='.$index->module.'&id='.$index->id
+                  );
+                }
+                if (isset($line)) {
+                  \Gcms\Line::send(implode("\n", $line));
                 }
               }
               // ส่งค่ากลับ
