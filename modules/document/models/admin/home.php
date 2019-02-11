@@ -21,24 +21,23 @@ use Kotchasan\Language;
  */
 class Model extends \Kotchasan\Model
 {
+    /**
+     * get populate document.
+     *
+     * @return array
+     */
+    public static function popularpage()
+    {
+        $model = new static();
 
-  /**
-   * get populate document.
-   *
-   * @return array
-   */
-  public static function popularpage()
-  {
-    $model = new static();
-
-    return $model->db()->createQuery()
-        ->select('D.topic', 'I.visited_today')
-        ->from('index I')
-        ->join('modules M', 'INNER', array(array('M.id', 'I.module_id'), array('M.owner', 'document')))
-        ->join('index_detail D', 'INNER', array(array('D.id', 'I.id'), array('D.module_id', 'I.module_id'), array('D.language', array(Language::name(), ''))))
-        ->order('I.visited_today DESC', 'I.visited DESC')
-        ->limit(12)
-        ->toArray()
-        ->execute();
-  }
+        return $model->db()->createQuery()
+            ->select('D.topic', 'I.visited_today')
+            ->from('index I')
+            ->join('modules M', 'INNER', array(array('M.id', 'I.module_id'), array('M.owner', 'document')))
+            ->join('index_detail D', 'INNER', array(array('D.id', 'I.id'), array('D.module_id', 'I.module_id'), array('D.language', array(Language::name(), ''))))
+            ->order('I.visited_today DESC', 'I.visited DESC')
+            ->limit(12)
+            ->toArray()
+            ->execute();
+    }
 }

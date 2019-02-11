@@ -52,7 +52,7 @@
   </form>
 </div>
 <script>
-  $G(window).Ready(function () {
+  $G(window).Ready(function() {
     new GForm('register_frm', '{WEBURL}xhr.php/index/model/register/submit').onsubmit(doFormSubmit);
     new GValidator('register_email', 'keyup,change', checkEmail, '{WEBURL}index.php/index/model/checker/email', null, 'register_frm');
     if ($E('register_phone1')) {
@@ -63,7 +63,7 @@
     }
     new GValidator('register_password', 'keyup,change', checkPassword);
     new GValidator('register_repassword', 'keyup,change', checkPassword);
-    callClick('register_accept', function () {
+    callClick('register_accept', function() {
       $E('register_submit').disabled = this.checked ? false : true;
     });
   });

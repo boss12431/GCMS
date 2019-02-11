@@ -1,6 +1,6 @@
-function initDocumentWrite(languages, tab, module_id) {
+function initDocumentWrite(languages, tab, module_id, module) {
   initWriteTab("accordient_menu", tab);
-  checkSaved("preview", WEB_URL + "index.php?module=" + module_id, "id");
+  checkSaved("preview", WEB_URL + "index.php?module=" + module, "id");
   new GValidator(
     "alias",
     "keyup,change",
@@ -8,20 +8,19 @@ function initDocumentWrite(languages, tab, module_id) {
     "index.php/index/model/checker/alias",
     null,
     "setup_frm"
-    );
+  );
   selectChanged(
     "category_" + module_id,
     "index.php/index/model/admincategory/action",
     doFormSubmit
-    );
-  forEach(languages, function (item) {
+  );
+  forEach(languages, function(item) {
     initAutoComplete(
       "relate_" + item,
       WEB_URL + "index.php/document/model/autocomplete/findRelate",
       "relate",
-      "edit",
-      {
-        get: function () {
+      "edit", {
+        get: function() {
           return (
             "search=" +
             encodeURIComponent($E("relate_" + item).value) +
@@ -29,9 +28,9 @@ function initDocumentWrite(languages, tab, module_id) {
             item +
             "&module_id=" +
             module_id
-            );
+          );
         },
-        callBack: function () {
+        callBack: function() {
           $E("relate_" + item).value = this.relate;
           $E("relate_" + item).focus();
         }
@@ -41,15 +40,14 @@ function initDocumentWrite(languages, tab, module_id) {
       "keywords_" + item,
       WEB_URL + "index.php/document/model/autocomplete/findTag",
       "tag",
-      "tags",
-      {
-        get: function () {
+      "tags", {
+        get: function() {
           return "search=" + encodeURIComponent($E("keywords_" + item).value);
         },
-        callBack: function () {
+        callBack: function() {
           $E("keywords_" + item).value = this.tag.unentityify();
         },
-        onSuccess: function () {
+        onSuccess: function() {
           var input = $G("keywords_" + item);
           input.inputGroup.addItem(this.datas.tag, this.datas.tag);
           input.value = "";

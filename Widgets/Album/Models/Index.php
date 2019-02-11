@@ -1,15 +1,17 @@
 <?php
 /**
  * @filesource Widgets/Album/Models/Index.php
- * @link http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Widgets\Album\Models;
 
 /**
- * อ่านรายการอัลบัมทั้งหมด
+ * อ่านรายการอัลบัมทั้งหมด.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -17,25 +19,26 @@ namespace Widgets\Album\Models;
  */
 class Index extends \Kotchasan\Model
 {
+    /**
+     * อ่านรายการอัลบัม
+     *
+     * @param array $query_string ข้อมูลที่เรียก query string
+     *
+     * @return array
+     */
+    public static function get($query_string)
+    {
+        // query อัลบัมล่าสุด
+        $model = new static();
 
-  /**
-   * อ่านรายการอัลบัม
-   *
-   * @param array $query_string ข้อมูลที่เรียก query string
-   * @return array
-   */
-  public static function get($query_string)
-  {
-    // query อัลบัมล่าสุด
-    $model = new static;
-    return $model->db()->createQuery()
-        ->select('C.id', 'C.topic', 'G.image', 'M.module')
-        ->from('gallery_album C')
-        ->join('gallery G', 'INNER', array(array('G.album_id', 'C.id'), array('G.module_id', 'C.module_id'), array('G.count', 0)))
-        ->join('modules M', 'INNER', array('M.id', 'C.module_id'))
-        ->order('C.id DESC')
-        ->limit($query_string['rows'] * $query_string['cols'])
-        ->cacheOn()
-        ->execute();
-  }
+        return $model->db()->createQuery()
+            ->select('C.id', 'C.topic', 'G.image', 'M.module')
+            ->from('gallery_album C')
+            ->join('gallery G', 'INNER', array(array('G.album_id', 'C.id'), array('G.module_id', 'C.module_id'), array('G.count', 0)))
+            ->join('modules M', 'INNER', array('M.id', 'C.module_id'))
+            ->order('C.id DESC')
+            ->limit($query_string['rows'] * $query_string['cols'])
+            ->cacheOn()
+            ->execute();
+    }
 }

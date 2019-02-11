@@ -5,15 +5,16 @@
   padding-top: 0;
   padding-bottom: 0;
 }
-.portfolio a, .portfolio a:hover {
+.portfolio a,
+.portfolio a:hover {
   color: inherit;
 }
 .portfolio .item {
   border: none;
   line-height: 1.6em;
 }
-.portfolio .item > figure {
-  border: 5px solid rgba(0,0,0,0.05);
+.portfolio .item>figure {
+  border: 5px solid rgba(0, 0, 0, 0.05);
   display: block;
   position: relative;
   overflow: hidden;
@@ -54,7 +55,7 @@
 }
 .portfolio h3 {
   font-size: 1em;
-  text-shadow: -1px -1px 0 rgba(0,0,0,0.4);
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.4);
   line-height: 1;
   color: #FFF;
 }
@@ -106,7 +107,7 @@
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
-.portfolio figure > div {
+.portfolio figure>div {
   overflow: hidden;
 }
 .portfolio figure img {

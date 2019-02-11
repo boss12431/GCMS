@@ -13,6 +13,7 @@
       </div>
     </fieldset>
     <fieldset class="submit right">
+      <a href="{WEBURL}index.php?module=dologin" title="{LNG_Already have an account? Sign in here.}"><span>{LNG_Sign in}</span></a>
       <input type=submit class="button large forgot" value="{LNG_Get new password}" title="{LNG_Request new password}">
       <input type=hidden name=modal value="{MODAL}">
       <input type=hidden name=token id=token value="{TOKEN}">
@@ -20,7 +21,7 @@
   </form>
 </div>
 <script>
-  $G(window).Ready(function () {
+  $G(window).Ready(function() {
     new GForm('forgot_frm', '{WEBURL}xhr.php/index/model/recover/submit').onsubmit(doFormSubmit);
   });
 </script>

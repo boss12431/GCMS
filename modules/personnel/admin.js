@@ -1,8 +1,8 @@
 function initPersonnel() {
   var patt = /order_([0-9]+)_([0-9]+)/;
-  forEach($G("datatable").elems("input"), function () {
+  forEach($G("datatable").elems("input"), function() {
     if (patt.test(this.id)) {
-      $G(this).addEvent("change", function () {
+      $G(this).addEvent("change", function() {
         var hs = patt.exec(this.id);
         if (hs) {
           send(
@@ -14,7 +14,7 @@ function initPersonnel() {
             "&value=" +
             this.value,
             doFormSubmit
-            );
+          );
         }
       });
     }

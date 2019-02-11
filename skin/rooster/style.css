@@ -5,6 +5,7 @@
  Author URI: https://goragod.com
  Responsive
 */
+
 body {
   font-size: 14px;
   color: #272727;
@@ -104,12 +105,12 @@ a:hover {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding: 10px;
 }
-.topmenu > ul > li > a {
+.topmenu>ul>li>a {
   text-transform: uppercase;
   font-size: 1.3em;
 }
-.topmenu > ul > li.select > a,
-.topmenu > ul > li:hover > a {
+.topmenu>ul>li.select>a,
+.topmenu>ul>li:hover>a {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 .breadcrumbs {
@@ -129,11 +130,11 @@ a:hover {
   margin: 30px 0;
   text-align: center;
 }
-.content header > h2 {
+.content header>h2 {
   padding: 0.5em 0;
   font-size: 3em;
 }
-.rightsidebar > .content {
+.rightsidebar>.content {
   padding-right: 10px;
 }
 .homepage .widget {
@@ -145,7 +146,7 @@ a:hover {
   border-bottom: 3px solid #f9f9f9;
   overflow: hidden;
 }
-.widget header > h2 {
+.widget header>h2 {
   background-color: #f9f9f9;
   float: left;
   font-size: 1.3em;
@@ -172,7 +173,7 @@ a:hover {
   margin-left: 0;
   margin-right: 0;
 }
-.leftsidebar > .content {
+.leftsidebar>.content {
   padding-left: 10px;
 }
 @media only screen and (max-width: 960px) {
@@ -199,7 +200,7 @@ a:hover {
   .header h1 {
     font-size: 4em;
   }
-  .content header > h2 {
+  .content header>h2 {
     font-size: 2em;
   }
 }

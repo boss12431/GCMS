@@ -19,17 +19,16 @@ namespace Index\Sitemap;
  */
 class View extends \Gcms\View
 {
-
-  /**
-   * สร้างรายการ sitemap.
-   *
-   * @param string $url
-   * @param string $date
-   *
-   * @return string
-   */
-  public function render($url, $date)
-  {
-    return '<url><loc>'.$url.'</loc><lastmod>'.$date.'</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>';
-  }
+    /**
+     * สร้างรายการ sitemap.
+     *
+     * @param string $url
+     * @param string $date
+     *
+     * @return string
+     */
+    public function render($url, $date)
+    {
+        return '<url><loc>'.$url.'</loc><lastmod>'.$date.'</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>';
+    }
 }

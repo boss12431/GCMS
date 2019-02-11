@@ -24,56 +24,55 @@ use Kotchasan\Template;
  */
 class View extends \Kotchasan\View
 {
+    /**
+     * ฟอร์มเข้าระบบ.
+     *
+     * @param Request $request
+     *
+     * @return object
+     */
+    public static function login(Request $request)
+    {
+        // template
+        $template = Template::create('', '', 'login');
+        $template->add(array(
+            '/<FACEBOOK>(.*)<\/FACEBOOK>/s' => empty(self::$cfg->facebook_appId) || !self::$cfg->demo_mode ? '' : '\\1',
+            '/{TOKEN}/' => $request->createToken(),
+            '/{PLACEHOLDER}/' => \Gcms\Gcms::getLoginPlaceholder(),
+            '/{EMAIL}/' => Login::$login_params['username'],
+            '/{PASSWORD}/' => isset(Login::$login_params['password']) ? Login::$login_params['password'] : '',
+            '/{MESSAGE}/' => Login::$login_message,
+            '/{CLASS}/' => empty(Login::$login_message) ? 'hidden' : (empty(Login::$login_input) ? 'message' : 'error'),
+            '/{LOGIN_ACTION}/' => $request->getUri()->withoutParams('action'),
+        ));
 
-  /**
-   * ฟอร์มเข้าระบบ.
-   *
-   * @param Request $request
-   *
-   * @return object
-   */
-  public static function login(Request $request)
-  {
-    // template
-    $template = Template::create('', '', 'login');
-    $template->add(array(
-      '/<FACEBOOK>(.*)<\/FACEBOOK>/s' => empty(self::$cfg->facebook_appId) || !self::$cfg->demo_mode ? '' : '\\1',
-      '/{TOKEN}/' => $request->createToken(),
-      '/{PLACEHOLDER}/' => \Gcms\Gcms::getLoginPlaceholder(),
-      '/{EMAIL}/' => Login::$login_params['username'],
-      '/{PASSWORD}/' => isset(Login::$login_params['password']) ? Login::$login_params['password'] : '',
-      '/{MESSAGE}/' => Login::$login_message,
-      '/{CLASS}/' => empty(Login::$login_message) ? 'hidden' : (empty(Login::$login_input) ? 'message' : 'error'),
-      '/{LOGIN_ACTION}/' => $request->getUri()->withoutParams('action'),
-    ));
+        return (object) array(
+            'content' => $template->render(),
+            'title' => Language::get('Login with an existing account'),
+        );
+    }
 
-    return (object)array(
-        'content' => $template->render(),
-        'title' => Language::get('Login with an existing account'),
-    );
-  }
+    /**
+     * ฟอร์มขอรหัสผ่านใหม่.
+     *
+     * @param Request $request
+     *
+     * @return object
+     */
+    public static function forgot(Request $request)
+    {
+        // template
+        $template = Template::create('', '', 'forgot');
+        $template->add(array(
+            '/{TOKEN}/' => $request->createToken(),
+            '/{EMAIL}/' => Login::$login_params['username'],
+            '/{MESSAGE}/' => Login::$login_message,
+            '/{CLASS}/' => empty(Login::$login_message) ? 'hidden' : (empty(Login::$login_input) ? 'message' : 'error'),
+        ));
 
-  /**
-   * ฟอร์มขอรหัสผ่านใหม่.
-   *
-   * @param Request $request
-   *
-   * @return object
-   */
-  public static function forgot(Request $request)
-  {
-    // template
-    $template = Template::create('', '', 'forgot');
-    $template->add(array(
-      '/{TOKEN}/' => $request->createToken(),
-      '/{EMAIL}/' => Login::$login_params['username'],
-      '/{MESSAGE}/' => Login::$login_message,
-      '/{CLASS}/' => empty(Login::$login_message) ? 'hidden' : (empty(Login::$login_input) ? 'message' : 'error'),
-    ));
-
-    return (object)array(
-        'content' => $template->render(),
-        'title' => Language::get('Get new password'),
-    );
-  }
+        return (object) array(
+            'content' => $template->render(),
+            'title' => Language::get('Get new password'),
+        );
+    }
 }

@@ -6,7 +6,7 @@
  */
 var GRSS = GClass.create();
 GRSS.prototype = {
-  initialize: function (feedurl, options) {
+  initialize: function(feedurl, options) {
     this.feed = feedurl;
     this.options = {
       rows: 2,
@@ -18,7 +18,7 @@ GRSS.prototype = {
     };
     Object.extend(this.options, options || {});
   },
-  show: function (div, interval) {
+  show: function(div, interval) {
     var query = 'class=Widgets\\Rss\\Controllers\\Reader&method=get';
     query += '&url=' + this.feed;
     query += '&rows=' + this.options.rows;
@@ -27,7 +27,7 @@ GRSS.prototype = {
     query += '&className=' + this.options.className;
     query += '&detaillen=' + this.options.detaillen;
     query += '&rssimage=' + this.options.image;
-    var _callback = function (xhr) {
+    var _callback = function(xhr) {
       if ($E(div)) {
         $E(div).innerHTML = xhr.responseText;
       } else {
@@ -44,7 +44,7 @@ GRSS.prototype = {
 };
 var GRSSTab = GClass.create();
 GRSSTab.prototype = {
-  initialize: function (tab, div, interval, loadingClass) {
+  initialize: function(tab, div, interval, loadingClass) {
     this.tab = $E(tab);
     this.tab.innerHTML = '';
     this.div = $E(div);
@@ -59,7 +59,7 @@ GRSSTab.prototype = {
     this.ajax = new GAjax();
     this.timer = 0;
   },
-  add: function (feedurl, text, options) {
+  add: function(feedurl, text, options) {
     this.feeds.push(feedurl);
     this.texts.push(text);
     var _options = {
@@ -73,13 +73,13 @@ GRSSTab.prototype = {
     Object.extend(_options, options || {});
     this.options.push(_options);
   },
-  show: function (id) {
+  show: function(id) {
     if (this.feeds.length > 0) {
       var ul = document.createElement('ul');
       this.tab.appendChild(ul);
       var temp = this;
       var tab = this.tab.id + '_';
-      forEach(this.feeds, function (item, index) {
+      forEach(this.feeds, function(item, index) {
         var li = document.createElement('li');
         ul.appendChild(li);
         var a = document.createElement('a');
@@ -87,7 +87,7 @@ GRSSTab.prototype = {
         a.href = '#' + index;
         a.id = tab + index;
         li.appendChild(a);
-        a.onclick = function () {
+        a.onclick = function() {
           temp.interval = 0;
           if (temp.timer > 0) {
             window.clearTimeout(temp.timer);
@@ -103,14 +103,14 @@ GRSSTab.prototype = {
       this.select(id);
     }
   },
-  select: function (id) {
+  select: function(id) {
     this._showLoading(id);
     var temp = this;
-    this.ajax.send(WEB_URL + 'xhr.php', this._query(id), function (xhr) {
+    this.ajax.send(WEB_URL + 'xhr.php', this._query(id), function(xhr) {
       temp.div.innerHTML = xhr.responseText;
       temp._setselect(id);
       if (temp.interval > 0) {
-        temp.timer = window.setTimeout(function () {
+        temp.timer = window.setTimeout(function() {
           temp.selectIndex++;
           if (temp.selectIndex >= temp.feeds.length) {
             temp.selectIndex = 0;
@@ -120,7 +120,7 @@ GRSSTab.prototype = {
       }
     });
   },
-  _query: function (id) {
+  _query: function(id) {
     var query = 'class=Widgets\\Rss\\Controllers\\Reader&method=get';
     query += '&url=' + encodeURIComponent(this.feeds[id]);
     query += '&rows=' + this.options[id].rows;
@@ -131,17 +131,17 @@ GRSSTab.prototype = {
     query += '&rssimage=' + this.options[id].image;
     return query;
   },
-  _setselect: function (id) {
+  _setselect: function(id) {
     this.selectIndex = id;
     var tab = this.tab.id + '_' + id;
-    forEach(this.tab.getElementsByTagName('a'), function () {
+    forEach(this.tab.getElementsByTagName('a'), function() {
       this.className = this.id == tab ? 'select' : '';
     });
   },
-  _showLoading: function (id) {
+  _showLoading: function(id) {
     var tab = this.tab.id + '_' + id;
     var self = this;
-    forEach(this.tab.getElementsByTagName('a'), function () {
+    forEach(this.tab.getElementsByTagName('a'), function() {
       this.className = this.id == tab ? self.loadingClass : '';
     });
   }

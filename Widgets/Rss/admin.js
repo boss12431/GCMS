@@ -1,5 +1,5 @@
 function initRssWrite() {
-  var indexChanged = function () {
+  var indexChanged = function() {
     var n = this.value.toInt();
     $E('rss_index_result').innerHTML = '{WIDGET_RSS' + (n == 0 ? '' : '_' + n) + '}';
   };

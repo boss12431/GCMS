@@ -21,79 +21,78 @@ use Kotchasan\Http\Request;
  */
 class Controller extends \Kotchasan\Controller
 {
-
-  /**
-   * แสดงผลฟอร์ม ที่เรียกมาจาก GModal.
-   *
-   * @param Request $request
-   */
-  public function modal(Request $request)
-  {
-    $action = $request->post('action')->toString();
-    if ($action === 'register') {
-      $page = createClass('Index\Register\View')->render($request, true);
-    } elseif ($action === 'forgot') {
-      $page = createClass('Index\Forgot\View')->render($request, true);
-    } else {
-      // 404
-      $page = createClass('Index\Error\Controller')->init('index');
+    /**
+     * แสดงผลฟอร์ม ที่เรียกมาจาก GModal.
+     *
+     * @param Request $request
+     */
+    public function modal(Request $request)
+    {
+        $action = $request->post('action')->toString();
+        if ($action === 'register') {
+            $page = createClass('Index\Register\View')->render($request, true);
+        } elseif ($action === 'forgot') {
+            $page = createClass('Index\Forgot\View')->render($request, true);
+        } else {
+            // 404
+            $page = createClass('Index\Error\Controller')->init('index');
+        }
+        echo json_encode($page);
     }
-    echo json_encode($page);
-  }
 
-  /**
-   * @param Request $request
-   */
-  public function editprofile(Request $request)
-  {
-    return createClass('Index\Editprofile\View')->render($request);
-  }
+    /**
+     * @param Request $request
+     */
+    public function editprofile(Request $request)
+    {
+        return createClass('Index\Editprofile\View')->render($request);
+    }
 
-  /**
-   * @param Request $request
-   */
-  public function sendmail(Request $request)
-  {
-    return createClass('Index\Sendmail\View')->render($request);
-  }
+    /**
+     * @param Request $request
+     */
+    public function sendmail(Request $request)
+    {
+        return createClass('Index\Sendmail\View')->render($request);
+    }
 
-  /**
-   * @param Request $request
-   */
-  public function register(Request $request)
-  {
-    return createClass('Index\Register\View')->render($request, false);
-  }
+    /**
+     * @param Request $request
+     */
+    public function register(Request $request)
+    {
+        return createClass('Index\Register\View')->render($request, false);
+    }
 
-  /**
-   * @param Request $request
-   */
-  public function forgot(Request $request)
-  {
-    return createClass('Index\Forgot\View')->render($request);
-  }
+    /**
+     * @param Request $request
+     */
+    public function forgot(Request $request)
+    {
+        return createClass('Index\Forgot\View')->render($request);
+    }
 
-  /**
-   * @param Request $request
-   */
-  public function dologin(Request $request)
-  {
-    return createClass('Index\Dologin\View')->render($request);
-  }
+    /**
+     * @param Request $request
+     */
+    public function dologin(Request $request)
+    {
+        return createClass('Index\Dologin\View')->render($request);
+    }
 
-  /**
-   * @param Request $request
-   */
-  public function member(Request $request)
-  {
-    return createClass('Index\View\View')->render($request);
-  }
+    /**
+     * @param Request $request
+     */
+    public function member(Request $request)
+    {
+        return createClass('Index\View\View')->render($request);
+    }
 
-  /**
-   * @param Request $request
-   */
-  public function activate(Request $request)
-  {
-    return createClass('Index\Activate\View')->render($request);
-  }
+    /**
+     * @param Request $request
+     */
+    public function activate(Request $request)
+    {
+        return createClass('Index\Activate\View')->render($request);
+    }
 }

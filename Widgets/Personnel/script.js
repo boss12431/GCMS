@@ -1,26 +1,26 @@
 function initPersonnelWidget(id) {
-  $G(window).Ready(function () {
+  $G(window).Ready(function() {
     var itemIndex = 0;
     var divs = new Array();
     var div = $G(id);
     var play = true;
-    forEach(div.elems('div'), function (item, index) {
+    forEach(div.elems('div'), function(item, index) {
       if ($G(item).hasClass('currItem item')) {
         item.id = index;
         item.style.position = 'absolute';
         divs.push(item);
-        item.addEvent('mouseover', function () {
+        item.addEvent('mouseover', function() {
           play = false;
         });
-        item.addEvent('mouseout', function () {
+        item.addEvent('mouseout', function() {
           play = true;
         });
       }
     });
     div.style.height = (floatval(div.getStyle('paddingTop')) + floatval(div.getStyle('paddingBottom')) + divs[itemIndex].getHeight()) + 'px';
-    window.setInterval(function () {
+    window.setInterval(function() {
       if (play) {
-        forEach(divs, function () {
+        forEach(divs, function() {
           this.className = this.id == itemIndex ? 'currItem' : 'item';
           if (this.id == itemIndex) {
             div.style.height = (floatval(div.getStyle('paddingTop')) + floatval(div.getStyle('paddingBottom')) + this.getHeight()) + 'px';

@@ -113,7 +113,7 @@ a:hover {
 .language-menu:hover ul {
   display: block;
 }
-.language-menu li > a {
+.language-menu li>a {
   display: block;
   height: 2em;
   background-position: 50% 50%;
@@ -160,15 +160,15 @@ header.header li {
   transition: all 0.5s ease;
 }
 .header .td,
-.topmenu > ul > li {
+.topmenu>ul>li {
   color: #ddd;
 }
 .header .td,
-.topmenu > ul > li > span,
-.topmenu > ul > li > a {
+.topmenu>ul>li>span,
+.topmenu>ul>li>a {
   text-shadow: -1px -1px rgba(0, 0, 0, 0.4);
 }
-.topmenu > ul ul,
+.topmenu>ul ul,
 .gdpanel a {
   text-shadow: none;
 }
@@ -179,28 +179,28 @@ header.header li {
 .menu_bg_color {
   background-color: #1276b9;
 }
-.topmenu ul > li:hover {
+.topmenu ul>li:hover {
   color: #fff;
 }
-.topmenu > ul > li.select,
-.topmenu > ul > li.hover,
+.topmenu>ul>li.select,
+.topmenu>ul>li.hover,
 .header a.gdpanel-arrow.hover {
   background-color: rgba(0, 0, 0, 0.07);
 }
-.topmenu > ul ul {
+.topmenu>ul ul {
   color: #666;
   -webkit-box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.07);
   -moz-box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.07);
   box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.07);
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
-.language-menu li > a:hover,
-.topmenu > ul ul > li.hover > a,
+.language-menu li>a:hover,
+.topmenu>ul ul>li.hover>a,
 .gdpanel a:hover {
   color: #fff;
   background-color: #1e88e5;
 }
-.topmenu > ul ul > li {
+.topmenu>ul ul>li {
   color: inherit;
 }
 .header .td {
@@ -266,7 +266,7 @@ fieldset.search input[type="submit"],
   overflow: hidden;
   text-shadow: 1px 1px 0 #fff;
 }
-.breadcrumbs > li {
+.breadcrumbs>li {
   float: left;
 }
 .breadcrumbs li:before {
@@ -281,7 +281,7 @@ fieldset.search input[type="submit"],
   padding-bottom: 10px;
   clear: both;
 }
-section > header {
+section>header {
   padding: 10px;
   position: relative;
   background-color: #ececec;
@@ -291,7 +291,9 @@ section > header {
   box-shadow: 0 -2px 1px rgba(0, 0, 0, 0.1) inset;
   text-shadow: 1px 1px 1px #fff;
 }
+
 /* edit inplace */
+
 .editinplace_list {
   display: block;
   padding: 0;
@@ -299,14 +301,14 @@ section > header {
   list-style-type: none;
   border-top: 1px solid #ddd;
 }
-.editinplace_list > li {
+.editinplace_list>li {
   display: block;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #ddd;
   padding: 5px 10px;
 }
-.editinplace_list > li > span,
-.editinplace_list > li > a {
+.editinplace_list>li>span,
+.editinplace_list>li>a {
   background-position: 50% 50%;
   background-repeat: no-repeat;
   display: inline-block;
@@ -316,8 +318,8 @@ section > header {
   vertical-align: middle;
   text-align: center;
 }
-.editinplace_list > li > span:before,
-.editinplace_list > li > a:before {
+.editinplace_list>li>span:before,
+.editinplace_list>li>a:before {
   line-height: inherit;
 }
 .editinplace_list [type="text"].editable {
@@ -325,7 +327,7 @@ section > header {
   vertical-align: middle;
   height: 2.1em;
 }
-.editinplace_list > li > .editinplace {
+.editinplace_list>li>.editinplace {
   border-width: 1px;
   border-style: dashed;
   border-color: transparent transparent rgba(0, 0, 0, 0.3) transparent;
@@ -358,14 +360,16 @@ section > header {
 .icon-amp:before {
   content: "⚡";
 }
+
 /* dashboard */
-.dashboard section > header {
+
+.dashboard section>header {
   box-shadow: none;
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
 }
-legend > span[class^="icon-"]:before,
-legend > span[class*=" icon-"]:before,
+legend>span[class^="icon-"]:before,
+legend>span[class*=" icon-"]:before,
 .breadcrumbs [class^="icon-"]:before,
 .breadcrumbs [class*=" icon-"]:before,
 h1[class]:before,
@@ -411,16 +415,16 @@ h3[class]:before {
 .card a {
   color: #fff;
 }
-.card:nth-child(1) > a {
+.card:nth-child(1)>a {
   background-color: #8cc152;
 }
-.card:nth-child(2) > a {
+.card:nth-child(2)>a {
   background-color: #1ebcd2;
 }
-.card:nth-child(3) > a {
+.card:nth-child(3)>a {
   background-color: #e54d42;
 }
-.card:nth-child(4) > a {
+.card:nth-child(4)>a {
   background-color: #8f44ad;
 }
 .card b {
@@ -456,12 +460,9 @@ h3[class]:before {
 }
 .qmenu a,
 .card a {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 .qmenu [class^="icon"]:before {
   color: inherit;
@@ -470,7 +471,9 @@ h3[class]:before {
   background-color: #333;
   color: #fff;
 }
+
 /* template */
+
 #admin_template {
   padding: 1% 0 1% 1%;
 }
@@ -548,7 +551,9 @@ h3[class]:before {
 #admin_template .item h3 {
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
+
 /* table */
+
 table {
   border-collapse: separate;
 }
@@ -575,7 +580,7 @@ th.menu {
   width: 16px;
   text-align: center;
 }
-td.thumb > img {
+td.thumb>img {
   max-width: 48px;
   max-height: 48px;
 }
@@ -587,7 +592,7 @@ thead th {
   border-top-color: #fff;
   border-top-color: rgba(255, 255, 255, 0.1);
 }
-table.responsive-v > thead > tr:first-child > th {
+table.responsive-v>thead>tr:first-child>th {
   border-top-color: inherit;
 }
 table.summary th {
@@ -606,7 +611,7 @@ table.database th {
   background-color: #f9f9f9;
   border-right-style: solid;
 }
-table.config_table > tbody > tr > td,
+table.config_table>tbody>tr>td,
 .no {
   text-align: center;
 }
@@ -620,7 +625,9 @@ td a[class^="icon-"],
 td a[class*=" icon-"] {
   display: block;
 }
+
 /* form */
+
 .setup_frm {
   overflow: hidden;
   margin: 10px auto;
@@ -663,8 +670,8 @@ fieldset fieldset,
 fieldset.item {
   padding-bottom: 0;
 }
-.setup_frm > form > fieldset > legend > span,
-.setup_frm > fieldset > legend > span,
+.setup_frm>form>fieldset>legend>span,
+.setup_frm>fieldset>legend>span,
 .setup_frm h3 {
   display: block;
   padding: 10px 10px;
@@ -676,26 +683,28 @@ fieldset.item {
 }
 form .label,
 label,
-fieldset fieldset > legend {
+fieldset fieldset>legend {
   color: #616161;
 }
+
 /* document tab */
+
 header .inline {
   position: absolute;
   bottom: -6px;
   right: 10px;
 }
-.writetab > ul {
+.writetab>ul {
   list-style-type: none;
   position: relative;
   right: 0;
   padding: 0;
   display: inline-block;
 }
-.writetab > ul > li {
+.writetab>ul>li {
   float: left;
 }
-.writetab > ul > li > a {
+.writetab>ul>li>a {
   color: inherit;
   display: block;
   padding: 0.5em 1em;
@@ -711,7 +720,7 @@ header .inline {
   white-space: nowrap;
   background-color: rgba(255, 255, 255, 0.1);
 }
-.writetab > ul > li > .select {
+.writetab>ul>li>.select {
   text-shadow: 1px 1px 0 #fff;
   background-color: #f5f5f5;
   border-bottom-color: #f5f5f5;
@@ -720,10 +729,10 @@ header .inline {
   text-align: right;
   padding: 5px 10px;
 }
-.lastupdate > .comment {
+.lastupdate>.comment {
   float: left;
 }
-.lastupdate > #lastupdate {
+.lastupdate>#lastupdate {
   color: #b71c1c;
   padding-left: 10px;
 }
@@ -805,10 +814,10 @@ td.icons a.icon-minus:before {
 div#install fieldset {
   padding: 10px;
 }
-div#install fieldset > legend {
+div#install fieldset>legend {
   border-bottom: 3px solid #ddd;
 }
-div#install fieldset > legend > span {
+div#install fieldset>legend>span {
   padding: 10px 0 0 0;
 }
 div#install ol {
@@ -842,18 +851,20 @@ div#install li.invalid {
   overflow-x: auto;
   padding: 10px;
 }
-#debug_layer > div {
+#debug_layer>div {
   padding: 5px 0;
   border-bottom: 1px dashed #ddd;
   display: inline-block;
   width: 100%;
 }
-#debug_layer > div > time {
+#debug_layer>div>time {
   display: block;
   background-color: #eee;
   padding: 3px 5px;
 }
+
 /* tablet, small device */
+
 @media only screen and (max-width: 960px) {
   .setup_frm {
     border-bottom: 1px solid #dbdbdb;
@@ -863,7 +874,7 @@ div#install li.invalid {
     margin: 10px 10px 0 10px;
     width: auto;
   }
-  .writetab > ul > li > .select {
+  .writetab>ul>li>.select {
     background-color: #fff;
     border-bottom-color: #fff;
   }
@@ -878,7 +889,9 @@ div#install li.invalid {
     padding-bottom: 5px;
   }
 }
+
 /* tablet, small device */
+
 @media only screen and (max-width: 768px) {
   /* tab */
   .writetab:after {
@@ -892,11 +905,11 @@ div#install li.invalid {
     border-style: solid solid none solid;
     border-color: #000 transparent #000 transparent;
   }
-  .writetab > ul > li {
+  .writetab>ul>li {
     float: none;
     line-height: 2em;
   }
-  .writetab > ul > li > a {
+  .writetab>ul>li>a {
     color: inherit;
     text-shadow: 1px 1px 0 #ffffff;
     background-color: #fff;
@@ -907,12 +920,12 @@ div#install li.invalid {
     margin-left: 0;
     padding-right: 2em;
   }
-  .writetab > ul > li > a:hover {
+  .writetab>ul>li>a:hover {
     background-color: #1976d2;
     color: #fff;
     text-shadow: 1px 1px 0 #333;
   }
-  .writetab > ul {
+  .writetab>ul {
     visibility: hidden;
     opacity: 0;
     height: 0;
@@ -941,12 +954,12 @@ div#install li.invalid {
     top: 0;
     height: auto;
   }
-  header .inline:hover > .writetab > ul {
+  header .inline:hover>.writetab>ul {
     visibility: visible;
     opacity: 1;
     height: auto;
   }
-  .inline > .writetab {
+  .inline>.writetab {
     min-width: 30px;
   }
   table.database,

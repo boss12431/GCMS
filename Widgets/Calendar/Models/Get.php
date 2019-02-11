@@ -21,21 +21,20 @@ use Kotchasan\Http\Request;
  */
 class Get extends \Kotchasan\Model
 {
+    /**
+     * อ่านข้อมูลปฏิทินจากเดือนและปีที่ส่งมา.
+     *
+     * @param Request $request
+     *
+     * @return JSON
+     */
+    public function toJSON(Request $request)
+    {
+        $className = ucfirst($request->post('owner')->filter('a-z')).'\Calendar\Model';
+        if (class_exists($className) && method_exists($className, 'widget')) {
+            $result = createClass($className)->widget($request);
 
-  /**
-   * อ่านข้อมูลปฏิทินจากเดือนและปีที่ส่งมา.
-   *
-   * @param Request $request
-   *
-   * @return JSON
-   */
-  public function toJSON(Request $request)
-  {
-    $className = ucfirst($request->post('owner')->filter('a-z')).'\Calendar\Model';
-    if (class_exists($className) && method_exists($className, 'widget')) {
-      $result = createClass($className)->widget($request);
-
-      echo json_encode($result);
+            echo json_encode($result);
+        }
     }
-  }
 }

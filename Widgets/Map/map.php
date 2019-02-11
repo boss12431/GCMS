@@ -1,11 +1,12 @@
 <?php
 /**
- * map.php
+ * map.php.
  *
  * @author Goragod Wiriya <admin@goragod.com>
- * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 $map = array('<!DOCTYPE html>');
 $map[] = '<html lang='.$_GET['lang'].' dir=ltr>';
@@ -28,13 +29,13 @@ $map[] = '};';
 $map[] = 'var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);';
 $info = isset($_GET['info']) ? $_GET['info'] : '';
 if (!empty($info)) {
-  $map[] = "var infowindow = new google.maps.InfoWindow({content:'".str_replace(array('&lt;', '&gt;', '&#92;', "\r", "\n"), array('<', '>', '\\', '', '<br>'), $info)."'});";
-  $map[] = 'var info = new google.maps.LatLng("'.$_GET['info_latitude'].'","'.$_GET['info_lantitude'].'");';
-  $map[] = 'var marker = new google.maps.Marker({position:info,map:map});';
-  $map[] = 'infowindow.open(map,marker);';
-  $map[] = 'google.maps.event.addListener(marker,"click",function(){';
-  $map[] = 'infowindow.open(map,marker);';
-  $map[] = '});';
+    $map[] = "var infowindow = new google.maps.InfoWindow({content:'".str_replace(array('&lt;', '&gt;', '&#92;', "\r", "\n"), array('<', '>', '\\', '', '<br>'), $info)."'});";
+    $map[] = 'var info = new google.maps.LatLng("'.$_GET['info_latitude'].'","'.$_GET['info_lantitude'].'");';
+    $map[] = 'var marker = new google.maps.Marker({position:info,map:map});';
+    $map[] = 'infowindow.open(map,marker);';
+    $map[] = 'google.maps.event.addListener(marker,"click",function(){';
+    $map[] = 'infowindow.open(map,marker);';
+    $map[] = '});';
 }
 $map[] = '}';
 $map[] = '</script>';

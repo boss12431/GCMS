@@ -6,7 +6,7 @@
 .widget_personnel .detail {
   margin: 10px 0 0 0;
 }
-.widget_personnel > div {
+.widget_personnel>div {
   position: relative;
   width: 100%;
   text-align: center;
@@ -20,19 +20,21 @@
   opacity: 0;
   z-index: 0;
 }
-.widget_personnel > .currItem {
+.widget_personnel>.currItem {
   -moz-opacity: 1;
   filter: alpha(opacity=1);
   opacity: 1;
   z-index: 1;
 }
-.widget_personnel .thumbnail, .widget_personnel .name, .widget_personnel .position {
+.widget_personnel .thumbnail,
+.widget_personnel .name,
+.widget_personnel .position {
   font-weight: bold;
   display: block;
 }
 .widget_personnel .thumbnail img {
   max-width: 150px;
-  background-color: rgba(255,255,255,0.2);
+  background-color: rgba(255, 255, 255, 0.2);
   padding: 5px;
-  box-shadow: 0 0 3px rgba(0,0,0,0.2) inset;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2) inset;
 }

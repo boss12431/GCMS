@@ -471,6 +471,7 @@ return array(
   'Personner image' => 'รูปบุคลากร',
   'Phone' => 'โทรศัพท์',
   'Phone number' => 'หมายเลขโทรศัพท์',
+  'Photos for sharing' => 'รูปภาพสำหรับการแชร์',
   'Pin' => 'ปักหมุด',
   'Pixel' => 'พิกเซล',
   'Please choose' => 'กรุณาเลือก',

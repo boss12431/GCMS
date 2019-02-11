@@ -7,11 +7,9 @@
   </header>
   <div class=ggrid>
     <div class="float-left block6">
-      <div class="margin-bottom center">
-        <a id=login_fb class="button {FACEBOOK} icon-facebook">{LNG_Login with Facebook}</a>
-      </div>
-      <div class="center">
-        <a id=login_google class="button {GOOGLE} icon-google">{LNG_Login with Google}</a>
+      <div class="table center">
+        <a id=login_fb class="button wide {FACEBOOK} icon-facebook">{LNG_Login with Facebook}</a>
+        <a id=login_google class="button wide {GOOGLE} icon-google margin-top">{LNG_Login with Google}</a>
       </div>
     </div>
     <div class="float-left block6">
@@ -24,6 +22,7 @@
             <label class="g-input icon-password"><input type=password name=login_password id=login_password maxlength=20 value="{PASSWORD}" placeholder="{LNG_Password}" autocomplete="off"></label>
           </div>
           <div class="submit right">
+            <a href="{WEBURL}index.php?module=forgot" title="{LNG_Request new password}"><span>{LNG_Forgot}</span></a>
             <input type=submit class="button large send" value="{LNG_Sign in}" title="{LNG_Member Login}">
           </div>
           <input type=hidden name=login_action id=login_action value=back>
@@ -34,7 +33,7 @@
   </div>
 </div>
 <script>
-  $G(window).Ready(function () {
+  $G(window).Ready(function() {
     new GForm('login_frm', '{WEBURL}xhr.php/index/model/login/chklogin').onsubmit(doLoginSubmit);
     initFacebookButton('login_fb');
     initGoogleButton('login_google');

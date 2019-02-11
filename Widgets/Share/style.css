@@ -1,72 +1,74 @@
 .widget_share a {
-  font-size: 1.4em;
   vertical-align: middle;
   text-align: center;
   display: inline-block;
-  width: 1.75em;
-  height: 1.75em;
-  line-height: 1.75em;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
   padding: 0;
+  margin: 0 5px;
 }
-.widget_share > a {
+.widget_share>a {
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-.widget_share > a:before {
+.widget_share>a:before {
   margin-right: 0;
+  line-height: inherit;
+  font-size: 1em;
 }
-.color:not(.circle) .widget_share > a {
+.widget_share_count .icon-line:before,
+.widget_share .icon-line:before,
+.widget_share_count .icon-twitter:before,
+.widget_share .icon-twitter:before {
+  font-size: 1.2em;
+}
+.color:not(.circle) .widget_share>a {
   float: left;
   border-width: 5px;
   border-color: rgba(0, 0, 0, 0.1);
   border-style: solid none none none;
 }
-.color:not(.circle) > .widget_share > a:hover {
+.color:not(.circle)>.widget_share>a:hover {
   border-color: rgba(0, 0, 0, 0.3);
 }
-.widget_share_count > a.icon-facebook,
-.color > .widget_share > a.icon-facebook {
+.widget_share_count>a.icon-facebook,
+.color>.widget_share>a.icon-facebook {
   background-color: #3b5998;
 }
-.widget_share_count > a.icon-googleplus,
-.color > .widget_share > a.icon-googleplus {
-  background-color: #eb4026;
-}
-.widget_share_count > a.icon-google,
-.color > .widget_share > a.icon-google {
-  background-color: #dc564a;
-}
-.widget_share_count > a.icon-twitter,
-.color > .widget_share > a.icon-twitter {
+.widget_share_count>a.icon-twitter,
+.color>.widget_share>a.icon-twitter {
   background-color: #1da1f2;
 }
-.widget_share_count > a.icon-line,
-.color > .widget_share > a.icon-line {
+.widget_share_count>a.icon-line,
+.color>.widget_share>a.icon-line {
   background-color: #00c300;
 }
-.circle > .widget_share > a {
+.circle>.widget_share>a {
+  border-width: 1px;
+  border-style: solid;
   border-radius: 50em;
   -moz-border-radius: 50em;
   -webkit-border-radius: 50em;
   margin: 0 10px;
 }
-.circle.left > .widget_share > a {
+.circle.left>.widget_share>a {
   margin: 0 20px 0 0;
 }
-.circle.right > .widget_share > a {
+.circle.right>.widget_share>a {
   margin: 0 0 0 20px;
 }
-.color > .widget_share > a {
+.color>.widget_share>a {
   color: rgba(255, 255, 255, 0.7);
   padding: 0;
 }
-.color > .widget_share > a:hover {
+.color>.widget_share>a:hover {
   color: #fff;
 }
-.circle > .widget_share > a:before {
+.circle>.widget_share>a:before {
   line-height: inherit;
 }
 .widget_share_count {

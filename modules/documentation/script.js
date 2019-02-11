@@ -1,15 +1,16 @@
 function initDocCat(id) {
   var patt = /icon-(expand|collapse)/;
-  var _doClick = function () {
+  var _doClick = function() {
     if (patt.test(this.className)) {
       this.className =
         this.className == "icon-collapse" ? "icon-expand" : "icon-collapse";
     }
   };
-  forEach($G(id).elems("span"), function () {
+  forEach($G(id).elems("span"), function() {
     callClick(this, _doClick);
   });
 }
+
 function initDocView(id, cat) {
   var node = $E("doccat_" + id + "_" + cat);
   if (node) {

@@ -8,7 +8,7 @@
   border-bottom-style: dotted;
   border-bottom-width: 2px;
 }
-#edocument-list td.detail > span {
+#edocument-list td.detail>span {
   display: block;
 }
 #edocument-list .size {

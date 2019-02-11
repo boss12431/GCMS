@@ -26,7 +26,7 @@
   left: 0;
   top: 0;
   position: absolute;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   transition: background-color 0.5s;
   -moz-transition: background-color 0.5s;
   -webkit-transition: background-color 0.5s;
@@ -54,7 +54,7 @@
   -webkit-transition: color 0.5s;
 }
 #gallery_list .item a:hover .zoom {
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 #gallery_list .item a:hover .zoom:before {
   color: #FFF;

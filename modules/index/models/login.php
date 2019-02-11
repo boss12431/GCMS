@@ -23,35 +23,34 @@ use Kotchasan\Language;
  */
 class Model extends \Kotchasan\KBase
 {
-
-  /**
-   * ฟังก์ชั่นตรวจสอบการ Login.
-   *
-   * @param Request $request
-   */
-  public function chklogin(Request $request)
-  {
-    if ($request->initSession() && $request->isSafe()) {
-      // ตรวจสอบการ login
-      Login::create();
-      // ตรวจสอบสมาชิก
-      $login = Login::isMember();
-      if ($login) {
-        $ret = array(
-          'alert' => Language::replace('Welcome %s, login complete', array('%s' => empty($login['name']) ? $login['email'] : $login['name'])),
-          'content' => rawurlencode(createClass('Index\Login\View')->member($login)),
-          'action' => $request->post('login_action')->toString(),
-        );
-        // เคลียร์
-        $request->removeToken();
-      } else {
-        $ret = array(
-          'alert' => Login::$login_message,
-          'input' => Login::$login_input,
-        );
-      }
-      // คืนค่า JSON
-      echo json_encode($ret);
+    /**
+     * ฟังก์ชั่นตรวจสอบการ Login.
+     *
+     * @param Request $request
+     */
+    public function chklogin(Request $request)
+    {
+        if ($request->initSession() && $request->isSafe()) {
+            // ตรวจสอบการ login
+            Login::create();
+            // ตรวจสอบสมาชิก
+            $login = Login::isMember();
+            if ($login) {
+                $ret = array(
+                    'alert' => Language::replace('Welcome %s, login complete', array('%s' => empty($login['name']) ? $login['email'] : $login['name'])),
+                    'content' => rawurlencode(createClass('Index\Login\View')->member($login)),
+                    'action' => $request->post('login_action')->toString(),
+                );
+                // เคลียร์
+                $request->removeToken();
+            } else {
+                $ret = array(
+                    'alert' => Login::$login_message,
+                    'input' => Login::$login_input,
+                );
+            }
+            // คืนค่า JSON
+            echo json_encode($ret);
+        }
     }
-  }
 }

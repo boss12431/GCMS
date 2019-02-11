@@ -19,16 +19,15 @@ namespace Index\Loader;
  */
 class View extends \Gcms\View
 {
-
-  /**
-   * ouput เป็น HTML.
-   *
-   * @param string|null $template HTML Template ถ้าไม่กำหนด (null) จะใช้ index.html
-   *
-   * @return string
-   */
-  public function renderHTML($template = null)
-  {
-    return parent::renderHTML($template);
-  }
+    /**
+     * ouput เป็น HTML.
+     *
+     * @param string|null $template HTML Template ถ้าไม่กำหนด (null) จะใช้ index.html
+     *
+     * @return string
+     */
+    public function renderHTML($template = null)
+    {
+        return parent::renderHTML($template);
+    }
 }

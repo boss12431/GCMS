@@ -18,7 +18,7 @@
   </fieldset>
 </form>
 <script>
-  $G(window).Ready(function () {
+  $G(window).Ready(function() {
     new GForm('login_frm', '{WEBURL}xhr.php/index/model/login/chklogin').onsubmit(doLoginSubmit);
     initFacebookButton('login_fb');
     initGoogleButton('login_google');

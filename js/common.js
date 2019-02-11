@@ -11,6 +11,7 @@ var mtooltip,
   loader = null,
   editor = null,
   G_Lightbox = null;
+
 function mTooltipShow(id, action, method, elem) {
   if (Object.isNull(mtooltip)) {
     mtooltip = new GTooltip({
@@ -19,28 +20,30 @@ function mTooltipShow(id, action, method, elem) {
       cache: true
     });
   }
-  mtooltip.showAjax(elem, action, method + "&id=" + id, function (xhr) {
+  mtooltip.showAjax(elem, action, method + "&id=" + id, function(xhr) {
     if (loader) {
       loader.init(this.tooltip);
     }
   });
 }
+
 function send(target, query, callback, wait, c) {
   var req = new GAjax();
   req.initLoading(wait || "wait", false, c);
-  req.send(target, query, function (xhr) {
+  req.send(target, query, function(xhr) {
     if (callback) {
       callback.call(this, xhr);
     }
   });
 }
-var hideModal = function () {
+var hideModal = function() {
   if (modal != null) {
     modal.hide();
   }
 };
+
 function showModal(src, qstr, doClose, className) {
-  send(src, qstr, function (xhr) {
+  send(src, qstr, function(xhr) {
     var ds = xhr.responseText.toJSON();
     var detail = "";
     if (ds) {
@@ -60,6 +63,7 @@ function showModal(src, qstr, doClose, className) {
     }
   });
 }
+
 function defaultSubmit(ds) {
   var _alert = "",
     _input = false,
@@ -100,14 +104,14 @@ function defaultSubmit(ds) {
       _url = val;
       _location = val;
     } else if (prop == "open") {
-      window.setTimeout(function () {
+      window.setTimeout(function() {
         window.open(val.replace(/&amp;/g, "&"));
       }, 1);
     } else if (prop == "tab") {
       initWriteTab("accordient_menu", val);
     } else if (remove.test(prop)) {
       if ($E(val)) {
-        $G(val).fadeOut(function () {
+        $G(val).fadeOut(function() {
           $G(val).remove();
         });
       }
@@ -207,6 +211,7 @@ function defaultSubmit(ds) {
     }
   }
 }
+
 function doFormSubmit(xhr) {
   var datas = xhr.responseText.toJSON();
   if (datas) {
@@ -215,9 +220,10 @@ function doFormSubmit(xhr) {
     console.log(xhr.responseText);
   }
 }
+
 function initWriteTab(id, sel) {
   function _doclick(sel) {
-    forEach($E(id).getElementsByTagName("a"), function () {
+    forEach($E(id).getElementsByTagName("a"), function() {
       var a = this.id.replace("tab_", "");
       if ($E(a)) {
         this.className = a == sel ? "select" : "";
@@ -226,9 +232,9 @@ function initWriteTab(id, sel) {
     });
     $E("tab").value = sel;
   }
-  forEach($G(id).elems("a"), function () {
+  forEach($G(id).elems("a"), function() {
     if ($E(this.id.replace("tab_", ""))) {
-      callClick(this, function () {
+      callClick(this, function() {
         _doclick(this.id.replace("tab_", ""));
         return false;
       });
@@ -236,6 +242,7 @@ function initWriteTab(id, sel) {
   });
   _doclick(sel);
 }
+
 function checkUsername() {
   var patt = /[a-zA-Z0-9@\.\-_]+/;
   var value = this.value;
@@ -249,6 +256,7 @@ function checkUsername() {
     this.invalid(this.title);
   }
 }
+
 function checkEmail() {
   var value = this.value;
   var ids = this.id.split("_");
@@ -261,6 +269,7 @@ function checkEmail() {
     this.invalid(this.title);
   }
 }
+
 function checkPhone() {
   var value = this.value;
   var ids = this.id.split("_");
@@ -269,6 +278,7 @@ function checkPhone() {
     return "value=" + encodeURIComponent(value) + id;
   }
 }
+
 function checkDisplayname() {
   var value = this.value;
   var ids = this.id.split("_");
@@ -279,6 +289,7 @@ function checkDisplayname() {
     return "value=" + encodeURIComponent(value) + "&id=" + id;
   }
 }
+
 function checkPassword() {
   var ids = this.id.split("_");
   var id = "&id=" + floatval($E(ids[0] + "_id").value);
@@ -298,6 +309,7 @@ function checkPassword() {
     this.Validator.invalid(this.Validator.title);
   }
 }
+
 function checkIdcard() {
   var value = this.value;
   var ids = this.id.split("_");
@@ -318,6 +330,7 @@ function checkIdcard() {
     }
   }
 }
+
 function checkAlias() {
   var value = this.value;
   if (value.length == 0) {
@@ -328,6 +341,7 @@ function checkAlias() {
     return "val=" + encodeURIComponent(value) + "&id=" + $E("id").value;
   }
 }
+
 function replaceURL(key, value) {
   var q,
     prop,
@@ -359,6 +373,7 @@ function replaceURL(key, value) {
   }
   return urls[0] + "?" + qs.join("&");
 }
+
 function getWebUri() {
   var port = floatval(window.location.port);
   var protocol = window.location.protocol;
@@ -369,6 +384,7 @@ function getWebUri() {
   }
   return protocol + "//" + window.location.hostname + port + "/";
 }
+
 function _doCheckKey(input, e, patt) {
   var val = input.value;
   var key = GEvent.keyCode(e);
@@ -381,37 +397,40 @@ function _doCheckKey(input, e, patt) {
   }
   return true;
 }
-var numberOnly = function (e) {
+var numberOnly = function(e) {
   return _doCheckKey(this, e, /[0-9]/);
 };
-var integerOnly = function (e) {
+var integerOnly = function(e) {
   return _doCheckKey(this, e, /[0-9\-]/);
 };
-var currencyOnly = function (e) {
+var currencyOnly = function(e) {
   return _doCheckKey(this, e, /[0-9\.]/);
 };
+
 function setSelect(id, value) {
-  forEach($E(id).getElementsByTagName("input"), function () {
+  forEach($E(id).getElementsByTagName("input"), function() {
     if (this.type.toLowerCase() == "checkbox") {
       this.checked = value;
     }
   });
 }
+
 function selectChanged(src, action, callback) {
-  $G(src).addEvent("change", function () {
+  $G(src).addEvent("change", function() {
     var temp = this;
-    send(action, "id=" + this.id + "&value=" + this.value, function (xhr) {
+    send(action, "id=" + this.id + "&value=" + this.value, function(xhr) {
       if (xhr.responseText !== "") {
         callback.call(temp, xhr);
       }
     }, this);
   });
 }
-var doCustomConfirm = function (value) {
+var doCustomConfirm = function(value) {
   return confirm(value);
 };
+
 function countryChanged(prefix) {
-  var _contryChanged = function () {
+  var _contryChanged = function() {
     if (this.value != "TH") {
       $G($E(prefix + "_provinceID").parentNode.parentNode).addClass("hidden");
       $G($E(prefix + "_province").parentNode.parentNode).removeClass("hidden");
@@ -425,23 +444,25 @@ function countryChanged(prefix) {
     _contryChanged.call($E(prefix + "_country"));
   }
 }
+
 function birthdayChanged(id, text) {
-  $G(id).addEvent("change", function () {
+  $G(id).addEvent("change", function() {
     if (this.calendar && this.value) {
       var age = new Date().compare(this.value);
       this.calendar.setText(text.replace("%s", this.calendar.getDateFormat("d M Y")).replace("%y", age.year).replace("%m", age.month).replace("%d", age.day));
     }
   });
 }
+
 function selectMenu(module) {
-  forEach(document.querySelectorAll("#topmenu > ul > li"), function () {
+  forEach(document.querySelectorAll("#topmenu > ul > li"), function() {
     if ($G(this).hasClass(module)) {
       this.addClass("select");
     } else {
       this.removeClass("select");
     }
   });
-  forEach(document.querySelectorAll(".sidemenu > ul > li"), function () {
+  forEach(document.querySelectorAll(".sidemenu > ul > li"), function() {
     if ($G(this).hasClass(module)) {
       this.addClass("select");
     } else {
@@ -449,6 +470,7 @@ function selectMenu(module) {
     }
   });
 }
+
 function loadJavascript(id, src) {
   var js,
     fjs = document.getElementsByTagName("script")[0];
@@ -460,7 +482,7 @@ function loadJavascript(id, src) {
   js.src = src;
   fjs.parentNode.insertBefore(js, fjs);
 }
-var doLoginSubmit = function (xhr) {
+var doLoginSubmit = function(xhr) {
   var el,
     t,
     ds = xhr.responseText.toJSON();
@@ -520,9 +542,10 @@ var doLoginSubmit = function (xhr) {
     console.log(xhr.responseText);
   }
 };
+
 function initEditProfile(prefix, countries) {
   prefix = prefix ? prefix + "_" : "";
-  var countryChanged = function () {
+  var countryChanged = function() {
     var province = $E(prefix + "province"),
       provinceID = $E(prefix + "provinceID");
     if (countries.indexOf(this.value) === -1) {
@@ -548,12 +571,13 @@ function initEditProfile(prefix, countries) {
   });
 }
 var createLikeButton;
+
 function initWeb(module) {
   module = module ? module + "/" : "";
   if (navigator.userAgent.indexOf("MSIE") > -1) {
     document.body.addClass("ie");
   }
-  forEach(document.body.elems("nav"), function () {
+  forEach(document.body.elems("nav"), function() {
     if ($G(this).hasClass("topmenu sidemenu slidemenu gddmenu")) {
       new GDDMenu(this);
     }
@@ -562,7 +586,7 @@ function initWeb(module) {
   var toTop = 100;
   if ($E("toTop")) {
     if ($G("toTop").hasClass("fixed_top")) {
-      document.addEvent("toTopChange", function () {
+      document.addEvent("toTopChange", function() {
         if (document.body.hasClass("toTop")) {
           var _toTop = $G("toTop").copy();
           _toTop.zIndex = -1;
@@ -576,7 +600,7 @@ function initWeb(module) {
       });
     }
     toTop = $E("toTop").getTop();
-    document.addEvent("scroll", function () {
+    document.addEvent("scroll", function() {
       var c = this.viewport.getscrollTop() > toTop;
       if (_scrolltop != c) {
         _scrolltop = c;
@@ -602,15 +626,15 @@ function initWeb(module) {
   if (fontSize > 5) {
     document.body.setStyle("fontSize", fontSize + "px");
   }
-  forEach(document.body.elems("a"), function () {
+  forEach(document.body.elems("a"), function() {
     if (/^lang_([a-z]{2,2})$/.test(this.id)) {
-      callClick(this, function (e) {
+      callClick(this, function(e) {
         var hs = /^lang_([a-z]{2,2})$/.exec(this.id);
         window.location = replaceURL("lang", hs[1]);
         GEvent.stop(e);
       });
     } else if (/font_size\s(small|normal|large)/.test(this.className)) {
-      callClick(this, function (e) {
+      callClick(this, function(e) {
         fontSize = floatval(document.body.getStyle("fontSize"));
         var hs = /font_size\s(small|normal|large)/.exec(this.className);
         if (hs[1] == "small") {
@@ -629,7 +653,7 @@ function initWeb(module) {
   if (typeof use_ajax != "undefined" && use_ajax == 1 && $E("content")) {
     loader = new GLoader(
       WEB_URL + module + "loader.php/index/controller/loader/index",
-      function (xhr) {
+      function(xhr) {
         var scroll_to = "scroll-to",
           content = $G("content"),
           datas = xhr.responseText.toJSON();
@@ -640,7 +664,7 @@ function initWeb(module) {
               content.setHTML(value);
               loader.init(content);
               content.replaceClass("loading", "animation");
-              content.Ready(function () {
+              content.Ready(function() {
                 $K.init(content);
                 value.evalScript();
               });
@@ -665,7 +689,7 @@ function initWeb(module) {
         }
       },
       null,
-      function () {
+      function() {
         $G("content").replaceClass("animation", "loading");
         return true;
       }
@@ -676,5 +700,5 @@ function initWeb(module) {
   $K.init(document.body);
 }
 if (navigator.userAgent.match(/(iPhone|iPod|iPad)/i)) {
-  document.addEventListener("touchstart", function () {}, false);
+  document.addEventListener("touchstart", function() {}, false);
 }

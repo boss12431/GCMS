@@ -3,11 +3,13 @@ body {
   background-color: #F5F5F5;
   font-size: 13px;
 }
-ul, ol {
+ul,
+ol {
   padding: 10px 0 10px 25px;
   line-height: 0;
 }
-body, li {
+body,
+li {
   line-height: 20px;
 }
 .gcss-wrapper {
@@ -63,7 +65,8 @@ footer p {
 .hidden {
   display: none;
 }
-.create, time {
+.create,
+time {
   color: #666;
 }
 .php {
@@ -84,7 +87,8 @@ footer p {
 .html {
   color: #008080;
 }
-.sql, .tags {
+.sql,
+.tags {
   color: #000080;
 }
 .htaccess {
@@ -93,7 +97,8 @@ footer p {
 .comment {
   color: #393;
 }
-.visited, .count {
+.visited,
+.count {
   color: #669517;
 }
 .reply {
@@ -165,7 +170,7 @@ u {
 .empty,
 .warning,
 .tip {
-  text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
   position: relative;
   padding: 10px;
   display: block;
@@ -182,13 +187,13 @@ div.tip {
 code,
 blockquote {
   background-color: #F9F9F9;
-  background-color: rgba(0,0,0,0.04);
+  background-color: rgba(0, 0, 0, 0.04);
   margin-top: 10px;
   margin-bottom: 10px;
   display: block;
 }
-code + br,
-blockquote + br {
+code+br,
+blockquote+br {
   display: none;
 }
 code {
@@ -205,7 +210,7 @@ blockquote {
   position: relative;
   padding: 10px 10px 10px 45px;
 }
-blockquote > b:first-child {
+blockquote>b:first-child {
   display: block;
   margin-bottom: 5px;
   font-style: normal;
@@ -219,7 +224,7 @@ blockquote:before {
   top: 0;
   left: 0;
   display: block;
-  color: rgba(0,0,0,0.1)
+  color: rgba(0, 0, 0, 0.1)
 }
 code code,
 blockquote blockquote {
@@ -253,44 +258,48 @@ table {
   border-right: 1px solid #666;
   border-top: 1px solid #666;
 }
-table td, table th, table caption {
+table td,
+table th,
+table caption {
   padding: 5px;
 }
 table caption {
   text-align: left;
 }
-table > thead > tr > th, table caption {
+table>thead>tr>th,
+table caption {
   background: #EEE;
   border-bottom: 1px solid #666;
 }
-table > thead > tr > th {
+table>thead>tr>th {
   border-left: 1px solid #666;
 }
-table > tbody > tr > td, table > tbody > tr > th {
+table>tbody>tr>td,
+table>tbody>tr>th {
   vertical-align: middle;
   border-bottom: 1px solid #666;
   border-left: 1px solid #666;
   background-color: #FFF;
 }
-table > tbody > tr > th {
+table>tbody>tr>th {
   text-align: center;
 }
-table > tbody > tr.bg2 > td {
+table>tbody>tr.bg2>td {
   background: #EEE;
 }
-table > tbody > tr.bg2 > th {
+table>tbody>tr.bg2>th {
   background: #EEE;
 }
-table > tbody > tr > th {
+table>tbody>tr>th {
   background: #F5F5F5;
 }
-table > tbody > tr > th.th {
+table>tbody>tr>th.th {
   background: #EEE;
 }
-table > thead > tr > th.th {
+table>thead>tr>th.th {
   border-left: 1px solid #666;
 }
-table th > span {
+table th>span {
   display: block;
   color: #F90;
 }

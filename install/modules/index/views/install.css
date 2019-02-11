@@ -48,7 +48,7 @@ ol {
 li {
   line-height: 1.8em;
 }
-ul > li {
+ul>li {
   border-bottom: 1px dashed #ddd;
 }
 div.footer {

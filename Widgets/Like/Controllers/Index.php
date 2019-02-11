@@ -1,17 +1,19 @@
 <?php
 /**
  * @filesource Widgets/Like/Controllers/Index.php
- * @link http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Widgets\Like\Controllers;
 
-use \Kotchasan\Language;
+use Kotchasan\Language;
 
 /**
- * Controller หลัก สำหรับแสดงผล Widget
+ * Controller หลัก สำหรับแสดงผล Widget.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -19,65 +21,66 @@ use \Kotchasan\Language;
  */
 class Index extends \Kotchasan\Controller
 {
+    /**
+     * แสดงผล Widget.
+     *
+     * @param array $query_string ข้อมูลที่ส่งมาจากการเรียก Widget
+     *
+     * @return string
+     */
+    public function get($query_string)
+    {
+        $module = empty($query_string['module']) ? '' : $query_string['module'];
+        $likes = array('g-plusone', 'fb-likebox');
+        $id = uniqid();
+        $widget = '<div class="widget_like">';
+        foreach ($likes as $item) {
+            $widget .= '<div id="'.$id.$item.'"></div>';
+        }
+        $widget .= '<script>';
+        $widget .= 'function setLikeURL(src, url){';
+        $widget .= 'var e = $E(src);';
+        $widget .= 'if (e) {';
+        $widget .= 'var d = (e.contentWindow || e.contentDocument);';
+        $widget .= 'd.location.replace(url);';
+        $widget .= '}';
+        $widget .= '};';
+        $widget .= 'function createLikeButton(){';
+        $widget .= 'var url = getCurrentURL();';
+        $widget .= 'var patt = /(.*)(&|\?)([0-9]+)?/;';
+        $widget .= 'var hs = patt.exec(url);';
+        $widget .= 'url = encodeURIComponent(hs ? hs[1] : url);';
+        $lng = Language::name();
+        $a = 'https://www.facebook.com/plugins/like.php?layout='.($module == 'tall' ? 'box_count' : 'button_count').'&node_type=link&show_faces=false&href=';
+        $widget .= 'setLikeURL("'.$id.'fb-likebox-iframe", "'.$a.'" + url);';
+        $a = 'https://plusone.google.com/_/+1/fastbutton?bsv&size='.($module == 'tall' ? 'tall' : 'medium').'&count=true&hl='.$lng.'&url=';
+        $widget .= 'setLikeURL("'.$id.'g-plusone-iframe", "'.$a.'" + url);';
+        $a = 'https://platform.twitter.com/widgets/tweet_button.1404859412.html#count='.($module == 'tall' ? 'vertical' : 'horizontal').'&lang='.$lng.'&url=';
+        $widget .= 'setLikeURL("'.$id.'twitter-share-iframe", "'.$a.'" + url);';
+        $widget .= '};';
+        $widget .= '$G(window).Ready(function(){';
+        foreach ($likes as $item) {
+            $widget .= '$E("'.$id.$item.'").style.display="inline-block";';
+            $widget .= '$E("'.$id.$item.'").style.vertalAlign="middle";';
+            $widget .= "var iframe=document.createElement('iframe');";
+            $widget .= 'iframe.id="'.$id.$item.'-iframe";';
+            if ($module == 'tall') {
+                $widget .= 'iframe.width=60;';
+                $widget .= 'iframe.height=68;';
+            } else {
+                $widget .= 'iframe.width=90;';
+                $widget .= 'iframe.height=28;';
+            }
+            $widget .= '$E("'.$id.$item.'").appendChild(iframe);';
+            if ($item == 'g-plusone') {
+                $widget .= '$G(iframe).setStyle("float","left");';
+            }
+        }
+        $widget .= 'createLikeButton();';
+        $widget .= '});';
+        $widget .= '</script>';
+        $widget .= '</div>';
 
-  /**
-   * แสดงผล Widget
-   *
-   * @param array $query_string ข้อมูลที่ส่งมาจากการเรียก Widget
-   * @return string
-   */
-  public function get($query_string)
-  {
-    $module = empty($query_string['module']) ? '' : $query_string['module'];
-    $likes = array('g-plusone', 'fb-likebox');
-    $id = uniqid();
-    $widget = '<div class="widget_like">';
-    foreach ($likes AS $item) {
-      $widget .= '<div id="'.$id.$item.'"></div>';
+        return $widget;
     }
-    $widget .= '<script>';
-    $widget .= 'function setLikeURL(src, url){';
-    $widget .= 'var e = $E(src);';
-    $widget .= 'if (e) {';
-    $widget .= 'var d = (e.contentWindow || e.contentDocument);';
-    $widget .= 'd.location.replace(url);';
-    $widget .= '}';
-    $widget .= '};';
-    $widget .= 'function createLikeButton(){';
-    $widget .= 'var url = getCurrentURL();';
-    $widget .= 'var patt = /(.*)(&|\?)([0-9]+)?/;';
-    $widget .= 'var hs = patt.exec(url);';
-    $widget .= 'url = encodeURIComponent(hs ? hs[1] : url);';
-    $lng = Language::name();
-    $a = 'https://www.facebook.com/plugins/like.php?layout='.($module == 'tall' ? 'box_count' : 'button_count').'&node_type=link&show_faces=false&href=';
-    $widget .= 'setLikeURL("'.$id.'fb-likebox-iframe", "'.$a.'" + url);';
-    $a = 'https://plusone.google.com/_/+1/fastbutton?bsv&size='.($module == 'tall' ? 'tall' : 'medium').'&count=true&hl='.$lng.'&url=';
-    $widget .= 'setLikeURL("'.$id.'g-plusone-iframe", "'.$a.'" + url);';
-    $a = 'https://platform.twitter.com/widgets/tweet_button.1404859412.html#count='.($module == 'tall' ? 'vertical' : 'horizontal').'&lang='.$lng.'&url=';
-    $widget .= 'setLikeURL("'.$id.'twitter-share-iframe", "'.$a.'" + url);';
-    $widget .= '};';
-    $widget .= '$G(window).Ready(function(){';
-    foreach ($likes AS $item) {
-      $widget .= '$E("'.$id.$item.'").style.display="inline-block";';
-      $widget .= '$E("'.$id.$item.'").style.vertalAlign="middle";';
-      $widget .= "var iframe=document.createElement('iframe');";
-      $widget .= 'iframe.id="'.$id.$item.'-iframe";';
-      if ($module == 'tall') {
-        $widget .= "iframe.width=60;";
-        $widget .= "iframe.height=68;";
-      } else {
-        $widget .= "iframe.width=90;";
-        $widget .= "iframe.height=28;";
-      }
-      $widget .= '$E("'.$id.$item.'").appendChild(iframe);';
-      if ($item == 'g-plusone') {
-        $widget .= '$G(iframe).setStyle("float","left");';
-      }
-    }
-    $widget .= 'createLikeButton();';
-    $widget .= '});';
-    $widget .= '</script>';
-    $widget .= '</div>';
-    return $widget;
-  }
 }

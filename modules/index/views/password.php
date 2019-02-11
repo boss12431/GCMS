@@ -25,50 +25,49 @@ use Kotchasan\Template;
  */
 class View extends \Gcms\View
 {
+    /**
+     * ฟอร์มแก้ไขรหัสผ่านสมาชิก
+     *
+     * @param Request $request
+     * @param object  $index
+     *
+     * @return object
+     */
+    public function render(Request $request, $index)
+    {
+        // อ่านข้อมูลสมาชิก
+        $rs = Recordset::create('Index\User\Model');
+        $user = $rs->where((int) $_SESSION['login']['id'])->first('id');
+        $template = Template::create('member', 'member', 'password');
+        $contents = array(
+            '/{ACCEPT}/' => Mime::getAccept(self::$cfg->user_icon_typies),
+            '/{USER_ICON_TYPIES}/' => sprintf(Language::get('Upload a picture of %s resize automatically'), empty(self::$cfg->user_icon_typies) ? 'jpg' : implode(', ', (self::$cfg->user_icon_typies))),
+        );
+        // ข้อมูลฟอร์ม
+        foreach ($user as $key => $value) {
+            if ($key == 'sex') {
+                $source = Language::get('SEXES');
+                $datas = array();
+                foreach ($source as $k => $v) {
+                    $sel = $k == $value ? ' selected' : '';
+                    $datas[] = '<option value="'.$k.'"'.$sel.'>'.$v.'</option>';
+                }
+                $contents['/{'.strtoupper($key).'}/'] = implode('', $datas);
+            } elseif ($key === 'icon') {
+                if (is_file(ROOT_PATH.self::$cfg->usericon_folder.$value)) {
+                    $icon = WEB_URL.self::$cfg->usericon_folder.$value;
+                } else {
+                    $icon = WEB_URL.'skin/img/noicon.jpg';
+                }
+                $contents['/{ICON}/'] = $icon;
+            } else {
+                $contents['/{'.strtoupper($key).'}/'] = $value;
+            }
+        }
+        $template->add($contents);
+        $index->detail = $template->render();
+        // คืนค่า
 
-  /**
-   * ฟอร์มแก้ไขรหัสผ่านสมาชิก
-   *
-   * @param Request $request
-   * @param object  $index
-   *
-   * @return object
-   */
-  public function render(Request $request, $index)
-  {
-    // อ่านข้อมูลสมาชิก
-    $rs = Recordset::create('Index\User\Model');
-    $user = $rs->where((int)$_SESSION['login']['id'])->first('id');
-    $template = Template::create('member', 'member', 'password');
-    $contents = array(
-      '/{ACCEPT}/' => Mime::getAccept(self::$cfg->user_icon_typies),
-      '/{USER_ICON_TYPIES}/' => sprintf(Language::get('Upload a picture of %s resize automatically'), empty(self::$cfg->user_icon_typies) ? 'jpg' : implode(', ', (self::$cfg->user_icon_typies))),
-    );
-    // ข้อมูลฟอร์ม
-    foreach ($user as $key => $value) {
-      if ($key == 'sex') {
-        $source = Language::get('SEXES');
-        $datas = array();
-        foreach ($source as $k => $v) {
-          $sel = $k == $value ? ' selected' : '';
-          $datas[] = '<option value="'.$k.'"'.$sel.'>'.$v.'</option>';
-        }
-        $contents['/{'.strtoupper($key).'}/'] = implode('', $datas);
-      } elseif ($key === 'icon') {
-        if (is_file(ROOT_PATH.self::$cfg->usericon_folder.$value)) {
-          $icon = WEB_URL.self::$cfg->usericon_folder.$value;
-        } else {
-          $icon = WEB_URL.'skin/img/noicon.jpg';
-        }
-        $contents['/{ICON}/'] = $icon;
-      } else {
-        $contents['/{'.strtoupper($key).'}/'] = $value;
-      }
+        return $index;
     }
-    $template->add($contents);
-    $index->detail = $template->render();
-    // คืนค่า
-
-    return $index;
-  }
 }

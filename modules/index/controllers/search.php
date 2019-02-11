@@ -21,17 +21,16 @@ use Kotchasan\Http\Request;
  */
 class Controller extends \Kotchasan\Controller
 {
-
-  /**
-   * แสดงผลโมดูล Index.
-   *
-   * @param Request $request
-   * @param object  $module  ข้อมูลโมดูลจาก database
-   *
-   * @return object||null คืนค่าข้อมูลหน้าที่เรียก ไม่พบคืนค่า null
-   */
-  public function init(Request $request, $module)
-  {
-    return createClass('Index\Search\View')->render(\Index\Search\Model::findAll($request, $module));
-  }
+    /**
+     * แสดงผลโมดูล Index.
+     *
+     * @param Request $request
+     * @param object  $module  ข้อมูลโมดูลจาก database
+     *
+     * @return object||null คืนค่าข้อมูลหน้าที่เรียก ไม่พบคืนค่า null
+     */
+    public function init(Request $request, $module)
+    {
+        return createClass('Index\Search\View')->render(\Index\Search\Model::findAll($request, $module));
+    }
 }

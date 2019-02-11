@@ -1,5 +1,7 @@
 <form id=register_frm class="main_frm" method=post action="{WEBURL}index.php" autocomplete=off>
-  <header><h2 class="cuttext icon-profile">{LNG_Editing your account}</h2></header>
+  <header>
+    <h2 class="cuttext icon-profile">{LNG_Editing your account}</h2>
+  </header>
   <fieldset>
     <div class=item>
       <label for=register_email>{LNG_Email}/Facebook ID</label>
@@ -58,7 +60,7 @@
   </fieldset>
 </form>
 <script>
-  $G(window).Ready(function () {
+  $G(window).Ready(function() {
     new GForm('register_frm', '{WEBURL}xhr.php/index/model/updateprofile/submit').onsubmit(doFormSubmit);
     birthdayChanged('register_birthday', '%s ({LNG_age} %y {LNG_year}, %m {LNG_month} %d {LNG_days})');
     new GValidator('register_displayname', 'keyup,change', checkDisplayname, '{WEBURL}index.php/index/model/checker/displayname', null, 'register_frm');

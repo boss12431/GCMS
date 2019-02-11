@@ -13,14 +13,14 @@ include 'load.php';
 // config
 $cfg = Gcms\Config::create();
 if (empty($cfg->msvalidate)) {
-  new \Kotchasan\Http\NotFound();
+    new \Kotchasan\Http\NotFound();
 } else {
-  $response = new Kotchasan\Http\Response();
-  $content = '<'.'?xml version="1.0"?'.'>';
-  $content .= "\n<users>";
-  $content .= "\n\t<user>".$cfg->msvalidate.'</user>';
-  $content .= "\n</users>";
-  $response->withContent($content)
-    ->withHeader('Content-Type', 'application/xml; charset=UTF-8')
-    ->send();
+    $response = new Kotchasan\Http\Response();
+    $content = '<'.'?xml version="1.0"?'.'>';
+    $content .= "\n<users>";
+    $content .= "\n\t<user>".$cfg->msvalidate.'</user>';
+    $content .= "\n</users>";
+    $response->withContent($content)
+        ->withHeader('Content-Type', 'application/xml; charset=UTF-8')
+        ->send();
 }

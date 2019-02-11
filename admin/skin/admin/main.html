@@ -34,8 +34,7 @@
       </a>
       <ul id=gdpanel class=gdpanel>
         <li>
-          <a class=icon-profile href="index.php?module=editprofile&amp;id={LOGINID}" title="{LNG_Editing your account}" tabindex=1
-             accesskey=w>{LNG_Editing your account}</a>
+          <a class=icon-profile href="index.php?module=editprofile&amp;id={LOGINID}" title="{LNG_Editing your account}" tabindex=1 accesskey=w>{LNG_Editing your account}</a>
         </li>
         <li>
           <a class=icon-preview href="{WEBURL}index.php" target=preview accesskey=p title="{LNG_Preview}" tabindex=1>{LNG_Home}</a>
@@ -56,7 +55,7 @@
   <main id="content">{CONTENT}</main>
 </div>
 <script>
-  $G(window).Ready(function () {
+  $G(window).Ready(function() {
     new GDPanel('gdpanel-arrow', 'gdpanel');
     initWeb('admin');
   });

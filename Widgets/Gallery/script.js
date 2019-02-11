@@ -7,7 +7,7 @@
  */
 RSSGal = GClass.create();
 RSSGal.prototype = {
-  initialize: function (options) {
+  initialize: function(options) {
     this.options = {
       rows: 3,
       cols: 2,
@@ -16,13 +16,13 @@ RSSGal.prototype = {
     };
     Object.extend(this.options, options || {});
   },
-  show: function (div) {
+  show: function(div) {
     var query = 'class=Widgets\\Gallery\\Controllers\\Reader&method=get';
     query += '&url=' + encodeURIComponent(this.options.url);
     query += '&rows=' + this.options.rows;
     query += '&cols=' + this.options.cols;
     query += '&className=' + this.options.className;
-    var _callback = function (xhr) {
+    var _callback = function(xhr) {
       $G(div).setHTML(xhr.responseText);
     };
     new GAjax().send(WEB_URL + 'xhr.php', query, _callback);

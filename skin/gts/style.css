@@ -5,6 +5,7 @@
  Author URI: https://goragod.com
  Responsive
 */
+
 body {
   background-color: #eee;
   color: #666;
@@ -122,8 +123,8 @@ a:hover {
 #board-view div.body {
   margin-bottom: 0;
 }
-fieldset > legend > span,
-.bdr_content header > h3.icon-tags {
+fieldset>legend>span,
+.bdr_content header>h3.icon-tags {
   font-size: 1.4em;
   padding-top: 10px;
   overflow: hidden;
@@ -137,15 +138,15 @@ fieldset > legend > span,
   padding-top: 10px;
   margin-bottom: 10px;
 }
-#comment-list .r-body > .detail {
+#comment-list .r-body>.detail {
   z-index: 2;
   margin-left: 60px;
   position: relative;
 }
-#comment-list .r > .reaction {
+#comment-list .r>.reaction {
   text-align: right;
 }
-#comment-list .r-body > img.usericon {
+#comment-list .r-body>img.usericon {
   float: left;
   margin: 0 10px 10px 0;
 }
@@ -158,8 +159,7 @@ nav.breadcrumbs {
   width: 102%;
 }
 nav.breadcrumbs li a {
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4),
-    -1px -1px 0 rgba(255, 255, 255, 0.2);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4), -1px -1px 0 rgba(255, 255, 255, 0.2);
 }
 nav.breadcrumbs li:before {
   border-width: 5px;
@@ -193,7 +193,7 @@ nav.breadcrumbs li:before {
 .homepage .widget_bdr .document-list {
   padding: 0 1%;
 }
-.bdr_content > header {
+.bdr_content>header {
   padding: 2.3em 0 0;
 }
 .widget h2,
@@ -201,7 +201,7 @@ nav.breadcrumbs li:before {
 .bdr_content h2 {
   line-height: 2;
 }
-.bdr_content > header,
+.bdr_content>header,
 header.header {
   position: relative;
   margin-bottom: 1%;
@@ -229,20 +229,18 @@ header.header {
 .menu_wrapper .topmenu {
   background-color: #333;
 }
-.menu_wrapper .topmenu > ul > li > a {
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.2)
-    rgba(0, 0, 0, 0.2);
+.menu_wrapper .topmenu>ul>li>a {
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.2);
   border-width: 1px;
   border-style: solid;
   text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.4), 1px 1px 0 rgba(0, 0, 0, 0.2);
   color: #a5a5a5;
 }
-.menu_wrapper .topmenu > ul > li:hover > a,
-.menu_wrapper .topmenu > ul > li.select > a {
+.menu_wrapper .topmenu>ul>li:hover>a,
+.menu_wrapper .topmenu>ul>li.select>a {
   background-color: #ffc459;
   color: #2c2c2c;
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4),
-    -1px -1px 0 rgba(255, 255, 255, 0.2);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4), -1px -1px 0 rgba(255, 255, 255, 0.2);
 }
 .sidemenu {
   border-width: 1px;
@@ -250,15 +248,15 @@ header.header {
   border-color: inherit;
   padding: 5px;
 }
-.sidemenu > ul > li {
+.sidemenu>ul>li {
   border-bottom-style: solid;
   border-width: 1px;
   border-color: inherit;
 }
-.sidemenu > ul ul {
+.sidemenu>ul ul {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
-#GModal_modaldiv > .modaldiv form {
+#GModal_modaldiv>.modaldiv form {
   padding: 10px;
   background-color: #fff;
 }

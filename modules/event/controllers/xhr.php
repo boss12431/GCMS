@@ -2,10 +2,10 @@
 /**
  * @filesource event/controllers/xhr.php
  *
- * @see http://www.kotchasan.com/
- *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Event\Xhr;
@@ -21,14 +21,13 @@ use Kotchasan\Http\Request;
  */
 class Controller extends \Kotchasan\Controller
 {
-
-  /**
-   * แสดงปฎิทิน.
-   */
-  public function get(Request $request)
-  {
-    if ($request->isReferer()) {
-      echo \Event\Calendar\Controller::render($request);
+    /**
+     * แสดงปฎิทิน.
+     */
+    public function get(Request $request)
+    {
+        if ($request->isReferer()) {
+            echo \Event\Calendar\Controller::render($request);
+        }
     }
-  }
 }

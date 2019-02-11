@@ -25,40 +25,39 @@ use Kotchasan\Template;
  */
 class View extends \Gcms\View
 {
+    /**
+     * หน้า login.
+     *
+     * @param Request $request
+     *
+     * @return object
+     */
+    public function render(Request $request)
+    {
+        $sign_in = Language::get('Sign in');
+        $index = (object) array(
+            'canonical' => WEB_URL.'index.php?module=dologin',
+            'topic' => $sign_in,
+            'description' => self::$cfg->web_description,
+            'menu' => 'dologin',
+        );
+        $template = Template::create('member', 'member', 'loginfrm');
+        $template->add(array(
+            '/{TOKEN}/' => $request->createToken(),
+            '/{EMAIL}/' => isset(Login::$login_params['username']) ? Login::$login_params['username'] : '',
+            '/{PASSWORD}/' => isset(Login::$login_params['password']) ? Login::$login_params['password'] : '',
+            '/{FACEBOOK}/' => empty(self::$cfg->facebook_appId) ? 'hidden' : 'facebook',
+            '/{GOOGLE}/' => empty(self::$cfg->google_client_id) ? 'hidden' : 'google',
+            '/{TOPIC}/' => $index->topic,
+            '/{SUBTITLE}/' => $index->description,
+            '/{PLACEHOLDER}/' => Gcms::getLoginPlaceholder(),
+        ));
+        $index->detail = $template->render();
+        $index->keywords = $index->topic;
+        if (isset(Gcms::$view)) {
+            Gcms::$view->addBreadcrumb($index->canonical, $sign_in);
+        }
 
-  /**
-   * หน้า login.
-   *
-   * @param Request $request
-   *
-   * @return object
-   */
-  public function render(Request $request)
-  {
-    $sign_in = Language::get('Sign in');
-    $index = (object)array(
-        'canonical' => WEB_URL.'index.php?module=dologin',
-        'topic' => $sign_in,
-        'description' => self::$cfg->web_description,
-        'menu' => 'dologin',
-    );
-    $template = Template::create('member', 'member', 'loginfrm');
-    $template->add(array(
-      '/{TOKEN}/' => $request->createToken(),
-      '/{EMAIL}/' => isset(Login::$login_params['username']) ? Login::$login_params['username'] : '',
-      '/{PASSWORD}/' => isset(Login::$login_params['password']) ? Login::$login_params['password'] : '',
-      '/{FACEBOOK}/' => empty(self::$cfg->facebook_appId) ? 'hidden' : 'facebook',
-      '/{GOOGLE}/' => empty(self::$cfg->google_client_id) ? 'hidden' : 'google',
-      '/{TOPIC}/' => $index->topic,
-      '/{SUBTITLE}/' => $index->description,
-      '/{PLACEHOLDER}/' => Gcms::getLoginPlaceholder(),
-    ));
-    $index->detail = $template->render();
-    $index->keywords = $index->topic;
-    if (isset(Gcms::$view)) {
-      Gcms::$view->addBreadcrumb($index->canonical, $sign_in);
+        return $index;
     }
-
-    return $index;
-  }
 }

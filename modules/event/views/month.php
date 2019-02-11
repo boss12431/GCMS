@@ -23,39 +23,38 @@ use Kotchasan\Template;
  */
 class View extends \Gcms\View
 {
+    /**
+     * แสดงปฎิทิน.
+     *
+     * @param Request $request
+     * @param object  $index
+     *
+     * @return object
+     */
+    public function index(Request $request, $index)
+    {
+        // breadcrumb ของโมดูล
+        if (Gcms::$menu->isHome($index->index_id)) {
+            $index->canonical = WEB_URL.'index.php';
+        } else {
+            $index->canonical = Gcms::createUrl($index->module);
+            $menu = Gcms::$menu->findTopLevelMenu($index->index_id);
+            if ($menu) {
+                Gcms::$view->addBreadcrumb($index->canonical, $menu->menu_text, $menu->menu_tooltip);
+            } else {
+                Gcms::$view->addBreadcrumb($index->canonical, $index->topic, $index->description);
+            }
+        }
+        // /event/month.html
+        $template = Template::create('event', $index->module, 'month');
+        $template->add(array(
+            '/{TOPIC}/' => $index->topic,
+            '/{DETAIL}/' => $index->detail,
+            '/{CALENDAR}/' => '<div id="event-calendar"></div>',
+            '/{MODULE}/' => $index->module,
+        ));
+        $index->detail = $template->render();
 
-  /**
-   * แสดงปฎิทิน.
-   *
-   * @param Request $request
-   * @param object  $index
-   *
-   * @return object
-   */
-  public function index(Request $request, $index)
-  {
-    // breadcrumb ของโมดูล
-    if (Gcms::$menu->isHome($index->index_id)) {
-      $index->canonical = WEB_URL.'index.php';
-    } else {
-      $index->canonical = Gcms::createUrl($index->module);
-      $menu = Gcms::$menu->findTopLevelMenu($index->index_id);
-      if ($menu) {
-        Gcms::$view->addBreadcrumb($index->canonical, $menu->menu_text, $menu->menu_tooltip);
-      } else {
-        Gcms::$view->addBreadcrumb($index->canonical, $index->topic, $index->description);
-      }
+        return $index;
     }
-    // /event/month.html
-    $template = Template::create('event', $index->module, 'month');
-    $template->add(array(
-      '/{TOPIC}/' => $index->topic,
-      '/{DETAIL}/' => $index->detail,
-      '/{CALENDAR}/' => '<div id="event-calendar"></div>',
-      '/{MODULE}/' => $index->module,
-    ));
-    $index->detail = $template->render();
-
-    return $index;
-  }
 }
