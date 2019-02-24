@@ -92,12 +92,12 @@ class View extends \Gcms\View
                             // add column
                             $sql = "SELECT * FROM `information_schema`.`columns` WHERE `table_schema`='$config[db_name]' AND `table_name`='$match[1]' AND `column_name`='$match[2]'";
                             $search = $db->customQuery($sql);
-                            if (sizeof($search) == 1) {
+                            if (count($search) == 1) {
                                 $sql = "ALTER TABLE `$match[1]` DROP COLUMN `$match[2]`";
                                 $db->query($sql);
                             }
                             $ret = $db->query($match[0]);
-                            if (sizeof($search) == 1) {
+                            if (count($search) == 1) {
                                 $content[] = '<li class="'.($ret === false ? 'incorrect' : 'correct')."\">REPLACE COLUMN <b>$match[2]</b> to TABLE <b>$match[1]</b></li>";
                             } else {
                                 $content[] = '<li class="'.($ret === false ? 'incorrect' : 'correct')."\">ADD COLUMN <b>$match[2]</b> to TABLE <b>$match[1]</b></li>";

@@ -86,7 +86,7 @@ class Model extends \Kotchasan\Model
                         }
                     }
                     // มีข้อมูลมาภาษาเดียวให้แสดงในทุกภาษา
-                    if (sizeof($details) == 1) {
+                    if (count($details) == 1) {
                         foreach ($details as $i => $item) {
                             $details[$i]['language'] = '';
                         }
@@ -207,7 +207,7 @@ class Model extends \Kotchasan\Model
                 ->where(array('P.id', $id));
         }
         $result = $query->limit(1)->toArray()->execute();
-        if (sizeof($result) == 1) {
+        if (count($result) == 1) {
             $result = ArrayTool::unserialize($result[0]['config'], $result[0], empty($id));
             unset($result['config']);
             if ($id == 0) {

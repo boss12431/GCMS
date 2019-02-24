@@ -27,9 +27,13 @@ function initShareButton(id) {
   forEach($E(id).getElementsByTagName("*"), function() {
     var hs = share_patt.exec(this.className);
     if (hs) {
-      callClick(this, doShare);
-      if (hs[1] == "fb") {
-        getShareCount();
+      if (hs[1] == "line" && !$K.isMobile()) {
+        this.className = 'hidden';
+      } else {
+        callClick(this, doShare);
+        if (hs[1] == "fb") {
+          getShareCount();
+        }
       }
     }
   });

@@ -74,6 +74,9 @@ class Gcms extends \Kotchasan\KBase
      * @var array
      */
     public static $module_menus = array(
+        'index' => array(
+            'search' => array('{LNG_Search}', '{WEBURL}index.php?module=search', 'search'),
+        ),
         'member' => array(
             'login' => array('{LNG_Sign in}', '{WEBURL}index.php?module=dologin', 'dologin'),
             'logout' => array('{LNG_Sign out}', '{WEBURL}index.php?action=logout', 'logout'),
@@ -130,7 +133,7 @@ class Gcms extends \Kotchasan\KBase
     public static function array2Ser($array)
     {
         $new_array = array();
-        $l = sizeof($array);
+        $l = count($array);
         if ($l > 0) {
             foreach ($array as $i => $v) {
                 if ($l == 1 && $i == 0) {

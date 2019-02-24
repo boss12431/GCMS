@@ -40,7 +40,7 @@ class Index extends \Kotchasan\Controller
             $tag_result = \Index\Tag\Model::all();
             $min = 1000000;
             $max = 0;
-            $nmax = sizeof($tag_result) - 1;
+            $nmax = count($tag_result) - 1;
             $min = isset($tag_result[1]) ? $tag_result[1]['count'] : 0;
             $max = isset($tag_result[$nmax - 1]) ? $tag_result[$nmax - 1]['count'] : 0;
             $step = ($max - $min > 0) ? ($max - $min) / 7 : 0.1;

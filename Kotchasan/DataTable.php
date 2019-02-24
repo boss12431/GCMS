@@ -558,7 +558,7 @@ class DataTable extends \Kotchasan\KBase
             }
         } elseif (!empty($this->datas)) {
             // จำนวนข้อมูลทั้งหมดจาก array
-            $count = sizeof($this->datas);
+            $count = count($this->datas);
         } else {
             // ไม่มีข้อมูล
             $count = 0;
@@ -665,7 +665,7 @@ class DataTable extends \Kotchasan\KBase
         if ($this->fullWidth) {
             $c[] = 'fullwidth';
         }
-        if (sizeof($c) > 0) {
+        if (count($c) > 0) {
             $prop[] = ' class="'.implode(' ', $c).'"';
         }
         // table

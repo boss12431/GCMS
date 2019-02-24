@@ -239,6 +239,16 @@ class View extends \Gcms\Adminview
             'options' => Language::get('LOGIN_FIELDS'),
             'value' => isset($config->login_fields) ? $config->login_fields : self::$cfg->login_fields,
         ));
+        // member_only
+        $fieldset->add('select', array(
+            'id' => 'member_only',
+            'labelClass' => 'g-input icon-customer',
+            'itemClass' => 'item',
+            'label' => '{LNG_Login per one account}',
+            'comment' => '{LNG_Limit access to only one account per member. Members who have logged in before will be forced to log out.}',
+            'options' => Language::get('BOOLEANS'),
+            'value' => isset($config->member_only) ? $config->member_only : self::$cfg->member_only,
+        ));
         $fieldset = $form->add('fieldset', array(
             'class' => 'submit',
         ));

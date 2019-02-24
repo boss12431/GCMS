@@ -118,6 +118,7 @@ class Model extends \Kotchasan\KBase
                     $config->member_idcard = $request->post('member_idcard')->toInt();
                     $config->use_ajax = $request->post('use_ajax')->toBoolean();
                     $config->new_register_status = $request->post('new_register_status')->toInt();
+                    $config->member_only = $request->post('member_only')->toBoolean();
                     // save config
                     if (Config::save($config, CONFIG)) {
                         $ret['alert'] = Language::get('Saved successfully');

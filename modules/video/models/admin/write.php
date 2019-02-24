@@ -55,7 +55,7 @@ class Model extends \Kotchasan\Model
                 ->where(array('A.id', $id));
         }
         $result = $query->limit(1)->toArray()->execute();
-        if (sizeof($result) == 1) {
+        if (count($result) == 1) {
             $result = ArrayTool::unserialize($result[0]['config'], $result[0], empty($id));
             unset($result['config']);
 
@@ -113,7 +113,7 @@ class Model extends \Kotchasan\Model
                                 $ret['alert'] = $datas->{'error'}->{'message'};
                             } else {
                                 $items = $datas->{'items'};
-                                if (sizeof($items) == 0) {
+                                if (count($items) == 0) {
                                     $ret['ret_write_youtube'] = Language::get('Video not found');
                                 } else {
                                     $error = false;

@@ -57,7 +57,7 @@ class Reader extends \Kotchasan\Controller
             $rss = $this->RSStoArray($contents);
             $listcount = $rows * $cols;
             echo '<table class="'.$className.'"><tr>';
-            for ($i = 0; $i < sizeof($rss) && $listcount > 0; ++$i) {
+            for ($i = 0; $i < count($rss) && $listcount > 0; ++$i) {
                 if ($i > 0 && $i % $cols == 0) {
                     echo '</tr><tr>';
                 }
@@ -94,7 +94,7 @@ class Reader extends \Kotchasan\Controller
     {
         $headers = explode('<'.'?xml', $xml);
         $ret = '';
-        for ($i = 0; $i < sizeof($headers); ++$i) {
+        for ($i = 0; $i < count($headers); ++$i) {
             $ret .= $this->parseXMLHeader(trim($headers[$i]));
         }
 
@@ -102,14 +102,14 @@ class Reader extends \Kotchasan\Controller
     }
 
     /**
-     * @param  $data
+     * @param $data
      */
     private function parseXMLHeader($data)
     {
         if ($data != '') {
             $EndPos = $this->strpos($data, '?>');
             $datas = explode(' ', $this->substr($data, 0, $EndPos));
-            for ($i = 0; $i < sizeof($datas); ++$i) {
+            for ($i = 0; $i < count($datas); ++$i) {
                 $temps = explode('=', $datas[$i]);
                 if (trim($temps[0]) == 'encoding') {
                     $value = trim($temps[1]);
@@ -180,7 +180,7 @@ class Reader extends \Kotchasan\Controller
         if ($EndAttr > $StartAttr) {
             $attribute = $this->substr($text, $StartAttr, $EndAttr - $StartAttr - 1);
             $datas = explode(' ', $attribute);
-            for ($i = 0; $i < sizeof($datas); ++$i) {
+            for ($i = 0; $i < count($datas); ++$i) {
                 if (preg_match('/^([a-zA-Z:]+)=["\'](.*)["\']/', $datas[$i], $match)) {
                     $items[$match[1]] = $match[2];
                 }

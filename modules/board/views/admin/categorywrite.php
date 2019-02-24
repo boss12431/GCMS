@@ -61,7 +61,7 @@ class View extends \Gcms\Adminview
         $lng = Language::name();
         // ภาษาที่ติดตั้ง
         $languages = Gcms::installedLanguage();
-        $multi_language = sizeof($languages) > 1;
+        $multi_language = count($languages) > 1;
         // topic,detail,icon
         $topic = ArrayTool::unserialize($index->topic);
         $detail = ArrayTool::unserialize($index->detail);

@@ -55,11 +55,11 @@ class View
         $mymenu = '';
         if (isset($items['toplevel'])) {
             foreach ($items['toplevel'] as $level => $name) {
-                if (isset($items[$level]) && sizeof($items[$level]) > 0) {
+                if (isset($items[$level]) && count($items[$level]) > 0) {
                     $mymenu .= $this->createItem($name, $select, true).'<ul>';
                     foreach ($items[$level] as $level2 => $item2) {
                         if ($item2->published != 0) {
-                            if (isset($items[$level2]) && sizeof($items[$level2]) > 0) {
+                            if (isset($items[$level2]) && count($items[$level2]) > 0) {
                                 $mymenu .= $this->createItem($item2, $select, true).'<ul>';
                                 foreach ($items[$level2] as $item3) {
                                     $mymenu .= $this->createItem($item3).'</li>';
@@ -116,7 +116,7 @@ class View
                 }
             }
         }
-        $c = sizeof($c) == 0 ? '' : ' class="'.implode(' ', $c).'"';
+        $c = count($c) == 0 ? '' : ' class="'.implode(' ', $c).'"';
         if (($module && $module->index_id > 0) || $item->menu_url != '') {
             $a = $item->menu_target == '' ? '' : ' target='.$item->menu_target;
             $a .= $item->accesskey == '' ? '' : ' accesskey='.$item->accesskey;

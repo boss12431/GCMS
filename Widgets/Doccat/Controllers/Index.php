@@ -10,7 +10,7 @@
 
 namespace Widgets\Doccat\Controllers;
 
-use Documentation\Index\Controller;
+use Document\Index\Controller;
 use Gcms\Gcms;
 use Kotchasan\Text;
 

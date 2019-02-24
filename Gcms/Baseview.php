@@ -40,7 +40,7 @@ class Baseview extends \Kotchasan\View
     public function getBreadcrumbJsonld()
     {
         // BreadcrumbList
-        if (sizeof($this->breadcrumbs_jsonld) > 1) {
+        if (count($this->breadcrumbs_jsonld) > 1) {
             $elements = array();
             foreach ($this->breadcrumbs_jsonld as $i => $items) {
                 $elements[] = array(

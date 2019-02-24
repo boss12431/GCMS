@@ -96,7 +96,7 @@ class Model extends \Kotchasan\Model
                             }
                         }
                         // มีข้อมูลมาภาษาเดียวให้แสดงในทุกภาษา
-                        if (sizeof($details) == 1) {
+                        if (count($details) == 1) {
                             foreach ($details as $i => $item) {
                                 $details[$i]['language'] = '';
                             }

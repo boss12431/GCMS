@@ -174,14 +174,13 @@ class Model
             $query->where(array(
                 array('I.id', (int) $index->index_id),
                 array('I.module_id', (int) $index->module_id),
-                Sql::ISNULL('I.page'),
+                array('I.page', ''),
             ));
         } else {
-            $query->where(array('I.module_id', (int) $index->module_id))
-                ->andWhere(array(
-                    //array('I.id', (int) $index->index_id),
-                    array('I.page', $page),
-                ), 'OR')
+            $query->where(array(
+                array('I.module_id', (int) $index->module_id),
+                array('I.page', $page),
+            ))
                 ->order('I.page DESC');
         }
         $search = $query->first('D.topic', 'D.detail', 'D.keywords', 'D.description');

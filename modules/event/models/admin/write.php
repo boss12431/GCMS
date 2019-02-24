@@ -54,7 +54,7 @@ class Model extends \Kotchasan\Model
                 ->where(array('A.id', $id));
         }
         $result = $query->limit(1)->toArray()->execute();
-        if (sizeof($result) == 1) {
+        if (count($result) == 1) {
             $result = ArrayTool::unserialize($result[0]['config'], $result[0], empty($id));
             unset($result['config']);
 

@@ -48,7 +48,7 @@ class Controller extends \Kotchasan\Controller
                     $datas = json_decode($feed);
                     if (isset($datas->{'items'})) {
                         $items = $datas->{'items'};
-                        if (sizeof($items) == 1) {
+                        if (count($items) == 1) {
                             $viewCount = (int) $items[0]->{'statistics'}->{'viewCount'};
                             if ($viewCount != $mv->views) {
                                 \Video\View\Model::updateView($mv->id, $viewCount);

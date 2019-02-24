@@ -80,7 +80,7 @@ class Controller extends \Kotchasan\Controller
                     );
                 }
             }
-            if (!isset(Gcms::$site['logo']) && is_file(ROOT_PATH.DATA_FOLDER.'image/site_logo.jpg')) {
+            if (is_file(ROOT_PATH.DATA_FOLDER.'image/site_logo.jpg')) {
                 $info = @getimagesize(ROOT_PATH.DATA_FOLDER.'image/site_logo.jpg');
                 if ($info && $info[0] > 0 && $info[1] > 0) {
                     Gcms::$site['logo'] = array(

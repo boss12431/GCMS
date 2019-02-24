@@ -50,7 +50,7 @@ class Controller extends \Kotchasan\Controller
         if ($index && MAIN_INIT === 'indexhtml') {
             $page = createClass($className)->index($request, $index);
         }
-        if ($page) {
+        if (!empty($page)) {
             return $page;
         }
         // 404

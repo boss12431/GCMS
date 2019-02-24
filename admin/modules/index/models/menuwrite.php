@@ -79,16 +79,8 @@ class Model extends \Kotchasan\Model
     {
         $result = array();
         if (defined('MAIN_INIT')) {
-            $model = new static();
-            $select = array(
-                'I.id',
-                'M.owner',
-                'M.module',
-                'D.topic',
-                'I.language',
-            );
-            $query = $model->db()->createQuery()
-                ->select($select)
+            $query = static::createQuery()
+                ->select(array('I.id', 'M.owner', 'M.module', 'D.topic', 'I.language'))
                 ->from('index I')
                 ->join('index_detail D', 'INNER', array(array('D.id', 'I.id'), array('D.module_id', 'I.module_id'), array('D.language', 'I.language')))
                 ->join('modules M', 'INNER', array('M.id', 'I.module_id'))

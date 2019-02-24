@@ -30,7 +30,7 @@ class View extends \Gcms\Adminview
         $thead = array();
         $tbody = array();
         $list = \Index\Pagesview\Model::get($date);
-        $l = sizeof($list);
+        $l = count($list);
         foreach ($list as $i => $item) {
             list($y, $m, $d) = explode('-', $item['date']);
             $d = '<a href="index.php?module=report&amp;date='.$item['date'].'">'.(int) $d.'</a>';

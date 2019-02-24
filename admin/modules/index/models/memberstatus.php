@@ -63,7 +63,7 @@ class Model extends \Kotchasan\KBase
                     $config->member_status[] = Language::get('click to edit');
                     $config->color_status[] = '#000000';
                     // id ของสถานะใหม่
-                    $i = sizeof($config->member_status) - 1;
+                    $i = count($config->member_status) - 1;
                     // ข้อมูลใหม่
                     $row = '<li id="config_status_'.$i.'">';
                     $row .= '<span class="icon-delete" id="config_status_delete_'.$i.'" title="'.Language::get('Delete').'"></span>';
@@ -79,7 +79,7 @@ class Model extends \Kotchasan\KBase
                     $save1 = array();
                     $save2 = array();
                     // ลบสถานะและสี
-                    for ($i = 0; $i < sizeof($config->member_status); ++$i) {
+                    for ($i = 0; $i < count($config->member_status); ++$i) {
                         if ($i < 2 || $i != $match[1]) {
                             $save1[] = $config->member_status[$i];
                             $save2[] = $config->color_status[$i];

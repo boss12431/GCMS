@@ -72,7 +72,7 @@ class Model extends \Kotchasan\Model
                 ))
                 ->cacheOn()
                 ->toArray();
-            if (sizeof($categories) == 1) {
+            if (count($categories) == 1) {
                 // มีการเลือกหมวด เพียงหมวดเดียว
                 $select[] = 'C.category_id';
                 $select[] = 'C.topic category';

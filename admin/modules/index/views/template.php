@@ -38,7 +38,7 @@ class View extends \Gcms\Adminview
         // จำนวนแถวที่ต้องการ (3 column)
         $rows = 3;
         // theme ทั้งหมด
-        $count = sizeof($themes);
+        $count = count($themes);
         // จำนวนรายการต่อหน้า
         $list_per_page = $rows * 3;
         // จำนวนหน้าทั้งหมด

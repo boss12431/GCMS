@@ -108,7 +108,7 @@ class Controller
             unset($menus['sections']['tools']);
             unset($menus['sections']['email']);
         }
-        if (isset($menus['widgets']) && sizeof($menus['widgets']) == 0) {
+        if (isset($menus['widgets']) && count($menus['widgets']) == 0) {
             unset($menus['sections']['widgets']);
         }
         if (empty($menus['tools']['install'])) {
