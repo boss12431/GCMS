@@ -1095,12 +1095,23 @@ class DataTable extends \Kotchasan\KBase
     {
         if (isset($item['type'])) {
             $prop = array();
+            $datalist = '';
             foreach ($item as $key => $value) {
-                if ($key != 'text' && $key != 'default') {
+                if ($key == 'datalist') {
+                    foreach ($value as $k => $v) {
+                        $datalist .= '<option value="'.$k.'">'.$v.'</option>';
+                    }
+                } elseif ($key != 'text' && $key != 'default') {
                     $prop[$key] = $key.'="'.$value.'"';
                 }
             }
-            $row = '<fieldset><label>'.(isset($item['text']) ? $item['text'] : '').' <input '.implode(' ', $prop).'></label></fieldset>';
+            if ($datalist != '' && isset($item['name'])) {
+                $prop['list'] = 'list="'.$item['name'].'-datalist"';
+                $datalist = '<datalist id="'.$item['name'].'-datalist">'.$datalist.'</datalist>';
+            } else {
+                $datalist = '';
+            }
+            $row = '<fieldset><label>'.(isset($item['text']) ? $item['text'] : '').' <input '.implode(' ', $prop).'>'.$datalist.'</label></fieldset>';
         } else {
             $prop = array();
             foreach ($item as $key => $value) {

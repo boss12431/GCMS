@@ -229,12 +229,14 @@ Calendar.prototype = {
         diff_next = a.compare(self.next_day_of_calendar);
         if (diff_next.days >= -42 || this.end) {
           diff_start = a.compare(self.first_day_of_calendar);
-          if (diff_start.days < 0) {
-            a = self._addLabel(self.first_day_of_calendar, this, true);
-            start_date = self.first_day_of_calendar.format("y-m-d H:i:s");
-          } else {
-            a = self._addLabel(a, this, true);
-            start_date = this.start;
+          start_date = this.start;
+          if (diff_next.days >= -42) {
+            if (diff_start.days < 0) {
+              a = self._addLabel(self.first_day_of_calendar, this, true);
+              start_date = self.first_day_of_calendar.format("y-m-d H:i:s");
+            } else {
+              a = self._addLabel(a, this, true);
+            }
           }
           if (a && this.end) {
             diff = new Date(this.end).compare(new Date(start_date));

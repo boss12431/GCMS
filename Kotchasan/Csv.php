@@ -85,12 +85,15 @@ class Csv
     }
 
     /**
-     * สร้างไฟล์ CSV สำหรับดาวน์โหลด.
+     * สร้างไฟล์ CSV สำหรับดาวน์โหลด
+     * คืนค่า true.
      *
      * @param string $file    ชื่อไฟล์ ไม่ต้องมีนามสกุล
      * @param array  $header  ส่วนหัวของข้อมูล
      * @param array  $datas   ข้อมูล
      * @param string $charset ภาษาของ CSV ค่าเริ่มต้นคือ Windows-874 (ภาษาไทย)
+     *
+     * @return bool
      */
     public static function send($file, $header, $datas, $charset = 'Windows-874')
     {
@@ -111,6 +114,9 @@ class Csv
         }
         // close
         fclose($f);
+        // คืนค่า สำเร็จ
+
+        return true;
     }
 
     /**
@@ -159,8 +165,8 @@ class Csv
                 } elseif ($type == 'en') {
                     $save[$key] = preg_replace('/[^a-zA-Z0-9]+/', '', $data[$n]);
                 } elseif ($type == 'date') {
-                    if (preg_match('/^([0-9]{4,4})[\-\/]([0-9]{1,2})[\-\/]([0-9]{1,2})$/', $data[$n])) {
-                        $save[$key] = $data[$n];
+                    if (preg_match('/^([0-9]{4,4})[\-\/]([0-9]{1,2})[\-\/]([0-9]{1,2})$/', $data[$n], $match)) {
+                        $save[$key] = "$match[1]-$match[2]-$match[3]";
                     } elseif (preg_match('/^([0-9]{1,2})[\-\/]([0-9]{1,2})[\-\/]([0-9]{4,4})$/', $data[$n], $match)) {
                         $save[$key] = "$match[3]-$match[2]-$match[1]";
                     }

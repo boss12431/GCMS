@@ -78,7 +78,7 @@ class Config extends \Kotchasan\Config
      */
     public $member_phone = 0;
     /**
-     * ชื่อสงวน ไม่อนุญาติให้ตั้งเป็นชื่อสมาชิก
+     * ชื่อสงวน ไม่อนุญาตให้ตั้งเป็นชื่อสมาชิก
      *
      * @var array
      */
