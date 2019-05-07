@@ -99,6 +99,7 @@ class View extends \Gcms\Adminview
         ));
         $tb_upload = $form->add('fieldset', array(
             'id' => 'tb_upload',
+            'class' => 'tb_upload',
         ));
         foreach (\Gallery\Admin\Write\Model::pictures($index) as $i => $item) {
             $id = $item->id;

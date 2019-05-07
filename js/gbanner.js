@@ -55,7 +55,7 @@ GBanner.prototype = {
     this.button.className = "button_container scroll";
     this.button.style.position = "relative";
     this.datas = new Array();
-    forEach(this.container.elems("figure"), function() {
+    forEach(this.container.querySelectorAll(".figure"), function() {
       tmp._initItem(this);
     });
     this.drag = false;
@@ -85,17 +85,15 @@ GBanner.prototype = {
   add: function(picture, detail, url) {
     var figure = document.createElement("figure");
     this.container.appendChild(figure);
-    var a = document.createElement("a");
-    a.href = url;
-    figure.appendChild(a);
+    figure.className = 'figure';
     var img = document.createElement("img");
     img.src = picture;
     img.className = "nozoom";
-    a.appendChild(img);
+    figure.appendChild(img);
     if (detail && detail != "") {
       var figcaption = document.createElement("figcaption");
       figure.appendChild(figcaption);
-      a = document.createElement("a");
+      var a = document.createElement("a");
       a.href = url;
       a.target = "_blank";
       figcaption.appendChild(a);
@@ -122,7 +120,11 @@ GBanner.prototype = {
       a = $G(this.button.create("a"));
     var span = a.create("span");
     a.rel = i;
-    obj.className = i == 0 ? "show" : "";
+    if (i == 0) {
+      obj.addClass('show');
+    } else {
+      obj.removeClass('show');
+    }
     if (img) {
       if (this.options.backgroundImage) {
         obj.style.backgroundImage = "url(" + img.src + ")";
@@ -185,13 +187,13 @@ GBanner.prototype = {
       forEach(this.datas, function(item, index) {
         figcaption = item.querySelector("figcaption");
         if (id == index) {
-          item.className = "show";
+          item.addClass('show');
           item.style.zIndex = 1;
           if (figcaption) {
             figcaption.className = "show";
           }
         } else {
-          item.className = "";
+          item.removeClass('show');
           item.style.zIndex = 0;
           if (figcaption) {
             figcaption.className = "";

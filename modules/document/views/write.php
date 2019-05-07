@@ -175,7 +175,7 @@ class View extends \Gcms\View
                 'comment' => '{LNG_Select the category you want}',
                 'itemClass' => 'item',
                 'options' => array(0 => '{LNG_Uncategorized}') + \Index\Category\Model::categories((int) $index->module_id),
-                'value' => $index->category_id,
+                'value' => empty($index->category_id) ? 0 : $index->category_id,
             ));
             $fieldset = $form->add('fieldset', array(
                 'class' => 'submit',

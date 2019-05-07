@@ -51,7 +51,11 @@ abstract class AbstractMessage implements MessageInterface
      *
      * @param string $name
      *
+<<<<<<< HEAD
      * @return array
+=======
+     * @return string[]
+>>>>>>> fixed Bugs
      */
     public function getHeader($name)
     {

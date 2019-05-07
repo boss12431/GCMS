@@ -33,7 +33,7 @@ class Model extends \Kotchasan\KBase
     public function submit(Request $request)
     {
         $ret = array();
-        // session, token, member, can_config, ไม่ใช่สมาชิกตัวอย่าง
+        // session, token, แอดมิน, can_config, ไม่ใช่สมาชิกตัวอย่าง
         if ($request->initSession() && $request->isSafe() && $login = Login::adminAccess()) {
             if (Login::checkPermission($login, 'can_config') && Login::notDemoMode($login)) {
                 // โหลด config

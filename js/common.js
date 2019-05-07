@@ -125,8 +125,7 @@ function defaultSubmit(ds) {
       if (val == "") {
         el.valid();
       } else {
-        if (val == "Please fill in" || val == "Please select" || val == "Please browse file") {
-          val = trans(val);
+        if (val == "Please fill in" || val == "Please select" || val == "Please browse file" || val == "already exist") {
           var label = el.findLabel();
           if (label) {
             t = label.innerHTML.strip_tags();
@@ -141,7 +140,11 @@ function defaultSubmit(ds) {
             }
           }
           if (t != "") {
-            val += " " + t;
+            if (val == "already exist") {
+              val = t + " " + trans(val);
+            } else {
+              val = trans(val) + " " + t;
+            }
           }
         } else if (val == "Please select at least one item") {
           val = trans(val);

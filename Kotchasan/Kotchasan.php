@@ -77,6 +77,7 @@ class Kotchasan extends Kotchasan\KBase
     {
         /* Request Class */
         self::$request = new Request();
+        self::$request = self::$request->withHeaders(apache_request_headers());
         /* config */
         if (empty($cfg)) {
             self::$cfg = Config::create();
