@@ -64,6 +64,7 @@ class View extends \Gcms\View
                     $icon = WEB_URL.'skin/img/noicon.jpg';
                 }
                 $contents['/{ICON}/'] = $icon;
+            } elseif ($key === 'token') {
             } else {
                 $contents['/{'.strtoupper($key).'}/'] = $value;
             }
