@@ -133,13 +133,13 @@ window.$K = (function() {
                     obj.dataset["keyboard"] = "1234567890-";
                   } else if (obj.type == "currency") {
                     obj.dataset["keyboard"] = "1234567890-.";
-                  } else if (obj.type == "number" || obj.type == "tel" || obj.type == "currency") {
+                  } else if (obj.type == "number" || obj.type == "tel") {
                     obj.dataset["keyboard"] = "1234567890";
                   }
                 }
                 if (obj.dataset["keyboard"]) {
                   obj.pattern = new RegExp("^(?:[" + obj.dataset["keyboard"].preg_quote() + "]+)$");
-                  if (obj.type == "currency") {
+                  if (obj.type == "integer" || obj.type == "currency" || obj.type == "number") {
                     new GInput(text, obj.dataset["keyboard"], function() {
                       var val = floatval(this.value);
                       if (obj.min) {
@@ -148,7 +148,11 @@ window.$K = (function() {
                       if (obj.max) {
                         val = Math.min(obj.max, val);
                       }
-                      this.value = val.toFixed(2);
+                      if (obj.type == "currency") {
+                        this.value = val.toFixed(2);
+                      } else {
+                        this.value = val;
+                      }
                     });
                   } else {
                     new GInput(text, obj.dataset["keyboard"]);
