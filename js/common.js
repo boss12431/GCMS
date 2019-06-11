@@ -95,8 +95,12 @@ function defaultSubmit(ds) {
     } else if (prop == "elem") {
       el = $E(val);
       if (el) {
-        el.className = ds.class;
-        el.title = ds.title;
+        if (ds.class) {
+          el.className = ds.class;
+        }
+        if (ds.title) {
+          el.title = ds.title;
+        }
       }
     } else if (prop == "location") {
       _location = val;
