@@ -49,7 +49,7 @@ class Model extends \Index\Upgrade\Model
         // index table
         $table = $_SESSION['prefix'].'_index';
         if (!self::fieldExists($db, $table, 'page')) {
-            $db->query("ALTER TABLE `$table` ADD `page` VARCHAR(20) NULL DEFAULT NULL");
+            $db->query("ALTER TABLE `$table` ADD `page` VARCHAR(20) NOT NULL DEFAULT ''");
             $content[] = '<li class="correct">Updated database <b>'.$table.'</b> complete...</li>';
         }
         $content[] = '<li class="correct">Upgrade to Version <b>13.3.1</b> complete.</li>';

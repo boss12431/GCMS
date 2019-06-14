@@ -106,19 +106,18 @@ class View extends \Gcms\Adminview
         // cols
         $groups->add('select', array(
             'id' => 'cols',
-            'labelClass' => 'g-input icon-width',
-            'itemClass' => 'width',
+            'labelClass' => 'g-input icon-cols',
+            'itemClass' => 'width50',
             'label' => '{LNG_Cols}',
-            'options' => array(2 => 2, 4 => 4, 6 => 6, 8 => 8),
+            'options' => array(1 => 1, 2 => 2, 4 => 4, 6 => 6, 8 => 8),
             'value' => $index->cols,
         ));
         // rows
-        $groups->add('select', array(
+        $groups->add('number', array(
             'id' => 'rows',
-            'labelClass' => 'g-input icon-height',
-            'itemClass' => 'width',
+            'labelClass' => 'g-input icon-rows',
+            'itemClass' => 'width50',
             'label' => '{LNG_Rows}',
-            'options' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10, 11 => 11, 12 => 12, 13 => 13, 14 => 14),
             'value' => $index->rows,
         ));
         // sort

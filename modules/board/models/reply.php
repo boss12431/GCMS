@@ -82,7 +82,6 @@ class Model extends \Kotchasan\Model
                         // ไม่ได้กรอกรายละเอียด และ ไม่มีรูป
                         $ret['ret_reply_detail'] = Language::get('Please fill in').' '.Language::get('Detail');
                     } elseif ($id == 0) {
-                        // ใหม่ ตรวจสอบการ login
                         if ($login) {
                             // login ใช้ข้อมูลของคน login
                             $post['member_id'] = $login['id'];

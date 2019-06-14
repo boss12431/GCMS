@@ -91,68 +91,70 @@ class Model extends \Kotchasan\Model
                         // ไม่ได้กรอกรายละเอียด และ ไม่มีรูป
                         $ret['ret_board_detail'] = Language::get('Please fill in').' '.Language::get('Detail');
                     }
-                    // login ใช้ email และ password ของคน login
-                    if ($login) {
-                        // login ใช้ข้อมูลของคน login
-                        $post['member_id'] = $login['id'];
-                        $post['email'] = $login['email'];
-                        $post['sender'] = empty($login['displayname']) ? $login['email'] : $login['displayname'];
-                    } else {
-                        // มาจากฟอร์ม
-                        $email = $request->post('board_email')->topic();
-                        $password = $request->post('board_password')->topic();
-                        if ($email == '') {
-                            // ไม่ได้กรอกอีเมล
-                            $ret['ret_reply_email'] = 'Please fill in';
-                        }
-                        if ($password == '' && !$guest) {
-                            // สมาชิกเท่านั้น และ ไม่ได้กรอกรหัสผ่าน
-                            $ret['ret_reply_password'] = 'Please fill in';
-                        }
-                        if ($email != '' && $password != '') {
-                            // ตรวจสอบ user และ password
-                            $user = Login::checkMember(array(
-                                'username' => $email,
-                                'password' => $password,
-                            ));
-                            if (is_string($user)) {
-                                if (Login::$login_input == 'password') {
-                                    $ret['ret_reply_password'] = $user;
-                                } elseif ($request->post('reply_email')->exists()) {
-                                    $ret['ret_reply_email'] = $user;
-                                } else {
-                                    $ret['ret_reply_email'] = $user;
-                                }
-                            } elseif (!in_array($user['status'], $index->can_reply)) {
-                                // ไม่สามารถแสดงความคิดเห็นได้
-                                $ret['alert'] = Language::get('Sorry, you do not have permission to comment');
-                            } else {
-                                // สมาชิก สามารถแสดงความคิดเห็นได้
-                                $post['member_id'] = $user['id'];
-                                $post['email'] = $user['email'];
-                                $post['sender'] = empty($user['displayname']) ? $user['email'] : $user['displayname'];
-                            }
-                        } elseif ($guest) {
-                            // ตรวจสอบอีเมลซ้ำกับสมาชิก สำหรับบุคคลทั่วไป
-                            $search = $this->db()->createQuery()
-                                ->from('user')
-                                ->where(array('email', $email))
-                                ->first('id');
-                            if ($search) {
-                                // พบอีเมล ต้องการ password
-                                $ret['ret_reply_password'] = 'Please fill in';
-                            } elseif (!Validator::email($email)) {
-                                // อีเมลไม่ถูกต้อง
-                                $ret['ret_reply_email'] = Language::replace('Invalid :name', array(':name' => Language::get('Email')));
-                            } else {
-                                // guest
-                                $post['member_id'] = 0;
-                                $post['email'] = $email;
-                                $post['sender'] = $email;
-                            }
+                    // ใหม่ หรือแก้ไขด้วยตัวเอง ตรวจสอบ username+password
+                    if ($id == 0 || !$moderator) {
+                        if ($login) {
+                            // login ใช้ข้อมูลของคน login
+                            $post['member_id'] = $login['id'];
+                            $post['email'] = $login['email'];
+                            $post['sender'] = empty($login['displayname']) ? $login['email'] : $login['displayname'];
                         } else {
-                            // สมาชิกเท่านั้น
-                            $ret['alert'] = Language::get('Members Only');
+                            // มาจากฟอร์ม
+                            $email = $request->post('board_email')->topic();
+                            $password = $request->post('board_password')->topic();
+                            if ($email == '') {
+                                // ไม่ได้กรอกอีเมล
+                                $ret['ret_reply_email'] = 'Please fill in';
+                            }
+                            if ($password == '' && !$guest) {
+                                // สมาชิกเท่านั้น และ ไม่ได้กรอกรหัสผ่าน
+                                $ret['ret_reply_password'] = 'Please fill in';
+                            }
+                            if ($email != '' && $password != '') {
+                                // ตรวจสอบ user และ password
+                                $user = Login::checkMember(array(
+                                    'username' => $email,
+                                    'password' => $password,
+                                ));
+                                if (is_string($user)) {
+                                    if (Login::$login_input == 'password') {
+                                        $ret['ret_reply_password'] = $user;
+                                    } elseif ($request->post('reply_email')->exists()) {
+                                        $ret['ret_reply_email'] = $user;
+                                    } else {
+                                        $ret['ret_reply_email'] = $user;
+                                    }
+                                } elseif (!in_array($user['status'], $index->can_reply)) {
+                                    // ไม่สามารถแสดงความคิดเห็นได้
+                                    $ret['alert'] = Language::get('Sorry, you do not have permission to comment');
+                                } else {
+                                    // สมาชิก สามารถแสดงความคิดเห็นได้
+                                    $post['member_id'] = $user['id'];
+                                    $post['email'] = $user['email'];
+                                    $post['sender'] = empty($user['displayname']) ? $user['email'] : $user['displayname'];
+                                }
+                            } elseif ($guest) {
+                                // ตรวจสอบอีเมลซ้ำกับสมาชิก สำหรับบุคคลทั่วไป
+                                $search = $this->db()->createQuery()
+                                    ->from('user')
+                                    ->where(array('email', $email))
+                                    ->first('id');
+                                if ($search) {
+                                    // พบอีเมล ต้องการ password
+                                    $ret['ret_reply_password'] = 'Please fill in';
+                                } elseif (!Validator::email($email)) {
+                                    // อีเมลไม่ถูกต้อง
+                                    $ret['ret_reply_email'] = Language::replace('Invalid :name', array(':name' => Language::get('Email')));
+                                } else {
+                                    // guest
+                                    $post['member_id'] = 0;
+                                    $post['email'] = $email;
+                                    $post['sender'] = $email;
+                                }
+                            } else {
+                                // สมาชิกเท่านั้น
+                                $ret['alert'] = Language::get('Members Only');
+                            }
                         }
                     }
                     if ($id == 0 && empty($ret) && $post['detail'] != '') {

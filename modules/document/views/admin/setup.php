@@ -25,27 +25,27 @@ use Kotchasan\Language;
 class View extends \Gcms\Adminview
 {
     /**
-     * ข้อมูลโมดูล.
+     * @var object
      */
     private $index;
     /**
-     * @var mixed
+     * @var array
      */
     private $publisheds;
     /**
-     * @var mixed
+     * @var array
      */
     private $replies;
     /**
-     * @var mixed
+     * @var array
      */
     private $thumbnails;
     /**
-     * @var mixed
+     * @var string
      */
     private $default_icon;
     /**
-     * @var mixed
+     * @var object
      */
     private $categories;
 
@@ -65,7 +65,7 @@ class View extends \Gcms\Adminview
         $this->thumbnails = Language::get('THUMBNAILS');
         $this->default_icon = WEB_URL.$index->default_icon;
         $this->categories = \Index\Category\Model::categories((int) $index->module_id);
-        $category_id = $request->request('cat', 0)->toInt();
+        $category_id = $request->request('cat')->toInt();
         // URL สำหรับส่งให้ตาราง
         $uri = $request->createUriWithGlobals(WEB_URL.'admin/index.php');
         // ตาราง
@@ -200,7 +200,7 @@ class View extends \Gcms\Adminview
      * @param int    $o    ID ของข้อมูล
      * @param object $prop กำหนด properties ของ TR
      *
-     * @return array คืนค่า $item กลับไปy
+     * @return array คืนค่า $item กลับไป
      */
     public function onRow($item, $o, $prop)
     {

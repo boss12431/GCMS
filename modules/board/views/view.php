@@ -113,7 +113,7 @@ class View extends \Gcms\View
                 // แก้ไขกระทู้ (mod หรือ ตัวเอง)
                 $canEdit = $moderator || ($isMember && $login['id'] == $index->member_id);
                 // รูปภาพในกระทู้
-                $picture = is_array($index->picture) ? '<div><figure class="center"><img src="'.$index->picture['url'].'" alt="'.$index->topic.'"></figure></div>' : '';
+                $picture = is_array($index->picture) ? '<div><figure><img src="'.$index->picture['url'].'" alt="'.$index->topic.'"></figure></div>' : '';
                 // เนื้อหา
                 $index->detail = Gcms::showDetail(nl2br($index->detail), $canView, true);
                 // description

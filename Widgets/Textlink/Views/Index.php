@@ -77,11 +77,15 @@ class Index extends \Gcms\View
     {
         $textlinks = array();
         foreach ($items as $item) {
-            $a = (empty($item['url']) ? '' : ' href="'.$item['url'].'"').($item['target'] == '_blank' ? ' target=_blank' : '').' title="'.$item['text'].'"';
-            $row = '<figure>';
+            $row = '<figure class="figure">';
+            if (empty($item['url'])) {
+                $a = '';
+            } else {
+                $a = ' href="'.$item['url'].'"'.($item['target'] == '_blank' ? ' target=_blank' : '').' title="'.$item['text'].'"';
+            }
             $row .= '<a'.$a.'><img class=nozoom src="'.WEB_URL.DATA_FOLDER.'image/'.$item['logo'].'" alt="'.$item['text'].'"></a>';
             if ($item['text'] != '') {
-                $row .= '<figcaption><a'.$a.'>'.$item['text'].'</a></figcaption>';
+                $row .= '<figcaption>'.$item['text'].'</figcaption>';
             }
             $row .= '</figure>';
             $textlinks[] = $row;

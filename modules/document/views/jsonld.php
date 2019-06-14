@@ -35,7 +35,7 @@ class View extends \Kotchasan\KBase
             foreach ($index->comment_items as $item) {
                 $comment[] = array(
                     '@type' => 'Comment',
-                    'text' => strip_tags($item->detail),
+                    'text' => strip_tags(str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), $item->detail)),
                     'dateCreated' => date(DATE_ISO8601, $item->last_update),
                     'creator' => array(
                         '@type' => 'Person',

@@ -83,7 +83,7 @@ class Model extends \Kotchasan\Model
                     'style' => $request->post('style', 'iconview')->filter('a-z'),
                     'new_date' => $request->post('new_date')->toInt(),
                     'viewing' => $request->post('viewing')->toInt(),
-                    'category_display' => $request->post('category_display')->filter('a-z0-9'),
+                    'category_display' => $request->post('category_display')->toBoolean(),
                     'category_cols' => max(1, $request->post('category_cols')->toInt()),
                     'news_count' => $request->post('news_count')->toInt(),
                     'news_sort' => $request->post('news_sort')->toInt(),

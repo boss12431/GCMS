@@ -44,7 +44,6 @@ class Controller extends \Kotchasan\Controller
             $className = 'Event\Month\View';
             $_page = '';
         }
-
         // ตรวจสอบโมดูลและอ่านข้อมูลโมดูล
         $index = \Index\Module\Model::getDetails($index, $_page);
         if ($index && MAIN_INIT === 'indexhtml') {

@@ -25,16 +25,16 @@ use Kotchasan\Language;
 class View extends \Gcms\Adminview
 {
     /**
-     * ข้อมูลโมดูล.
+     * @var object
+     */
+    private $index;
+    /**
+     * @var array
      */
     private $publisheds;
-    /**
-     * @var mixed
-     */
-    private $module;
 
     /**
-     * ตารางรายการ.
+     * ตาราง สินค้า
      *
      * @param Request $request
      * @param object  $index
@@ -43,7 +43,7 @@ class View extends \Gcms\Adminview
      */
     public function render(Request $request, $index)
     {
-        $this->module = $index->module;
+        $this->index = $index;
         $this->publisheds = Language::get('PUBLISHEDS');
         // URL สำหรับส่งให้ตาราง
         $uri = $request->createUriWithGlobals(WEB_URL.'admin/index.php');
@@ -66,7 +66,6 @@ class View extends \Gcms\Adminview
             /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
             'action' => 'index.php/product/model/admin/setup/action?mid='.$index->module_id,
             'actionCallback' => 'dataTableActionCallback',
-            'actionConfirm' => 'confirmAction',
             'actions' => array(
                 array(
                     'id' => 'action',
@@ -143,7 +142,7 @@ class View extends \Gcms\Adminview
      */
     public function onRow($item, $o, $prop)
     {
-        $item['topic'] = '<a href="../index.php?module='.$this->module.'&amp;id='.$item['id'].'" target=preview>'.$item['topic'].'</a>';
+        $item['topic'] = '<a href="../index.php?module='.$this->index->module.'&amp;id='.$item['id'].'" target=preview>'.$item['topic'].'</a>';
         $item['last_update'] = Date::format($item['last_update'], 'd M Y H:i');
         $item['published'] = '<a id=published_'.$item['id'].' class="icon-published'.$item['published'].'" title="'.$this->publisheds[$item['published']].'"></a>';
 

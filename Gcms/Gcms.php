@@ -119,7 +119,7 @@ class Gcms extends \Kotchasan\KBase
      */
     public static function aliasName($text)
     {
-        return preg_replace(array('/[\{\}\[\]\(\)]{1,}/isu', '/[_\%\-\+\#\r\n\s\"\'<>\.\/\\\?&]{1,}/isu', '/^(_)?(.*?)(_)?$/'), array('', '_', '\\2'), strtolower(trim(strip_tags($text))));
+        return preg_replace(array('/[\{\}\[\]\(\)]{1,}/isu', '/[_\:\@~,;\%\-\+\#\r\n\s\"\'<>\.\/\\\?&]{1,}/isu', '/^(_)?(.*?)(_)?$/'), array('', '_', '\\2'), strtolower(trim(strip_tags($text))));
     }
 
     /**

@@ -23,7 +23,7 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\Model
 {
     /**
-     * ลิสต์รายการสินค้า.
+     * ลิสต์รายการ สินค้า
      *
      * @param Request $request
      * @param object  $index
@@ -33,15 +33,14 @@ class Model extends \Kotchasan\Model
     public static function stories(Request $request, $index)
     {
         if (isset($index->module_id)) {
-            // Model
-            $model = new static();
+            $where = array(
+                array('P.module_id', (int) $index->module_id),
+                array('P.published', 1),
+            );
             // query
-            $query = $model->db()->createQuery()
+            $query = static::createQuery()
                 ->from('product P')
-                ->where(array(
-                    array('P.module_id', (int) $index->module_id),
-                    array('P.published', 1),
-                ));
+                ->where($where);
             // จำนวน
             $index->total = $query->cacheOn()->count();
             // ข้อมูลแบ่งหน้า

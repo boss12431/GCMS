@@ -92,7 +92,7 @@ class View extends \Gcms\View
                 '/{NET}/' => empty($index->net[$index->currency_unit]) ? '{LNG_Contact information}' : Currency::format($index->net[$index->currency_unit]),
                 '/{CURRENCYUNIT}/' => $currency_units[$index->currency_unit],
             );
-            // /product/view.html
+            // view.html
             $detail = Template::create('product', $index->module, 'view')->add($replace);
             // JSON-LD
             Gcms::$view->setJsonLd(\Product\Jsonld\View::generate($index));

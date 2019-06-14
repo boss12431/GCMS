@@ -34,7 +34,6 @@ class Model extends \Kotchasan\Model
     public static function stories(Request $request, $index)
     {
         if (isset($index->module_id)) {
-            // query
             $where = array(array('D.module_id', (int) $index->module_id));
             if (!empty($index->category_id)) {
                 $where[] = array('I.category_id', is_array($index->category_id) ? $index->category_id : (int) $index->category_id);

@@ -31,7 +31,7 @@ class Index extends \Kotchasan\Controller
     public function get($query_string)
     {
         $module = empty($query_string['module']) ? '' : $query_string['module'];
-        $likes = array('g-plusone', 'fb-likebox');
+        $likes = array('fb-likebox', 'twitter-share');
         $id = uniqid();
         $widget = '<div class="widget_like">';
         foreach ($likes as $item) {
@@ -53,15 +53,14 @@ class Index extends \Kotchasan\Controller
         $lng = Language::name();
         $a = 'https://www.facebook.com/plugins/like.php?layout='.($module == 'tall' ? 'box_count' : 'button_count').'&node_type=link&show_faces=false&href=';
         $widget .= 'setLikeURL("'.$id.'fb-likebox-iframe", "'.$a.'" + url);';
-        $a = 'https://plusone.google.com/_/+1/fastbutton?bsv&size='.($module == 'tall' ? 'tall' : 'medium').'&count=true&hl='.$lng.'&url=';
-        $widget .= 'setLikeURL("'.$id.'g-plusone-iframe", "'.$a.'" + url);';
         $a = 'https://platform.twitter.com/widgets/tweet_button.1404859412.html#count='.($module == 'tall' ? 'vertical' : 'horizontal').'&lang='.$lng.'&url=';
         $widget .= 'setLikeURL("'.$id.'twitter-share-iframe", "'.$a.'" + url);';
         $widget .= '};';
         $widget .= '$G(window).Ready(function(){';
         foreach ($likes as $item) {
-            $widget .= '$E("'.$id.$item.'").style.display="inline-block";';
-            $widget .= '$E("'.$id.$item.'").style.vertalAlign="middle";';
+            $widget .= 'var div = $G("'.$id.$item.'");';
+            $widget .= 'div.style.display="inline-block";';
+            $widget .= 'div.style.verticalAlign="middle";';
             $widget .= "var iframe=document.createElement('iframe');";
             $widget .= 'iframe.id="'.$id.$item.'-iframe";';
             if ($module == 'tall') {
@@ -71,10 +70,7 @@ class Index extends \Kotchasan\Controller
                 $widget .= 'iframe.width=90;';
                 $widget .= 'iframe.height=28;';
             }
-            $widget .= '$E("'.$id.$item.'").appendChild(iframe);';
-            if ($item == 'g-plusone') {
-                $widget .= '$G(iframe).setStyle("float","left");';
-            }
+            $widget .= 'div.appendChild(iframe);';
         }
         $widget .= 'createLikeButton();';
         $widget .= '});';

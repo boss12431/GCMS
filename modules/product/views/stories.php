@@ -37,7 +37,7 @@ class View extends \Gcms\View
      */
     public function index(Request $request, $index)
     {
-        // /product/listitem.html
+        // listitem.html
         $listitem = Grid::create('product', $index->module, 'listitem');
         // คอลัมน์
         $listitem->setCols($index->cols);
@@ -75,7 +75,7 @@ class View extends \Gcms\View
         }
         // current URL
         $uri = \Kotchasan\Http\Uri::createFromUri($index->canonical);
-        // /product/list.html หรือ /product/empty.html ถ้าไม่มีข้อมูล
+        // list.html หรือ empty.html ถ้าไม่มีข้อมูล
         $template = Template::create('product', $index->module, $listitem->hasItem() ? 'list' : 'empty');
         // สกุลเงิน
         $currency_units = Language::get('CURRENCY_UNITS');

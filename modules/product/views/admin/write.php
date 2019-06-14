@@ -66,14 +66,13 @@ class View extends \Gcms\Adminview
                 'value' => $details->topic,
             ));
             // keywords
-            $fieldset->add('checkboxgroups', array(
+            $fieldset->add('inputgroups', array(
                 'id' => 'keywords_'.$item,
                 'labelClass' => 'g-input icon-tags',
                 'itemClass' => 'item',
                 'label' => '{LNG_Keywords}',
                 'comment' => '{LNG_Text keywords for SEO or Search Engine to search}',
-                'options' => \Index\Tag\Model::toSelect(),
-                'value' => explode(',', $details->keywords),
+                'value' => $details->keywords == '' ? array() : explode(',', $details->keywords),
             ));
             // description
             $fieldset->add('textarea', array(
@@ -137,11 +136,12 @@ class View extends \Gcms\Adminview
             'itemClass' => 'item',
             'label' => '{LNG_Alias}',
             'comment' => '{LNG_Used for the URL of the web page (SEO) can use letters, numbers and _ only can not have duplicate names.}',
+            'maxlength' => 255,
             'value' => isset($index->alias) ? $index->alias : '',
         ));
         // picture
         if (!empty($index->picture) && is_file(ROOT_PATH.DATA_FOLDER.'product/'.$index->picture)) {
-            $img = WEB_URL.DATA_FOLDER.'product/'.$index->picture;
+            $img = WEB_URL.DATA_FOLDER.'product/'.$index->picture.'?'.time();
         } else {
             $img = WEB_URL.'skin/img/blank.gif';
         }
@@ -191,10 +191,6 @@ class View extends \Gcms\Adminview
         // tab ที่เลือก
         $tab = $request->request('tab')->toString();
         $tab = empty($tab) ? 'detail_'.reset($index->languages) : $tab;
-        $form->script('initWriteTab("accordient_menu", "'.$tab.'");');
-        $form->script('checkSaved("preview", "'.WEB_URL.'index.php?module='.$index->module.'", "id");');
-        $form->script('new GValidator("alias", "keyup,change", checkAlias, "index.php/index/model/checker/alias", null, "setup_frm");');
-        $form->script('selectChanged("category_'.$index->module_id.'","index.php/index/model/admincategory/action",doFormSubmit);');
         // tab
         $fieldset->add('hidden', array(
             'id' => 'tab',
@@ -204,6 +200,7 @@ class View extends \Gcms\Adminview
             '/:type/' => implode(', ', $index->img_typies),
             '/:width/' => $index->image_width,
         ));
+        $form->script('initProductWrite(["'.implode('", "', $index->languages).'"], "'.$tab.'", '.$index->module_id.', "'.$index->module.'");');
 
         return $form->render();
     }
