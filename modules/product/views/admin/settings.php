@@ -121,7 +121,7 @@ class View extends \Gcms\Adminview
             'value' => $index->rows,
         ));
         // sort
-        $sorts = array('ID', '{LNG_Last updated}', '{LNG_Random}');
+        $sorts = array('{LNG_Product Code} 9-0', '{LNG_Product Code} 0-9', '{LNG_Last updated}', '{LNG_Random}');
         $fieldset->add('select', array(
             'id' => 'sort',
             'labelClass' => 'g-input icon-sort',

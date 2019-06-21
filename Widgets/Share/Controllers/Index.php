@@ -29,7 +29,7 @@ class Index extends \Kotchasan\Controller
     public function get($query_string)
     {
         $id = uniqid();
-        // share on tweeter & facebook
+        // share on tweeter & facebook & line
         $widget = '<div id="'.$id.'" class="widget_share'.(empty($query_string['module']) ? '' : '_'.$query_string['module']).'">';
         if (!empty($query_string['module'])) {
             $widget .= '<span><b id="fb_share_count">0</b>SHARE</span>';

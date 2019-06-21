@@ -58,6 +58,7 @@ class Model extends \Kotchasan\Model
             // เรียงลำดับ
             $sorts = array(
                 array('P.product_no DESC'),
+                array('P.product_no ASC'),
                 array('P.last_update DESC'),
                 array('RAND()'),
             );
