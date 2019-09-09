@@ -43,7 +43,7 @@ a:hover {
     margin-left: 0;
   }
 }
-#logo {
+.header .header_bg {
   background-image: url(img/logo.jpg);
   height: 200px;
   color: transparent;
@@ -197,8 +197,8 @@ nav.breadcrumbs li:before {
   padding: 2.3em 0 0;
 }
 .widget h2,
-.member_section h2,
-.bdr_content h2 {
+.member_section h1,
+.bdr_content h1 {
   line-height: 2;
 }
 .bdr_content>header,

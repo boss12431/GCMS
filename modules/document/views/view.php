@@ -116,7 +116,7 @@ class View extends \Gcms\View
                     $tags[] = '<a href="'.Gcms::createUrl('tag', $tag).'">'.$tag.'</a>';
                 }
                 // เนื้อหา
-                $index->detail = Gcms::showDetail(str_replace(array('&#x007B;', '&#x007D;'), array('{', '}'), $index->detail), $canView, true);
+                $index->detail = Gcms::showDetail($index->detail, $canView, true);
                 // แสดงความคิดเห็นได้ จากการตั้งค่าโมดูล และ จากบทความ
                 $canReply = $canReply && $index->canReply == 1;
                 $replace = array(

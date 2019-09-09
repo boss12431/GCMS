@@ -236,7 +236,7 @@ class Model extends \Kotchasan\Model
                         if (!empty($index->line_notifications) && in_array(2, $index->line_notifications)) {
                             $msg = Language::get('BOARD_NOTIFICATIONS');
                             \Gcms\Line::send(implode("\n", array(
-                                $post['sender'].' '.$msg[2].':',
+                                (isset($post['sender']) ? $post['sender'].' ' : '').$msg[2].':',
                                 $post['detail'],
                                 $location.'#R_'.$id,
                             )));

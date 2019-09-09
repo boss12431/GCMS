@@ -102,40 +102,18 @@ class View extends \Gcms\Adminview
             'class' => 'tb_upload',
         ));
         foreach (\Gallery\Admin\Write\Model::pictures($index) as $i => $item) {
-            $id = $item->id;
-            $div = $tb_upload->add('fieldset', array(
-                'id' => 'L_'.$id,
-                'class' => 'item',
+            $figure = $tb_upload->add('figure', array(
+                'id' => 'L_'.$item->id,
+                'class' => 'item icon-drag sort',
+                'style' => 'background-image:url('.WEB_URL.DATA_FOLDER.'gallery/'.$index->id.'/thumb_'.$item->image.');',
             ));
-            $figure = $div->add('figure');
-            if ($i > 0) {
-                $figure->add('a', array(
-                    'id' => 'delete_'.$id.'_'.$index->id,
-                    'class' => 'icon-uncheck',
-                    'title' => '{LNG_Delete}',
-                ));
-                $figure->add('a', array(
-                    'id' => 'preview_'.$id,
-                    'href' => WEB_URL.DATA_FOLDER.'gallery/'.$index->id.'/'.$item->image,
-                    'innerHTML' => '<img src="'.WEB_URL.DATA_FOLDER.'gallery/'.$index->id.'/thumb_'.$item->image.'" alt='.$id.'>',
-                    'target' => '_self',
-                ));
-                $figure->add('a', array(
-                    'id' => 'cover_'.$id.'_'.$index->id,
-                    'class' => 'icon-thumbnail',
-                    'title' => '{LNG_Set as cover image}',
-                ));
-            } else {
-                $figure->add('a', array(
-                    'id' => 'preview_'.$id,
-                    'href' => WEB_URL.DATA_FOLDER.'gallery/'.$index->id.'/'.$item->image,
-                    'innerHTML' => '<img src="'.WEB_URL.DATA_FOLDER.'gallery/'.$index->id.'/thumb_'.$item->image.'" alt='.$id.'>',
-                    'target' => '_self',
-                    'title' => '{LNG_Cover image}',
-                ));
-            }
+            $figure->add('a', array(
+                'id' => 'delete_'.$item->id.'_'.$index->id,
+                'class' => 'icon-uncheck',
+                'title' => '{LNG_Delete}',
+            ));
         }
-        $form->script('initGUploads("gallery_upload", '.$index->id.', "gallery/model/admin/setup/action")');
+        $form->script('initGUploads("gallery_upload", '.$index->id.', "gallery/model/admin/setup/action", '.$index->module_id.')');
 
         return $form->render();
     }

@@ -161,8 +161,8 @@ function initLanguages(id) {
     }
   });
   callClick("import_xx", doClick);
-  new GSortTable(id, {
-    tag: "li",
+  new GDragDrop(id, {
+    dragClass: "icon-move",
     endDrag: function() {
       var trs = [];
       forEach($E(id).getElementsByTagName("li"), function() {

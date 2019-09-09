@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 body,
 li {
   line-height: 1.8;
@@ -58,19 +61,16 @@ a[id^="lang_"]:focus,
 .modaldiv .bdr_content {
   margin: 0;
 }
-.header h1 {
+.header #logo {
   font-size: 4em;
+  color: inherit;
+  display: block;
 }
 header p,
 footer p {
   margin: 0;
 }
-.header h1>a {
-  display: block;
-}
-.content h2 a,
-.header h1>a,
-.header h1>a:hover {
+.content h2 a {
   color: inherit;
 }
 .keywords>a {
@@ -207,7 +207,7 @@ span.icon-sex-m:before {
 .header {
   background-position: 0 50%;
 }
-.header h1 {
+.header #logo {
   padding: 10px 10px 0;
 }
 .header .description {
@@ -691,7 +691,7 @@ header.list h2 select {
 /* iphone and small device */
 
 @media only screen and (max-width: 480px) {
-  body.responsie .header h1 {
+  body.responsie .header #logo {
     font-size: 2.5em;
   }
 }

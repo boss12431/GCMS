@@ -35,9 +35,9 @@ class Model extends \Kotchasan\Model
      */
     public function submit(Request $request)
     {
+        $ret = array();
         // session, token
         if ($request->initSession() && $request->isSafe()) {
-            $ret = array();
             // login
             $login = Login::isMember();
             if ($login && $login['email'] == 'demo') {
@@ -188,7 +188,7 @@ class Model extends \Kotchasan\Model
                                 $ext = $file->getClientFileExt();
                                 $post[$k] = "$mktime.$ext";
                                 while (is_file(ROOT_PATH.DATA_FOLDER.'board/'.$post[$k])) {
-                                    ++$mmktime;
+                                    ++$mktime;
                                     $post[$k] = "$mktime.$ext";
                                 }
                                 try {
@@ -247,7 +247,7 @@ class Model extends \Kotchasan\Model
                         if (!empty($index->line_notifications) && in_array(1, $index->line_notifications)) {
                             $msg = Language::get('BOARD_NOTIFICATIONS');
                             \Gcms\Line::send(implode("\n", array(
-                                $post['sender'].' '.$msg[1].':',
+                                (isset($post['sender']) ? $post['sender'].' ' : '').$msg[1].':',
                                 $post['topic'],
                                 $ret['location'],
                             )));
@@ -255,12 +255,12 @@ class Model extends \Kotchasan\Model
                     }
                 }
             }
-            if (empty($ret)) {
-                $ret['alert'] = Language::get('Can not be performed this request. Because they do not find the information you need or you are not allowed');
-            }
-            // คืนค่าเป็น JSON
-            echo json_encode($ret);
         }
+        if (empty($ret)) {
+            $ret['alert'] = Language::get('Can not be performed this request. Because they do not find the information you need or you are not allowed');
+        }
+        // คืนค่าเป็น JSON
+        echo json_encode($ret);
     }
 
     /**

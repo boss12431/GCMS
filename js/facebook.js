@@ -33,15 +33,7 @@ function initFacebookButton(button) {
                 for (var prop in response) {
                   q.push(prop + "=" + encodeURIComponent(response[prop]));
                 }
-                send(
-                  WEB_URL +
-                  "index.php/" +
-                  ($E("facebook_action") ?
-                    $E("facebook_action").value :
-                    "index/model/fblogin/chklogin"),
-                  q.join("&"),
-                  doLoginSubmit
-                );
+                send(WEB_URL + "index.php/" + ($E("facebook_action") ? $E("facebook_action").value : "index/model/fblogin/chklogin"), q.join("&"), doLoginSubmit);
               }
             }
           );

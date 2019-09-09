@@ -44,15 +44,7 @@ function initGoogleButton(button) {
           q.push("name=" + encodeURIComponent(profile.getName()));
           q.push("image=" + encodeURIComponent(profile.getImageUrl()));
           q.push("email=" + encodeURIComponent(profile.getEmail()));
-          send(
-            WEB_URL +
-            "index.php/" +
-            ($E("google_action") ?
-              $E("google_action").value :
-              "index/model/gglogin/chklogin"),
-            q.join("&"),
-            doLoginSubmit
-          );
+          send(WEB_URL + "index.php/" + ($E("google_action") ? $E("google_action").value : "index/model/gglogin/chklogin"), q.join("&"), doLoginSubmit);
         });
       } else {
         initGoogleButton(button);

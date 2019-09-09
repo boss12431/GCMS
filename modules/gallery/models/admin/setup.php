@@ -127,23 +127,20 @@ class Model extends \Kotchasan\Orm\Field
                         }
                         // คืนค่า
                         $ret['location'] = 'reload';
-                    } elseif ($action === 'cover') {
-                        // รายการที่เลือก
-                        $image = $model->db()->first($table_name, array(
-                            array('id', $id),
-                            array('album_id', $request->post('aid')->toInt()),
-                        ));
+                    } elseif ($action === 'sort') {
+                        // เรียงลำดับรูป
+                        $album_id = $request->post('aid')->toInt();
+                        $count = 1;
+                        foreach (explode(',', $id) as $id) {
+                            // save
+                            $model->db()->update($table_name, array(
+                                array('album_id', $album_id),
+                                array('id', $id),
+                            ), array('count' => $count));
+                            $count++;
+                        }
                         // save
-                        $model->db()->update($table_name, array(
-                            array('album_id', $image->album_id),
-                            array('count', 0),
-                        ), array('count' => $image->count));
-                        $model->db()->update($table_name, array(
-                            array('id', $image->id),
-                            array('album_id', $image->album_id),
-                        ), array('count' => 0));
-                        // คืนค่า
-                        $ret['location'] = 'reload';
+                        $ret['save'] = true;
                     }
                 }
             }
