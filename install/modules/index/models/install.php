@@ -151,7 +151,7 @@ class Model extends \Kotchasan\Model
     }
 
     /**
-     * อัปเดทจำนวนกระทู้และความคิดเห็นในหมวดหมู่.
+     * อัปเดตจำนวนกระทู้และความคิดเห็นในหมวดหมู่.
      *
      * @param object $db
      * @param int    $module_id ID ของโมดูล
@@ -165,7 +165,7 @@ class Model extends \Kotchasan\Model
     }
 
     /**
-     * อัปเดทจำนวนบทความและความคิดเห็นในหมวดหมู่.
+     * อัปเดตจำนวนบทความและความคิดเห็นในหมวดหมู่.
      *
      * @param object $db
      * @param int    $module_id ID ของโมดูล
@@ -179,7 +179,7 @@ class Model extends \Kotchasan\Model
     }
 
     /**
-     * อัปเดทจำนวนความคิดเห็น.
+     * อัปเดตจำนวนความคิดเห็น.
      *
      * @param object $db
      * @param string $q  ตารางคำถาม

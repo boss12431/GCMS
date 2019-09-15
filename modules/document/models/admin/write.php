@@ -256,7 +256,7 @@ class Model extends \Kotchasan\Model
                                 $save1['id'] = $index->id;
                                 $this->db()->insert($table, $save1);
                             }
-                            // อัปเดทหมวดหมู่
+                            // อัปเดตหมวดหมู่
                             if ($save['category_id'] > 0) {
                                 self::updateCategories((int) $index->module_id);
                             }
@@ -327,7 +327,7 @@ class Model extends \Kotchasan\Model
     }
 
     /**
-     * อัปเดทจำนวนบทความและความคิดเห็นในหมวดหมู่.
+     * อัปเดตจำนวนบทความและความคิดเห็นในหมวดหมู่.
      *
      * @param int $module_id
      */

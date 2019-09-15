@@ -35,7 +35,7 @@ class Index extends \Gcms\View
         $items = \Kotchasan\ArrayTool::sort($items, 'last_preview');
         // ใช้แบนเนอร์รายการแรก
         $banner = reset($items);
-        // อัปเดทรายการว่าแสดงผลแล้ว
+        // อัปเดตรายการว่าแสดงผลแล้ว
         \Widgets\Textlink\Models\Index::previewUpdate($banner['id']);
         // แสดงผล
         $replace = array();

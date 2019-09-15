@@ -22,7 +22,7 @@ use Kotchasan\Language;
 class Model extends \Kotchasan\Model
 {
     /**
-     * อัปเดทไฟล์ ภาษา.
+     * อัปเดตไฟล์ ภาษา.
      *
      * @param Database $db
      *

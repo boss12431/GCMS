@@ -51,9 +51,9 @@ class Model extends \Kotchasan\Model
      */
     public static function install($module)
     {
-        // อัปเดทชื่อตาราง
+        // อัปเดตชื่อตาราง
         \Index\Install\Model::updateTables(array('product' => 'product', 'product_detail' => 'product_detail', 'product_price' => 'product_price'));
-        // อัปเดท database
+        // อัปเดต database
         \Index\Install\Model::execute(ROOT_PATH.'modules/product/models/admin/sql.php');
         // สร้างไดเร็คทอรี่เก็บข้อมูลโมดูล
         \Kotchasan\File::makeDirectory(ROOT_PATH.DATA_FOLDER.'product/');

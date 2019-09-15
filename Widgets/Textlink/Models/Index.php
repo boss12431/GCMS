@@ -109,7 +109,7 @@ class Index extends \Kotchasan\Model
     }
 
     /**
-     * อัปเดทการเปิดดู.
+     * อัปเดตการเปิดดู.
      *
      * @param int $id
      */

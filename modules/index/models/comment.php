@@ -44,7 +44,7 @@ class Model extends \Kotchasan\Model
     }
 
     /**
-     * อัปเดทจำนวนความคิดเห็น.
+     * อัปเดตจำนวนความคิดเห็น.
      *
      * @param int $qid       ID ของบทความ
      * @param int $module_id ID ของโมดูล

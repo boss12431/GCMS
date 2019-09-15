@@ -88,7 +88,7 @@ class Model extends \Kotchasan\Model
     /**
      * บันทึกไฟล์ settings/database.php.
      *
-     * @param array $tables รายการตารางที่ต้องการอัปเดท (แทนที่ข้อมูลเดิม)
+     * @param array $tables รายการตารางที่ต้องการอัปเดต (แทนที่ข้อมูลเดิม)
      *
      * @return bool คืนค่า true ถ้าสำเร็จ
      */
@@ -96,7 +96,7 @@ class Model extends \Kotchasan\Model
     {
         // โหลด database
         $database = \Kotchasan\Config::load(ROOT_PATH.'settings/database.php');
-        // อัปเดท tables
+        // อัปเดต tables
         foreach ($tables as $key => $value) {
             $database->tables[$key] = $value;
         }

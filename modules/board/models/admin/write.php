@@ -20,7 +20,7 @@ namespace Board\Admin\Write;
 class Model extends \Kotchasan\Model
 {
     /**
-     * อัปเดทจำนวนกระทู้และความคิดเห็นในหมวดหมู่.
+     * อัปเดตจำนวนกระทู้และความคิดเห็นในหมวดหมู่.
      *
      * @param int $module_id
      */

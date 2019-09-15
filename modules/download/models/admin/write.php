@@ -156,7 +156,7 @@ class Model extends \Kotchasan\Model
                         }
                     }
                     if (is_file(ROOT_PATH.$save['file'])) {
-                        // อัปเดทขนาดของไฟล์
+                        // อัปเดตขนาดของไฟล์
                         $save['size'] = filesize(ROOT_PATH.$save['file']);
                     }
                     if (empty($ret)) {

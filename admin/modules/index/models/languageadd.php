@@ -76,7 +76,7 @@ class Model extends \Kotchasan\KBase
                                 $config->languages[$i] = $post['language_name'];
                             }
                         }
-                        // อัปเดทฐานข้อมูล
+                        // อัปเดตฐานข้อมูล
                         $model->db()->query("ALTER TABLE `$language_table` CHANGE `$post[language]` `$post[language_name]` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL");
                     }
                     // ไอคอนอัปโหลด

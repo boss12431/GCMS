@@ -185,7 +185,7 @@ class Model extends \Kotchasan\Model
                             }
                             $msgs = array();
                             if (!$err->error()) {
-                                // อัปเดทรหัสผ่านใหม่
+                                // อัปเดตรหัสผ่านใหม่
                                 $this->db()->update($user_table, $item['id'], $save);
                             } else {
                                 $msgs[] = $err->getErrorMessage();

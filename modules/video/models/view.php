@@ -50,7 +50,7 @@ class Model extends \Kotchasan\Model
     }
 
     /**
-     * อัปเดทการเปิดดูจาก Youtube.
+     * อัปเดตการเปิดดูจาก Youtube.
      *
      * @param int $id
      * @param int $views

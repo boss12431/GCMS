@@ -74,14 +74,14 @@ class Model extends \Kotchasan\Model
                 $save['token'] = sha1($password.$save['salt']);
                 $db->insert($user_table, $save);
             } elseif ($search['social'] == 2) {
-                // google เคยเยี่ยมชมแล้ว อัปเดทการเยี่ยมชม
+                // google เคยเยี่ยมชมแล้ว อัปเดตการเยี่ยมชม
                 $save = $search;
                 ++$save['visited'];
                 $save['lastvisited'] = time();
                 $save['ip'] = $request->getClientIp();
                 $save['salt'] = uniqid();
                 $save['token'] = sha1($password.$save['salt']);
-                // อัปเดท
+                // อัปเดต
                 $db->update($user_table, $search['id'], $save);
             } else {
                 // ไม่สามารถ login ได้ เนื่องจากมี email อยู่ก่อนแล้ว
@@ -90,7 +90,7 @@ class Model extends \Kotchasan\Model
                 $ret['isMember'] = 0;
             }
             if (is_array($save) && !empty($id)) {
-                // อัปเดท icon สมาชิก
+                // อัปเดต icon สมาชิก
                 $data = @file_get_contents($request->post('image')->url());
                 if ($data) {
                     $f = @fopen(ROOT_PATH.self::$cfg->usericon_folder.$save['icon'], 'wb');

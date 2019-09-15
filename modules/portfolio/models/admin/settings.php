@@ -48,9 +48,9 @@ class Model extends \Kotchasan\Model
      */
     public static function install($module)
     {
-        // อัปเดทชื่อตาราง
+        // อัปเดตชื่อตาราง
         \Index\Install\Model::updateTables(array('portfolio' => 'portfolio'));
-        // อัปเดท database
+        // อัปเดต database
         \Index\Install\Model::execute(ROOT_PATH.'modules/portfolio/models/admin/sql.php');
         // สร้างไดเร็คทอรี่เก็บข้อมูลโมดูล
         \Kotchasan\File::makeDirectory(ROOT_PATH.DATA_FOLDER.'portfolio/');

@@ -123,7 +123,7 @@ class Model extends \Kotchasan\Model
                             ->order('C.id DESC')
                             ->toArray()
                             ->first('C.id', 'C.module_id', 'C.last_update', 'U.id member_id', 'U.status', $sql);
-                        // อัปเดทคำถาม
+                        // อัปเดตคำถาม
                         $this->db()->createQuery()
                             ->update('board_q')
                             ->set(array(
@@ -167,9 +167,9 @@ class Model extends \Kotchasan\Model
                             $ret['remove'] = "L_$qid";
                         }
                     }
-                    // อัปเดทหมวดหมู่
+                    // อัปเดตหมวดหมู่
                     if ($index->category_id > 0) {
-                        // อัปเดทจำนวนเรื่อง และ ความคิดเห็น ในหมวด
+                        // อัปเดตจำนวนเรื่อง และ ความคิดเห็น ในหมวด
                         \Board\Admin\Write\Model::updateCategories((int) $index->module_id);
                     }
                 } elseif ($action == 'edit' && ($moderator || ($isMember && $index->member_id == $login['id']))) {

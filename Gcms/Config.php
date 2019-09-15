@@ -120,7 +120,7 @@ class Config extends \Kotchasan\Config
      */
     public $new_register_status = 0;
     /**
-     * ถ้าเป็น true จะไม่แสดงข่าวสารจาก GCMS และการแจ้งเตือนการอัปเดท
+     * ถ้าเป็น true จะไม่แสดงข่าวสารจาก GCMS และการแจ้งเตือนการอัปเดต
      * สำหรับสคริปต์ที่ขาย.
      *
      * @var bool

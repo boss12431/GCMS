@@ -72,7 +72,7 @@ class Model extends \Index\Upgrade\Model
         if (!$ja) {
             $db->query("ALTER TABLE `$table` DROP `ja`;");
         }
-        // อัปเดทไฟล์ ภาษา
+        // อัปเดตไฟล์ ภาษา
         $error = \Index\Language\Model::updateLanguageFile($db);
         if ($error != '') {
             $content[] = '<li class="incorrect">Updated database <b>'.$table.'</b> error!.</li>';

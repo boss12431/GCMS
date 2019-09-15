@@ -717,7 +717,7 @@ return array(
   'Uncategorized' => 'ไม่มีหมวดหมู่',
   'Unlock' => 'แสดงความคิดเห็นได้',
   'Unpin' => 'ยกเลิกปักหมุด',
-  'Update file %s Success' => 'อัปเดทไฟล์ %s เรียบร้อย',
+  'Update file %s Success' => 'อัปเดตไฟล์ %s เรียบร้อย',
   'Upload' => 'อัปโหลด',
   'Upload :type files no larger than :size' => 'ไฟล์อัปโหลด ชนิด :type ขนาดไฟล์ไม่เกิน :size',
   'Upload a photo no larger than :width pixels :type types only larger than a specified size will be resize automatically' => 'อัปโหลดรูปภาพขนาดไม่เกิน :width พิกเซล ชนิด :type เท่านั้น รูปภาพขนาดใหญ่กว่าที่กำหนดจะถูกปรับขนาดอัตโนมัติ',

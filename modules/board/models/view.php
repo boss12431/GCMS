@@ -54,11 +54,11 @@ class Model extends \Kotchasan\Model
         }
         $result = $query->first($fields);
         if ($result) {
-            // อัปเดทการเยี่ยมชม
+            // อัปเดตการเยี่ยมชม
             ++$result['visited'];
             $model->db()->update($model->getTableName('board_q'), $result['id'], array('visited' => $result['visited']));
             $model->db()->cacheSave(array($result));
-            // อัปเดทตัวแปร
+            // อัปเดตตัวแปร
             foreach ($result as $key => $value) {
                 switch ($key) {
                     case 'config':

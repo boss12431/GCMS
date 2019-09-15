@@ -50,9 +50,9 @@ class Model extends \Kotchasan\Model
      */
     public static function install($module)
     {
-        // อัปเดทชื่อตาราง
+        // อัปเดตชื่อตาราง
         \Index\Install\Model::updateTables(array('friends' => 'friends'));
-        // อัปเดท database
+        // อัปเดต database
         \Index\Install\Model::execute(ROOT_PATH.'modules/friends/models/admin/sql.php');
         // สร้างไดเร็คทอรี่เก็บข้อมูลโมดูล
         \Kotchasan\File::makeDirectory(ROOT_PATH.DATA_FOLDER.'friends/');

@@ -53,7 +53,7 @@ class Model extends \Kotchasan\Model
                         } elseif ($action === 'download') {
                             $ret['confirm'] = Language::get('Do you want to download the file ?');
                         } elseif ($action === 'downloading') {
-                            // อัปเดทดาวน์โหลด
+                            // อัปเดตดาวน์โหลด
                             $save = array(
                                 'last_update' => time(),
                                 'downloads' => $download->downloads + 1,

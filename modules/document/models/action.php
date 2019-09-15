@@ -95,13 +95,13 @@ class Model extends \Kotchasan\Model
                     if ($rid > 0) {
                         // ลบความคิดเห็น
                         $this->db()->delete($this->getTableName('comment'), $rid);
-                        // อัปเดทจำนวนคำตอบของคำถาม
+                        // อัปเดตจำนวนคำตอบของคำถาม
                         \Index\Comment\Model::update($qid, (int) $index->module_id);
                         $ret['remove'] = "R_$rid";
                     }
-                    // อัปเดทหมวดหมู่
+                    // อัปเดตหมวดหมู่
                     if ($index->category_id > 0) {
-                        // อัปเดทจำนวนเรื่อง และ ความคิดเห็น ในหมวด
+                        // อัปเดตจำนวนเรื่อง และ ความคิดเห็น ในหมวด
                         \Document\Admin\Write\Model::updateCategories((int) $index->module_id);
                     }
                 } elseif ($action == 'edit' && ($moderator || ($isMember && $index->member_id == $login['id']))) {

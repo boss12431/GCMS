@@ -228,7 +228,7 @@ class Model extends \Kotchasan\Model
                             $post['create_date'] = $mktime;
                             $post['module_id'] = $index->module_id;
                             $id = $this->db()->insert($this->getTableName('board_q'), $post);
-                            // อัปเดทสมาชิก
+                            // อัปเดตสมาชิก
                             if ($post['member_id'] > 0) {
                                 $this->db()->createQuery()->update('user')->set('`post`=`post`+1')->where($post['member_id'])->execute();
                             }
@@ -236,7 +236,7 @@ class Model extends \Kotchasan\Model
                             $ret['alert'] = Language::get('Thank you for your post');
                         }
                         if ($post['category_id'] > 0) {
-                            // อัปเดทจำนวนเรื่อง และ ความคิดเห็น ในหมวด
+                            // อัปเดตจำนวนเรื่อง และ ความคิดเห็น ในหมวด
                             \Board\Admin\Write\Model::updateCategories($index->module_id);
                         }
                         // เคลียร์

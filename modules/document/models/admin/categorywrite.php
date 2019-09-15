@@ -233,7 +233,7 @@ class Model extends \Kotchasan\Model
                                 // แก้ไข
                                 $this->db()->update($table_category, $id, $save);
                             }
-                            // อัปเดทจำนวนเรื่อง และ ความคิดเห็น ในหมวด
+                            // อัปเดตจำนวนเรื่อง และ ความคิดเห็น ในหมวด
                             \Document\Admin\Write\Model::updateCategories((int) $index['module_id']);
                             // ส่งค่ากลับ
                             $ret['alert'] = Language::get('Saved successfully');

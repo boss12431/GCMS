@@ -182,7 +182,7 @@ class Model extends \Kotchasan\Model
                                 $save1['id'] = $index->id;
                                 $this->db()->insert($table, $save1);
                             }
-                            // อัปเดทหมวดหมู่
+                            // อัปเดตหมวดหมู่
                             if ($save['category_id'] > 0) {
                                 \Document\Admin\Write\Model::updateCategories((int) $index->module_id);
                             }

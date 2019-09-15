@@ -56,7 +56,7 @@ class Model extends \Kotchasan\Model
                 // send mail
                 $err = Email::send(3, 'member', $replace, $search->email);
                 if (!$err->error()) {
-                    // อัปเดทรหัสผ่านใหม่
+                    // อัปเดตรหัสผ่านใหม่
                     $save = array('password' => sha1($password.$search->salt));
                     $this->db()->createQuery()->update('user')->set($save)->where($search->id)->execute();
                     // คืนค่า

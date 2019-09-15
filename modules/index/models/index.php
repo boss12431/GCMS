@@ -64,7 +64,7 @@ class Model extends \Kotchasan\Orm\Field
             ->cacheOn(false)
             ->first('I.id index_id', 'I.module_id', 'M.module', 'D.topic', 'D.keywords', 'D.detail', 'D.description', 'I.visited');
         if ($result) {
-            // อัปเดทการเยี่ยมชม
+            // อัปเดตการเยี่ยมชม
             ++$result['visited'];
             $model->db()->cacheSave(array($result));
             $model->db()->update($model->getTableName('index'), $result['index_id'], array('visited' => $result['visited']));

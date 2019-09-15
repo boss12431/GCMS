@@ -152,7 +152,7 @@ class Model extends \Kotchasan\Model
                     }
                     Installer::insertIndex($db, $module_id, 1, $item->topic, $item->detail, (int) $item->post_date, $item->pageview, 0, $item->topic, Text::oneLine(strip_tags($item->headline)), (int) $item->member_id, $item->enable_comment == 1 ? 1 : 0, (int) $item->category, $picture);
                 }
-                // อัปเดทหมวดหมู่
+                // อัปเดตหมวดหมู่
                 Installer::updateCategories($db, $module_id);
                 // ความคิดเห็น
                 $sql = "SELECT Q.*,M.`id` AS `member_id`,M.`nic_name` FROM `{$prefix}_{$module}_comment` AS Q";
@@ -171,7 +171,7 @@ class Model extends \Kotchasan\Model
                 $content[] = '<li class="correct">Import from <b>'.$prefix.'_'.$module.'</b> complete...</li>';
             }
         }
-        // อัปเดทความคิดเห็น document
+        // อัปเดตความคิดเห็น document
         Installer::updateComments($db, $_SESSION['prefix'].'_index', $_SESSION['prefix'].'_comment');
         // webboard
         if (Upgrade::tableExists($db, $prefix.'_webboard')) {
@@ -254,7 +254,7 @@ class Model extends \Kotchasan\Model
                 ));
                 if ($topic_id != $item->topic_id) {
                     $topic_id = $item->topic_id;
-                    // อัปเดทคำตอบล่าสุด
+                    // อัปเดตคำตอบล่าสุด
                     $db->update($_SESSION['prefix'].'_board_q', $topic_id, array(
                         'comment_id' => $comment_id,
                         'commentator' => empty($item->nic_name) ? $item->post_name : $item->nic_name,
@@ -263,9 +263,9 @@ class Model extends \Kotchasan\Model
                     ));
                 }
             }
-            // อัปเดทหมวดหมู่ webboard
+            // อัปเดตหมวดหมู่ webboard
             Installer::updateBoardCategories($db, $module_id);
-            // อัปเดทความคิดเห็น webboard
+            // อัปเดตความคิดเห็น webboard
             Installer::updateComments($db, $_SESSION['prefix'].'_board_q', $_SESSION['prefix'].'_board_r');
             $content[] = '<li class="correct">Import from <b>'.$prefix.'_webboard</b> complete...</li>';
         }

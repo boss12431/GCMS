@@ -156,17 +156,17 @@ class Model extends \Kotchasan\Model
                             $post['index_id'] = $index->id;
                             $post['module_id'] = $index->module_id;
                             $id = $this->db()->insert($this->getTableName('comment'), $post);
-                            // อัปเดทคำถาม
+                            // อัปเดตคำถาม
                             $q['commentator'] = empty($post['sender']) ? $post['email'] : $post['sender'];
                             $q['commentator_id'] = $post['member_id'];
                             $q['comments'] = $index->comments + 1;
                             $q['comment_id'] = $id;
-                            // อัปเดทสมาชิก
+                            // อัปเดตสมาชิก
                             if ($post['member_id'] > 0) {
                                 $this->db()->createQuery()->update('user')->set('`reply`=`reply`+1')->where($post['member_id'])->execute();
                             }
                             if ($index->category_id > 0) {
-                                // อัปเดทจำนวนเรื่อง และ ความคิดเห็น ในหมวด
+                                // อัปเดตจำนวนเรื่อง และ ความคิดเห็น ในหมวด
                                 \Document\Admin\Write\Model::updateCategories((int) $index->module_id);
                             }
                             // คืนค่า
