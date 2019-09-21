@@ -36,7 +36,7 @@ class Controller extends \Kotchasan\Controller
             $rss = array();
             foreach ($modules as $module) {
                 // RSS Menu
-                $rss[$module->module] = '<link rel=alternate type="application/rss+xml" title="'.$module->topic.'" href="'.WEB_URL.$module->module.'.rss">';
+                $rss[$module->module] = '<link rel="alternate" type="application/rss+xml" title="'.$module->topic.'" href="'.WEB_URL.$module->module.'.rss">';
                 // แท็บบทความในเมนูข้อมูลส่วนตัว
                 if (self::$cfg->document_can_write && isset($module->can_write) && in_array($login['status'], $module->can_write)) {
                     Gcms::$member_tabs[$module->module] = array(ucfirst($module->module), 'Document\Member\View', 'icon-documents');

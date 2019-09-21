@@ -109,7 +109,7 @@ class Model extends \Kotchasan\Model
             foreach ($db->customQuery("SELECT * FROM `{$prefix}_page` ORDER BY `sort`") as $item) {
                 if (preg_match('/name=([a-z]+)/', $item->links, $match)) {
                     if (strtolower($match[1]) == 'page') {
-                        Installer::installing($db, 'index', Text::rndname(5, 'abcdefghjkmnpqrstuvwxys'), $item->name, $item->detail, $item->status, strtoupper($item->menugr), $item->menuname);
+                        Installer::installing($db, 'index', substr(uniqid(), 0, 5), $item->name, $item->detail, $item->status, strtoupper($item->menugr), $item->menuname);
                     }
                 } else {
                     Installer::installMenu($db, strtoupper($item->menugr), $item->name, $item->proto.$item->links, $item->target, $item->status, 0);

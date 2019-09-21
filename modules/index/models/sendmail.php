@@ -16,7 +16,7 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * ส่งอีเมล.
+ * ส่งอีเมล
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *

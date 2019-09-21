@@ -11,7 +11,6 @@
 namespace Widgets\Video\Views;
 
 use Kotchasan\Grid;
-use Kotchasan\Text;
 
 /**
  * Controller หลัก สำหรับแสดงผล Widget.
@@ -37,7 +36,7 @@ class Index extends \Kotchasan\Controller
         if ($cols == 1 && $cols == 1) {
             return '<div class="youtube"><iframe src="//www.youtube.com/embed/'.$videos[0]['youtube'].'?wmode=transparent"></iframe></div>';
         } else {
-            $a = Text::rndname(10);
+            $a = uniqid();
             $widget = array('<div id="'.$a.'" class="document-list video">');
             // รายการ
             $listitem = Grid::create('video', 'video', 'widgetitem');

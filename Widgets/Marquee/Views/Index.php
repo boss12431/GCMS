@@ -10,8 +10,6 @@
 
 namespace Widgets\Marquee\Views;
 
-use Kotchasan\Text;
-
 /**
  * Marquee.
  *
@@ -31,7 +29,7 @@ class Index extends \Gcms\View
     public static function render($query_string)
     {
         if (!empty($query_string['text'])) {
-            $id = Text::rndname(10);
+            $id = uniqid();
             $content = '<div id="containner_'.$id.'" class=marquee_containner><div id="scroller_'.$id.'" class=marquee_scroller>'.$query_string['text'].'</div></div>';
             $content .= '<script>new GScroll("containner_'.$id.'","scroller_'.$id.'").play({"scrollto":"'.$query_string['style'].'","speed":'.max(1, (int) $query_string['speed']).'});</script>';
 

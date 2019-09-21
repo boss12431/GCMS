@@ -13,7 +13,6 @@ namespace Download\Download;
 use Gcms\Login;
 use Kotchasan\Http\Request;
 use Kotchasan\Language;
-use Kotchasan\Text;
 
 /**
  * อ่านข้อมูลโมดูล.
@@ -56,7 +55,7 @@ class Model extends \Kotchasan\Model
                     ++$download->downloads;
                     $this->db()->update($this->getTableName('download'), (int) $download->id, array('downloads' => $download->downloads));
                     // URL สำหรับดาวน์โหลด
-                    $fid = Text::rndname(32);
+                    $fid = uniqid();
                     $_SESSION[$fid]['file'] = ROOT_PATH.$download->file;
                     $_SESSION[$fid]['size'] = $download->size;
                     $_SESSION[$fid]['name'] = $download->name.'.'.$download->ext;

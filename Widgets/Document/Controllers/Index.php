@@ -14,7 +14,6 @@ use Gcms\Gcms;
 use Kotchasan\Grid;
 use Kotchasan\Http\Request;
 use Kotchasan\Template;
-use Kotchasan\Text;
 
 /**
  * Controller หลัก สำหรับแสดงผล Widget.
@@ -57,7 +56,7 @@ class Index extends \Kotchasan\Controller
                     $template->add(array(
                         '/{DETAIL}/' => '<script>getWidgetNews("{ID}", "Document", '.$interval.')</script>',
                         // module_id_cat_rows_cols_sort_show
-                        '/{ID}/' => Text::rndname(10).'_'.$index->module_id.'_'.$cat.'_'.$rows.'_'.$cols.'_'.$sort.'_'.$show,
+                        '/{ID}/' => uniqid().'_'.$index->module_id.'_'.$cat.'_'.$rows.'_'.$cols.'_'.$sort.'_'.$show,
                         '/{MODULE}/' => $index->module,
                         '/{STYLE}/' => $style,
                     ));
@@ -80,7 +79,7 @@ class Index extends \Kotchasan\Controller
     public function getWidgetNews(Request $request)
     {
         // module_id_cat_rows_cols_sort_show
-        if ($request->isReferer() && preg_match('/^([a-z]{10,10})_([0-9]+)_([0-9,]{0,})_([0-9]+)_([0-9]+)_([0-9]+)_([a-z]{0,})$/', $request->post('id')->toString(), $match)) {
+        if ($request->isReferer() && preg_match('/^([a-z0-9]+)_([0-9]+)_([0-9,]{0,})_([0-9]+)_([0-9]+)_([0-9]+)_([a-z]{0,})$/', $request->post('id')->toString(), $match)) {
             $rows = (int) $match[4];
             $cols = (int) $match[5];
             // ตรวจสอบโมดูล

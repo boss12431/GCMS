@@ -10,8 +10,6 @@
 
 namespace Widgets\Tags\Views;
 
-use Kotchasan\Text;
-
 /**
  * โมดูลสำหรับจัดการการตั้งค่าเริ่มต้น.
  *
@@ -30,7 +28,7 @@ class Index extends \Gcms\View
      */
     public static function render($items)
     {
-        $id = Text::rndname(10);
+        $id = uniqid();
         $content = '<div id="'.$id.'" class=widget-tags>';
         $content .= implode('', $items);
         $content .= '</div>';

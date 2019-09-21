@@ -13,7 +13,6 @@ namespace Index\Recover;
 use Gcms\Email;
 use Kotchasan\Http\Request;
 use Kotchasan\Language;
-use Kotchasan\Text;
 
 /**
  * ขอรหัสผ่านใหม่.
@@ -47,7 +46,7 @@ class Model extends \Kotchasan\Model
             }
             if (empty($ret)) {
                 // รหัสผ่านใหม่
-                $password = Text::rndname(6);
+                $password = substr(uniqid(), 0, 6);
                 // ข้อมูลอีเมล
                 $replace = array(
                     '/%PASSWORD%/' => $password,

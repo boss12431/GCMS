@@ -162,7 +162,7 @@ class Model extends \Kotchasan\Model
                         $msgs = array();
                         foreach ($query->execute() as $item) {
                             // รหัสผ่านใหม่
-                            $password = \Kotchasan\Text::rndname(6);
+                            $password = substr(uniqid(), 0, 6);
                             // ข้อมูลอีเมล
                             $replace = array(
                                 '/%PASSWORD%/' => $password,
@@ -175,7 +175,7 @@ class Model extends \Kotchasan\Model
                             );
                             if ($action === 'activate' || !empty($item['activatecode'])) {
                                 // activate หรือ ยังไม่ได้ activate
-                                $save['activatecode'] = empty($item['activatecode']) ? \Kotchasan\Text::rndname(32) : $item['activatecode'];
+                                $save['activatecode'] = empty($item['activatecode']) ? md5(uniqid()) : $item['activatecode'];
                                 $replace['/%ID%/'] = $save['activatecode'];
                                 // send mail
                                 $err = \Gcms\Email::send(1, 'member', $replace, $item['email']);

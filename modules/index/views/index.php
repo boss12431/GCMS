@@ -42,7 +42,7 @@ class View extends \Gcms\View
         // add template
         $template->add(array(
             // content
-            '/{DETAIL}/' => Gcms::showDetail($index->detail, true, false),
+            '/{DETAIL}/' => Gcms::showDetail(str_replace(array('&#x007B;', '&#x007D;'), array('{', '}'), $index->detail), true, false),
             // topic
             '/{TOPIC}/' => $index->topic,
             // Module name

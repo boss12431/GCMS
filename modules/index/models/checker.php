@@ -11,7 +11,6 @@
 namespace Index\Checker;
 
 use Gcms\Gcms;
-use Kotchasan\Antispam;
 use Kotchasan\Language;
 use Kotchasan\Validator;
 
@@ -105,20 +104,6 @@ class Model extends \Kotchasan\Model
                 if ($search && ($id == 0 || $id != $search->id)) {
                     echo Language::replace('This :name already exist', array(':name' => Language::get('Name')));
                 }
-            }
-        }
-    }
-
-    /**
-     * ฟังก์ชั่นตรวจสอบความถูกต้องของ Anti Spam.
-     */
-    public function antispam()
-    {
-        // referer, session
-        if (self::$request->initSession() && self::$request->isReferer()) {
-            $antispam = new Antispam(self::$request->post('id')->toString());
-            if (!$antispam->valid(self::$request->post('value')->toString())) {
-                echo Language::replace('Incorrect :name', array(':name' => Language::get('Antispam')));
             }
         }
     }

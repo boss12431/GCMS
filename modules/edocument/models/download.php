@@ -13,7 +13,6 @@ namespace Edocument\Download;
 use Gcms\Login;
 use Kotchasan\Http\Request;
 use Kotchasan\Language;
-use Kotchasan\Text;
 
 /**
  * อ่านข้อมูลโมดูล.
@@ -67,7 +66,7 @@ class Model extends \Kotchasan\Model
                                 $this->db()->update($this->getTableName('edocument_download'), (int) $download->download_id, $save);
                             }
                             // URL สำหรับดาวน์โหลด
-                            $id = Text::rndname(32);
+                            $id = uniqid();
                             $_SESSION[$id] = array(
                                 'file' => ROOT_PATH.DATA_FOLDER.'edocument/'.$download->file,
                                 'name' => $download->download_action == 1 ? '' : $download->topic.'.'.$download->ext,

@@ -18,7 +18,6 @@ use Kotchasan\Database\Sql;
 use Kotchasan\File;
 use Kotchasan\Http\Request;
 use Kotchasan\Language;
-use Kotchasan\Text;
 
 /**
  * อ่านข้อมูลโมดูล.
@@ -150,9 +149,9 @@ class Model extends \Kotchasan\Model
                                             $ret['ret_topic'] = 'this';
                                         } else {
                                             // อัปโหลด
-                                            $save['file'] = Text::rndname(10).'.'.$save['ext'];
+                                            $save['file'] = substr(uniqid(), 0, 10).'.'.$save['ext'];
                                             while (file_exists($dir.$save['file'])) {
-                                                $save['file'] = Text::rndname(10).'.'.$save['ext'];
+                                                $save['file'] = substr(uniqid(), 0, 10).'.'.$save['ext'];
                                             }
                                             try {
                                                 $file->moveTo($dir.$save['file']);

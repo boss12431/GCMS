@@ -37,7 +37,7 @@ class Index extends \Kotchasan\Controller
             $interval = 30;
         }
         if (!empty(self::$cfg->rss_tabs)) {
-            $tab = \Kotchasan\Text::rndname(10);
+            $tab = uniqid();
             $widget[] = '<div class="rss_widget">';
             $widget[] = '<div id=rss_tab_'.$tab.' class=rss_tab></div>';
             $widget[] = '<div id=rss_div_'.$tab.' class=rss_div></div>';

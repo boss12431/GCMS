@@ -218,26 +218,6 @@ class Text
     }
 
     /**
-     * ฟังก์ชั่น สุ่มตัวอักษร.
-     *
-     * @param int    $count จำนวนหลักที่ต้องการ
-     * @param string $chars (optional) ตัวอักษรที่ใช้ในการสุ่ม default abcdefghjkmnpqrstuvwxyz
-     *
-     * @return string
-     */
-    public static function rndname($count, $chars = 'abcdefghjkmnpqrstuvwxyz')
-    {
-        srand((float) microtime() * 10000000);
-        $ret = '';
-        $num = strlen($chars);
-        for ($i = 0; $i < $count; ++$i) {
-            $ret .= $chars[rand() % $num];
-        }
-
-        return $ret;
-    }
-
-    /**
      * ฟังก์ชั่น เข้ารหัส อักขระพิเศษ และ {} ก่อนจะส่งให้กับ textarea หรือ editor ตอนแก้ไข
      * & " ' < > { } ไม่แปลง รหัส HTML เช่น &amp; &#38;.
      *

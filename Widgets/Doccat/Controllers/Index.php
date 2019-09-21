@@ -12,7 +12,6 @@ namespace Widgets\Doccat\Controllers;
 
 use Document\Index\Controller;
 use Gcms\Gcms;
-use Kotchasan\Text;
 
 /**
  * Controller หลัก สำหรับแสดงผล Widget.
@@ -46,7 +45,7 @@ class Index extends \Kotchasan\Controller
             $trees[$items['parent_id']][] = $items;
         }
         if (!empty($trees)) {
-            $id = Text::rndname(10);
+            $id = uniqid();
             $widget = '<nav class=tree_menu id="'.$id.'">'.$this->showTree($index->module, $trees, 0).'</nav>';
             $widget .= '<script>initDocCat("'.$id.'")</script>';
         } else {

@@ -124,7 +124,7 @@ class View extends \Gcms\View
                 }
             }
             // config
-            self::$cfg->password_key = \Kotchasan\Text::rndname(10, '1234567890');
+            self::$cfg->password_key = uniqid();
             self::$cfg->version = self::$cfg->new_version;
             unset(self::$cfg->new_version);
             self::$cfg->skin = 'rooser';

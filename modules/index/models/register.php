@@ -13,7 +13,6 @@ namespace Index\Register;
 use Gcms\Email;
 use Kotchasan\Http\Request;
 use Kotchasan\Language;
-use Kotchasan\Text;
 use Kotchasan\Validator;
 
 /**
@@ -126,7 +125,7 @@ class Model extends \Kotchasan\Model
                         }
                     }
                     // รหัสยืนยัน
-                    $save['activatecode'] = empty(self::$cfg->user_activate) ? '' : Text::rndname(32);
+                    $save['activatecode'] = empty(self::$cfg->user_activate) ? '' : md5(uniqid());
                     // บันทึกลงฐานข้อมูล
                     $save['id'] = $db->insert($user_table, $save);
                     // ส่งอีเมล

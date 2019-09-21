@@ -201,7 +201,7 @@ class Login extends \Kotchasan\Login
                 self::$login_message = Language::get('not a registered user');
             } else {
                 // สุ่มรหัสผ่านใหม่
-                $password = \Kotchasan\Text::rndname(6);
+                $password = substr(uniqid(), 0, 6);
                 // ข้อมูลอีเมล
                 $replace = array(
                     '/%PASSWORD%/' => $password,

@@ -112,11 +112,11 @@ class Controller extends \Kotchasan\Controller
             $favicon = is_file(ROOT_PATH.DATA_FOLDER.'image/favicon.ico') ? WEB_URL.DATA_FOLDER.'image/favicon.ico' : WEB_URL.'favicon.ico';
             // meta tag
             $meta = array(
-                'generator' => '<meta name=generator content="GCMS AJAX CMS design by https://gcms.in.th">',
+                'generator' => '<meta name="generator" content="GCMS AJAX CMS design by https://gcms.in.th">',
                 'og:title' => '<meta property="og:title" content="'.$page->topic.'">',
-                'description' => '<meta name=description content="'.$page->description.'">',
+                'description' => '<meta name="description" content="'.$page->description.'">',
                 'og:description' => '<meta property="og:description" content="'.$page->description.'">',
-                'keywords' => '<meta name=keywords content="'.$page->keywords.'">',
+                'keywords' => '<meta name="keywords" content="'.$page->keywords.'">',
                 'og:site_name' => '<meta property="og:site_name" content="'.strip_tags(self::$cfg->web_title).'">',
                 'og:type' => '<meta property="og:type" content="article">',
                 'shortcut_icon' => '<link rel="shortcut icon" href="'.$favicon.'" type="image/x-icon">',
@@ -126,7 +126,7 @@ class Controller extends \Kotchasan\Controller
                 $page->image_src = Gcms::$site['logo']['url'];
             }
             if (!empty($page->image_src)) {
-                $meta['image_src'] = '<link rel=image_src href="'.$page->image_src.'">';
+                $meta['image_src'] = '<link rel="image_src" href="'.$page->image_src.'">';
                 $meta['og:image'] = '<meta property="og:image" content="'.$page->image_src.'">';
                 $meta['og:image:alt'] = '<meta property="og:image:alt" content="'.$page->topic.'">';
                 if (isset($page->image_width)) {
