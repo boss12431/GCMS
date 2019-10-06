@@ -93,20 +93,18 @@ class Model extends \Kotchasan\Orm\Field
                 $table_menus = $model->getTableName('menus');
                 if ($action === 'move') {
                     // move menu
-                    $data = $request->post('data')->toString();
-                    if (preg_match('/[0-9,]+/', $data)) {
-                        $ids = explode(',', $data);
+                    if (preg_match_all('/,?([0-9]+),?/', $request->post('data')->toString(), $match)) {
                         $query = $model->db()->createQuery()
                             ->select('id', 'level', 'menu_text')
                             ->from('menus')
-                            ->where(array('id', $ids));
+                            ->where(array('id', $match[1]));
                         foreach ($query->toArray()->execute() as $item) {
                             $levels[$item['id']] = $item;
                         }
                         // reorder
                         $save['menu_order'] = 0;
                         $top_id = 0;
-                        foreach ($ids as $i) {
+                        foreach ($match[1] as $i) {
                             ++$save['menu_order'];
                             if ($top_id == 0) {
                                 $save['level'] = 0;

@@ -110,7 +110,7 @@ class Gcms extends \Kotchasan\KBase
 
     /**
      * ฟังก์ชั่นตรวจสอบข้อความ ใช้เป็น alias name
-     * ตัวพิมพ์เล็ก ลบ {}[]() ออก แทนช่องว่างและอักขระพิเศษด้วย _
+     * ตัวพิมพ์เล็ก ลบ {}[]() ออก แทนช่องว่างและอักขระพิเศษด้วย -
      * คืนค่าข้อความ
      *
      * @param string $text ข้อความ
@@ -119,7 +119,7 @@ class Gcms extends \Kotchasan\KBase
      */
     public static function aliasName($text)
     {
-        return preg_replace(array('/[\{\}\[\]\(\)]{1,}/isu', '/[_\:\@~,;\%\-\+\#\r\n\s\"\'<>\.\/\\\?&]{1,}/isu', '/^(_)?(.*?)(_)?$/'), array('', '_', '\\2'), strtolower(trim(strip_tags($text))));
+        return preg_replace(array('/[\{\}\[\]\(\)]{1,}/isu', '/[_\:\@~,;\%\-\+\#\r\n\s\"\'<>\.\/\\\?&]{1,}/isu', '/^(_)?(.*?)(_)?$/'), array('', '-', '\\2'), strtolower(trim(strip_tags($text))));
     }
 
     /**

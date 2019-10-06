@@ -140,7 +140,7 @@ class Controller extends \Kotchasan\Controller
                 $meta['og:app_id'] = '<meta property="fb:app_id" content="'.self::$cfg->facebook_appId.'">';
             }
             if (isset($page->canonical)) {
-                $meta['canonical'] = '<meta name=canonical content="'.$page->canonical.'">';
+                $meta['canonical'] = '<meta name="canonical" content="'.$page->canonical.'">';
                 $meta['og:url'] = '<meta property="og:url" content="'.$page->canonical.'">';
             }
             if (!empty(self::$cfg->google_site_verification)) {
