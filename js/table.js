@@ -358,8 +358,6 @@
           var ret = true;
           if (temp.options.onBeforeDelete) {
             ret = temp.options.onBeforeDelete.call(temp, tr);
-          } else if (tbody.elems("tr").length > 1) {
-            ret = confirm(trans("You want to XXX ?").replace(/XXX/, trans("delete")));
           }
           if (ret) {
             if (tbody.elems("tr").length > 1) {

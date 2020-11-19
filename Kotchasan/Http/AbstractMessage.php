@@ -59,7 +59,7 @@ abstract class AbstractMessage implements MessageInterface
 
     /**
      * อ่าน header ที่ต้องการ ผลลัพท์เป็น array
-     * คืนค่าแอเรย์ของ header ถ้าไม่พบคืนค่าแอเรย์ว่าง.
+     * คืนค่าแอเรย์ของ header ถ้าไม่พบคืนค่าแอเรย์ว่าง
      *
      * @param string $name
      *
@@ -72,7 +72,7 @@ abstract class AbstractMessage implements MessageInterface
 
     /**
      * อ่าน header ที่ต้องการ ผลลัพท์เป็น string
-     * คืนค่ารายการ header ทั้งหมดที่พบเชื่อมต่อด้วย ลูกน้ำ (,) หรือคืนค่าข้อความว่าง หากไม่พบ.
+     * คืนค่ารายการ header ทั้งหมดที่พบเชื่อมต่อด้วย ลูกน้ำ (,) หรือคืนค่าข้อความว่าง หากไม่พบ
      *
      * @param string $name
      *
@@ -82,7 +82,7 @@ abstract class AbstractMessage implements MessageInterface
     {
         $values = $this->getHeader($name);
 
-        return empty($values) ? '' : implode('', $values);
+        return empty($values) ? '' : implode(',', $values);
     }
 
     /**
@@ -229,7 +229,7 @@ abstract class AbstractMessage implements MessageInterface
     }
 
     /**
-     * ตรวจสอบความถูกต้องของ header.
+     * ตรวจสอบความถูกต้องของ header
      *
      * @param string $name
      *
@@ -249,15 +249,18 @@ abstract class AbstractMessage implements MessageInterface
      */
     protected function getRequestHeaders()
     {
-        if (function_exists("apache_request_headers")) {
-            if ($headers = apache_request_headers()) {
-                return $headers;
-            }
-        }
         $headers = array();
-        foreach ($_SERVER as $key => $value) {
-            if (preg_match('/^HTTP_([A-Z0-9_]+)$/', $key, $match)) {
-                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace(array('_', '-'), ' ', $match[1]))))] = $value;
+        if (function_exists("apache_request_headers")) {
+            foreach (apache_request_headers() as $key => $value) {
+                if (preg_match('/^[a-zA-Z0-9\-]+$/', $key)) {
+                    $headers[$key] = array($value);
+                }
+            }
+        } else {
+            foreach ($_SERVER as $key => $value) {
+                if (preg_match('/^HTTP_([a-zA-Z0-9_]+)$/', $key, $match)) {
+                    $headers[str_replace(' ', '-', ucwords(strtolower(str_replace(array('_', '-'), ' ', $match[1]))))] = array($value);
+                }
             }
         }
 

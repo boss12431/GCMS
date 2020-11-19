@@ -18,7 +18,7 @@ use Kotchasan\Language;
 use Kotchasan\Template;
 
 /**
- * module=editprofile.
+ * module=editprofile
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *

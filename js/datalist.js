@@ -66,7 +66,7 @@
 
       this.value_change = false;
       forEach($G(this.input.list).elems('option'), function() {
-        self.datalist[this.value] = this.innerHTML;
+        self.datalist[this.value] = this.innerText;
       });
       this.input.list.remove();
       this.input.removeAttribute('list');
@@ -130,38 +130,40 @@
       }
 
       var _search = function() {
-        if (!cancelEvent) {
-          display.innerHTML = "";
-          var value,
-            text = self.input.value,
-            filter = new RegExp("(" + text.preg_quote() + ")", "gi");
-          listindex = 0;
-          list = [];
-          if (self.datalist[self.input.selectedIndex] != text) {
-            self.input.selectedIndex = null;
-            self.value_change = true;
-          }
-          for (var key in self.datalist) {
-            value = self.datalist[key];
-            if (text == '') {
-              _populateitem(key, value);
-            } else {
-              if (filter.test(value)) {
-                _populateitem(key, value.replace(filter, "<em>$1</em>"));
+        if (self.input.readOnly == false && self.input.disabled == false) {
+          if (!cancelEvent) {
+            display.innerHTML = "";
+            var value,
+              text = self.input.value,
+              filter = new RegExp("(" + text.preg_quote() + ")", "gi");
+            listindex = 0;
+            list = [];
+            if (self.datalist[self.input.selectedIndex] != text) {
+              self.input.selectedIndex = null;
+              self.value_change = true;
+            }
+            for (var key in self.datalist) {
+              value = self.datalist[key];
+              if (text == '') {
+                _populateitem(key, value);
+              } else {
+                if (filter.test(value)) {
+                  _populateitem(key, value.replace(filter, "<em>$1</em>"));
+                }
               }
             }
+            _movehighlight(0);
+            if (list.length > 0) {
+              window.setTimeout(function() {
+                self.dropdown.show();
+              }, 1);
+              showing = true;
+            } else {
+              _hide();
+            }
           }
-          _movehighlight(0);
-          if (list.length > 0) {
-            window.setTimeout(function() {
-              self.dropdown.show();
-            }, 1);
-            showing = true;
-          } else {
-            _hide();
-          }
+          cancelEvent = false;
         }
-        cancelEvent = false;
       };
 
       function _showitem(item) {

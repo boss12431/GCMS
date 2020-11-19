@@ -13,7 +13,7 @@ namespace Index\Register;
 use Kotchasan\Html;
 
 /**
- * module=register.
+ * module=register
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *

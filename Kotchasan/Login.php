@@ -104,6 +104,8 @@ class Login extends \Kotchasan\KBase
                     self::$login_params['username'] = Text::username($_SESSION['login'][$field_name]);
                     if (isset($_SESSION['login']['token'])) {
                         self::$login_params['token'] = $_SESSION['login']['token'];
+                    } elseif (isset($_SESSION['login']['password'])) {
+                        self::$login_params['password'] = $_SESSION['login']['password'];
                     }
                 } else {
                     self::$login_params['username'] = null;

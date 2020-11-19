@@ -406,7 +406,7 @@ class DataTable extends \Kotchasan\KBase
                 }
             }
         } elseif (isset($this->datas)) {
-            // อ่านคอลัมน์จากข้อมูลเราการแรก
+            // อ่านคอลัมน์จากข้อมูลรายการแรก
             $this->columns = array();
             if (!empty($this->datas)) {
                 foreach (reset($this->datas) as $key => $value) {
@@ -946,7 +946,7 @@ class DataTable extends \Kotchasan\KBase
                         }
                     }
                     if ($this->pmButton) {
-                        $row[] = '<td class="icons"><div><a class="icon-plus" title="'.Language::get('Add').'"></a><a class="icon-minus" title="'.Language::get('Remove').'"></a></div></td>';
+                        $row[] = '<td class="icons"><div><a class="icon-plus" title="'.Language::get('Add New').'"></a><a class="icon-minus" title="'.Language::get('Remove').'"></a></div></td>';
                     }
                 }
                 $row[] = '</tr>';

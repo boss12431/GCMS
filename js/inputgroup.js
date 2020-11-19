@@ -23,11 +23,13 @@
       });
       this.input.addEvent("keydown", function(e) {
         if (GEvent.keyCode(e) == 8 && this.value == "") {
-          var btns = self.ul.getElementsByTagName("button");
-          if (btns.length > 0) {
-            self.ul.removeChild(btns[btns.length - 1].parentNode);
+          if (self.input.readOnly == false && self.input.disabled == false) {
+            var btns = self.ul.getElementsByTagName("button");
+            if (btns.length > 0) {
+              self.ul.removeChild(btns[btns.length - 1].parentNode);
+            }
+            GEvent.stop(e);
           }
-          GEvent.stop(e);
         }
       });
       this.input.addEvent("keypress", function(e) {
@@ -71,7 +73,9 @@
       });
     },
     removeItem: function(button) {
-      this.ul.removeChild(button.parentNode);
+      if (this.input.readOnly == false && this.input.disabled == false) {
+        this.ul.removeChild(button.parentNode);
+      }
     },
     values: function() {
       var ret = [];

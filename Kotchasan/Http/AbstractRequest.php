@@ -137,16 +137,16 @@ class AbstractRequest extends AbstractMessage implements \Psr\Http\Message\Reque
     }
 
     /**
-     * รวมแอเรย์ $_GET $_POST เป็นข้อมูลเดียวกัน.
+     * รวมแอเรย์ $_GET $_POST เป็นข้อมูลเดียวกัน
      *
      * @param array $result  ตัวแปรเก็บผลลัพท์ สำหรับนำไปใช้งานต่อ
      * @param array $array   ตัวแปรที่ต้องการรวม เช่น $_GET $_POST
      * @param array $exclude รายการคีย์ของแอเรย์ ที่ไม่ต้องการให้รวมอยู่ในผลลัพท์
      */
-    public function map(&$result, $array, $exclude = array())
+    public static function map(&$result, $array, $exclude = array())
     {
         foreach ($array as $key => $value) {
-            if ($value != '' && !in_array($key, $exclude)) {
+            if (!in_array($key, $exclude)) {
                 if (is_array($value)) {
                     foreach ($value as $k => $v) {
                         $result[$key.'['.$k.']'] = $v;

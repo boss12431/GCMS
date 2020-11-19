@@ -508,7 +508,7 @@ class Sql
      * @assert ('HOUR', 'create_date', Sql::NOW())->text() [==] "TIMESTAMPDIFF(HOUR, `create_date`, NOW())"
      * @assert ('MONTH', '2017-04-04', 'create_date')->text() [==] "TIMESTAMPDIFF(MONTH, '2017-04-04', `create_date`)"
      *
-     * @param string $unit FRAC_SECOND (microseconds), SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, or YEAR.
+     * @param string $unit FRAC_SECOND (microseconds), SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, or YEAR
      * @param string $column_name1
      * @param string $column_name2
      * @param string $alias

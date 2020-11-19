@@ -109,8 +109,8 @@ class View extends \Kotchasan\KBase
             $js[] = 'initGooleSignin("'.self::$cfg->google_client_id.'");';
         }
         // compress javascript
-        $patt = array('#/\*(?:[^*]*(?:\*(?!/))*)*\*/#u', '#[\r\t]#', '#\n//.*\n#', '#;//.*\n#', '#[\n]#', '#[\s]{2,}#');
-        $replace = array('', '', '', ";\n", '', ' ');
+        $patt = array('#/\*(?:[^*]*(?:\*(?!/))*)*\*/#u', '#[\r\t]#', '#\n//.*\n#', '#;//.*\n#', '#[\n]#', '#[\s]{2,}#', '/[\s]{0,}([\+\-\*\|\&\?<>:=;,\(\)\{\}])[\s]{0,}/');
+        $replace = array('', '', '', ";\n", '', ' ', '\\1');
         // Response
         $response = new \Kotchasan\Http\Response();
         $response->withHeaders(array(

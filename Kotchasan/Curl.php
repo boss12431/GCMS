@@ -84,7 +84,7 @@ class Curl
     {
         $this->options[CURLOPT_CUSTOMREQUEST] = 'DELETE';
         if (is_array($params)) {
-            $this->options[CURLOPT_POSTFIELDS] = http_build_query($params, null, '&');
+            $this->options[CURLOPT_POSTFIELDS] = http_build_query($params, '', '&');
         } else {
             $this->options[CURLOPT_POSTFIELDS] = $params;
         }
@@ -126,7 +126,7 @@ class Curl
         $this->options[CURLOPT_CUSTOMREQUEST] = 'GET';
         $this->options[CURLOPT_HTTPGET] = true;
         if (is_array($params)) {
-            $url .= (strpos($url, '?') === false ? '?' : '&').http_build_query($params, null, '&');
+            $url .= (strpos($url, '?') === false ? '?' : '&').http_build_query($params, '', '&');
         } else {
             $this->options[CURLOPT_POSTFIELDS] = $params;
         }
@@ -147,7 +147,7 @@ class Curl
         $this->options[CURLOPT_CUSTOMREQUEST] = 'HEAD';
         $this->options[CURLOPT_NOBODY] = true;
         if (is_array($params)) {
-            $this->options[CURLOPT_POSTFIELDS] = http_build_query($params, null, '&');
+            $this->options[CURLOPT_POSTFIELDS] = http_build_query($params, '', '&');
         } else {
             $this->options[CURLOPT_POSTFIELDS] = $params;
         }
@@ -206,7 +206,7 @@ class Curl
         $this->options[CURLOPT_CUSTOMREQUEST] = 'POST';
         $this->options[CURLOPT_POST] = true;
         if (is_array($params)) {
-            $this->options[CURLOPT_POSTFIELDS] = http_build_query($params, null, '&');
+            $this->options[CURLOPT_POSTFIELDS] = http_build_query($params, '', '&');
         } else {
             $this->options[CURLOPT_POSTFIELDS] = $params;
         }
@@ -226,7 +226,7 @@ class Curl
     {
         $this->options[CURLOPT_CUSTOMREQUEST] = 'PUT';
         if (is_array($params)) {
-            $this->options[CURLOPT_POSTFIELDS] = http_build_query($params, null, '&');
+            $this->options[CURLOPT_POSTFIELDS] = http_build_query($params, '', '&');
         } else {
             $this->options[CURLOPT_POSTFIELDS] = $params;
         }

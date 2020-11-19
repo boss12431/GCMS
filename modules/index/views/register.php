@@ -16,7 +16,7 @@ use Kotchasan\Language;
 use Kotchasan\Template;
 
 /**
- * module=register.
+ * module=register
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *

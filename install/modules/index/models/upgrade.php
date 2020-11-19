@@ -22,7 +22,7 @@ class Model extends \Kotchasan\KBase
     /**
      * ตรวจสอบว่ามีตารางหรือไม่.
      *
-     * @param resource $db
+     * @param object $db
      * @param string   $table_name
      *
      * @return bool
@@ -41,7 +41,7 @@ class Model extends \Kotchasan\KBase
     /**
      * ตรวจสอบฟิลด์.
      *
-     * @param resource $db
+     * @param object $db
      * @param string   $table_name
      * @param string   $field
      *

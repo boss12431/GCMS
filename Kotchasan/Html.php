@@ -397,6 +397,16 @@ class Html extends \Kotchasan\KBase
      */
     private function addInputGroups($attributes)
     {
+        if (!empty($attributes['disabled'])) {
+            $attributes['disabled'] = 'disabled';
+        } else {
+            unset($attributes['disabled']);
+        }
+        if (!empty($attributes['readonly'])) {
+            $attributes['readonly'] = 'readonly';
+        } else {
+            unset($attributes['readonly']);
+        }
         $prop = array('class' => empty($attributes['itemClass']) ? 'item' : $attributes['itemClass']);
         if (isset($attributes['itemId'])) {
             $prop['id'] = $attributes['itemId'];

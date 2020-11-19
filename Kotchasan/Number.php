@@ -52,7 +52,7 @@ class Number
      */
     public static function division($actual, $divisor)
     {
-        return empty($divisor) ? 0 : $actual / $divisor;
+        return $divisor == 0 ? 0 : $actual / $divisor;
     }
 
     /**

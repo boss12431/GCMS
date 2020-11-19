@@ -141,16 +141,19 @@ class ArrayTool
 
     /**
      * อ่านคีย์รายการแรก
+     * ไม่พบ คืนค่า null
      *
      * @param array $array
      *
-     * @return mix
+     * @return mixed
      */
     public static function getFirstKey($array)
     {
         foreach ($array as $key => $value) {
             return $key;
         }
+
+        return null;
     }
 
     /**
