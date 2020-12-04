@@ -13,7 +13,7 @@ namespace Widgets\Tags\Models;
 use Kotchasan\Http\Request;
 
 /**
- * Controller สำหรับจัดการการตั้งค่าเริ่มต้น.
+ * รับค่าจากการคลิก Tag
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -26,9 +26,10 @@ class Clicked extends \Kotchasan\Model
      */
     public static function submit(Request $request)
     {
-        if (preg_match('/tags\-([0-9]+)/', $request->post('id')->toString(), $match)) {
-            $model = new static();
-            $model->db()->createQuery()->update('tags')->set('`count`=`count`+1')->where((int) $match[1])->execute();
+        if ($request->isAjax() && $request->isReferer()) {
+            if (preg_match('/tags\-([0-9]+)/', $request->post('id')->toString(), $match)) {
+                \Kotchasan\Model::createQuery()->update('tags')->set('`count`=`count`+1')->where((int) $match[1])->execute();
+            }
         }
     }
 }

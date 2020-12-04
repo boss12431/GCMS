@@ -10,6 +10,8 @@
 
 namespace Widgets\Tags\Views;
 
+use Kotchasan\Language;
+
 /**
  * โมดูลสำหรับจัดการการตั้งค่าเริ่มต้น.
  *
@@ -28,12 +30,12 @@ class Index extends \Gcms\View
      */
     public static function render($items)
     {
-        $id = uniqid();
+        $id = \Kotchasan\Password::uniqid();
         $content = '<div id="'.$id.'" class=widget-tags>';
         $content .= implode('', $items);
         $content .= '</div>';
-        $content .= '<script>initTags("'.$id.'")</script>';
-
+        $template = '<div class=tag-tooltip><h5>%TAG%</h5><p>'.Language::get('Clicked').' <em>%COUNT%</em> '.Language::get('Count').'</p></div>';
+        $content .= '<script>initTags("'.$id.'", "'.$template.'")</script>';
         return $content;
     }
 }
