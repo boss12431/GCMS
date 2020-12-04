@@ -15,13 +15,14 @@ use Kotchasan\Http\Request;
 use Kotchasan\Language;
 
 /**
- * โมเดลสำหรับแสดงรายการเอกสารของสมาชิก (member.php).
+ * module=member&tab=edocument
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
  * @since 1.0
  */
 class Model extends \Kotchasan\Orm\Field
+
 {
     /**
      * ชื่อตาราง.

@@ -18,16 +18,17 @@ use Kotchasan\Language;
 use Kotchasan\Validator;
 
 /**
- *  Model สำหรับบันทึกความคิดเห็น.
+ * module=document-reply
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
  * @since 1.0
  */
 class Model extends \Kotchasan\Model
+
 {
     /**
-     * บันทึกความคิดเห็น.
+     * บันทึกความคิดเห็น
      *
      * @param Request $request
      */
@@ -192,7 +193,7 @@ class Model extends \Kotchasan\Model
                             $ret['location'] = $location;
                         }
                     }
-                } catch (\Kotchasan\InputItemException $e) {
+                } catch (\Kotchasan\InputItemException$e) {
                     $ret['alert'] = $e->getMessage();
                 }
             }
@@ -241,10 +242,8 @@ class Model extends \Kotchasan\Model
             // config จากโมดูล
             $index = ArrayTool::unserialize($index['config'], $index);
             unset($index['config']);
-
             return (object) $index;
         }
-
         return false;
     }
 }

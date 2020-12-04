@@ -25,6 +25,7 @@ use Kotchasan\Language;
  * @since 1.0
  */
 class Model extends \Kotchasan\Model
+
 {
     /**
      * บันทึก
@@ -137,7 +138,7 @@ class Model extends \Kotchasan\Model
                                                     // ลบรูปภาพเก่า
                                                     @unlink(ROOT_PATH.DATA_FOLDER.'document/'.$index->$item);
                                                 }
-                                            } catch (\Exception $exc) {
+                                            } catch (\Exception$exc) {
                                                 // ไม่สามารถอัปโหลดได้
                                                 $ret['ret_'.$item] = Language::get($exc->getMessage());
                                             }
@@ -219,7 +220,7 @@ class Model extends \Kotchasan\Model
                             }
                         }
                     }
-                } catch (\Kotchasan\InputItemException $e) {
+                } catch (\Kotchasan\InputItemException$e) {
                     $ret['alert'] = $e->getMessage();
                 }
             }

@@ -19,16 +19,17 @@ use Kotchasan\Language;
 use Kotchasan\Validator;
 
 /**
- *  Model สำหรับบันทึกความคิดเห็น.
+ *  module=board-reply
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
  * @since 1.0
  */
 class Model extends \Kotchasan\Model
+
 {
     /**
-     * บันทึกความคิดเห็น.
+     * บันทึกความคิดเห็น
      *
      * @param Request $request
      */
@@ -191,7 +192,7 @@ class Model extends \Kotchasan\Model
                                         if (!empty($index->$k) && $index->$k != $post[$k]) {
                                             @unlink(ROOT_PATH.DATA_FOLDER.'board/'.$index->$k);
                                         }
-                                    } catch (\Exception $exc) {
+                                    } catch (\Exception$exc) {
                                         // ไม่สามารถอัปโหลดได้
                                         $ret['ret_'.$item] = Language::get($exc->getMessage());
                                     }
@@ -248,7 +249,7 @@ class Model extends \Kotchasan\Model
                             $ret['location'] = $location;
                         }
                     }
-                } catch (\Kotchasan\InputItemException $e) {
+                } catch (\Kotchasan\InputItemException$e) {
                     $ret['alert'] = $e->getMessage();
                 }
             }
@@ -302,10 +303,8 @@ class Model extends \Kotchasan\Model
             }
             unset($index['mconfig']);
             unset($index['config']);
-
             return (object) $index;
         }
-
         return false;
     }
 }

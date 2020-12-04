@@ -161,8 +161,8 @@ class Model extends \Kotchasan\Model
                                 }
                             }
                         }
-                        // ใหม่ หรือ เจ้าของ
-                        if ($id == 0 || ($index->member_id > 0 && $post['member_id'] === $index->member_id)) {
+                        // ใหม่ หรือ ผู้ดูแล หรือ เจ้าของ
+                        if ($id == 0 || $moderator || ($index->member_id > 0 && $post['member_id'] === $index->member_id)) {
                             if ($id == 0 && empty($ret) && $post['detail'] != '') {
                                 // ตรวจสอบโพสต์ซ้ำภายใน 1 วัน
                                 $search = $this->db()->createQuery()
@@ -319,10 +319,8 @@ class Model extends \Kotchasan\Model
             }
             unset($index['mconfig']);
             unset($index['config']);
-
             return (object) $index;
         }
-
         return false;
     }
 }
