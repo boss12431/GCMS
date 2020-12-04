@@ -23,6 +23,7 @@ use Kotchasan\Language;
  * @since 1.0
  */
 class Model extends \Kotchasan\Model
+
 {
     /**
      * แก้ไขข้อมูลสมาชิก (editprofile.php)
@@ -81,10 +82,7 @@ class Model extends \Kotchasan\Model
                     $db = $this->db();
                     // ตรวจสอบค่าที่ส่งมา
                     $user = $db->first($user_table, $request->post('register_id')->toInt());
-                    if (!$user) {
-                        // ไม่พบสมาชิกที่แก้ไข
-                        $ret['alert'] = Language::get('not a registered user');
-                    } else {
+                    if ($user && $user->id === $login['id']) {
                         // อีเมล
                         if (in_array('email', self::$cfg->login_fields) || $user->social > 0) {
                             unset($save['email']);
@@ -168,7 +166,7 @@ class Model extends \Kotchasan\Model
                                             // อัปโหลด user icon
                                             $save['icon'] = $user->id.'.jpg';
                                             $file->cropImage(self::$cfg->user_icon_typies, ROOT_PATH.self::$cfg->usericon_folder.$save['icon'], self::$cfg->user_icon_w, self::$cfg->user_icon_h);
-                                        } catch (\Exception $exc) {
+                                        } catch (\Exception$exc) {
                                             // ไม่สามารถอัปโหลดได้
                                             $ret['ret_'.$item] = Language::get($exc->getMessage());
                                         }
@@ -193,7 +191,7 @@ class Model extends \Kotchasan\Model
                             $request->removeToken();
                         }
                     }
-                } catch (\Kotchasan\InputItemException $e) {
+                } catch (\Kotchasan\InputItemException$e) {
                     $ret['alert'] = $e->getMessage();
                 }
             }
