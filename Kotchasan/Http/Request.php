@@ -18,6 +18,7 @@ namespace Kotchasan\Http;
  * @since 1.0
  */
 class Request extends AbstractRequest implements \Psr\Http\Message\RequestInterface
+
 {
     /**
      * @var array
@@ -67,13 +68,13 @@ class Request extends AbstractRequest implements \Psr\Http\Message\RequestInterf
     }
 
     /**
-     * ฟังก์ชั่นสร้าง token.
+     * ฟังก์ชั่นสร้าง token
      *
      * @return string
      */
     public function createToken()
     {
-        $token = md5(uniqid(rand(), true));
+        $token = \Kotchasan\Password::uniqid(32);
         $_SESSION[$token] = array(
             'times' => 0,
             'expired' => time() + TOKEN_AGE,

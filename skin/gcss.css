@@ -3863,6 +3863,9 @@ tbody tr.select,
   padding-bottom: 0 !important;
   vertical-align: middle;
 }
+.table_nav>div>fieldset {
+  background-color: inherit;
+}
 .table_nav fieldset .button {
   margin-left: 5px;
 }
@@ -3892,9 +3895,14 @@ fieldset.search button {
   height: inherit;
   line-height: inherit;
   border: none;
-  background-color: transparent;
+  background-color: #fff;
   float: right;
   font-family: "icomoon";
+}
+fieldset.search button:focus {
+  outline: none;
+  color: #2196f3;
+  background-color: transparent;
 }
 table p,
 .table p {
@@ -4059,7 +4067,7 @@ td.buttons .button:last-child {
   -webkit-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(0, 0, 0, 0.04);
 }
-.table_nav .float_button:hover{
+.table_nav .float_button:hover {
   background-color: #f50057;
   color: #fff;
   text-decoration: none;

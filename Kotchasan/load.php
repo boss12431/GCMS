@@ -93,6 +93,7 @@ if (isset($_SERVER['APPL_PHYSICAL_PATH'])) {
         define('BASE_PATH', $contextPrefix.$appPath.'/');
     }
 }
+
 /*
  * พาธของ Application เช่น D:/htdocs/kotchasan/
  */

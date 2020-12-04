@@ -18,6 +18,7 @@ namespace Kotchasan;
  * @since 1.0
  */
 class Html extends \Kotchasan\KBase
+
 {
     /**
      * attrribute ของ tag.
@@ -416,7 +417,7 @@ class Html extends \Kotchasan\KBase
         if (isset($attributes['id'])) {
             $id = $attributes['id'];
         } else {
-            $id = uniqid();
+            $id = \Kotchasan\Password::uniqid();
         }
         $c = array('inputgroups');
         if (isset($attributes['labelClass'])) {
@@ -456,7 +457,7 @@ class Html extends \Kotchasan\KBase
                 self::$form->javascript[] = 'new GValidator('.implode(', ', $js).');';
             } elseif ($key == 'options') {
                 $options = $value;
-                $datalist = $id.'_'.uniqid();
+                $datalist = $id.'_'.\Kotchasan\Password::uniqid();
                 $prop['list'] = 'list="'.$datalist.'"';
             } elseif ($key == 'comment') {
                 $comment = $value;
@@ -504,11 +505,6 @@ class Html extends \Kotchasan\KBase
         }
         $obj = new static('div', $prop);
         $this->rows[] = $obj;
-        if (isset($attributes['id'])) {
-            $id = $attributes['id'];
-        } else {
-            $id = uniqid();
-        }
         if (isset($attributes['label'])) {
             $obj->add('label', array(
                 'innerHTML' => $attributes['label'],

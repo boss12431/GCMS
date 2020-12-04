@@ -12,86 +12,87 @@ namespace Kotchasan;
 
 /**
  * Password Class
- * คลาสสำหรับการเข้ารหัส และ ถอดรหัส อย่างง่าย
- * สำหรับใช้ทดแทน base64.
- *
- * @setupParam '1234567890'
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
  * @since 1.0
  */
-class Password extends \Kotchasan\KBase
+class Password
 {
     /**
-     * คีย์สำหรับการเข้ารหัส ถอดรหัส.
-     *
-     * @var string
-     */
-    protected $password_key;
-
-    /**
-     * class constructor.
-     *
-     * @param string $key กำหนดคีย์สำหรับการเข้ารหัส ถอดรหัส ถ้าไม่กำหนดมาจะใช้ค่าจาก Config
-     */
-    public function __construct($key = null)
-    {
-        $this->password_key = $key === null ? self::$cfg->password_key : $key;
-    }
-
-    /**
      * ฟังก์ชั่น ถอดรหัสข้อความ
-     * คืนค่าข้อความที่ถอดรหัสแล้ว.
+     * คืนค่าข้อความที่ถอดรหัสแล้ว
      *
-     * @assert ($this->object->encode("ทดสอบภาษาไทย")) [==] "ทดสอบภาษาไทย"
-     * @assert ($this->object->encode(1234)) [==] 1234
+     * @assert (Password::encode("ทดสอบภาษาไทย", 12345678), 12345678) [==] "ทดสอบภาษาไทย"
+     * @assert (Password::encode(1234, 12345678), 12345678) [==] 1234
      *
      * @param string $string ข้อความที่เข้ารหัสจาก encode()
+     * @param string $password คีย์สำหรับการเข้ารหัส
      *
      * @return string
      */
-    public function decode($string)
+    public static function decode($string, $password)
     {
-        $key = sha1($this->password_key);
-        $str_len = strlen($string);
-        $key_len = strlen($key);
-        $j = 0;
-        $hash = '';
-        for ($i = 0; $i < $str_len; $i += 2) {
-            $ordStr = hexdec(base_convert(strrev(substr($string, $i, 2)), 36, 16));
-            $j = $j == $key_len ? 0 : $j;
-            $ordKey = ord(substr($key, $j, 1));
-            ++$j;
-            $hash .= chr($ordStr - $ordKey);
-        }
+        list($data, $iv) = explode('::', base64_decode($string), 2);
 
-        return $hash;
+        return openssl_decrypt($data, 'aes-256-cbc', $password, 0, $iv);
     }
 
     /**
      * ฟังก์ชั่น เข้ารหัสข้อความ
-     * คืนค่าข้อความที่เข้ารหัสแล้ว.
+     * คืนค่าข้อความที่เข้ารหัสแล้ว
      *
      * @param string $string ข้อความที่ต้องการเข้ารหัส
+     * @param string $password คีย์สำหรับการเข้ารหัส
      *
      * @return string
      */
-    public function encode($string)
+    public static function encode($string, $password)
     {
-        $key = sha1($this->password_key);
-        $str_len = strlen($string);
-        $key_len = strlen($key);
-        $j = 0;
-        $hash = '';
-        for ($i = 0; $i < $str_len; ++$i) {
-            $ordStr = ord(substr($string, $i, 1));
-            $j = $j == $key_len ? 0 : $j;
-            $ordKey = ord(substr($key, $j, 1));
-            ++$j;
-            $hash .= strrev(base_convert(dechex($ordStr + $ordKey), 16, 36));
+        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
+        $encrypted = openssl_encrypt($string, 'aes-256-cbc', $password, 0, $iv);
+
+        return base64_encode($encrypted.'::'.$iv);
+    }
+
+    /**
+     * สร้าง Sign สำหรับส่งให้ API
+     *
+     * @param string $apiName
+     * @param array $params
+     * @param string $secret
+     *
+     * @return string
+     */
+    public static function generateSign($apiName, $params, $secret)
+    {
+        // เรียงลำดับตามคีย์
+        ksort($params);
+        // นำข้อมูลมาต่อกัน
+        foreach ($params as $k => $v) {
+            $apiName .= $k.$v;
+        }
+        // คืนค่าข้อความเข้ารหัส
+
+        return strtoupper(hash_hmac('sha256', $apiName, $secret));
+    }
+
+    /**
+     * สร้าง password แบบสุ่ม
+     *
+     * @param int $length ความยาวของ password ที่ต้องการ
+     *
+     * @return string
+     */
+    public static function uniqid($length = 13)
+    {
+        if (function_exists('random_bytes')) {
+            $token = random_bytes(ceil($length / 2));
+        } else {
+            $token = openssl_random_pseudo_bytes(ceil($length / 2));
         }
 
-        return $hash;
+        return substr(bin2hex($token), 0, $length);
+
     }
 }

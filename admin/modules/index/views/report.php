@@ -22,6 +22,7 @@ use Kotchasan\Http\Request;
  * @since 1.0
  */
 class View extends \Gcms\Adminview
+
 {
     /**
      * @var mixed
@@ -157,7 +158,7 @@ class View extends \Gcms\Adminview
     public function onRow($item, $o, $prop)
     {
         $item['time'] = Date::format($item['time'], 'H:i:s');
-        $item['url'] = '<a class="cuttext block" style="max-width:30vw" href="'.$item['url'].'" target=_blank>'.$item['url'].'</a>';
+        $item['url'] = '<a class="cuttext block" style="max-width:30vw" href="'.htmlspecialchars($item['url']).'" target=_blank>'.htmlspecialchars($item['url']).'</a>';
         if (preg_match_all('%(?P<browser>Firefox|Safari|MSIE|AppleWebKit|bingbot|MJ12bot|Baiduspider|Googlebot|DotBot|Twitterbot|LivelapBot|facebookexternalhit|StatusNet|PaperLiBot|SurdotlyBot|Trident|archive\.org_bot|Yahoo\!\sSlurp|Go[a-z\-]+)([\/\s](?P<version>[^;\s]+))?%ix', $item['user_agent'], $result, PREG_PATTERN_ORDER)) {
             $item['user_agent'] = '<span title="'.$item['user_agent'].'">'.$result['browser'][0].(empty($result['version'][0]) ? '' : '/'.$result['version'][0]).'</span>';
         } elseif ($item['user_agent'] != '') {
