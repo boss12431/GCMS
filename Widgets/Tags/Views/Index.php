@@ -35,7 +35,7 @@ class Index extends \Gcms\View
         $content .= implode('', $items);
         $content .= '</div>';
         $template = '<div class=tag-tooltip><h5>%TAG%</h5><p>'.Language::get('Clicked').' <em>%COUNT%</em> '.Language::get('Count').'</p></div>';
-        $content .= '<script>initTags("'.$id.'", "'.$template.'")</script>';
+        $content .= '<script>initTags("'.$id.'", "'.addslashes($template).'")</script>';
         return $content;
     }
 }
