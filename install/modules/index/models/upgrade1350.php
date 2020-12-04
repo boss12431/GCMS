@@ -18,6 +18,7 @@ namespace Index\Upgrade1350;
  * @since 1.0
  */
 class Model extends \Index\Upgrade\Model
+
 {
     /**
      * อัปเกรดเป็นเวอร์ชั่น 13.5.0

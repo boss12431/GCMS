@@ -18,6 +18,7 @@ namespace Index\Upgrading;
  * @since 1.0
  */
 class Model extends \Kotchasan\Model
+
 {
     /**
      * @param $db
@@ -42,6 +43,9 @@ class Model extends \Kotchasan\Model
         } elseif ($version < '13.5.0') {
             // อัปเกรดเป็น 13.5.0
             return \Index\Upgrade1350\Model::upgrade($db);
+        } elseif ($version < '13.6.0') {
+            // อัปเกรดเป็น 13.6.0
+            return \Index\Upgrade1360\Model::upgrade($db);
         }
     }
 }
