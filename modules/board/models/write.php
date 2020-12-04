@@ -20,16 +20,17 @@ use Kotchasan\Language;
 use Kotchasan\Validator;
 
 /**
- * บันทึกกระทู้.
+ * module=board-write
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
  * @since 1.0
  */
 class Model extends \Kotchasan\Model
+
 {
     /**
-     * บันทึกกระทู้.
+     * บันทึกกระทู้ (write.php)
      *
      * @param Request $request
      */
@@ -160,104 +161,107 @@ class Model extends \Kotchasan\Model
                                 }
                             }
                         }
-                        if ($id == 0 && empty($ret) && $post['detail'] != '') {
-                            // ตรวจสอบโพสต์ซ้ำภายใน 1 วัน
-                            $search = $this->db()->createQuery()
-                                ->from('board_q')
-                                ->where(array(
-                                    array('topic', $post['topic']),
-                                    array('detail', $post['detail']),
-                                    array('email', $post['email']),
-                                    array('module_id', $index->module_id),
-                                    array('last_update', '>', time() - 86400),
-                                ))
-                                ->first('id');
-                            if ($search) {
-                                $ret['alert'] = Language::get('Your post is already exists. You do not need to post this.');
+                        // ใหม่ หรือ เจ้าของ
+                        if ($id == 0 || ($index->member_id > 0 && $post['member_id'] === $index->member_id)) {
+                            if ($id == 0 && empty($ret) && $post['detail'] != '') {
+                                // ตรวจสอบโพสต์ซ้ำภายใน 1 วัน
+                                $search = $this->db()->createQuery()
+                                    ->from('board_q')
+                                    ->where(array(
+                                        array('topic', $post['topic']),
+                                        array('detail', $post['detail']),
+                                        array('email', $post['email']),
+                                        array('module_id', $index->module_id),
+                                        array('last_update', '>', time() - 86400),
+                                    ))
+                                    ->first('id');
+                                if ($search) {
+                                    $ret['alert'] = Language::get('Your post is already exists. You do not need to post this.');
+                                }
                             }
-                        }
-                        // เวลาปัจจุบัน
-                        $mktime = time();
-                        // ไฟล์อัปโหลด
-                        if (empty($ret) && !empty($index->img_upload_type)) {
-                            foreach ($fileUpload as $item => $file) {
-                                $k = str_replace('board_', '', $item);
-                                if (!$file->validFileExt($index->img_upload_type)) {
-                                    $ret['ret_'.$item] = Language::get('The type of file is invalid');
-                                } elseif ($file->getSize() > ($index->img_upload_size * 1024)) {
-                                    $ret['ret_'.$item] = Language::get('The file size larger than the limit');
-                                } else {
-                                    // อัปโหลดได้
-                                    $ext = $file->getClientFileExt();
-                                    $post[$k] = "$mktime.$ext";
-                                    while (is_file(ROOT_PATH.DATA_FOLDER.'board/'.$post[$k])) {
-                                        ++$mktime;
+                            // เวลาปัจจุบัน
+                            $mktime = time();
+                            // ไฟล์อัปโหลด
+                            if (empty($ret) && !empty($index->img_upload_type)) {
+                                foreach ($fileUpload as $item => $file) {
+                                    $k = str_replace('board_', '', $item);
+                                    if (!$file->validFileExt($index->img_upload_type)) {
+                                        $ret['ret_'.$item] = Language::get('The type of file is invalid');
+                                    } elseif ($file->getSize() > ($index->img_upload_size * 1024)) {
+                                        $ret['ret_'.$item] = Language::get('The file size larger than the limit');
+                                    } else {
+                                        // อัปโหลดได้
+                                        $ext = $file->getClientFileExt();
                                         $post[$k] = "$mktime.$ext";
-                                    }
-                                    try {
-                                        $file->cropImage($index->img_upload_type, ROOT_PATH.DATA_FOLDER.'board/thumb-'.$post[$k], $index->icon_width, $index->icon_height);
-                                        // ลบรูปภาพเก่า
-                                        if (!empty($index->$k) && $index->$k != $post[$k]) {
-                                            @unlink(ROOT_PATH.DATA_FOLDER.'board/thumb-'.$index->$k);
+                                        while (is_file(ROOT_PATH.DATA_FOLDER.'board/'.$post[$k])) {
+                                            ++$mktime;
+                                            $post[$k] = "$mktime.$ext";
                                         }
-                                    } catch (\Exception $exc) {
-                                        // ไม่สามารถอัปโหลดได้
-                                        $ret['ret_'.$item] = Language::get($exc->getMessage());
-                                    }
-                                    try {
-                                        $file->moveTo(ROOT_PATH.DATA_FOLDER.'board/'.$post[$k]);
-                                        // ลบรูปภาพเก่า
-                                        if (!empty($index->$k) && $index->$k != $post[$k]) {
-                                            @unlink(ROOT_PATH.DATA_FOLDER.'board/'.$index->$k);
+                                        try {
+                                            $file->cropImage($index->img_upload_type, ROOT_PATH.DATA_FOLDER.'board/thumb-'.$post[$k], $index->icon_width, $index->icon_height);
+                                            // ลบรูปภาพเก่า
+                                            if (!empty($index->$k) && $index->$k != $post[$k]) {
+                                                @unlink(ROOT_PATH.DATA_FOLDER.'board/thumb-'.$index->$k);
+                                            }
+                                        } catch (\Exception$exc) {
+                                            // ไม่สามารถอัปโหลดได้
+                                            $ret['ret_'.$item] = Language::get($exc->getMessage());
                                         }
-                                    } catch (\Exception $exc) {
-                                        // ไม่สามารถอัปโหลดได้
-                                        $ret['ret_'.$item] = Language::get($exc->getMessage());
+                                        try {
+                                            $file->moveTo(ROOT_PATH.DATA_FOLDER.'board/'.$post[$k]);
+                                            // ลบรูปภาพเก่า
+                                            if (!empty($index->$k) && $index->$k != $post[$k]) {
+                                                @unlink(ROOT_PATH.DATA_FOLDER.'board/'.$index->$k);
+                                            }
+                                        } catch (\Exception$exc) {
+                                            // ไม่สามารถอัปโหลดได้
+                                            $ret['ret_'.$item] = Language::get($exc->getMessage());
+                                        }
                                     }
                                 }
                             }
-                        }
-                        if (empty($ret)) {
-                            $post['last_update'] = $mktime;
-                            $post['can_reply'] = empty($index->can_reply) ? 0 : 1;
-                            if ($id > 0) {
-                                // แก้ไข
-                                $this->db()->update($this->getTableName('board_q'), $id, $post);
-                                // คืนค่า
-                                $ret['alert'] = Language::get('Edit post successfully');
-                            } else {
-                                // ใหม่
-                                $post['ip'] = $request->getClientIp();
-                                $post['create_date'] = $mktime;
-                                $post['module_id'] = $index->module_id;
-                                $id = $this->db()->insert($this->getTableName('board_q'), $post);
-                                // อัปเดตสมาชิก
-                                if ($post['member_id'] > 0) {
-                                    $this->db()->createQuery()->update('user')->set('`post`=`post`+1')->where($post['member_id'])->execute();
+                            if (empty($ret)) {
+                                $post['last_update'] = $mktime;
+                                $post['can_reply'] = empty($index->can_reply) ? 0 : 1;
+                                if ($id > 0) {
+                                    // แก้ไข
+                                    $this->db()->update($this->getTableName('board_q'), $id, $post);
+                                    // คืนค่า
+                                    $ret['alert'] = Language::get('Edit post successfully');
+                                } else {
+                                    // ใหม่
+                                    $post['ip'] = $request->getClientIp();
+                                    $post['create_date'] = $mktime;
+                                    $post['module_id'] = $index->module_id;
+                                    $id = $this->db()->insert($this->getTableName('board_q'), $post);
+                                    // อัปเดตสมาชิก
+                                    if ($post['member_id'] > 0) {
+                                        $this->db()->createQuery()->update('user')->set('`post`=`post`+1')->where($post['member_id'])->execute();
+                                    }
+                                    // คืนค่า
+                                    $ret['alert'] = Language::get('Thank you for your post');
                                 }
-                                // คืนค่า
-                                $ret['alert'] = Language::get('Thank you for your post');
-                            }
-                            if ($post['category_id'] > 0) {
-                                // อัปเดตจำนวนเรื่อง และ ความคิดเห็น ในหมวด
-                                \Board\Admin\Write\Model::updateCategories($index->module_id);
-                            }
-                            // เคลียร์
-                            $request->removeToken();
-                            // คืนค่า url ของบอร์ด
-                            $ret['location'] = WEB_URL.'index.php?module='.$index->module.'&id='.$id.'&visited='.$mktime;
-                            // ส่งข้อความแจ้งเตือนไปยังไลน์เมื่อมีโพสต์ใหม่
-                            if (!empty($index->line_notifications) && in_array(1, $index->line_notifications)) {
-                                $msg = Language::get('BOARD_NOTIFICATIONS');
-                                \Gcms\Line::send(implode("\n", array(
-                                    (isset($post['sender']) ? $post['sender'].' ' : '').$msg[1].':',
-                                    $post['topic'],
-                                    $ret['location'],
-                                )));
+                                if ($post['category_id'] > 0) {
+                                    // อัปเดตจำนวนเรื่อง และ ความคิดเห็น ในหมวด
+                                    \Board\Admin\Write\Model::updateCategories($index->module_id);
+                                }
+                                // เคลียร์
+                                $request->removeToken();
+                                // คืนค่า url ของบอร์ด
+                                $ret['location'] = WEB_URL.'index.php?module='.$index->module.'&id='.$id.'&visited='.$mktime;
+                                // ส่งข้อความแจ้งเตือนไปยังไลน์เมื่อมีโพสต์ใหม่
+                                if (!empty($index->line_notifications) && in_array(1, $index->line_notifications)) {
+                                    $msg = Language::get('BOARD_NOTIFICATIONS');
+                                    \Gcms\Line::send(implode("\n", array(
+                                        (isset($post['sender']) ? $post['sender'].' ' : '').$msg[1].':',
+                                        $post['topic'],
+                                        $ret['location'],
+                                    )));
+                                }
                             }
                         }
                     }
-                } catch (\Kotchasan\InputItemException $e) {
+                } catch (\Kotchasan\InputItemException$e) {
                     $ret['alert'] = $e->getMessage();
                 }
             }
